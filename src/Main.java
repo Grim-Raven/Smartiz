@@ -1,6 +1,9 @@
+import fc.ConnexionDB;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        System.out.println("Modif");
+        ConnexionDB connexionDB = new ConnexionDB();
+        connexionDB.connect();
+        connexionDB.requeteConnection(1111, "mdp");
     }
 }
