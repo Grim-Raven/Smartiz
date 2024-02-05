@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class ConnexionDB {
+public class DialogueBD {
 
     Connection connection = null; // La référence vers la connexion à la BD
 
+    /**
+     * Méthode de connexion à la base de données
+     */
     public void connect() {
         try {
             // Identifiants de connexion
@@ -31,13 +34,17 @@ public class ConnexionDB {
 
         } catch (ClassNotFoundException ex) {
             // En cas de driver introuvable
-            Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DialogueBD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             // En cas d'erreur SQL au niveau du serveur de la BD
-            Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DialogueBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * @param idUtilisateur : identifiant de l'utilisateur
+     * @param motDePasse : mot de passe de l'utilisateur
+     */
     public void requeteConnection(int idUtilisateur, String motDePasse) {
         if (connection != null) { // La connexion a été établie
             System.out.println("Connexion établie.");
@@ -50,19 +57,8 @@ public class ConnexionDB {
                 String s = "SELECT idPersonnelMedical, mdp "
                         + "FROM PersonnelMedical "
                         + "WHERE idPersonnelMedical = " + idUtilisateur + " AND mdp = '" + motDePasse + "'";
-                System.out.println(s);
-                resultSet = statement.executeQuery(
-                        "SELECT idPersonnelMedical, mdp "
-                                + "FROM PersonnelMedical "
-                                + "WHERE idPersonnelMedical = " + idUtilisateur + " AND mdp = '" + motDePasse + "'");
 
-                // Récupération des résultats
-                if (resultSet.next()) {
-                    System.out.println("ok vas y");
-                } else {
-                    System.out.println("nop");
-                }
-
+                resultSet = statement.executeQuery(s);
                 // Une fois le test terminé, fermeture du flux de résultat, de la requête et de la connexion
                 resultSet.close();
                 statement.close();
@@ -71,10 +67,22 @@ public class ConnexionDB {
             } catch (SQLException ex) {
                 System.out.println("Erreur SQL :");
                 // En cas d'erreur SQL au niveau du serveur de la BD
-                Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DialogueBD.class.getName()).log(Level.SEVERE, null, ex);
             }
 
 
         }
+    }
+
+    public ResultSet requete(String requete) {
+        ResultSet resultSet = null;
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(requete);
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultSet;
     }
 }

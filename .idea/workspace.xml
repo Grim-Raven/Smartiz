@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/fc/ConnexionDB.java" afterDir="false" />
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout de la classe ConnexionDB&#10;&#10;Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/ConnexionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +49,19 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.ConnexionDB.executor": "Run",
+    "Application.InterfaceConnexion.executor": "Run",
     "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TestConnexionDB.executor": "Run",
+    "JUnit.TestDialogueBD.executor": "Run",
+    "JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "fc-jbdc",
+    "git-widget-placeholder": "connexion-ui-fc",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz/lib/ojdbc8-23.3.0.23.09.jar",
@@ -58,13 +70,26 @@
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="ConnexionDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fc.ConnexionDB" />
+  <component name="RunManager" selected="JUnit.TestDialogueBD">
+    <configuration name="DialogueBD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fc.DialogueBD" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="fc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InterfaceConnexion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.InterfaceConnexion" />
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -79,10 +104,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestDialogueBD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fc" />
+      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDialogueBD.testRequeteConnexionDpiPositive" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fc" />
+      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
+      <option name="METHOD_NAME" value="testRequeteConnexionDpiPositive" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDialogueBD" />
+        <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiPositive" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ConnexionDB" />
+        <item itemvalue="Application.InterfaceConnexion" />
+        <item itemvalue="Application.DialogueBD" />
       </list>
     </recent_temporary>
   </component>

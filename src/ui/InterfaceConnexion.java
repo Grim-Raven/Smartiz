@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
+
 /**
  *
  * @author emmaa
@@ -25,6 +27,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre par l'ultilisateur
         setResizable(false);
+
     }
 
     /**
@@ -38,10 +41,10 @@ public class InterfaceConnexion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Identifiant = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textFieldIdentifiant = new javax.swing.JTextField();
         MotDePasse = new javax.swing.JLabel();
         SeConnecter = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PasswordFieldMotDePasse = new javax.swing.JPasswordField();
         Langues = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,9 +54,9 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         Identifiant.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         Identifiant.setText("Identifiant");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldIdentifiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldIdentifiantActionPerformed(evt);
             }
         });
 
@@ -69,14 +72,19 @@ public class InterfaceConnexion extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        PasswordFieldMotDePasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                PasswordFieldMotDePasseActionPerformed(evt);
             }
         });
 
         Langues.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        Langues.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Français", "English", " " }));
+        Langues.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Français", "English" }));
+        Langues.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LanguesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,8 +97,8 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(SeConnecter)
                             .addComponent(MotDePasse)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))
+                            .addComponent(textFieldIdentifiant, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(PasswordFieldMotDePasse))
                         .addGap(32, 32, 32))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Identifiant)
@@ -109,11 +117,11 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(Langues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textFieldIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(MotDePasse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PasswordFieldMotDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(SeConnecter)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -138,13 +146,36 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrects");
     }//GEN-LAST:event_SeConnecterActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIdentifiantActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldIdentifiantActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void PasswordFieldMotDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldMotDePasseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
+
+    private void LanguesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanguesActionPerformed
+        // On récupère la langue choisie par l'utilisateur
+        String langue = Objects.requireNonNull(Langues.getSelectedItem()).toString();
+        // On change la langue de l'interface
+        changerLangue(langue);
+    }//GEN-LAST:event_LanguesActionPerformed
+
+    public void changerLangue(String langue){
+        //Changer la langue de l'interface
+        if(langue.equals("Français"))
+        { // On met tous les labels en Français
+            Identifiant.setText("Identifiant");
+            MotDePasse.setText("Mot de passe");
+            SeConnecter.setText("Se connecter");
+        }
+        else if(langue.equals("English"))
+        {// On met tous les labels en Anglais
+            Identifiant.setText("Login");
+            MotDePasse.setText("Password");
+            SeConnecter.setText("Log in");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -185,9 +216,9 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     private javax.swing.JLabel Identifiant;
     private javax.swing.JComboBox Langues;
     private javax.swing.JLabel MotDePasse;
+    private javax.swing.JPasswordField PasswordFieldMotDePasse;
     private javax.swing.JButton SeConnecter;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField textFieldIdentifiant;
     // End of variables declaration//GEN-END:variables
 }
