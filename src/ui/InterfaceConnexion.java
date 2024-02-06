@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package ui;
+import fc.DialogueBD;
+
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
@@ -23,11 +26,15 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     /**
      * Creates new form InterfaceConnexion
      */
-    public InterfaceConnexion() {
+    // Pour contenir l'instance de Dialogue avec la BD
+    private DialogueBD dialogueBD;
+    public InterfaceConnexion(DialogueBD dialogueBD) {
         initComponents();
+        this.dialogueBD = dialogueBD;
         //Pour empêcher le redimensionnement de la fenêtre par l'ultilisateur
         setResizable(false);
-
+        // Le message d'erreur de connexion n'est pas visible par défaut
+        labelErreurConnexion.setVisible(false);
     }
 
     /**
@@ -46,6 +53,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         SeConnecter = new javax.swing.JButton();
         PasswordFieldMotDePasse = new javax.swing.JPasswordField();
         Langues = new javax.swing.JComboBox();
+        labelErreurConnexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +76,11 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         SeConnecter.setText("Se connecter");
         SeConnecter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeConnecterActionPerformed(evt);
+                try {
+                    SeConnecterActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -86,25 +98,33 @@ public class InterfaceConnexion extends javax.swing.JFrame {
             }
         });
 
+        labelErreurConnexion.setForeground(new java.awt.Color(255, 51, 51));
+        labelErreurConnexion.setText("Identifiant ou mot de passe incorrect");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SeConnecter)
-                            .addComponent(MotDePasse)
-                            .addComponent(textFieldIdentifiant, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(PasswordFieldMotDePasse))
-                        .addGap(32, 32, 32))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Identifiant)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                        .addComponent(Langues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(191, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelErreurConnexion)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(Identifiant)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Langues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(MotDePasse)
+                                .addComponent(textFieldIdentifiant)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(PasswordFieldMotDePasse)
+                                        .addComponent(SeConnecter))
+                                    .addGap(173, 173, 173)))
+                            .addGap(32, 32, 32)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +144,9 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                 .addComponent(PasswordFieldMotDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(SeConnecter)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelErreurConnexion)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,9 +163,23 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeConnecterActionPerformed
-        //Si l'identifiant et le mot de passe sont incorrect, un message d'erreur est affiché 
-        JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrects");
+    private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_SeConnecterActionPerformed
+        // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
+        String identifiant = textFieldIdentifiant.getText();
+        String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
+        String requete = "SELECT idPersonnelMedical, mdp " +
+                "FROM PersonnelMedical " +
+                "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + motDePasse + "'";
+        // On vérifie si l'identifiant et le mot de passe sont corrects
+        if(dialogueBD.requete(requete).next()){
+            // Si c'est le cas, on ouvre l'interface de l'application
+            System.out.println("Connexion réussie");
+            this.dispose();
+        }
+        else{
+            // Sinon, on affiche un message d'erreur
+            labelErreurConnexion.setVisible(true);
+        }
     }//GEN-LAST:event_SeConnecterActionPerformed
 
     private void textFieldIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIdentifiantActionPerformed
@@ -168,12 +204,14 @@ public class InterfaceConnexion extends javax.swing.JFrame {
             Identifiant.setText("Identifiant");
             MotDePasse.setText("Mot de passe");
             SeConnecter.setText("Se connecter");
+            labelErreurConnexion.setText("Indentifiant ou mot de passe incorrect");
         }
         else if(langue.equals("English"))
         {// On met tous les labels en Anglais
             Identifiant.setText("Login");
             MotDePasse.setText("Password");
             SeConnecter.setText("Log in");
+            labelErreurConnexion.setText("Invalid id or password");
         }
     }
 
@@ -207,7 +245,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfaceConnexion().setVisible(true);
+                new InterfaceConnexion(new DialogueBD()).setVisible(true);
             }
         });
     }
@@ -219,6 +257,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordFieldMotDePasse;
     private javax.swing.JButton SeConnecter;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelErreurConnexion;
     private javax.swing.JTextField textFieldIdentifiant;
     // End of variables declaration//GEN-END:variables
 }

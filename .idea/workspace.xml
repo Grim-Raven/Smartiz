@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout de la classe ConnexionDB&#10;&#10;Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/ConnexionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" afterDir="false" />
     </list>
@@ -48,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.ConnexionDB.executor": "Run",
     "Application.InterfaceConnexion.executor": "Run",
     "Application.Main.executor": "Run",
@@ -70,7 +69,7 @@
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TestDialogueBD">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="DialogueBD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fc.DialogueBD" />
       <module name="Smartiz" />
@@ -137,10 +136,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestDialogueBD" />
-        <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiPositive" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="Application.InterfaceConnexion" />
+        <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiPositive" />
         <item itemvalue="Application.DialogueBD" />
       </list>
     </recent_temporary>
@@ -161,6 +160,15 @@
       <option name="presentableId" value="Default" />
       <updated>1705651783555</updated>
     </task>
+    <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
+      <option name="closed" value="true" />
+      <created>1707155739563</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707155739564</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,5 +196,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/fc/DialogueBD.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

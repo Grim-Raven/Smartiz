@@ -41,39 +41,6 @@ public class DialogueBD {
         }
     }
 
-    /**
-     * @param idUtilisateur : identifiant de l'utilisateur
-     * @param motDePasse : mot de passe de l'utilisateur
-     */
-    public void requeteConnection(int idUtilisateur, String motDePasse) {
-        if (connection != null) { // La connexion a été établie
-            System.out.println("Connexion établie.");
-
-            try {
-                // Création de la requête
-                Statement statement = connection.createStatement();
-                ResultSet resultSet;
-                // Exécution de la requête : on récupère le mot de passe associé à l'idUtilisateur
-                String s = "SELECT idPersonnelMedical, mdp "
-                        + "FROM PersonnelMedical "
-                        + "WHERE idPersonnelMedical = " + idUtilisateur + " AND mdp = '" + motDePasse + "'";
-
-                resultSet = statement.executeQuery(s);
-                // Une fois le test terminé, fermeture du flux de résultat, de la requête et de la connexion
-                resultSet.close();
-                statement.close();
-                connection.close();
-
-            } catch (SQLException ex) {
-                System.out.println("Erreur SQL :");
-                // En cas d'erreur SQL au niveau du serveur de la BD
-                Logger.getLogger(DialogueBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-
-        }
-    }
-
     public ResultSet requete(String requete) {
         ResultSet resultSet = null;
         Statement statement;
