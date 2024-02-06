@@ -1,9 +1,17 @@
-import fc.ConnexionDB;
+import fc.DialogueBD;
+import ui.InterfaceConnexion;
 
 public class Main {
     public static void main(String[] args) {
-        ConnexionDB connexionDB = new ConnexionDB();
-        connexionDB.connect();
-        connexionDB.requeteConnection(1111, "mdp");
+        // On instancie un objet DialogueBD pour communiquer avec la base de données
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On instancie l'interface de connexion
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfaceConnexion(dialogueBD).setVisible(true);
+            }
+        });
     }
 }
