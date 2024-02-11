@@ -5,6 +5,10 @@
  */
 package ui;
 
+import fc.DialogueBD;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author emmaa
@@ -14,10 +18,15 @@ public class AjoutPatient extends javax.swing.JFrame {
     /**
      * Creates new form AjoutPatient
      */
-    public AjoutPatient() {
+
+    private final DialogueBD dialogueBD;
+    public AjoutPatient(DialogueBD dialogueBD, String langue) {
         initComponents();
-        //Pour empêcher le redimensionnement de la fenêtre 
+        this.dialogueBD = dialogueBD;
+        // Pour empêcher le redimensionnement de la fenêtre
         setResizable(false);
+        // On change la langue de l'interface
+        changerLangue(langue);
     }
 
     /**
@@ -40,11 +49,9 @@ public class AjoutPatient extends javax.swing.JFrame {
         TextePrenom = new javax.swing.JTextField();
         DateNaissance = new javax.swing.JLabel();
         TexteDateNaissance = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        sexe = new javax.swing.JLabel();
         Femme = new javax.swing.JRadioButton();
         Homme = new javax.swing.JRadioButton();
-        NonBinaire = new javax.swing.JRadioButton();
-        Autre = new javax.swing.JRadioButton();
         Adresse = new javax.swing.JLabel();
         Voie = new javax.swing.JLabel();
         TexteAdresse = new javax.swing.JTextField();
@@ -54,16 +61,16 @@ public class AjoutPatient extends javax.swing.JFrame {
         TexteVille = new javax.swing.JTextField();
         Pays = new javax.swing.JLabel();
         TextePays = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        telephone = new javax.swing.JLabel();
         TexteTelephone = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        fumeur = new javax.swing.JLabel();
         FumeurOui = new javax.swing.JRadioButton();
         FumeurNon = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
+        alcool = new javax.swing.JLabel();
         AlcoolOui = new javax.swing.JRadioButton();
         AlcoolNon = new javax.swing.JRadioButton();
-        jLabel5 = new javax.swing.JLabel();
+        donneesSociales = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TexteDonneesSociales = new javax.swing.JTextPane();
         jPanel4 = new javax.swing.JPanel();
@@ -71,7 +78,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         MenuDeroulantService = new javax.swing.JComboBox();
         MedecinReferant = new javax.swing.JLabel();
         TexteMedecinReferant = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        boutonAjouter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,21 +108,12 @@ public class AjoutPatient extends javax.swing.JFrame {
         DateNaissance.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         DateNaissance.setText("Date de Naissance");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setText("Sexe");
+        sexe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        sexe.setText("Sexe");
 
         Femme.setText("Femme");
 
         Homme.setText("Homme");
-
-        NonBinaire.setText("Non binaire");
-        NonBinaire.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NonBinaireActionPerformed(evt);
-            }
-        });
-
-        Autre.setText("Autre");
 
         Adresse.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         Adresse.setText("Adresse");
@@ -128,8 +126,8 @@ public class AjoutPatient extends javax.swing.JFrame {
 
         Pays.setText("Pays");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setText("Téléphone");
+        telephone.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        telephone.setText("Téléphone");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -159,22 +157,18 @@ public class AjoutPatient extends javax.swing.JFrame {
                             .addComponent(TextePays)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(sexe)
                             .addComponent(Nom)
                             .addComponent(Prenom)
                             .addComponent(DateNaissance)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(Femme, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20)
-                                .addComponent(Homme)
-                                .addGap(18, 18, 18)
-                                .addComponent(NonBinaire)
-                                .addGap(18, 18, 18)
-                                .addComponent(Autre, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Homme))
                             .addComponent(Adresse)
                             .addComponent(Voie)
-                            .addComponent(jLabel6))
-                        .addGap(0, 69, Short.MAX_VALUE)))
+                            .addComponent(telephone))
+                        .addGap(0, 273, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -193,13 +187,11 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TexteDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(sexe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Femme)
-                    .addComponent(Homme)
-                    .addComponent(NonBinaire)
-                    .addComponent(Autre))
+                    .addComponent(Homme))
                 .addGap(18, 18, 18)
                 .addComponent(Adresse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -217,7 +209,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                     .addComponent(TexteVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextePays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addComponent(telephone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -227,22 +219,22 @@ public class AjoutPatient extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel3.setText("Fumeur");
+        fumeur.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        fumeur.setText("Fumeur");
 
         FumeurOui.setText("OUI");
 
         FumeurNon.setText("NON");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel4.setText("Alcool");
+        alcool.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        alcool.setText("Alcool");
 
         AlcoolOui.setText("OUI");
 
         AlcoolNon.setText("NON");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel5.setText("Données sociales");
+        donneesSociales.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        donneesSociales.setText("Données sociales");
 
         jScrollPane1.setViewportView(TexteDonneesSociales);
 
@@ -256,8 +248,8 @@ public class AjoutPatient extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
+                            .addComponent(fumeur)
+                            .addComponent(alcool)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(FumeurOui)
@@ -266,7 +258,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(AlcoolNon)
                                     .addComponent(FumeurNon)))
-                            .addComponent(jLabel5))
+                            .addComponent(donneesSociales))
                         .addGap(0, 289, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -274,19 +266,19 @@ public class AjoutPatient extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(fumeur)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FumeurOui)
                     .addComponent(FumeurNon))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(alcool)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AlcoolOui)
                     .addComponent(AlcoolNon))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(donneesSociales)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addContainerGap())
@@ -336,8 +328,17 @@ public class AjoutPatient extends javax.swing.JFrame {
 
         OngletIdentite.addTab("Service", jPanel4);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton1.setText("Ajouter");
+        boutonAjouter.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        boutonAjouter.setText("Ajouter");
+        boutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    boutonAjouterActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -353,7 +354,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(187, 187, 187)
-                .addComponent(jButton1)
+                .addComponent(boutonAjouter)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -364,7 +365,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(OngletIdentite)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(boutonAjouter)
                 .addContainerGap())
         );
 
@@ -382,13 +383,111 @@ public class AjoutPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NonBinaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NonBinaireActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NonBinaireActionPerformed
-
     private void TexteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TexteNomActionPerformed
+
+    private void boutonAjouterActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_boutonAjouterActionPerformed
+        // On s'assure que le patient n'existe pas déjà (en se basant sur le nom, le prénom et la date de naissance)
+        if(dialogueBD.patientExiste(TexteNom.getText(), TextePrenom.getText(), TexteDateNaissance.getText())){
+            // Si le patient existe déjà, on affiche un message d'erreur
+            javax.swing.JOptionPane.showMessageDialog(null, "Le patient existe déjà");
+            System.out.println("Le patient existe déjà");
+        }
+        // Si le patient n'existe pas on l'ajoute à la base de données
+        else{
+            // On récupère les données saisies par l'utilisateur
+            String nom = TexteNom.getText();
+            String prenom = TextePrenom.getText();
+            String dateNaissance = TexteDateNaissance.getText();
+            String sexe = Femme.isSelected() ? "F" : "M";
+            String adresse = TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText();
+            String telephone = TexteTelephone.getText();
+            String fumeur = FumeurOui.isSelected() ? "'Y'" : "'N'";
+            String alcool = AlcoolOui.isSelected() ? "'Y'" : "'N'";
+            String donneesSociales = TexteDonneesSociales.getText();
+            String service = (String) MenuDeroulantService.getSelectedItem();
+            String medecinReferant = TexteMedecinReferant.getText();
+
+            // On crée un tableau contenant les données du patient
+            // TODO : changer les valeurs null par ce qui devra correspondre plus tard (idService, idLocG)
+            String[] data = {nom, prenom, dateNaissance, sexe, adresse, "'Y'", "'Y'", null, null, fumeur, alcool, donneesSociales};
+            // On insère le patient dans la base de données
+            dialogueBD.insertPatient(data);
+            // On affiche un message de confirmation
+            javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
+            System.out.println("Le patient a été ajouté avec succès");
+        }
+
+    }//GEN-LAST:event_boutonAjouterActionPerformed
+
+
+    /**
+     * Permet de changer la langue de l'interface
+     * @param langue : la langue choisie
+     */
+    public void changerLangue(String langue){
+        // Si la langue choisie est le français
+        if(langue.equals("Français")){
+            TexteAjouterUnPatient.setText("Ajouter un patient");
+            Nom.setText("Nom");
+            Prenom.setText("Prénom");
+            DateNaissance.setText("Date de Naissance");
+            sexe.setText("Sexe");
+            Femme.setText("Femme");
+            Homme.setText("Homme");
+            Adresse.setText("Adresse");
+            Voie.setText("N° et nom de voie");
+            CodePostal.setText("Code Postal");
+            Ville.setText("Ville");
+            Pays.setText("Pays");
+            telephone.setText("Téléphone");
+            fumeur.setText("Fumeur");
+            FumeurOui.setText("OUI");
+            FumeurNon.setText("NON");
+            alcool.setText("Alcool");
+            AlcoolOui.setText("OUI");
+            AlcoolNon.setText("NON");
+            donneesSociales.setText("Données sociales");
+            Service.setText("Service");
+            MedecinReferant.setText("Médecin référant");
+            boutonAjouter.setText("Ajouter");
+
+            // On change le titre des onglets
+            OngletIdentite.setTitleAt(0, "Identité");
+            OngletIdentite.setTitleAt(1, "Données Médicales");
+            OngletIdentite.setTitleAt(2, "Service");
+
+        }
+        // Si la langue choisie est l'anglais
+        else if(langue.equals("English")) {
+            TexteAjouterUnPatient.setText("Add a patient");
+            Nom.setText("Name");
+            Prenom.setText("First name");
+            DateNaissance.setText("Date of birth");
+            sexe.setText("Sex");
+            Femme.setText("Female");
+            Homme.setText("Male");
+            Adresse.setText("Address");
+            Voie.setText("Street number and name");
+            CodePostal.setText("Postal code");
+            Ville.setText("City");
+            Pays.setText("Country");
+            telephone.setText("Phone number");
+            fumeur.setText("Smoker");
+            alcool.setText("Alcohol");
+            donneesSociales.setText("Social data");
+            Service.setText("Unit");
+            MedecinReferant.setText("Referring doctor");
+            boutonAjouter.setText("Add");
+            // On change le titre des onglets
+            OngletIdentite.setTitleAt(0, "Identity");
+            OngletIdentite.setTitleAt(1, "Medical data");
+            OngletIdentite.setTitleAt(2, "Unit");
+        }
+    }
+
+
 
     /**
      * @param args the command line arguments
@@ -420,7 +519,12 @@ public class AjoutPatient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjoutPatient().setVisible(true);
+                // On instancie un objet DialogueBD pour communiquer avec la base de données
+                DialogueBD dialogueBD = new DialogueBD();
+                // On se connecte à la base de données
+                dialogueBD.connect();
+                // On instancie l'interface d'ajout de patient
+                new AjoutPatient(dialogueBD, "Français").setVisible(true);
             }
         });
     }
@@ -429,7 +533,6 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JLabel Adresse;
     private javax.swing.JRadioButton AlcoolNon;
     private javax.swing.JRadioButton AlcoolOui;
-    private javax.swing.JRadioButton Autre;
     private javax.swing.JLabel CodePostal;
     private javax.swing.JLabel DateNaissance;
     private javax.swing.JRadioButton Femme;
@@ -439,7 +542,6 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JLabel MedecinReferant;
     private javax.swing.JComboBox MenuDeroulantService;
     private javax.swing.JLabel Nom;
-    private javax.swing.JRadioButton NonBinaire;
     private javax.swing.JTabbedPane OngletIdentite;
     private javax.swing.JLabel Pays;
     private javax.swing.JLabel Prenom;
@@ -457,17 +559,17 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JTextField TexteVille;
     private javax.swing.JLabel Ville;
     private javax.swing.JLabel Voie;
+    private javax.swing.JLabel alcool;
+    private javax.swing.JButton boutonAjouter;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel donneesSociales;
+    private javax.swing.JLabel fumeur;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel sexe;
+    private javax.swing.JLabel telephone;
     // End of variables declaration//GEN-END:variables
 }

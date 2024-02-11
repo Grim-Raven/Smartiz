@@ -47,4 +47,40 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         // Le couple id/mdp est incorrect.
         assertFalse(resultSet.next());
     }
+
+    @Test // Test de la vérification de l'existence d'un patient dans la base de données
+    public void testPatientExistePositif() {
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour un patient existant
+        String nom = "Dupont";
+        String prenom = "Jean";
+        String dateNaissance = "1980-01-01";
+        // On exécute la requête
+        boolean patientExiste = dialogueBD.patientExiste(nom, prenom, dateNaissance);
+        System.out.println(patientExiste);
+        // Le patient existe.
+        assertTrue(patientExiste);
+    }
+
+    @Test // Test de la vérification de l'absence d'un patient dans la base de données
+    public void testPatientExisteNegatif() {
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour un patient inexistant
+        String nom = "Doe";
+        String prenom = "John";
+        String dateNaissance = "1990-01-03";// La date de naissance est différente.
+        // On exécute la requête
+        boolean patientExiste = dialogueBD.patientExiste(nom, prenom, dateNaissance);
+        System.out.println(patientExiste);
+        // Le patient n'existe pas.
+        assertFalse(patientExiste);
+    }
+
+
 }
+
+
