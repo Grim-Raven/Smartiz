@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -32,7 +34,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -71,7 +73,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TexteAjouterUnPatient" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="OngletIdentite" max="32767" attributes="0"/>
+                  <Component id="OngletIdentite" pref="537" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="boutonAjouter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -215,7 +217,7 @@
                           <Component id="telephone" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TexteTelephone" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -385,7 +387,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="donneesSociales" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="295" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="311" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -457,8 +459,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Service">
-                    <Property name="tabTitle" type="java.lang.String" value="Service"/>
+                  <JTabbedPaneConstraints tabName="S&#xe9;jour">
+                    <Property name="tabTitle" type="java.lang.String" value="S&#xe9;jour"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -466,18 +468,49 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="TexteMedecinReferant" max="32767" attributes="0"/>
+                              <Component id="TexteMedecinReferant" alignment="1" max="32767" attributes="0"/>
+                              <Component id="TexteDateDebut" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TexteDateFin" alignment="0" max="32767" attributes="0"/>
+                              <Component id="MenuDeroulantService" alignment="0" max="32767" attributes="0"/>
+                              <Component id="MeneDeroulantServiceGeo" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Service" min="-2" max="-2" attributes="0"/>
-                                      <Component id="MenuDeroulantService" min="-2" pref="229" max="-2" attributes="0"/>
+                                      <Component id="DateDebut" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DateFin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Consultation" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="ConsultationOui" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="ConsultationNon" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="Service" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="MedecinReferant" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="LocGeo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ServiceGeo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Chambre" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="Box" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="ChambrePorte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="ChambreFenetre" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="Box1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="Box2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="Box3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="NumeroChambre" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="TexteNumeroChambre" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -487,14 +520,52 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="DateDebut" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="TexteDateDebut" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="DateFin" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="TexteDateFin" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="Consultation" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ConsultationOui" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ConsultationNon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Service" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="MenuDeroulantService" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="MedecinReferant" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TexteMedecinReferant" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="365" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="LocGeo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="ServiceGeo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="MeneDeroulantServiceGeo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Chambre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Box" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ChambrePorte" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ChambreFenetre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Box1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Box2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Box3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="NumeroChambre" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="TexteNumeroChambre" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -503,12 +574,113 @@
                 <Component class="javax.swing.JLabel" name="Service">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="18" style="1"/>
+                      <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Service"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="MenuDeroulantService">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="17">
+                        <StringItem index="0" value="Anapathologie"/>
+                        <StringItem index="1" value="Cardiologie"/>
+                        <StringItem index="2" value="Chirurgie"/>
+                        <StringItem index="3" value="Dermatologie"/>
+                        <StringItem index="4" value="Gyn&#xe9;cologie"/>
+                        <StringItem index="5" value="H&#xe9;matologie"/>
+                        <StringItem index="6" value="Immunologie"/>
+                        <StringItem index="7" value="M&#xe9;decine G&#xe9;n&#xe9;rale"/>
+                        <StringItem index="8" value="Neurologie"/>
+                        <StringItem index="9" value="Obst&#xe9;trie"/>
+                        <StringItem index="10" value="Oncologie"/>
+                        <StringItem index="11" value="Pneumologie"/>
+                        <StringItem index="12" value="Psychiatrie"/>
+                        <StringItem index="13" value="Radiologie"/>
+                        <StringItem index="14" value="R&#xe9;animation"/>
+                        <StringItem index="15" value="Urologie"/>
+                        <StringItem index="16" value="Urgence"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuDeroulantServiceActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="MedecinReferant">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="M&#xe9;decin r&#xe9;f&#xe9;rant"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="TexteMedecinReferant">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TexteMedecinReferantActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="DateDebut">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Date de d&#xe9;but"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="TexteDateDebut">
+                </Component>
+                <Component class="javax.swing.JLabel" name="DateFin">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Date de fin"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="TexteDateFin">
+                </Component>
+                <Component class="javax.swing.JLabel" name="Consultation">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Consultation"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="ConsultationOui">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Oui"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="ConsultationNon">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Non"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConsultationNonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="LocGeo">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Localisation g&#xe9;ographique"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ServiceGeo">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Service"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="MeneDeroulantServiceGeo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="17">
@@ -533,15 +705,86 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="MedecinReferant">
+                <Component class="javax.swing.JLabel" name="Chambre">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="18" style="1"/>
+                      <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="M&#xe9;decin r&#xe9;f&#xe9;rant"/>
+                    <Property name="text" type="java.lang.String" value="Chambre"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="TexteMedecinReferant">
+                <Component class="javax.swing.JRadioButton" name="ChambrePorte">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup2"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Porte"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="ChambreFenetre">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup2"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Fen&#xea;tre"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="Box">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Box"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="Box1">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup2"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="Box2">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup2"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="Box3">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup2"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="NumeroChambre">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Num&#xe9;ro de chambre"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="TexteNumeroChambre">
                 </Component>
               </SubComponents>
             </Container>
@@ -550,7 +793,7 @@
         <Component class="javax.swing.JButton" name="boutonAjouter">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="1"/>
+              <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
