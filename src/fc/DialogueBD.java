@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DialogueBD {
@@ -87,16 +88,17 @@ public class DialogueBD {
         return false;
     }
 
-    public void insertPatient(String[] data) throws SQLException {
+    public void insertPatient(HashMap<String, String> data) throws SQLException {
         ResultSet requetID = requete("SELECT MAX(idPatient) FROM Patient");
         requetID.next();
         int idPatient = requetID.getInt(1) + 1;
         // On construit la requête d'insertion du patient
         String requete = "INSERT INTO Patient (idPatient, nom, prenom, dateNaissance, sexe, adresse, dossierVisible, " +
                 "vivant, idLocG, idService, fumeur, alcool, donneesSociales) " +
-                "VALUES ("+ idPatient+", '" + data[0] + "', '" + data[1] + "', TO_DATE('" + data[2] + "', 'YYYY-MM-DD'), '" +
-                data[3] + "', '" + data[4] + "', " + data[5] + ", " + data[6] + ", " + data[7] + ", " + data[8] + ", " +
-                data[9] + ", " + data[10] + ", '" + data[11] + "')";
+                "VALUES (" + idPatient + "," + data.get("nom") + "," + data.get("prenom") + "," + "TO_DATE("+data.get("dateNaissance")+",'YYYY-MM-DD')" + "," +
+                data.get("sexe") + "," + data.get("adresse") + "," + data.get("dossierVisible") + "," + data.get("vivant") + "," +
+                data.get("idLocG") + "," + data.get("idService") + "," + data.get("fumeur") + "," + data.get("alcool") + "," +
+                data.get("donneesSociales") + ")";
         // On exécute la requête
         System.out.println(requete);
         requete(requete);

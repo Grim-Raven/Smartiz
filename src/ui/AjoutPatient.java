@@ -8,6 +8,7 @@ package ui;
 import fc.DialogueBD;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  *
@@ -394,24 +395,47 @@ public class AjoutPatient extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Le patient existe déjà");
             System.out.println("Le patient existe déjà");
         }
-        // Si le patient n'existe pas on l'ajoute à la base de données
+        // Si le patient n'existe pas, on l'ajoute à la base de données
         else{
             // On récupère les données saisies par l'utilisateur
-            String nom = TexteNom.getText();
-            String prenom = TextePrenom.getText();
-            String dateNaissance = TexteDateNaissance.getText();
-            String sexe = Femme.isSelected() ? "F" : "M";
-            String adresse = TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText();
-            String telephone = TexteTelephone.getText();
-            String fumeur = FumeurOui.isSelected() ? "'Y'" : "'N'";
-            String alcool = AlcoolOui.isSelected() ? "'Y'" : "'N'";
-            String donneesSociales = TexteDonneesSociales.getText();
+            // On met des guillemets simples pour les CHAR et VARCHAR dans les requêtes SQL
+            String nom = "'"+TexteNom.getText()+"'";
+            String prenom = "'"+TextePrenom.getText()+"'";
+            String telephone = "'"+TexteTelephone.getText()+"'";
+            String adresse = "'"+TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText()+"'";
+            String donneesSociales = "'"+TexteDonneesSociales.getText()+"'";
+            String dateNaissance = "'"+TexteDateNaissance.getText()+"'";
+
+            // On récupère le sexe du patient (Femme, Homme ou null si rien n'est sélectionné)
+            String sexe = Femme.isSelected() ? "'F'" : (Homme.isSelected() ? "'M'" : null);
+            // On récupère si le patient est fumeur ou non (Oui, Non ou null si rien n'est sélectionné)
+            String fumeur = FumeurOui.isSelected() ? "'Y'" : (FumeurNon.isSelected() ? "'N'" : null);
+            // On récupère si le patient consomme de l'alcool ou non (Oui, Non ou null si rien n'est sélectionné)
+            String alcool = AlcoolOui.isSelected() ? "'Y'" : (AlcoolNon.isSelected() ? "'N'" : null);
+
             String service = (String) MenuDeroulantService.getSelectedItem();
             String medecinReferant = TexteMedecinReferant.getText();
 
             // On crée un tableau contenant les données du patient
             // TODO : changer les valeurs null par ce qui devra correspondre plus tard (idService, idLocG)
-            String[] data = {nom, prenom, dateNaissance, sexe, adresse, "'Y'", "'Y'", null, null, fumeur, alcool, donneesSociales};
+            // TODO : gérer la création d'un séjour et la liaison avec le patient
+            HashMap<String, String> data = new HashMap<>();
+            data.put("nom", nom);
+            data.put("prenom", prenom);
+            data.put("dateNaissance", dateNaissance);
+            data.put("sexe", sexe);
+            data.put("adresse", adresse);
+            data.put("dossierVisible", "'Y'");
+            data.put("vivant", "'Y'");
+            data.put("telephone", telephone);
+            data.put("fumeur", fumeur);
+            data.put("alcool", alcool);
+            data.put("donneesSociales", donneesSociales);
+            data.put("idService", null);
+            data.put("idLocG", null);
+
+
+
             // On insère le patient dans la base de données
             dialogueBD.insertPatient(data);
             // On affiche un message de confirmation
