@@ -30,6 +30,7 @@ public class AjoutPatient extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         TexteAjouterUnPatient = new javax.swing.JLabel();
         OngletIdentite = new javax.swing.JTabbedPane();
@@ -71,7 +72,26 @@ public class AjoutPatient extends javax.swing.JFrame {
         MenuDeroulantService = new javax.swing.JComboBox();
         MedecinReferant = new javax.swing.JLabel();
         TexteMedecinReferant = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        DateDebut = new javax.swing.JLabel();
+        TexteDateDebut = new javax.swing.JTextField();
+        DateFin = new javax.swing.JLabel();
+        TexteDateFin = new javax.swing.JTextField();
+        Consultation = new javax.swing.JLabel();
+        ConsultationOui = new javax.swing.JRadioButton();
+        ConsultationNon = new javax.swing.JRadioButton();
+        LocGeo = new javax.swing.JLabel();
+        ServiceGeo = new javax.swing.JLabel();
+        MeneDeroulantServiceGeo = new javax.swing.JComboBox();
+        Chambre = new javax.swing.JLabel();
+        ChambrePorte = new javax.swing.JRadioButton();
+        ChambreFenetre = new javax.swing.JRadioButton();
+        Box = new javax.swing.JLabel();
+        Box1 = new javax.swing.JRadioButton();
+        Box2 = new javax.swing.JRadioButton();
+        Box3 = new javax.swing.JRadioButton();
+        NumeroChambre = new javax.swing.JLabel();
+        TexteNumeroChambre = new javax.swing.JTextField();
+        BoutonAjouter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,7 +240,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         OngletIdentite.addTab("Identité", jPanel2);
@@ -288,7 +308,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -296,13 +316,80 @@ public class AjoutPatient extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        Service.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Service.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Service.setText("Service");
 
+        MenuDeroulantService.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
+        MenuDeroulantService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuDeroulantServiceActionPerformed(evt);
+            }
+        });
 
-        MedecinReferant.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        MedecinReferant.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         MedecinReferant.setText("Médecin référant");
+
+        TexteMedecinReferant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TexteMedecinReferantActionPerformed(evt);
+            }
+        });
+
+        DateDebut.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        DateDebut.setText("Date de début");
+
+        DateFin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        DateFin.setText("Date de fin");
+
+        Consultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Consultation.setText("Consultation");
+
+        ConsultationOui.setText("Oui");
+
+        ConsultationNon.setText("Non");
+        ConsultationNon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultationNonActionPerformed(evt);
+            }
+        });
+
+        LocGeo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        LocGeo.setText("Localisation géographique");
+
+        ServiceGeo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        ServiceGeo.setText("Service");
+
+        MeneDeroulantServiceGeo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
+
+        Chambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Chambre.setText("Chambre");
+
+        buttonGroup2.add(ChambrePorte);
+        ChambrePorte.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        ChambrePorte.setText("Porte");
+
+        buttonGroup2.add(ChambreFenetre);
+        ChambreFenetre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        ChambreFenetre.setText("Fenêtre");
+
+        Box.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Box.setText("Box");
+
+        buttonGroup2.add(Box1);
+        Box1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Box1.setText("1");
+
+        buttonGroup2.add(Box2);
+        Box2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Box2.setText("2");
+
+        buttonGroup2.add(Box3);
+        Box3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Box3.setText("3");
+
+        NumeroChambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        NumeroChambre.setText("Numéro de chambre");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -311,33 +398,96 @@ public class AjoutPatient extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TexteMedecinReferant)
+                    .addComponent(TexteMedecinReferant, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TexteDateDebut)
+                    .addComponent(TexteDateFin)
+                    .addComponent(MenuDeroulantService, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MeneDeroulantServiceGeo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DateDebut)
+                            .addComponent(DateFin)
+                            .addComponent(Consultation)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(ConsultationOui)
+                                .addGap(27, 27, 27)
+                                .addComponent(ConsultationNon))
                             .addComponent(Service)
-                            .addComponent(MenuDeroulantService, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MedecinReferant))
-                        .addGap(0, 190, Short.MAX_VALUE)))
+                            .addComponent(MedecinReferant)
+                            .addComponent(LocGeo)
+                            .addComponent(ServiceGeo)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(Chambre)
+                                .addGap(138, 138, 138)
+                                .addComponent(Box))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(ChambrePorte)
+                                .addGap(18, 18, 18)
+                                .addComponent(ChambreFenetre)
+                                .addGap(55, 55, 55)
+                                .addComponent(Box1)
+                                .addGap(18, 18, 18)
+                                .addComponent(Box2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Box3))
+                            .addComponent(NumeroChambre))
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addComponent(TexteNumeroChambre))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(DateDebut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TexteDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DateFin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TexteDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Consultation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConsultationOui)
+                    .addComponent(ConsultationNon))
+                .addGap(18, 18, 18)
                 .addComponent(Service)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuDeroulantService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MedecinReferant)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteMedecinReferant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LocGeo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ServiceGeo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MeneDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Chambre)
+                    .addComponent(Box))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChambrePorte)
+                    .addComponent(ChambreFenetre)
+                    .addComponent(Box1)
+                    .addComponent(Box2)
+                    .addComponent(Box3))
+                .addGap(18, 18, 18)
+                .addComponent(NumeroChambre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        OngletIdentite.addTab("Service", jPanel4);
+        OngletIdentite.addTab("Séjour", jPanel4);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton1.setText("Ajouter");
+        BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouter.setText("Ajouter");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -353,7 +503,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(187, 187, 187)
-                .addComponent(jButton1)
+                .addComponent(BoutonAjouter)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -362,9 +512,9 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TexteAjouterUnPatient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OngletIdentite)
+                .addComponent(OngletIdentite, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(BoutonAjouter)
                 .addContainerGap())
         );
 
@@ -376,7 +526,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -389,6 +539,18 @@ public class AjoutPatient extends javax.swing.JFrame {
     private void TexteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TexteNomActionPerformed
+
+    private void MenuDeroulantServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantServiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuDeroulantServiceActionPerformed
+
+    private void TexteMedecinReferantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteMedecinReferantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TexteMedecinReferantActionPerformed
+
+    private void ConsultationNonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultationNonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultationNonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,27 +592,47 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JRadioButton AlcoolNon;
     private javax.swing.JRadioButton AlcoolOui;
     private javax.swing.JRadioButton Autre;
+    private javax.swing.JButton BoutonAjouter;
+    private javax.swing.JLabel Box;
+    private javax.swing.JRadioButton Box1;
+    private javax.swing.JRadioButton Box2;
+    private javax.swing.JRadioButton Box3;
+    private javax.swing.JLabel Chambre;
+    private javax.swing.JRadioButton ChambreFenetre;
+    private javax.swing.JRadioButton ChambrePorte;
     private javax.swing.JLabel CodePostal;
+    private javax.swing.JLabel Consultation;
+    private javax.swing.JRadioButton ConsultationNon;
+    private javax.swing.JRadioButton ConsultationOui;
+    private javax.swing.JLabel DateDebut;
+    private javax.swing.JLabel DateFin;
     private javax.swing.JLabel DateNaissance;
     private javax.swing.JRadioButton Femme;
     private javax.swing.JRadioButton FumeurNon;
     private javax.swing.JRadioButton FumeurOui;
     private javax.swing.JRadioButton Homme;
+    private javax.swing.JLabel LocGeo;
     private javax.swing.JLabel MedecinReferant;
+    private javax.swing.JComboBox MeneDeroulantServiceGeo;
     private javax.swing.JComboBox MenuDeroulantService;
     private javax.swing.JLabel Nom;
     private javax.swing.JRadioButton NonBinaire;
+    private javax.swing.JLabel NumeroChambre;
     private javax.swing.JTabbedPane OngletIdentite;
     private javax.swing.JLabel Pays;
     private javax.swing.JLabel Prenom;
     private javax.swing.JLabel Service;
+    private javax.swing.JLabel ServiceGeo;
     private javax.swing.JTextField TexteAdresse;
     private javax.swing.JLabel TexteAjouterUnPatient;
     private javax.swing.JTextField TexteCodePostal;
+    private javax.swing.JTextField TexteDateDebut;
+    private javax.swing.JTextField TexteDateFin;
     private javax.swing.JTextField TexteDateNaissance;
     private javax.swing.JTextPane TexteDonneesSociales;
     private javax.swing.JTextField TexteMedecinReferant;
     private javax.swing.JTextField TexteNom;
+    private javax.swing.JTextField TexteNumeroChambre;
     private javax.swing.JTextField TextePays;
     private javax.swing.JTextField TextePrenom;
     private javax.swing.JTextField TexteTelephone;
@@ -458,7 +640,7 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JLabel Ville;
     private javax.swing.JLabel Voie;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
