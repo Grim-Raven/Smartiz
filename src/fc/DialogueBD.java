@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DialogueBD {
@@ -89,18 +91,67 @@ public class DialogueBD {
     }
 
     public void insertPatient(HashMap<String, String> data) throws SQLException {
+        // TODO: changer l'ipp pour respecter le cahier des charges
         ResultSet requetID = requete("SELECT MAX(idPatient) FROM Patient");
         requetID.next();
         int idPatient = requetID.getInt(1) + 1;
         // On construit la requête d'insertion du patient
-        String requete = "INSERT INTO Patient (idPatient, nom, prenom, dateNaissance, sexe, adresse, dossierVisible, " +
-                "vivant, idLocG, idService, fumeur, alcool, donneesSociales) " +
-                "VALUES (" + idPatient + "," + data.get("nom") + "," + data.get("prenom") + "," + "TO_DATE("+data.get("dateNaissance")+",'YYYY-MM-DD')" + "," +
-                data.get("sexe") + "," + data.get("adresse") + "," + data.get("dossierVisible") + "," + data.get("vivant") + "," +
-                data.get("idLocG") + "," + data.get("idService") + "," + data.get("fumeur") + "," + data.get("alcool") + "," +
-                data.get("donneesSociales") + ")";
+
+        StringBuilder columns = new StringBuilder("INSERT INTO Patient (idPatient, ");
+        StringBuilder values = new StringBuilder("VALUES ("+idPatient+", ");
+
+        // On parcourt les données du patient pour les ajouter à la requête
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            // Si la valeur n'est pas nulle, on l'ajoute à la requête
+            if (entry.getValue() != null) {
+                // On ajoute le nom de la colonne et la valeur à la requête
+                columns.append(entry.getKey()).append(", ");
+                // Si la colonne contient le mot "date", on ajoute la valeur avec un format de date
+                if(entry.getKey().toLowerCase().contains("date")) {
+                    values.append("TO_DATE(").append(entry.getValue()).append(", 'YYYY-MM-DD'), ");
+                }
+                else { // Sinon, on ajoute la valeur entre guillemets simples
+                    values.append(entry.getValue()).append(", ");
+                }
+            }
+        }
+
+        // On supprime les ", " à la fin de chaque partie de la requête
+        if (columns.length() > 0) {
+            columns.setLength(columns.length() - 2); // for last ", "
+        }
+        if (values.length() > 0) {
+            values.setLength(values.length() - 2); // for last ", "
+        }
+
+        // On ajoute les parenthèses à la fin de chaque partie de la requête
+        columns.append(") ");
+        values.append(")");
+
+        String requete = columns.toString() + values;
         // On exécute la requête
         System.out.println(requete);
         requete(requete);
+    }
+
+    public ArrayList<String> getServices() {
+        // On construit la requête pour récupérer les services
+        String requete = "SELECT NOMSERVICE FROM Service";
+        // On exécute la requête
+        ResultSet resultSet = requete(requete);
+
+        ArrayList<String> services = new ArrayList<>();
+        try {
+            // On récupère les résultats de la requête
+            while (resultSet.next()) {
+                // On ajoute le nom du service à la liste des services
+                services.add(resultSet.getString("nomService"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        // On retourne la liste des services
+        System.out.println(services);
+        return services;
     }
 }

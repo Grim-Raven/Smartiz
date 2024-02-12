@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Liaison entre le nf et l'iu pour l'ajour d'un patient">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="changement du tableau contenant les infos du patient en HashMap">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/AjoutPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutPatient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,10 +30,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JavaAutoRunManager">
-    <enabled-run-configurations>
-      <run-configuration type="JUnit" name="Rerun Failed Tests" />
-    </enabled-run-configurations>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Grim-Raven&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="87f9a5ee-4ca5-4ce8-930f-9ae9702c93d7" />
+        <option name="url" value="https://github.com/Grim-Raven/Smartiz.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -46,42 +55,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.AjoutPatient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;Application.InterfaceConnexion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.TestConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testPatientExiste.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;liaison-fc-ui-ajoutPatient&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.AjoutPatient.executor": "Run",
+    "Application.ConnexionDB.executor": "Run",
+    "Application.InterfaceConnexion.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TestConnexionDB.executor": "Run",
+    "JUnit.TestDialogueBD.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertPatient.executor": "Run",
+    "JUnit.TestDialogueBD.testPatientExiste.executor": "Run",
+    "JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor": "Run",
+    "JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "liaison-fc-ui-ajoutPatient",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.sync",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="JUnit.TestDialogueBD">
     <configuration name="AjoutPatient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.AjoutPatient" />
@@ -111,6 +121,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestDialogueBD.testInsertPatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fc" />
+      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
+      <option name="METHOD_NAME" value="testInsertPatient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestDialogueBD.testPatientExiste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Smartiz" />
       <extension name="coverage">
@@ -122,22 +148,6 @@
       <option name="PACKAGE_NAME" value="fc" />
       <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
       <option name="METHOD_NAME" value="testPatientExiste" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDialogueBD.testRequeteConnexionDpiNegative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="fc" />
-      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
-      <option name="METHOD_NAME" value="testRequeteConnexionDpiNegative" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,9 +173,9 @@
       <list>
         <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="Application.AjoutPatient" />
+        <item itemvalue="JUnit.TestDialogueBD.testInsertPatient" />
         <item itemvalue="JUnit.TestDialogueBD.testPatientExiste" />
         <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiPositive" />
-        <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiNegative" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +199,8 @@
       <workItem from="1707662369478" duration="1185000" />
       <workItem from="1707663584043" duration="564000" />
       <workItem from="1707664184646" duration="165000" />
-      <workItem from="1707730203891" duration="5072000" />
+      <workItem from="1707730203891" duration="5294000" />
+      <workItem from="1707748579618" duration="3678000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -207,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707664306813</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changement du tableau contenant les infos du patient en HashMap">
+      <option name="closed" value="true" />
+      <created>1707735479819</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707735479819</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +259,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte" />
     <MESSAGE value="Liaison entre le nf et l'iu pour l'ajour d'un patient" />
-    <option name="LAST_COMMIT_MESSAGE" value="Liaison entre le nf et l'iu pour l'ajour d'un patient" />
+    <MESSAGE value="changement du tableau contenant les infos du patient en HashMap" />
+    <option name="LAST_COMMIT_MESSAGE" value="changement du tableau contenant les infos du patient en HashMap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
