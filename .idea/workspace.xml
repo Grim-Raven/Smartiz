@@ -7,8 +7,6 @@
     <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="changement du tableau contenant les infos du patient en HashMap">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutPatient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +41,9 @@
         <option name="url" value="https://github.com/Grim-Raven/Smartiz.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -92,7 +93,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TestDialogueBD">
+  <component name="RunManager" selected="Application.AjoutPatient">
     <configuration name="AjoutPatient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.AjoutPatient" />
       <module name="Smartiz" />
@@ -171,8 +172,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="Application.AjoutPatient" />
+        <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPatient" />
         <item itemvalue="JUnit.TestDialogueBD.testPatientExiste" />
         <item itemvalue="JUnit.TestDialogueBD.testRequeteConnexionDpiPositive" />
@@ -200,7 +201,7 @@
       <workItem from="1707663584043" duration="564000" />
       <workItem from="1707664184646" duration="165000" />
       <workItem from="1707730203891" duration="5294000" />
-      <workItem from="1707748579618" duration="3678000" />
+      <workItem from="1707748579618" duration="4796000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -226,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707735479819</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="changement du tableau contenant les infos du patient en HashMap">
+      <option name="closed" value="true" />
+      <created>1707753532031</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707753532031</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
