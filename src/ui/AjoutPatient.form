@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupSexe">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupChambreBox">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupFumeur">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupAlcool">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupConsultation">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -217,7 +223,7 @@
                           <Component id="telephone" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TexteTelephone" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="47" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -266,11 +272,17 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="Femme">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSexe"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Femme"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="Homme">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupSexe"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Homme"/>
                   </Properties>
                 </Component>
@@ -404,11 +416,17 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="FumeurOui">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupFumeur"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="OUI"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="FumeurNon">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupFumeur"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="NON"/>
                   </Properties>
                 </Component>
@@ -422,11 +440,17 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="AlcoolOui">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupAlcool"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="OUI"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="AlcoolNon">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupAlcool"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="NON"/>
                   </Properties>
                 </Component>
@@ -471,15 +495,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="TexteMedecinReferant" alignment="1" max="32767" attributes="0"/>
-                              <Component id="TexteDateDebut" alignment="0" max="32767" attributes="0"/>
                               <Component id="TexteDateFin" alignment="0" max="32767" attributes="0"/>
                               <Component id="MenuDeroulantService" alignment="0" max="32767" attributes="0"/>
                               <Component id="MeneDeroulantServiceGeo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TexteNumeroChambre" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="DateDebut" min="-2" max="-2" attributes="0"/>
-                                      <Component id="DateFin" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="Consultation" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="ConsultationOui" min="-2" max="-2" attributes="0"/>
@@ -487,7 +509,6 @@
                                           <Component id="ConsultationNon" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="Service" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="MedecinReferant" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="LocGeo" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="ServiceGeo" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -507,10 +528,11 @@
                                           <Component id="Box3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="NumeroChambre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DateFin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="101" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="TexteNumeroChambre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TexteDateDebut" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -538,10 +560,6 @@
                           <Component id="Service" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="MenuDeroulantService" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="MedecinReferant" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TexteMedecinReferant" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="LocGeo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -565,7 +583,7 @@
                           <Component id="NumeroChambre" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TexteNumeroChambre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="49" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -610,35 +628,20 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuDeroulantServiceActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="MedecinReferant">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="14" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="M&#xe9;decin r&#xe9;f&#xe9;rant"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="TexteMedecinReferant">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TexteMedecinReferantActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JLabel" name="DateDebut">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Date de d&#xe9;but"/>
+                    <Property name="text" type="java.lang.String" value="Date de d&#xe9;but (AAAA-MM-JJ)"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="TexteDateDebut">
                 </Component>
                 <Component class="javax.swing.JLabel" name="DateFin">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Date de fin"/>
+                    <Property name="text" type="java.lang.String" value="Date de fin (AAAA-MM-JJ)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TexteDateFin">
@@ -653,11 +656,17 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="ConsultationOui">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupConsultation"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Oui"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="ConsultationNon">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupConsultation"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Non"/>
                   </Properties>
                   <Events>
@@ -716,7 +725,7 @@
                 <Component class="javax.swing.JRadioButton" name="ChambrePorte">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup2"/>
+                      <ComponentRef name="buttonGroupChambreBox"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
@@ -727,7 +736,7 @@
                 <Component class="javax.swing.JRadioButton" name="ChambreFenetre">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup2"/>
+                      <ComponentRef name="buttonGroupChambreBox"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
@@ -746,7 +755,7 @@
                 <Component class="javax.swing.JRadioButton" name="Box1">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup2"/>
+                      <ComponentRef name="buttonGroupChambreBox"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
@@ -757,7 +766,7 @@
                 <Component class="javax.swing.JRadioButton" name="Box2">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup2"/>
+                      <ComponentRef name="buttonGroupChambreBox"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
@@ -768,7 +777,7 @@
                 <Component class="javax.swing.JRadioButton" name="Box3">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup2"/>
+                      <ComponentRef name="buttonGroupChambreBox"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="14" style="0"/>
@@ -785,6 +794,16 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TexteNumeroChambre">
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="TexteDateDebut">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="yyyy-mm-dd" subtype="-1" type="1"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TexteDateDebutActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
