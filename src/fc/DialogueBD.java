@@ -109,7 +109,6 @@ public class DialogueBD {
             if (entry.getValue() != null) {
                 // On ajoute le nom de la colonne et la valeur à la requête
                 columns.append(entry.getKey()).append(", ");
-                System.out.println("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 
                 resultatType.next(); // On se met sur la première ligne du résultat
@@ -143,8 +142,8 @@ public class DialogueBD {
 
         String requete = columns.toString() + values;
         // On exécute la requête
-        System.out.println(requete);
         requete(requete);
+        System.out.println(requete);
     }
 
     /**
@@ -172,7 +171,7 @@ public class DialogueBD {
         ResultSet requeteID = requete("SELECT MAX(idLocG) FROM LocalisationG");
         requeteID.next();
         int idLocG = requeteID.getInt(1) + 1;
-        insertTable("LocG", String.valueOf(idLocG), "idLocG", data);
+        insertTable("LOCALISATIONG", String.valueOf(idLocG), "idLocG", data);
         return String.valueOf(idLocG);
     }
 

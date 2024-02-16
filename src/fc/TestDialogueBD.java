@@ -108,7 +108,7 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         data.put("donneesSociales", "Aucune");
         // On exécute la requête
         try {
-            dialogueBD.insertPatient(data);
+            String idPatient = dialogueBD.insertPatient(data);
         } catch (SQLException ex) {
             System.out.println(ex);
         }

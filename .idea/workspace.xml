@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Après le merge avec Ajout Sejour">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Changements dans la classe DialogueDB pour l'insertion dans la BD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/AjoutPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutPatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutSejour.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutSejour.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutSejour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutSejour.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.TestDialogueBD.testInsertPatient">
+  <component name="RunManager" selected="Application.AjoutPatient">
     <configuration name="AjoutPatient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.AjoutPatient" />
       <module name="Smartiz" />
@@ -177,10 +174,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AjoutPatient" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPatient" />
         <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertLocG" />
-        <item itemvalue="Application.AjoutPatient" />
         <item itemvalue="JUnit.TestDialogueBD.testPatientExiste" />
       </list>
     </recent_temporary>
@@ -213,7 +210,7 @@
       <workItem from="1708024122804" duration="925000" />
       <workItem from="1708025881528" duration="645000" />
       <workItem from="1708067077199" duration="413000" />
-      <workItem from="1708067510437" duration="920000" />
+      <workItem from="1708067510437" duration="3496000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -255,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707754555336</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changements dans la classe DialogueDB pour l'insertion dans la BD">
+      <option name="closed" value="true" />
+      <created>1708076078645</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708076078645</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +295,8 @@
     <MESSAGE value="Liaison entre le nf et l'iu pour l'ajour d'un patient" />
     <MESSAGE value="changement du tableau contenant les infos du patient en HashMap" />
     <MESSAGE value="Après le merge avec Ajout Sejour" />
-    <option name="LAST_COMMIT_MESSAGE" value="Après le merge avec Ajout Sejour" />
+    <MESSAGE value="Changements dans la classe DialogueDB pour l'insertion dans la BD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changements dans la classe DialogueDB pour l'insertion dans la BD" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

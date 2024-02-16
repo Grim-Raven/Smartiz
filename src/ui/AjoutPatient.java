@@ -588,7 +588,7 @@ public class AjoutPatient extends javax.swing.JFrame {
 
 
             // 1 : On insère le patient dans la base de données
-            dialogueBD.insertPatient(dataPatient);
+            String idPatient = dialogueBD.insertPatient(dataPatient);
             // On affiche un message de confirmation
             javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
             System.out.println("Le patient a été ajouté avec succès");
@@ -612,13 +612,17 @@ public class AjoutPatient extends javax.swing.JFrame {
             String dateDebut = TexteDateDebut.getText();
             String dateFin = TexteDateFin.getText();
             String consultation = ConsultationOui.isSelected() ? "Y" : (ConsultationNon.isSelected() ? "N" : null);
-            String numeroChambre = TexteNumeroChambre.getText();
             // On crée un dictionnaire contenant les données du séjour
             HashMap<String, String> dataSejour = new HashMap<>();
+            dataSejour.put("idPatient", idPatient);
             dataSejour.put("dateDebut", dateDebut);
             dataSejour.put("dateFin", dateFin);
             dataSejour.put("consultation", consultation);
             dataSejour.put("ouvert", "Y");
+            dataSejour.put("idLocG", idLocG);
+            // TODO : Ajouter le médecin référent
+            // On insère le séjour dans la base de données
+            dialogueBD.insertSejour(dataSejour);
 
         }
 
