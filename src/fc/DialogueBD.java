@@ -90,15 +90,18 @@ public class DialogueBD {
         return false;
     }
 
-    public void insertPatient(HashMap<String, String> data) throws SQLException {
-        // TODO: changer l'ipp pour respecter le cahier des charges
-        ResultSet requetID = requete("SELECT MAX(idPatient) FROM Patient");
-        requetID.next();
-        int idPatient = requetID.getInt(1) + 1;
-        // On construit la requête d'insertion du patient
-
-        StringBuilder columns = new StringBuilder("INSERT INTO Patient (idPatient, ");
-        StringBuilder values = new StringBuilder("VALUES ("+idPatient+", ");
+    /**
+     * Méthode d'insertion dans une table de la base de données
+     * @param table la table dans laquelle on veut insérer les données
+     * @param valeurClef la valeur de la clé primaire
+     * @param nomClef le nom de la clé primaire
+     * @param data les données à insérer dans la table
+     */
+    public void insertTable(String table, String valeurClef, String nomClef, HashMap<String, String> data) throws SQLException {
+        // On construit la requête d'insertion dans la table
+        // On commence par les colonnes et les valeurs de la clé primaire
+        StringBuilder columns = new StringBuilder("INSERT INTO "+table+" ("+nomClef+", ");
+        StringBuilder values = new StringBuilder("VALUES ("+valeurClef+", ");
 
         // On parcourt les données du patient pour les ajouter à la requête
         for (Map.Entry<String, String> entry : data.entrySet()) {
@@ -106,16 +109,25 @@ public class DialogueBD {
             if (entry.getValue() != null) {
                 // On ajoute le nom de la colonne et la valeur à la requête
                 columns.append(entry.getKey()).append(", ");
-                // Si la colonne contient le mot "date", on ajoute la valeur avec un format de date
-                if(entry.getKey().toLowerCase().contains("date")) {
-                    values.append("TO_DATE(").append(entry.getValue()).append(", 'YYYY-MM-DD'), ");
-                }
-                else { // Sinon, on ajoute la valeur entre guillemets simples
-                    values.append(entry.getValue()).append(", ");
+                ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
+                
+                resultatType.next(); // On se met sur la première ligne du résultat
+                // On récupère le type de la colonne
+                String typeColonne = resultatType.getString("DATA_TYPE");
+
+                switch (typeColonne) {
+                    case "NUMBER":
+                        values.append(entry.getValue()).append(", ");
+                        break;
+                    case "DATE": // Pour les dates, on utilise la fonction TO_DATE
+                        values.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD'), ");
+                        break;
+                    default: // Pour les chaînes de caractères, on ajoute des guillemets simples
+                        values.append("'").append(entry.getValue()).append("', ");
+                        break;
                 }
             }
         }
-
         // On supprime les ", " à la fin de chaque partie de la requête
         if (columns.length() > 0) {
             columns.setLength(columns.length() - 2); // for last ", "
@@ -130,11 +142,44 @@ public class DialogueBD {
 
         String requete = columns.toString() + values;
         // On exécute la requête
-        System.out.println(requete);
         requete(requete);
+        System.out.println(requete);
     }
 
-    public ArrayList<String> getServices() {
+    /**
+     * Méthode d'insertion d'un patient dans la base de données
+     * @param data les données du patient à insérer
+     * @throws SQLException si une erreur SQL survient
+     */
+    public String insertPatient(HashMap<String, String> data) throws SQLException {
+        // TODO: changer l'ipp pour respecter le cahier des charges
+        ResultSet requeteID = requete("SELECT MAX(idPatient) FROM Patient");
+        requeteID.next();
+        int idPatient = requeteID.getInt(1) + 1;
+        insertTable("Patient", String.valueOf(idPatient), "idPatient", data);
+        return String.valueOf(idPatient);
+    }
+
+    public void insertSejour(HashMap<String, String> data) throws SQLException {
+        ResultSet requeteID = requete("SELECT MAX(idSejour) FROM Sejour");
+        requeteID.next();
+        int idSejour = requeteID.getInt(1) + 1;
+        insertTable("Sejour", String.valueOf(idSejour), "idSejour", data);
+    }
+
+    public String insertLocG(HashMap<String, String> data) throws SQLException {
+        ResultSet requeteID = requete("SELECT MAX(idLocG) FROM LocalisationG");
+        requeteID.next();
+        int idLocG = requeteID.getInt(1) + 1;
+        insertTable("LOCALISATIONG", String.valueOf(idLocG), "idLocG", data);
+        return String.valueOf(idLocG);
+    }
+
+    /**
+     * Méthode de récupération des noms des services de la base de données
+     * @return la liste des noms des services
+     */
+    public ArrayList<String> getNomServices() {
         // On construit la requête pour récupérer les services
         String requete = "SELECT NOMSERVICE FROM Service";
         // On exécute la requête
@@ -154,4 +199,23 @@ public class DialogueBD {
         System.out.println(services);
         return services;
     }
+
+    /**
+     * Méthode de récupération de l'identifiant d'un service de la base de données
+     * @param serviceGeo le nom du service
+     * @return l'identifiant du service
+     */
+    public String getIdService(String serviceGeo) {
+        String requete = "SELECT idService FROM Service WHERE nomService = '" + serviceGeo + "'";
+        ResultSet resultSet = requete(requete);
+        try {
+            if (resultSet.next()) {
+                return resultSet.getString("idService");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        return null;
+    }
+
 }

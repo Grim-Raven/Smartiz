@@ -16,7 +16,7 @@ public class AjoutSejour extends javax.swing.JFrame {
      */
     public AjoutSejour() {
         initComponents();
-        //Pour empêcher le redimensionnement de la fenêtre 
+        //Pour empÃªcher le redimensionnement de la fenÃªtre 
         setResizable(false);
     }
 
@@ -111,10 +111,12 @@ public class AjoutSejour extends javax.swing.JFrame {
         buttonGroup1.add(ChambrePorte);
         ChambrePorte.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambrePorte.setText("Porte");
+        ChambrePorte.setActionCommand("'P'");
 
         buttonGroup1.add(ChambreFenetre);
         ChambreFenetre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambreFenetre.setText("Fenêtre");
+        ChambreFenetre.setActionCommand("'F'");
 
         Box.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Box.setText("Box");
@@ -122,14 +124,17 @@ public class AjoutSejour extends javax.swing.JFrame {
         buttonGroup1.add(Box1);
         Box1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box1.setText("1");
+        Box1.setActionCommand("'1'");
 
         buttonGroup1.add(Box2);
         Box2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box2.setText("2");
+        Box2.setActionCommand("'2'");
 
         buttonGroup1.add(Box3);
         Box3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box3.setText("3");
+        Box3.setActionCommand("'3'");
 
         Numerochambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Numerochambre.setText("Numéro de chambre");
@@ -140,10 +145,10 @@ public class AjoutSejour extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(LocGeo)
@@ -233,7 +238,7 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addComponent(Numerochambre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BoutonAjouter)
                 .addContainerGap())
         );
@@ -248,7 +253,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
         );
 
         pack();

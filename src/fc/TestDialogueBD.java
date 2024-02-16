@@ -94,21 +94,21 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
 
         // On crée des données pour un patient à insérer
         HashMap<String, String> data = new HashMap<>();
-        data.put("nom", "'Doe'");
-        data.put("prenom", "'John'");
-        data.put("dateNaissance", "'1990-01-03'");
-        data.put("sexe", "'M'");
-        data.put("adresse", "'1 rue de la Paix'");
-        data.put("dossierVisible", "'Y'");
-        data.put("vivant", "'Y'");
+        data.put("nom", "Doe");
+        data.put("prenom", "John");
+        data.put("dateNaissance", "1990-01-03");
+        data.put("sexe", "M");
+        data.put("adresse", "1 rue de la Paix");
+        data.put("dossierVisible", "Y");
+        data.put("vivant", "Y");
         data.put("idLocG", "1");
         data.put("idService", "1");
-        data.put("fumeur", "'N'");
-        data.put("alcool", "'N'");
-        data.put("donneesSociales", "'Aucune'");
+        data.put("fumeur", "N");
+        data.put("alcool", "N");
+        data.put("donneesSociales", "Aucune");
         // On exécute la requête
         try {
-            dialogueBD.insertPatient(data);
+            String idPatient = dialogueBD.insertPatient(data);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -116,7 +116,25 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         assertTrue(dialogueBD.patientExiste("Doe", "John", "1990-01-03"));
     }
 
-
+    @Test // Test de l'insertion d'une Localisation géographique dans la base de données
+    public void testInsertLocG() throws SQLException {
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour une localisation géographique à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("idService", "1");
+        data.put("idPiece", "1");
+        data.put("idLit", "P");
+        // On exécute la requête
+        try {
+            dialogueBD.insertLocG(data);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        // On vérifie que la localisation géographique a bien été insérée
+        assertTrue(dialogueBD.requete("SELECT * FROM LocalisationGeographique WHERE idService = 1 AND idPiece = 1 AND idLit = 'P'").next());
+    }
 }
 
 

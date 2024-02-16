@@ -55,10 +55,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                          <Component id="TexteNumeroChambre" alignment="1" min="-2" pref="423" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="TexteNumeroChambre" alignment="1" min="-2" pref="423" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="LocGeo" min="-2" max="-2" attributes="0"/>
@@ -165,7 +165,7 @@
                   <Component id="Numerochambre" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TexteNumeroChambre" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="BoutonAjouter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -338,6 +338,7 @@
               <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Porte"/>
+            <Property name="actionCommand" type="java.lang.String" value="&apos;P&apos;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="ChambreFenetre">
@@ -349,6 +350,7 @@
               <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Fen&#xea;tre"/>
+            <Property name="actionCommand" type="java.lang.String" value="&apos;F&apos;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Box">
@@ -368,6 +370,7 @@
               <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="1"/>
+            <Property name="actionCommand" type="java.lang.String" value="&apos;1&apos;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="Box2">
@@ -379,6 +382,7 @@
               <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="2"/>
+            <Property name="actionCommand" type="java.lang.String" value="&apos;2&apos;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="Box3">
@@ -390,6 +394,7 @@
               <Font name="Times New Roman" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="3"/>
+            <Property name="actionCommand" type="java.lang.String" value="&apos;3&apos;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Numerochambre">

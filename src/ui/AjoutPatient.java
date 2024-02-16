@@ -29,7 +29,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         // On change la langue de l'interface
         changerLangue(langue);
         //
-        MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getServices().toArray()));
+        MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
     }
 
     /**
@@ -551,48 +551,82 @@ public class AjoutPatient extends javax.swing.JFrame {
         else{
             // On récupère les données saisies par l'utilisateur
             // On met des guillemets simples pour les CHAR et VARCHAR dans les requêtes SQL
-            String nom = "'"+TexteNom.getText()+"'";
-            String prenom = "'"+TextePrenom.getText()+"'";
-            String telephone = "'"+TexteTelephone.getText()+"'";
-            String adresse = "'"+TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText()+"'";
-            String donneesSociales = "'"+TexteDonneesSociales.getText()+"'";
-            String dateNaissance = "'"+TexteDateNaissance.getText()+"'";
+            String nom = TexteNom.getText();
+            String prenom = TextePrenom.getText();
+            String telephone = TexteTelephone.getText();
+            String adresse = TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText();
+            String donneesSociales = TexteDonneesSociales.getText();
+            String dateNaissance = TexteDateNaissance.getText();
 
             // On récupère le sexe du patient (Femme, Homme ou null si rien n'est sélectionné)
-            String sexe = Femme.isSelected() ? "'F'" : (Homme.isSelected() ? "'M'" : null);
+            String sexe = Femme.isSelected() ? "F" : (Homme.isSelected() ? "M" : null);
             // On récupère si le patient est fumeur ou non (Oui, Non ou null si rien n'est sélectionné)
-            String fumeur = FumeurOui.isSelected() ? "'Y'" : (FumeurNon.isSelected() ? "'N'" : null);
+            String fumeur = FumeurOui.isSelected() ? "Y" : (FumeurNon.isSelected() ? "N" : null);
             // On récupère si le patient consomme de l'alcool ou non (Oui, Non ou null si rien n'est sélectionné)
-            String alcool = AlcoolOui.isSelected() ? "'Y'" : (AlcoolNon.isSelected() ? "'N'" : null);
+            String alcool = AlcoolOui.isSelected() ? "Y" : (AlcoolNon.isSelected() ? "N" : null);
 
             String service = (String) MenuDeroulantService.getSelectedItem();
 
-            // On crée un tableau contenant les données du patient
+            // On crée un dictionnaire contenant les données du patient
             // TODO : changer les valeurs null par ce qui devra correspondre plus tard (idService, idLocG)
             // TODO : gérer la création d'un séjour et la liaison avec le patient
-            HashMap<String, String> data = new HashMap<>();
-            data.put("nom", nom);
-            data.put("prenom", prenom);
-            data.put("dateNaissance", dateNaissance);
-            data.put("sexe", sexe);
-            data.put("adresse", adresse);
-            data.put("dossierVisible", "'Y'");
-            data.put("vivant", "'Y'");
-            data.put("telephone", telephone);
-            data.put("fumeur", fumeur);
-            data.put("alcool", alcool);
-            data.put("donneesSociales", donneesSociales);
-            data.put("idService", null);
-            data.put("idLocG", null);
+            HashMap<String, String> dataPatient = new HashMap<>();
+            dataPatient.put("nom", nom);
+            dataPatient.put("prenom", prenom);
+            dataPatient.put("dateNaissance", dateNaissance);
+            dataPatient.put("sexe", sexe);
+            dataPatient.put("adresse", adresse);
+            dataPatient.put("dossierVisible", "Y");
+            dataPatient.put("vivant", "Y");
+            dataPatient.put("telephone", telephone);
+            dataPatient.put("fumeur", fumeur);
+            dataPatient.put("alcool", alcool);
+            dataPatient.put("donneesSociales", donneesSociales);
+            dataPatient.put("idService", null);
+            dataPatient.put("idLocG", null);
 
 
 
-            // On insère le patient dans la base de données
-            dialogueBD.insertPatient(data);
+            // 1 : On insère le patient dans la base de données
+            String idPatient = dialogueBD.insertPatient(dataPatient);
             // On affiche un message de confirmation
             javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
             System.out.println("Le patient a été ajouté avec succès");
+
+            // 2 : On ajoute le séjour associé au patient
+            // 2.1 : On crée dans un premier temps la localisation géographique
+            // On récupère le service géographique sélectionné par l'utilisateur
+            String serviceGeo = (String) MeneDeroulantServiceGeo.getSelectedItem();
+            String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
+            String idLit = buttonGroupChambreBox.getSelection().getActionCommand();
+            String idPiece = TexteNumeroChambre.getText();
+            // On crée un dictionnaire contenant les données de la localisation géographique
+            HashMap<String, String> dataLocG = new HashMap<>();
+            dataLocG.put("idService", idServiceGeo);
+            dataLocG.put("idLit", idLit);
+            dataLocG.put("idPiece", idPiece);
+            // On insère la localisation géographique dans la base de données et on récupère son id
+            String idLocG = dialogueBD.insertLocG(dataLocG);
+
+            // On récupère les données relatives au séjour saisies par l'utilisateur
+            String dateDebut = TexteDateDebut.getText();
+            String dateFin = TexteDateFin.getText();
+            String consultation = ConsultationOui.isSelected() ? "Y" : (ConsultationNon.isSelected() ? "N" : null);
+            // On crée un dictionnaire contenant les données du séjour
+            HashMap<String, String> dataSejour = new HashMap<>();
+            dataSejour.put("idPatient", idPatient);
+            dataSejour.put("dateDebut", dateDebut);
+            dataSejour.put("dateFin", dateFin);
+            dataSejour.put("consultation", consultation);
+            dataSejour.put("ouvert", "Y");
+            dataSejour.put("idLocG", idLocG);
+            // TODO : Ajouter le médecin référent
+            // On insère le séjour dans la base de données
+            dialogueBD.insertSejour(dataSejour);
+
         }
+
+
 
     }//GEN-LAST:event_boutonAjouterActionPerformed
 
