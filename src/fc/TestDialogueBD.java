@@ -108,7 +108,7 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         data.put("donneesSociales", "Aucune");
         // On exécute la requête
         try {
-            String idPatient = dialogueBD.insertPatient(data);
+            dialogueBD.insertPatient(data);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -117,7 +117,7 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
     }
 
     @Test // Test de l'insertion d'une Localisation géographique dans la base de données
-    public void testInsertLocG() throws SQLException {
+    public void testInsertLocG(){
         DialogueBD dialogueBD = new DialogueBD();
         // On se connecte à la base de données
         dialogueBD.connect();
@@ -128,12 +128,69 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         data.put("idLit", "P");
         // On exécute la requête
         try {
-            dialogueBD.insertLocG(data);
+            String idLocG = dialogueBD.insertLocG(data);
+            // On vérifie que la localisation géographique a bien été insérée
+            assertTrue(dialogueBD.requete("SELECT * FROM LocalisationG WHERE idLocG =" + idLocG).next());
+            // On supprime la locG qui a été créée
+            dialogueBD.requete("DELETE FROM LocalisationG WHERE idLocG ="+idLocG);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        // On vérifie que la localisation géographique a bien été insérée
-        assertTrue(dialogueBD.requete("SELECT * FROM LocalisationGeographique WHERE idService = 1 AND idPiece = 1 AND idLit = 'P'").next());
+    }
+
+    @Test // Test de l'insertion d'un séjour dans la base de donnée
+    public void testInsertSejour(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour un séjour à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("idPatient", "1");
+        data.put("dateDebut", "2024-02-16");
+        data.put("dateFin", "2024-02-16");
+        data.put("consultation", "Y");
+        data.put("ouvert", "Y");
+        data.put("LettreDeSortie", "lds");
+        data.put("idLocG", "1");
+        data.put("idMedecinReferent", "1111");
+
+        try {
+            String idSejour = dialogueBD.insertSejour(data);
+            // On vérifie que la localisation géographique a bien été insérée
+            assertTrue(dialogueBD.requete("SELECT * FROM Sejour WHERE idSejour = 1").next());
+            // On supprime la locG qui a été créée
+            dialogueBD.requete("DELETE FROM Sejour WHERE idSejour ="+idSejour);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    @Test // Test de l'insertion d'un personnel médical dans la base de données
+    public void testInsertPersonnelMedical(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour une localisation géographique à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("idPersonnelMedical", "2222");
+        data.put("mdp", "mdp");
+        data.put("nom", "Doe");
+        data.put("prenom", "John");
+        data.put("poste", "medecin");
+        data.put("dateFinContrat", "2024-09-16");
+        data.put("idService", "1");
+        data.put("ARC", "Y");
+        // On exécute la requête
+        try {
+            dialogueBD.insertPersonnelMedical(data);
+            // On vérifie que la localisation géographique a bien été insérée
+            boolean existe =dialogueBD.requete("SELECT * FROM PersonnelMedical WHERE idPersonnelMedical =2222").next();
+            assertTrue(existe);
+            // On supprime la locG qui a été créée
+            dialogueBD.requete("DELETE FROM PersonnelMedical WHERE idPersonnelMedical =2222");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }
 
