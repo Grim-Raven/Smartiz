@@ -142,8 +142,9 @@ public class DialogueBD {
 
         String requete = columns.toString() + values;
         // On exécute la requête
-        requete(requete);
         System.out.println(requete);
+        requete(requete);
+
     }
 
     /**
@@ -160,19 +161,51 @@ public class DialogueBD {
         return String.valueOf(idPatient);
     }
 
-    public void insertSejour(HashMap<String, String> data) throws SQLException {
+    /**
+     * Méthode d'insertion d'un nouveau séjour dans la base de donnée
+     *
+     * @param data la HashMap contenant les données du séjour
+     * @return l'id du séjour créé
+     * @throws SQLException Si une erreur liée à SQL survient
+     */
+    public String insertSejour(HashMap<String, String> data) throws SQLException {
         ResultSet requeteID = requete("SELECT MAX(idSejour) FROM Sejour");
         requeteID.next();
         int idSejour = requeteID.getInt(1) + 1;
         insertTable("Sejour", String.valueOf(idSejour), "idSejour", data);
+        return String.valueOf(idSejour);
     }
 
+
+    /**
+     * Méthode d'insertion d'une localisation géographique dans la base de donnée
+     * @param data : la HashMap contenant les données de la locG
+     * @return l'id de la locG qui vient d'être insérée
+     * @throws SQLException Si une erreur liée à SQL survient
+     */
     public String insertLocG(HashMap<String, String> data) throws SQLException {
+        // On récupère le plus grand id pour une locG
         ResultSet requeteID = requete("SELECT MAX(idLocG) FROM LocalisationG");
         requeteID.next();
+        // On crée un nouvel id en incrémentant de 1 le plus grand id existant
         int idLocG = requeteID.getInt(1) + 1;
+        // On insère une nouvelle locG dans la table LOCALISATIONG
         insertTable("LOCALISATIONG", String.valueOf(idLocG), "idLocG", data);
+        // On retourne l'id de la nouvelle locG créée
         return String.valueOf(idLocG);
+    }
+
+    /**
+     * Méthode d'ajout d'un nouveau personnel Médical dans la base de données
+     * @param data La HashMap contenant les données du nouveau personnel médical
+     * @throws SQLException Si une erreur liée à SQL survient
+     */
+    public void insertPersonnelMedical(HashMap<String, String> data) throws SQLException {
+        // On récupère la clef dans la HashMap et on l'enlève
+        String idPersonnelMedical = data.get("idPersonnelMedical");
+        data.remove("idPersonnelMedical");
+        insertTable("PERSONNELMEDICAL", idPersonnelMedical, "IDPERSONNELMEDICAL",data);
+
     }
 
     /**
