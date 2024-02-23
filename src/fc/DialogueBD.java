@@ -109,6 +109,7 @@ public class DialogueBD {
             if (entry.getValue() != null) {
                 // On ajoute le nom de la colonne et la valeur à la requête
                 columns.append(entry.getKey()).append(", ");
+                System.out.println("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 
                 resultatType.next(); // On se met sur la première ligne du résultat
@@ -144,7 +145,6 @@ public class DialogueBD {
         // On exécute la requête
         System.out.println(requete);
         requete(requete);
-
     }
 
     /**
@@ -286,4 +286,58 @@ public class DialogueBD {
         }
         return null;
     }
+    /**
+     * Méthode de recherche d'une table dans la base de données
+     * @param table la table dque l'on cherche
+     * @param data les données avec lesquelles on cherche
+     * @throws SQLException si une erreur SQL survient
+     * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
+    */
+
+    public ResultSet rechercheTable(String table, HashMap<String, String> data) throws SQLException{
+        // On construit la requête de recherche dans la table
+        StringBuilder recherche = new StringBuilder("SELECT * FROM ").append(table).append(" WHERE ");
+
+        // On parcourt les données pour les ajouter à la requête
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            // Si la valeur n'est pas nulle, on l'ajoute à la requête
+            if (entry.getValue() != null) {
+                //la HashMap n'est pas vide, donc on a des filtres à prendre en compte
+                ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
+
+                // On se met sur la première ligne du résultat
+                resultatType.next();
+                //On récupère la clé
+                recherche.append(entry.getKey()).append("= ");
+                // On récupère le type de la colonne
+                String typeColonne = resultatType.getString("DATA_TYPE");
+
+                switch (typeColonne) {
+                    case "NUMBER":
+                        recherche.append(entry.getValue()).append(" AND ");
+                        break;
+                    case "DATE": // Pour les dates, on utilise la fonction TO_DATE
+                        recherche.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD') AND ");
+                        break;
+                    default: // Pour les chaînes de caractères, on ajoute des guillemets simples
+                        recherche.append("'").append(entry.getValue());
+                        recherche.append("' AND ");
+                        break;
+                }
+            }
+        }
+
+        // On supprime les "AND " à la fin de chaque partie de la requête
+        if (data.size() > 0) {
+            recherche.setLength(recherche.length() - 5); // pour le dernier "AND "
+        }
+        else{
+            recherche.setLength(recherche.length() -7); // pour le " WHERE "
+        }
+        String requete = recherche.toString();
+        // On exécute la requête
+        System.out.println(requete);
+        return requete(requete);
+    }
+
 }
