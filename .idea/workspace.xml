@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjouterPrescription.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjouterPrescription.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjouterPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjouterPrescription.java" afterDir="false" />
-    </list>
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="ui-fc-ajout-prescription" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,6 +57,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Accueil.executor": "Run",
     "Application.AjoutPatient.executor": "Run",
     "Application.AjouterPrescription.executor": "Run",
     "Application.ConnexionDB.executor": "Run",
@@ -85,7 +80,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "ui-fc-ajout-prescription",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz",
@@ -101,7 +96,20 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TestDialogueBD">
+  <component name="RunManager" selected="Application.Accueil">
+    <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AjouterPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.AjouterPrescription" />
       <module name="Smartiz" />
@@ -162,29 +170,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDialogueBD.testInsertSejour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="fc" />
-      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
-      <option name="METHOD_NAME" value="testInsertSejour" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Accueil" />
         <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPrescription" />
         <item itemvalue="Application.AjouterPrescription" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPersonnelMedical" />
-        <item itemvalue="JUnit.TestDialogueBD.testInsertSejour" />
       </list>
     </recent_temporary>
   </component>

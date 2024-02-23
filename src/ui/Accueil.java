@@ -5,6 +5,7 @@
  */
 package ui;
 
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -55,7 +56,8 @@ public class Accueil extends javax.swing.JFrame {
         //Le panneau Ouest prend pour dimension longueur1 et hauteur 
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
-        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));  
+        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
