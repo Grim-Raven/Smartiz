@@ -5,6 +5,7 @@
  */
 package ui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -219,6 +220,11 @@ public class Accueil extends javax.swing.JFrame {
         BoutonRechercher.setForeground(new java.awt.Color(255, 255, 255));
         BoutonRechercher.setText("Rechercher");
         BoutonRechercher.setPreferredSize(new java.awt.Dimension(97, 40));
+        BoutonRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonRechercherActionPerformed(evt);
+            }
+        });
 
         IPP.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         IPP.setText("IPP");
@@ -410,6 +416,10 @@ public class Accueil extends javax.swing.JFrame {
     private void texteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_texteNomActionPerformed
+
+    private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     /**
      * @param args the command line arguments

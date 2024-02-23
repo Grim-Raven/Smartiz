@@ -356,6 +356,9 @@
                   <Dimension value="[97, 40]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoutonRechercherActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="IPP">
               <Properties>
