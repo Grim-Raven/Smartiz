@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AjouterPrescription.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjouterPrescription.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AjouterPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjouterPrescription.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +64,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.AjoutPatient.executor": "Run",
+    "Application.AjouterPrescription.executor": "Run",
     "Application.ConnexionDB.executor": "Run",
     "Application.InterfaceConnexion.executor": "Run",
     "Application.Main.executor": "Run",
@@ -71,6 +74,7 @@
     "JUnit.TestDialogueBD.testInsertLocG.executor": "Run",
     "JUnit.TestDialogueBD.testInsertPatient.executor": "Run",
     "JUnit.TestDialogueBD.testInsertPersonnelMedical.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertPrescription.executor": "Run",
     "JUnit.TestDialogueBD.testInsertSejour.executor": "Run",
     "JUnit.TestDialogueBD.testPatientExiste.executor": "Run",
     "JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor": "Run",
@@ -81,7 +85,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "fc-ajout-medecin",
+    "git-widget-placeholder": "ui-fc-ajout-prescription",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz",
@@ -98,8 +102,8 @@
   }
 }]]></component>
   <component name="RunManager" selected="JUnit.TestDialogueBD">
-    <configuration name="AjoutPatient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.AjoutPatient" />
+    <configuration name="AjouterPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.AjouterPrescription" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -126,22 +130,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDialogueBD.testInsertLocG" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="fc" />
-      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
-      <option name="METHOD_NAME" value="testInsertLocG" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestDialogueBD.testInsertPersonnelMedical" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Smartiz" />
       <extension name="coverage">
@@ -153,6 +141,22 @@
       <option name="PACKAGE_NAME" value="fc" />
       <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
       <option name="METHOD_NAME" value="testInsertPersonnelMedical" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDialogueBD.testInsertPrescription" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fc" />
+      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
+      <option name="METHOD_NAME" value="testInsertPrescription" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -177,10 +181,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestDialogueBD" />
+        <item itemvalue="JUnit.TestDialogueBD.testInsertPrescription" />
+        <item itemvalue="Application.AjouterPrescription" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPersonnelMedical" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertSejour" />
-        <item itemvalue="JUnit.TestDialogueBD.testInsertLocG" />
-        <item itemvalue="Application.AjoutPatient" />
       </list>
     </recent_temporary>
   </component>
@@ -219,7 +223,9 @@
       <workItem from="1708104720407" duration="12000" />
       <workItem from="1708104777415" duration="1018000" />
       <workItem from="1708105832639" duration="1122000" />
-      <workItem from="1708443777604" duration="2298000" />
+      <workItem from="1708443777604" duration="3279000" />
+      <workItem from="1708511048671" duration="990000" />
+      <workItem from="1708674586646" duration="7217000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -277,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708079557970</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test">
+      <option name="closed" value="true" />
+      <created>1708446393443</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708446393443</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +328,8 @@
     <MESSAGE value="Après le merge avec Ajout Sejour" />
     <MESSAGE value="Changements dans la classe DialogueDB pour l'insertion dans la BD" />
     <MESSAGE value="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée" />
+    <MESSAGE value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

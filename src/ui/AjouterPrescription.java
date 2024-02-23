@@ -5,6 +5,10 @@
  */
 package ui;
 
+import fc.DialogueBD;
+
+import java.util.HashMap;
+
 /**
  *
  * @author emmaa
@@ -14,8 +18,17 @@ public class AjouterPrescription extends javax.swing.JFrame {
     /**
      * Creates new form AjouterPrescription
      */
+    private DialogueBD dialogueBD;
     public AjouterPrescription() {
         initComponents();
+        setResizable(false);
+    }
+
+    public AjouterPrescription(DialogueBD dialogueBD, String langue) {
+        initComponents();
+        this.dialogueBD = dialogueBD;
+        dialogueBD.connect();
+        changerLangue(langue);
         setResizable(false);
     }
 
@@ -85,6 +98,11 @@ public class AjouterPrescription extends javax.swing.JFrame {
 
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouter.setText("Ajouter");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         Commentaire.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Commentaire.setText("Commentaire");
@@ -182,6 +200,49 @@ public class AjouterPrescription extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MatinActionPerformed
 
+    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        String nomMedicament = TexteNomMedicament.getText();
+        String quantite = TexteQuantite.getText()+ MenuDeroulantQuantite.getSelectedItem();
+        String posologie = "";
+        if(Matin.isSelected()){
+            posologie += "Matin ";
+        }
+        if(Midi.isSelected()){
+            posologie += "Midi ";
+        }
+        if(Soir.isSelected()){
+            posologie += "Soir ";
+        }
+        String voieAdministration = (String) MenuDeroulantVoie.getSelectedItem();
+        String commentaire = TexteCommentaire.getText();
+        HashMap<String, String> prescriptionData = new HashMap<String, String>();
+        // TODO: ajouter le prescritpeur (utilisateur, le patient cible (dont le dossier est ouvert, le code, le cout ?)
+        prescriptionData.put("nom", "prescription");
+        prescriptionData.put("posologie", nomMedicament + " " + quantite + " " + posologie + " " + voieAdministration);
+        prescriptionData.put("commentaire", commentaire);
+        dialogueBD.insertPrescription(prescriptionData);
+
+        // On envoie les données à la base de données
+    }//GEN-LAST:event_BoutonAjouterActionPerformed
+
+    public void changerLangue(String langue) {
+        if(langue.equals("English")){
+            AjouterUnePrescription.setText("Add a prescription");
+            NomMedicament.setText("Drug name");
+            Posologie.setText("Dosage");
+            Quantite.setText("Quantity");
+            Matin.setText("Morning");
+            Midi.setText("Noon");
+            Soir.setText("Evening");
+            VoieAdministration.setText("Intake way");
+            Commentaire.setText("Comment");
+            BoutonAjouter.setText("Add");
+            MenuDeroulantVoie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auricular", "Intravenous", "Intramuscular", "Intrathecal", "Nasal", "Oral", "Rectal", "Subcutaneous", "Sublingual", "Transdermal", "Vaginal" }));
+        }
+
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -212,7 +273,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterPrescription().setVisible(true);
+                new AjouterPrescription(new DialogueBD(),"English").setVisible(true);
             }
         });
     }
