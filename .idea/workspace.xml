@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="nom utilisateur sur l'accueil" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ui-fc-ajout-prescription" />
+        <entry key="$PROJECT_DIR$" value="liaison-connexion-accueil" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +96,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Accueil">
+  <component name="RunManager" selected="Application.InterfaceConnexion">
     <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
       <module name="Smartiz" />
@@ -110,8 +110,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AjouterPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.AjouterPrescription" />
+    <configuration name="InterfaceConnexion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.InterfaceConnexion" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -172,10 +172,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.InterfaceConnexion" />
         <item itemvalue="Application.Accueil" />
         <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPrescription" />
-        <item itemvalue="Application.AjouterPrescription" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPersonnelMedical" />
       </list>
     </recent_temporary>
@@ -218,6 +218,8 @@
       <workItem from="1708443777604" duration="3279000" />
       <workItem from="1708511048671" duration="990000" />
       <workItem from="1708674586646" duration="7217000" />
+      <workItem from="1708693324538" duration="2549000" />
+      <workItem from="1708696077718" duration="6362000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -283,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708446393443</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="L'accueil s'ouvre en plein écran">
+      <option name="closed" value="true" />
+      <created>1708684341577</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708684341577</updated>
+    </task>
+    <task id="LOCAL-00010" summary="nom utilisateur sur l'accueil">
+      <option name="closed" value="true" />
+      <created>1708698905730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708698905730</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +339,9 @@
     <MESSAGE value="Changements dans la classe DialogueDB pour l'insertion dans la BD" />
     <MESSAGE value="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée" />
     <MESSAGE value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
+    <MESSAGE value="L'accueil s'ouvre en plein écran" />
+    <MESSAGE value="nom utilisateur sur l'accueil" />
+    <option name="LAST_COMMIT_MESSAGE" value="nom utilisateur sur l'accueil" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -31,6 +31,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     public InterfaceConnexion(DialogueBD dialogueBD) {
         initComponents();
         this.dialogueBD = dialogueBD;
+        this.dialogueBD.connect();
         //Pour empêcher le redimensionnement de la fenêtre par l'ultilisateur
         setResizable(false);
         // Le message d'erreur de connexion n'est pas visible par défaut
@@ -173,6 +174,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         if(dialogueBD.requete(requete).next()){
             // Si c'est le cas, on ouvre l'interface de l'application
             System.out.println("Connexion réussie");
+            new Accueil(dialogueBD, identifiant, Langues.getSelectedItem().toString()).setVisible(true);
             this.dispose();
         }
         else{
