@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="L'accueil s'ouvre en plein écran">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="nom utilisateur sur l'accueil">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Accueil.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Accueil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +224,7 @@
       <workItem from="1708511048671" duration="990000" />
       <workItem from="1708674586646" duration="7217000" />
       <workItem from="1708693324538" duration="2549000" />
-      <workItem from="1708696077718" duration="2530000" />
+      <workItem from="1708696077718" duration="6362000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -299,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708684341577</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="nom utilisateur sur l'accueil">
+      <option name="closed" value="true" />
+      <created>1708698905730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708698905730</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +345,8 @@
     <MESSAGE value="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée" />
     <MESSAGE value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
     <MESSAGE value="L'accueil s'ouvre en plein écran" />
-    <option name="LAST_COMMIT_MESSAGE" value="L'accueil s'ouvre en plein écran" />
+    <MESSAGE value="nom utilisateur sur l'accueil" />
+    <option name="LAST_COMMIT_MESSAGE" value="nom utilisateur sur l'accueil" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

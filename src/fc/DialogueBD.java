@@ -267,12 +267,19 @@ public class DialogueBD {
         }
     }
 
+    /**
+     * Méthode de récupération du nom d'utilisateur via son identifiant
+     * @param identifiant l'identifiant de l'utilisateur
+     * @return le nom + prénom de l'utilisateur
+     */
     public String getNomUtilisateur(String identifiant) {
+        // On construit la requête pour récupérer le nom et le prénom de l'utilisateur
         String requete = "SELECT nom, prenom FROM PersonnelMedical WHERE idPersonnelMedical = '" + identifiant + "'";
         ResultSet resultSet = requete(requete);
         try {
             if (resultSet.next()) {
-                return resultSet.getString("nom") + " " + resultSet.getString("prenom");
+                // On retourne le nom et le prénom de l'utilisateur en enlevant les espaces
+                return resultSet.getString("nom").replace(" ", "") + " " + resultSet.getString("prenom").replace(" ", "");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DialogueBD.class.getName());

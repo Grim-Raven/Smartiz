@@ -36,7 +36,7 @@ public class Accueil extends javax.swing.JFrame {
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
 
-    private DialogueBD dialogueBD;
+    private final DialogueBD dialogueBD;
     public Accueil() {
         initComponents();
         //On récupère la taille de l'écran
@@ -88,10 +88,8 @@ public class Accueil extends javax.swing.JFrame {
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
-
         this.dialogueBD = dialogueBD;
-        //On affiche le nom de l'utilisateur
-        nomUtilisateur.setText(dialogueBD.getNomUtilisateur(idUtilisateur));
+        this.setTitle("Bienvenue "+dialogueBD.getNomUtilisateur(idUtilisateur));
     }
 
     /**
@@ -131,10 +129,8 @@ public class Accueil extends javax.swing.JFrame {
         PanneauPrincipaleSud = new javax.swing.JPanel();
         PanneauPrincipaleCentral = new javax.swing.JPanel();
         Bienvenue = new javax.swing.JLabel();
-        nomUtilisateur = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(largeur,hauteur));
 
         PanneauOuest.setBackground(new java.awt.Color(236, 242, 254));
         PanneauOuest.setPreferredSize(new Dimension(largeur1,hauteur));
@@ -185,7 +181,7 @@ public class Accueil extends javax.swing.JFrame {
             .addGroup(PanneauOuestLayout.createSequentialGroup()
                 .addGroup(PanneauOuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonMedecins, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(BoutonMedecins, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BoutonServices, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(PanneauOuestLayout.createSequentialGroup()
@@ -239,8 +235,6 @@ public class Accueil extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        labelLogo.getAccessibleContext().setAccessibleName("");
-
         PanneauNord.add(PanneauLogo, java.awt.BorderLayout.WEST);
 
         PanneauRecherche.setBackground(new java.awt.Color(236, 242, 254));
@@ -255,6 +249,11 @@ public class Accueil extends javax.swing.JFrame {
         BoutonRechercher.setForeground(new java.awt.Color(255, 255, 255));
         BoutonRechercher.setText("Rechercher");
         BoutonRechercher.setPreferredSize(new java.awt.Dimension(97, 40));
+        BoutonRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonRechercherActionPerformed(evt);
+            }
+        });
 
         IPP.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         IPP.setText("IPP");
@@ -401,36 +400,13 @@ public class Accueil extends javax.swing.JFrame {
         PanneauPrincipale.add(PanneauPrincipaleSud, java.awt.BorderLayout.PAGE_END);
 
         PanneauPrincipaleCentral.setBackground(new java.awt.Color(255, 255, 255));
+        PanneauPrincipaleCentral.setLayout(new java.awt.BorderLayout());
 
         Bienvenue.setFont(new java.awt.Font("Segoe Script", 0, 80)); // NOI18N
         Bienvenue.setForeground(new java.awt.Color(4, 66, 114));
+        Bienvenue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Bienvenue.setText("Bienvenue");
-
-        nomUtilisateur.setFont(new java.awt.Font("Segoe Script", 3, 36)); // NOI18N
-        nomUtilisateur.setText("nomUtilisateur ");
-
-        javax.swing.GroupLayout PanneauPrincipaleCentralLayout = new javax.swing.GroupLayout(PanneauPrincipaleCentral);
-        PanneauPrincipaleCentral.setLayout(PanneauPrincipaleCentralLayout);
-        PanneauPrincipaleCentralLayout.setHorizontalGroup(
-            PanneauPrincipaleCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauPrincipaleCentralLayout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
-                .addGroup(PanneauPrincipaleCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanneauPrincipaleCentralLayout.createSequentialGroup()
-                        .addComponent(Bienvenue)
-                        .addGap(114, 114, 114))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanneauPrincipaleCentralLayout.createSequentialGroup()
-                        .addComponent(nomUtilisateur)
-                        .addGap(176, 176, 176))))
-        );
-        PanneauPrincipaleCentralLayout.setVerticalGroup(
-            PanneauPrincipaleCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauPrincipaleCentralLayout.createSequentialGroup()
-                .addComponent(Bienvenue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomUtilisateur)
-                .addGap(0, 4, Short.MAX_VALUE))
-        );
+        PanneauPrincipaleCentral.add(Bienvenue, java.awt.BorderLayout.NORTH);
 
         PanneauPrincipale.add(PanneauPrincipaleCentral, java.awt.BorderLayout.CENTER);
 
@@ -513,7 +489,6 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JTextField TexteDateDeNaissance;
     private javax.swing.JTextField TexteIPP;
     private javax.swing.JLabel labelLogo;
-    private javax.swing.JLabel nomUtilisateur;
     private javax.swing.JTextField texteNom;
     private javax.swing.JTextField textePrenom;
     // End of variables declaration//GEN-END:variables
