@@ -192,6 +192,30 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
             System.out.println(ex);
         }
     }
+
+    @Test // Test de l'insertion d'une prescription dans la base de données
+    public void testInsertPrescription(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour une prescription à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("nom", "prescription");
+        data.put("datePrescription", "2024-02-16");
+        data.put("posologie", "Doliprane 8mg Soir  Auricular");
+        data.put("commentaire", "commentaire");
+        // On exécute la requête
+        try {
+            String idActe =dialogueBD.insertPrescription(data);
+            // On vérifie que la prescription a bien été insérée
+            boolean existe =dialogueBD.requete("SELECT * FROM Acte WHERE idActe="+idActe).next();
+            assertTrue(existe);
+            // On supprime la prescription qui a été créée
+            dialogueBD.requete("DELETE FROM Acte WHERE idActe ="+idActe);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }
 
 
