@@ -5,6 +5,8 @@
  */
 package ui;
 
+import fc.DialogueBD;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -34,6 +36,7 @@ public class Accueil extends javax.swing.JFrame {
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
 
+    private DialogueBD dialogueBD;
     public Accueil() {
         initComponents();
         //On récupère la taille de l'écran
@@ -56,7 +59,39 @@ public class Accueil extends javax.swing.JFrame {
         //Le panneau Ouest prend pour dimension longueur1 et hauteur 
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
-        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));  
+        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
+
+        this.dialogueBD = new DialogueBD();
+        this.dialogueBD.connect();
+    }
+
+    public Accueil(DialogueBD dialogueBD, String idUtilisateur, String langue) {
+        initComponents();
+        //On récupère la taille de l'écran
+        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
+        //On stocke la largeur de l'écran dans la variable largeur
+        largeur = tailleMoniteur.width;
+        //On stocke la hauteur de l'écran dans la variable hauteur
+        hauteur = tailleMoniteur.height;
+        //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
+        largeur1 = largeur/5;
+        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        largeurCentree = (largeur-largeur1)/4;
+        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
+        hauteur1 = hauteur - hauteur2;
+        //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
+        hauteur2 = hauteur/5;
+
+        initComponents();
+
+        //Le panneau Ouest prend pour dimension longueur1 et hauteur
+        PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
+        //Le panneau Nord prend pour dimension longueur2 et hauteur2
+        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
+
+        this.dialogueBD = dialogueBD;
+        //On affiche le nom de l'utilisateur
+        nomUtilisateur.setText(dialogueBD.getNomUtilisateur(idUtilisateur));
     }
 
     /**
@@ -220,11 +255,6 @@ public class Accueil extends javax.swing.JFrame {
         BoutonRechercher.setForeground(new java.awt.Color(255, 255, 255));
         BoutonRechercher.setText("Rechercher");
         BoutonRechercher.setPreferredSize(new java.awt.Dimension(97, 40));
-        BoutonRechercher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoutonRechercherActionPerformed(evt);
-            }
-        });
 
         IPP.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         IPP.setText("IPP");

@@ -267,4 +267,16 @@ public class DialogueBD {
         }
     }
 
+    public String getNomUtilisateur(String identifiant) {
+        String requete = "SELECT nom, prenom FROM PersonnelMedical WHERE idPersonnelMedical = '" + identifiant + "'";
+        ResultSet resultSet = requete(requete);
+        try {
+            if (resultSet.next()) {
+                return resultSet.getString("nom") + " " + resultSet.getString("prenom");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        return null;
+    }
 }
