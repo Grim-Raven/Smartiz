@@ -7,9 +7,12 @@ package ui;
 
 import fc.DialogueBD;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  *
@@ -30,13 +33,14 @@ public class Accueil extends javax.swing.JFrame {
     protected int hauteur1;
     //L'attribut hauteur2 correspond à la hauteur du panneau Nord
     protected int hauteur2;
-    //L'attribut largeurCentré correspond à 1/4 de largeur - largeur1
+    //L'attribut largeurCentrÃ© correspond à 1/4 de largeur - largeur1
     protected int largeurCentree;
     
-    //Code couleur : bleu foncé -> 044272
+    //Code couleur : bleu foncÃ© -> 044272
     //Code couleur : bleu clair -> ecf2fe
 
     private final DialogueBD dialogueBD;
+    private String idUtilisateur;
     public Accueil() {
         initComponents();
         //On récupère la taille de l'écran
@@ -47,7 +51,7 @@ public class Accueil extends javax.swing.JFrame {
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
         largeur1 = largeur/5;
-        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        //L'attribut largeurCentrée correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur-largeur1)/4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
@@ -55,18 +59,22 @@ public class Accueil extends javax.swing.JFrame {
         hauteur2 = hauteur/5;
         
         initComponents();
-        
+        // On met le logo de l'application
+        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
+
         //Le panneau Ouest prend pour dimension longueur1 et hauteur 
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
 
+        this.idUtilisateur = "1111";
         this.dialogueBD = new DialogueBD();
         this.dialogueBD.connect();
+        // On met la Jframe en plein écran
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public Accueil(DialogueBD dialogueBD, String idUtilisateur, String langue) {
-        initComponents();
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -75,21 +83,26 @@ public class Accueil extends javax.swing.JFrame {
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
         largeur1 = largeur/5;
-        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        //L'attribut largeurCentrÃ© correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur-largeur1)/4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
         hauteur2 = hauteur/5;
-
         initComponents();
-
         //Le panneau Ouest prend pour dimension longueur1 et hauteur
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
         this.dialogueBD = dialogueBD;
+        // On affiche le nom de l'utilisateur en Titre de la JFrame
+        this.idUtilisateur = idUtilisateur;
         this.setTitle("Bienvenue "+dialogueBD.getNomUtilisateur(idUtilisateur));
+        // On met la Jframe en plein écran
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // On met le logo de l'application
+        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
+
     }
 
     /**
@@ -113,7 +126,7 @@ public class Accueil extends javax.swing.JFrame {
         labelLogo = new javax.swing.JLabel();
         PanneauRecherche = new java.awt.Panel();
         RechercherUnPatient = new javax.swing.JLabel();
-        TexteIPP = new javax.swing.JTextField();
+        texteIPP = new javax.swing.JTextField();
         BoutonRechercher = new javax.swing.JButton();
         IPP = new javax.swing.JLabel();
         Nom = new javax.swing.JLabel();
@@ -121,7 +134,7 @@ public class Accueil extends javax.swing.JFrame {
         Prenom = new javax.swing.JLabel();
         textePrenom = new javax.swing.JTextField();
         DateDeNaissance = new javax.swing.JLabel();
-        TexteDateDeNaissance = new javax.swing.JTextField();
+        texteDateNaissance = new javax.swing.JTextField();
         PanneauPrincipale = new javax.swing.JPanel();
         PanneauPrincipaleNord = new javax.swing.JPanel();
         PanneauPrincipalOuest = new javax.swing.JPanel();
@@ -218,8 +231,6 @@ public class Accueil extends javax.swing.JFrame {
 
         PanneauLogo.setPreferredSize(new Dimension(largeur1,hauteur2));
 
-        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Image/Logo_Smartiz.png"))); // NOI18N
-
         javax.swing.GroupLayout PanneauLogoLayout = new javax.swing.GroupLayout(PanneauLogo);
         PanneauLogo.setLayout(PanneauLogoLayout);
         PanneauLogoLayout.setHorizontalGroup(
@@ -244,6 +255,8 @@ public class Accueil extends javax.swing.JFrame {
         RechercherUnPatient.setText(" Rechercher un patient :");
         RechercherUnPatient.setPreferredSize(new Dimension(400,75));
 
+        texteIPP.setName("idPatient"); // NOI18N
+
         BoutonRechercher.setBackground(new java.awt.Color(4, 66, 114));
         BoutonRechercher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonRechercher.setForeground(new java.awt.Color(255, 255, 255));
@@ -261,6 +274,7 @@ public class Accueil extends javax.swing.JFrame {
         Nom.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         Nom.setText("Nom ");
 
+        texteNom.setName("nom"); // NOI18N
         texteNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 texteNomActionPerformed(evt);
@@ -270,8 +284,12 @@ public class Accueil extends javax.swing.JFrame {
         Prenom.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         Prenom.setText("Prénom");
 
+        textePrenom.setName("prenom"); // NOI18N
+
         DateDeNaissance.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         DateDeNaissance.setText("Date de Naissance");
+
+        texteDateNaissance.setName("dateNaissance"); // NOI18N
 
         javax.swing.GroupLayout PanneauRechercheLayout = new javax.swing.GroupLayout(PanneauRecherche);
         PanneauRecherche.setLayout(PanneauRechercheLayout);
@@ -283,7 +301,7 @@ public class Accueil extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanneauRechercheLayout.createSequentialGroup()
                         .addComponent(DateDeNaissance)
                         .addGap(18, 18, 18)
-                        .addComponent(TexteDateDeNaissance))
+                        .addComponent(texteDateNaissance))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanneauRechercheLayout.createSequentialGroup()
                         .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanneauRechercheLayout.createSequentialGroup()
@@ -298,7 +316,7 @@ public class Accueil extends javax.swing.JFrame {
                                 .addComponent(IPP)))
                         .addGap(18, 18, 18)
                         .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TexteIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(texteIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                             .addComponent(textePrenom))))
                 .addGap(18, 18, 18)
                 .addComponent(BoutonRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +328,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RechercherUnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TexteIPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texteIPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BoutonRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IPP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,7 +342,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DateDeNaissance)
-                    .addComponent(TexteDateDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(texteDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -424,7 +442,43 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
-        // TODO add your handling code here:
+        // On récupère la liste des patients qui correspondent à la recherche.
+        // On récupère les champs de la recherche dans une HashMap
+        HashMap<String,String> dataPatient = new HashMap<>();
+        // Pour chaque component, on vérifie si c'est un JTextField, si c'est le cas, on ajoute le contenu du JTextField dans la HashMap
+        for(Component component : PanneauRecherche.getComponents()){
+            if(component instanceof JTextField){
+                JTextField textField = (JTextField) component;
+                if(!textField.getText().isEmpty()) { // On vérifie que le JTextField ne soit pas vide
+                    dataPatient.put(textField.getName(), textField.getText());
+                }
+            }
+        }
+        // On ne veut que les patients du service de l'utilisateur
+        dataPatient.put("idService", dialogueBD.getService(idUtilisateur));
+        //TODO : Rendre la recherche insensible à la casse
+        //On récupère les patients qui correspondent à la recherche
+        ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
+        try{
+            while (resultSetPatients.next()) {
+                // On imprime le nom des patients qui correspondent à la recherche
+                System.out.println(resultSetPatients.getString("nom"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        //On supprime tous les composants du panneau principal
+        for(Component component : PanneauPrincipale.getComponents()){
+            PanneauPrincipale.remove(component);
+        }
+        // On affiche le panel AffichagePatient
+        AffichagePatient affichagePatient = new AffichagePatient();
+        affichagePatient.setVisible(true);
+        //On ajoute le panel AffichagePatient au panneau principal
+        PanneauPrincipale.add(affichagePatient, java.awt.BorderLayout.CENTER);
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     /**
@@ -486,9 +540,9 @@ public class Accueil extends javax.swing.JFrame {
     private java.awt.Panel PanneauRecherche;
     private javax.swing.JLabel Prenom;
     private javax.swing.JLabel RechercherUnPatient;
-    private javax.swing.JTextField TexteDateDeNaissance;
-    private javax.swing.JTextField TexteIPP;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JTextField texteDateNaissance;
+    private javax.swing.JTextField texteIPP;
     private javax.swing.JTextField texteNom;
     private javax.swing.JTextField textePrenom;
     // End of variables declaration//GEN-END:variables

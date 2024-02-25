@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="nom utilisateur sur l'accueil" />
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="recherche des patients via l'accueil.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/TestDialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Accueil.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Accueil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="liaison-connexion-accueil" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,6 +74,7 @@
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.TestConnexionDB.executor": "Run",
     "JUnit.TestDialogueBD.executor": "Run",
+    "JUnit.TestDialogueBD.testGetPatientsService.executor": "Run",
     "JUnit.TestDialogueBD.testInsertLocG.executor": "Run",
     "JUnit.TestDialogueBD.testInsertPatient.executor": "Run",
     "JUnit.TestDialogueBD.testInsertPersonnelMedical.executor": "Run",
@@ -80,7 +89,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "récupérer-patients-service",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz",
@@ -96,7 +105,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.InterfaceConnexion">
+  <component name="RunManager" selected="Application.Accueil">
     <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
       <module name="Smartiz" />
@@ -138,7 +147,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDialogueBD.testInsertPersonnelMedical" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDialogueBD.testGetPatientsService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -148,7 +157,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="fc" />
       <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
-      <option name="METHOD_NAME" value="testInsertPersonnelMedical" />
+      <option name="METHOD_NAME" value="testGetPatientsService" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InterfaceConnexion" />
-        <item itemvalue="Application.Accueil" />
         <item itemvalue="JUnit.TestDialogueBD" />
+        <item itemvalue="Application.Accueil" />
         <item itemvalue="JUnit.TestDialogueBD.testInsertPrescription" />
-        <item itemvalue="JUnit.TestDialogueBD.testInsertPersonnelMedical" />
+        <item itemvalue="JUnit.TestDialogueBD.testGetPatientsService" />
+        <item itemvalue="Application.InterfaceConnexion" />
       </list>
     </recent_temporary>
   </component>
@@ -220,6 +229,10 @@
       <workItem from="1708674586646" duration="7217000" />
       <workItem from="1708693324538" duration="2549000" />
       <workItem from="1708696077718" duration="6362000" />
+      <workItem from="1708707440626" duration="3312000" />
+      <workItem from="1708710860274" duration="1221000" />
+      <workItem from="1708873341444" duration="4093000" />
+      <workItem from="1708887525710" duration="4789000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -301,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708698905730</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="nom utilisateur sur l'accueil">
+      <option name="closed" value="true" />
+      <created>1708703094596</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1708703094596</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +339,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="récupérer-patients-service" />
                       </list>
                     </value>
                   </entry>
@@ -341,7 +362,8 @@
     <MESSAGE value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
     <MESSAGE value="L'accueil s'ouvre en plein écran" />
     <MESSAGE value="nom utilisateur sur l'accueil" />
-    <option name="LAST_COMMIT_MESSAGE" value="nom utilisateur sur l'accueil" />
+    <MESSAGE value="recherche des patients via l'accueil." />
+    <option name="LAST_COMMIT_MESSAGE" value="recherche des patients via l'accueil." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

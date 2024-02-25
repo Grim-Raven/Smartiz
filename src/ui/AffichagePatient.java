@@ -40,7 +40,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     //Code couleur : bleu clair -> ecf2fe
     
     public AffichagePatient() {
-        initComponents();
+
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -58,6 +58,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
         largeurBouton = largeurCentree/8;
         hauteurInfo = 1 ;
+        initComponents();
     }
 
     /**
@@ -88,15 +89,17 @@ public class AffichagePatient extends javax.swing.JPanel {
         PanneauSud = new javax.swing.JPanel();
         nomUtilisateur = new javax.swing.JLabel();
         PanneauCentral = new javax.swing.JPanel();
-        MenuDeroulantSejours = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        panelSejourEtBoutons = new javax.swing.JPanel();
+        MenuDeroulantSejours = new javax.swing.JComboBox();
         Ajout = new javax.swing.JLabel();
-        BoutonExamenBiologique = new javax.swing.JButton();
-        BoutonPrescription = new javax.swing.JButton();
-        BoutonConsultation = new javax.swing.JButton();
+        PanelBoutons = new javax.swing.JPanel();
         BoutonRadiologie = new javax.swing.JButton();
         BoutonAnesthesie = new javax.swing.JButton();
+        BoutonConsultation = new javax.swing.JButton();
+        BoutonPrescription = new javax.swing.JButton();
+        BoutonExamenBiologique = new javax.swing.JButton();
 
         setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
         setLayout(new java.awt.BorderLayout());
@@ -188,7 +191,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                         .addComponent(Alcool)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AlcoolPatient)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanneauNordLayout.setVerticalGroup(
             PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +218,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                     .addComponent(FumeurPatient)
                     .addComponent(Alcool)
                     .addComponent(AlcoolPatient))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         add(PanneauNord, java.awt.BorderLayout.PAGE_START);
@@ -247,8 +250,7 @@ public class AffichagePatient extends javax.swing.JPanel {
 
         PanneauCentral.setBackground(new java.awt.Color(255, 255, 255));
         PanneauCentral.setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
-
-        MenuDeroulantSejours.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Séjour1", "Séjour2", "Séjour3", "Séjour4" }));
+        PanneauCentral.setLayout(new java.awt.BorderLayout());
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -257,87 +259,81 @@ public class AffichagePatient extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
+        PanneauCentral.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        panelSejourEtBoutons.setBackground(new java.awt.Color(255, 255, 255));
+
+        MenuDeroulantSejours.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Séjour1", "Séjour2", "Séjour3", "Séjour4" }));
+
         Ajout.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         Ajout.setText("Ajouter un(e) :");
 
-        BoutonExamenBiologique.setBackground(new java.awt.Color(236, 242, 254));
-        BoutonExamenBiologique.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        BoutonExamenBiologique.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonExamenBiologique.setText("Examen Biologique");
-        BoutonExamenBiologique.setPreferredSize(new Dimension(largeurBouton, 40));
-        BoutonExamenBiologique.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoutonExamenBiologiqueActionPerformed(evt);
-            }
-        });
+        PanelBoutons.setBackground(new java.awt.Color(255, 255, 255));
+        PanelBoutons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        BoutonPrescription.setBackground(new java.awt.Color(236, 242, 254));
-        BoutonPrescription.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        BoutonPrescription.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonPrescription.setText("Prescription");
-        BoutonPrescription.setPreferredSize(new Dimension(largeurBouton, 40));
+        BoutonRadiologie.setBackground(new java.awt.Color(236, 242, 254));
+        BoutonRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        BoutonRadiologie.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonRadiologie.setText("Radiologie");
+        PanelBoutons.add(BoutonRadiologie);
+
+        BoutonAnesthesie.setBackground(new java.awt.Color(236, 242, 254));
+        BoutonAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        BoutonAnesthesie.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonAnesthesie.setText("Anesthésie");
+        PanelBoutons.add(BoutonAnesthesie);
 
         BoutonConsultation.setBackground(new java.awt.Color(236, 242, 254));
         BoutonConsultation.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         BoutonConsultation.setForeground(new java.awt.Color(4, 66, 114));
         BoutonConsultation.setText("Consultation");
         BoutonConsultation.setToolTipText("");
-        BoutonConsultation.setPreferredSize(new Dimension(largeurBouton, 40));
+        PanelBoutons.add(BoutonConsultation);
 
-        BoutonRadiologie.setBackground(new java.awt.Color(236, 242, 254));
-        BoutonRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        BoutonRadiologie.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonRadiologie.setText("Radiologie");
-        BoutonRadiologie.setPreferredSize(new Dimension(largeurBouton, 40));
+        BoutonPrescription.setBackground(new java.awt.Color(236, 242, 254));
+        BoutonPrescription.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        BoutonPrescription.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonPrescription.setText("Prescription");
+        PanelBoutons.add(BoutonPrescription);
 
-        BoutonAnesthesie.setBackground(new java.awt.Color(236, 242, 254));
-        BoutonAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        BoutonAnesthesie.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonAnesthesie.setText("Anesthésie");
-        BoutonAnesthesie.setPreferredSize(new Dimension(largeurBouton, 40));
+        BoutonExamenBiologique.setBackground(new java.awt.Color(236, 242, 254));
+        BoutonExamenBiologique.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        BoutonExamenBiologique.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonExamenBiologique.setText("Examen Biologique");
+        BoutonExamenBiologique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonExamenBiologiqueActionPerformed(evt);
+            }
+        });
+        PanelBoutons.add(BoutonExamenBiologique);
 
-        javax.swing.GroupLayout PanneauCentralLayout = new javax.swing.GroupLayout(PanneauCentral);
-        PanneauCentral.setLayout(PanneauCentralLayout);
-        PanneauCentralLayout.setHorizontalGroup(
-            PanneauCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauCentralLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(PanneauCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Ajout)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanneauCentralLayout.createSequentialGroup()
-                        .addGroup(PanneauCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(MenuDeroulantSejours, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(PanneauCentralLayout.createSequentialGroup()
-                                .addComponent(BoutonExamenBiologique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BoutonPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BoutonConsultation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BoutonRadiologie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(BoutonAnesthesie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        PanneauCentralLayout.setVerticalGroup(
-            PanneauCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauCentralLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelSejourEtBoutonsLayout = new javax.swing.GroupLayout(panelSejourEtBoutons);
+        panelSejourEtBoutons.setLayout(panelSejourEtBoutonsLayout);
+        panelSejourEtBoutonsLayout.setHorizontalGroup(
+            panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSejourEtBoutonsLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PanelBoutons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSejourEtBoutonsLayout.createSequentialGroup()
+                        .addComponent(Ajout)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(MenuDeroulantSejours, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelSejourEtBoutonsLayout.setVerticalGroup(
+            panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSejourEtBoutonsLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(MenuDeroulantSejours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Ajout)
-                .addGap(18, 18, 18)
-                .addGroup(PanneauCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BoutonExamenBiologique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonConsultation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonRadiologie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonAnesthesie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelBoutons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        PanneauCentral.add(panelSejourEtBoutons, java.awt.BorderLayout.NORTH);
 
         add(PanneauCentral, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -346,6 +342,13 @@ public class AffichagePatient extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonExamenBiologiqueActionPerformed
 
+    public void setBoutonsVisibles(boolean visibles) {
+        BoutonAnesthesie.setVisible(visibles);
+        BoutonConsultation.setVisible(visibles);
+        BoutonExamenBiologique.setVisible(visibles);
+        BoutonPrescription.setVisible(visibles);
+        BoutonRadiologie.setVisible(visibles);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Adresse;
@@ -365,6 +368,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     private javax.swing.JComboBox MenuDeroulantSejours;
     private javax.swing.JLabel NeeLe;
     private javax.swing.JLabel NomPrenomPatient;
+    private javax.swing.JPanel PanelBoutons;
     private javax.swing.JPanel PanneauCentral;
     private javax.swing.JPanel PanneauNord;
     private javax.swing.JPanel PanneauSud;
@@ -376,5 +380,6 @@ public class AffichagePatient extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomUtilisateur;
+    private javax.swing.JPanel panelSejourEtBoutons;
     // End of variables declaration//GEN-END:variables
 }

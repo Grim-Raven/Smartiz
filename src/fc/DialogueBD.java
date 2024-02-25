@@ -310,6 +310,7 @@ public class DialogueBD {
                 //On récupère la clé
                 recherche.append(entry.getKey()).append("= ");
                 // On récupère le type de la colonne
+                System.out.println(entry.getKey().toString());
                 String typeColonne = resultatType.getString("DATA_TYPE");
 
                 switch (typeColonne) {
@@ -340,4 +341,47 @@ public class DialogueBD {
         return requete(requete);
     }
 
+    public ResultSet getPatientsService(String idService){
+        // Construction de la requête
+        HashMap<String, String> dataService = new HashMap<>();
+        dataService.put("idService", idService);
+        try {
+            return rechercheTable("Patient", dataService);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Méthode de récupération des patients de la base de données sur le critère de leurs données
+     * @param dataPatient les données du patient
+     * @return les patients correspondant aux données
+     */
+    public ResultSet getPatients(HashMap<String, String> dataPatient) {
+        try {
+            return rechercheTable("Patient", dataPatient);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Méthode de récupération du service d'un personnel medical via son Id
+     * @param id l'identifiant du patient
+     * @return le service du personnel médical
+     */
+    public String getService(String id) {
+        // On construit la requête pour récupérer le service du personnel médical
+        String requete = "SELECT idService FROM PersonnelMedical WHERE idPersonnelMedical = '" + id + "'";
+        ResultSet resultSet = requete(requete);
+        try {
+            if (resultSet.next()) {
+                // On retourne le service du personnel médical
+                return resultSet.getString("idService");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        return null;
+    }
 }
