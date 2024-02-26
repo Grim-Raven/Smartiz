@@ -294,7 +294,7 @@ public class DialogueBD {
      * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
     */
 
-    public ResultSet rechercheTable(String table, HashMap<String, String> data) throws SQLException{
+    public ResultSet rechercheTable(String table, HashMap<String, String> data, boolean sensibleCasse) throws SQLException{
         // On construit la requête de recherche dans la table
         StringBuilder recherche = new StringBuilder("SELECT * FROM ").append(table).append(" WHERE ");
 
@@ -308,7 +308,11 @@ public class DialogueBD {
                 // On se met sur la première ligne du résultat
                 resultatType.next();
                 //On récupère la clé
+                if(!sensibleCasse){
+                    recherche.append("UPPER(").append(entry.getKey()).append(") = ");
+                }else{
                 recherche.append(entry.getKey()).append("= ");
+                }
                 // On récupère le type de la colonne
                 System.out.println(entry.getKey().toString());
                 String typeColonne = resultatType.getString("DATA_TYPE");
@@ -321,8 +325,12 @@ public class DialogueBD {
                         recherche.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD') AND ");
                         break;
                     default: // Pour les chaînes de caractères, on ajoute des guillemets simples
-                        recherche.append("'").append(entry.getValue());
-                        recherche.append("' AND ");
+                        String charSQL = "'"+entry.getValue()+"'";
+                        if(!sensibleCasse){
+                            recherche.append("UPPER(").append(charSQL).append(") AND ");
+                        }else{
+                            recherche.append(charSQL).append(" AND ");
+                        }
                         break;
                 }
             }
@@ -341,12 +349,17 @@ public class DialogueBD {
         return requete(requete);
     }
 
+    /**
+     * Méthode de récupération des patients d'un service de la base de données
+     * @param idService l'identifiant du service
+     * @return les patients du service
+     */
     public ResultSet getPatientsService(String idService){
         // Construction de la requête
         HashMap<String, String> dataService = new HashMap<>();
         dataService.put("idService", idService);
         try {
-            return rechercheTable("Patient", dataService);
+            return rechercheTable("Patient", dataService, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -359,7 +372,7 @@ public class DialogueBD {
      */
     public ResultSet getPatients(HashMap<String, String> dataPatient) {
         try {
-            return rechercheTable("Patient", dataPatient);
+            return rechercheTable("Patient", dataPatient, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
