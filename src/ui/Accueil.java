@@ -6,8 +6,11 @@
 package ui;
 
 import fc.DialogueBD;
+import fc.Utilisateur;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,16 +36,15 @@ public class Accueil extends javax.swing.JFrame {
     protected int hauteur1;
     //L'attribut hauteur2 correspond à la hauteur du panneau Nord
     protected int hauteur2;
-    //L'attribut largeurCentrÃ© correspond à 1/4 de largeur - largeur1
+    //L'attribut largeurCentrée correspond à 1/4 de largeur - largeur1
     protected int largeurCentree;
     
-    //Code couleur : bleu foncÃ© -> 044272
+    //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
 
     private final DialogueBD dialogueBD;
-    private String idUtilisateur;
+    private Utilisateur utilisateur;
     public Accueil() {
-        initComponents();
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -57,24 +59,24 @@ public class Accueil extends javax.swing.JFrame {
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
         hauteur2 = hauteur/5;
-        
         initComponents();
-        // On met le logo de l'application
-        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
 
+        // On met le logo de l'application
+        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png"))));
         //Le panneau Ouest prend pour dimension longueur1 et hauteur 
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
 
-        this.idUtilisateur = "1111";
+        this.utilisateur = new Utilisateur("Cot","Harry",true, "Français",1);
         this.dialogueBD = new DialogueBD();
         this.dialogueBD.connect();
+        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    public Accueil(DialogueBD dialogueBD, String idUtilisateur, String langue) {
+    public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -96,8 +98,8 @@ public class Accueil extends javax.swing.JFrame {
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
         this.dialogueBD = dialogueBD;
         // On affiche le nom de l'utilisateur en Titre de la JFrame
-        this.idUtilisateur = idUtilisateur;
-        this.setTitle("Bienvenue "+dialogueBD.getNomUtilisateur(idUtilisateur));
+        this.utilisateur = utilisateur;
+        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
@@ -442,7 +444,7 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
-        // On récupère la liste des patients qui correspondent à la recherche.
+        // -------------------- On récupère la liste des patients qui correspondent à la recherche ---------------------
         // On récupère les champs de la recherche dans une HashMap
         HashMap<String,String> dataPatient = new HashMap<>();
         // Pour chaque component, on vérifie si c'est un JTextField, si c'est le cas, on ajoute le contenu du JTextField dans la HashMap
@@ -455,30 +457,109 @@ public class Accueil extends javax.swing.JFrame {
             }
         }
         // On ne veut que les patients du service de l'utilisateur
-        dataPatient.put("idService", dialogueBD.getService(idUtilisateur));
-        //TODO : Rendre la recherche insensible à la casse
+        dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
         //On récupère les patients qui correspondent à la recherche
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
+
+
+        // ---------------------------- On crée une JTable pour afficher les patients ---------------------------------
+        //On crée un modèle de table
+        DefaultTableModel modelTable = new DefaultTableModel();
+        //On ajoute les colonnes de la table
+        modelTable.addColumn("IPP");
+        modelTable.addColumn("Nom");
+        modelTable.addColumn("Prénom");
+        modelTable.addColumn("Date de Naissance");
+
+        // Ajout des patients dans le modèle de table
         try{
             while (resultSetPatients.next()) {
-                // On imprime le nom des patients qui correspondent à la recherche
-                System.out.println(resultSetPatients.getString("nom"));
+                // On ajoute les informations des patients qui correspondent à la recherche dans le modèle de table
+                modelTable.addRow(new Object[]{resultSetPatients.getString("idPatient"),
+                                              resultSetPatients.getString("nom").trim(),
+                                              resultSetPatients.getString("prenom").trim(),
+                                              resultSetPatients.getString("dateNaissance").substring(0,10)});
+                System.out.println(resultSetPatients.getString("idPatient") +" - " +
+                        resultSetPatients.getString("nom").trim() + " " +
+                        resultSetPatients.getString("prenom").trim() + " - " +
+                        resultSetPatients.getString("dateNaissance").substring(0,10));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+        //On crée une JTable avec le modèle de table
+        JTable tablePatients = new JTable(modelTable);
+        //On définit la taille de la police de la JTable
+        tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
+        tablePatients.setRowHeight(30);
+        tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
+
+        // On change la couleur de fond de l'entête de la JTable
+        tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBackground(new Color(4,66,114));
+                setForeground(Color.WHITE);
+                return this;
+            }
+        });
+        // On empêche l'utilisateur de modifier les données de la JTable
+        tablePatients.setDefaultEditor(Object.class, null);
+        // On définit un modèle de sélection de la JTable à un seul Patient
+        tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //On crée un JScrollPane avec la JTable
+        JScrollPane scrollPaneTable = new JScrollPane(tablePatients);
+        // On change la couleur de fond de la JTable et du JScrollPane
+        tablePatients.setBackground(new Color(236, 242, 254));
+        scrollPaneTable.setBackground(new Color(236, 242, 254));
+        scrollPaneTable.getViewport().setBackground(new Color(236, 242, 254));
+
+        // On change la couleur de fond des lignes de la JTable
+        tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (row % 2 == 0) {
+
+                    c.setBackground(new java.awt.Color(236, 242, 254));
+                } else {
+
+                    c.setBackground(new java.awt.Color(244, 247, 254));
+                }
+                if (isSelected) {
+                    // En gris si la ligne est sélectionnée
+                    c.setBackground(new java.awt.Color(50, 115, 244));
+                }
+                return c;
+            }
+        });
+
+        PanneauPrincipale.setBackground(new java.awt.Color(236, 242, 254));
+        // On ajoute la JTable au JScrollPane
+        scrollPaneTable.setViewportView(tablePatients);
 
 
+
+
+        // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
         //On supprime tous les composants du panneau principal
         for(Component component : PanneauPrincipale.getComponents()){
             PanneauPrincipale.remove(component);
         }
-        // On affiche le panel AffichagePatient
-        AffichagePatient affichagePatient = new AffichagePatient();
-        affichagePatient.setVisible(true);
-        //On ajoute le panel AffichagePatient au panneau principal
-        PanneauPrincipale.add(affichagePatient, java.awt.BorderLayout.CENTER);
+        //On ajoute le JScrollPane au panneau principal
+        PanneauPrincipale.add(scrollPaneTable, java.awt.BorderLayout.CENTER);
+        //On actualise le panneau principal
+        PanneauPrincipale.revalidate();
+
+//        // On affiche le panel AffichagePatient
+//        AffichagePatient affichagePatient = new AffichagePatient("",utilisateur.getPrenom() +" "+ utilisateur.getNom());
+//        affichagePatient.setVisible(true);
+//        //On ajoute le panel AffichagePatient au panneau principal
+//        PanneauPrincipale.add(affichagePatient, java.awt.BorderLayout.CENTER);
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     /**

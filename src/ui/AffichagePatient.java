@@ -58,7 +58,33 @@ public class AffichagePatient extends javax.swing.JPanel {
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
         largeurBouton = largeurCentree/8;
         hauteurInfo = 1 ;
+
         initComponents();
+        this.nomUtilisateur.setText("Nom utilisateur");
+    }
+
+    public AffichagePatient(String idPatient, String nomUtilisateur) {
+
+        //On récupère la taille de l'écran
+        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
+        //On stocke la largeur de l'écran dans la variable largeur
+        largeur = tailleMoniteur.width;
+        //On stocke la hauteur de l'écran dans la variable hauteur
+        hauteur = tailleMoniteur.height;
+        //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
+        largeur1 = largeur/5;
+        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        largeurCentree = (largeur-largeur1)/4;
+        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
+        hauteur1 = hauteur - hauteur2;
+        //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
+        hauteur2 = hauteur/5;
+        //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
+        largeurBouton = largeurCentree/8;
+        hauteurInfo = 1 ;
+
+        initComponents();
+        this.nomUtilisateur.setText(nomUtilisateur);
     }
 
     /**

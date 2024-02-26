@@ -235,7 +235,30 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Test // Test de la récupération des patients par la recherche
+    public void testGetPatientsRecherche(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée les données de la recherche
+        HashMap<String, String> data = new HashMap<>();
+        data.put("prenom", "Jean");
+        data.put("idService", "1");
+        // On fait la requête avec les données
+        ResultSet resultat = dialogueBD.getPatients(data);
+        // On vérifie si le test est réussi
+        try {
+            assertTrue(resultat.next());
+            // On imprime le nom de tous les patients
+            System.out.println(resultat.getString("nom"));
+            while(resultat.next()){ // Tant qu'il y a des patients
+                System.out.println(resultat.getString("nom"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
