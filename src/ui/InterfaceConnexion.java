@@ -197,8 +197,14 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldIdentifiantActionPerformed
 
+    // Pour permettre à l'utilisateur de se connecter en appuyant sur la touche "Entrée"
     private void PasswordFieldMotDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldMotDePasseActionPerformed
-        // TODO add your handling code here:
+        try {
+            // On appelle la méthode SeConnecterActionPerformed pour se connecter
+            SeConnecterActionPerformed(evt);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
 
     private void LanguesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanguesActionPerformed

@@ -286,6 +286,7 @@ public class DialogueBD {
         }
         return null;
     }
+
     /**
      * Méthode de recherche d'une table dans la base de données
      * @param table la table dque l'on cherche
@@ -379,18 +380,18 @@ public class DialogueBD {
     }
 
     /**
-     * Méthode de récupération du service d'un personnel medical via son Id
-     * @param id l'identifiant du patient
-     * @return le service du personnel médical
+     * Méthode de récupération du nom d'un service via son Id
+     * @param idService l'identifiant du service
+     * @return Le nom du Service
      */
-    public String getService(String id) {
+    public String getNomService(String idService) {
         // On construit la requête pour récupérer le service du personnel médical
-        String requete = "SELECT idService FROM PersonnelMedical WHERE idPersonnelMedical = '" + id + "'";
+        String requete = "SELECT nomService FROM Service WHERE idService = " + idService;
         ResultSet resultSet = requete(requete);
         try {
             if (resultSet.next()) {
                 // On retourne le service du personnel médical
-                return resultSet.getString("idService");
+                return resultSet.getString("nomService").trim();
             }
         } catch (SQLException ex) {
             Logger.getLogger(DialogueBD.class.getName());

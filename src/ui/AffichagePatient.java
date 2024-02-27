@@ -5,11 +5,18 @@
  */
 package ui;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
- *
  * @author emmaa
  */
 public class AffichagePatient extends javax.swing.JPanel {
@@ -35,36 +42,14 @@ public class AffichagePatient extends javax.swing.JPanel {
     protected int hauteurInfo;
     //L'attribut hauteurCentral correspond à la hauteur du panneau central
     protected int hauteurCentral;
-    
+
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
-    
-    public AffichagePatient() {
 
-        //On récupère la taille de l'écran
-        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
-        //On stocke la largeur de l'écran dans la variable largeur
-        largeur = tailleMoniteur.width;
-        //On stocke la hauteur de l'écran dans la variable hauteur 
-        hauteur = tailleMoniteur.height;
-        //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
-        largeur1 = largeur/5;
-        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
-        largeurCentree = (largeur-largeur1)/4;
-        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
-        hauteur1 = hauteur - hauteur2;
-        //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
-        hauteur2 = hauteur/5;
-        //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
-        largeurBouton = largeurCentree/8;
-        hauteurInfo = 1 ;
+    public DialogueBD dialogueBD;
+    public AffichagePatient(String idPatient, Utilisateur utilisateur, DialogueBD dialogueBD) {
 
-        initComponents();
-        this.nomUtilisateur.setText("Nom utilisateur");
-    }
-
-    public AffichagePatient(String idPatient, String nomUtilisateur) {
-
+        //-------- On définit les dimensions du panneau et de ses composants en fonction de la taille de l'écran -------
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -72,19 +57,26 @@ public class AffichagePatient extends javax.swing.JPanel {
         //On stocke la hauteur de l'écran dans la variable hauteur
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
-        largeur1 = largeur/5;
+        largeur1 = largeur / 5;
         //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
-        largeurCentree = (largeur-largeur1)/4;
+        largeurCentree = (largeur - largeur1) / 4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
-        hauteur2 = hauteur/5;
+        hauteur2 = hauteur / 5;
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
-        largeurBouton = largeurCentree/8;
-        hauteurInfo = 1 ;
+        largeurBouton = largeurCentree / 8;
+        hauteurInfo = 1;
 
+        // -------------------------------- On initialise les composants de l'interface --------------------------------
         initComponents();
-        this.nomUtilisateur.setText(nomUtilisateur);
+        //On définit le texte du label nomUtilisateur
+        this.nomUtilisateur.setText(utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
+        this.dialogueBD = dialogueBD;
+        // On remplit les informations du patient
+        remplirChampsPatient(idPatient);
+        remplirSejours(idPatient);
+        remplirActes();
     }
 
     /**
@@ -113,6 +105,8 @@ public class AffichagePatient extends javax.swing.JPanel {
         Alcool = new javax.swing.JLabel();
         AlcoolPatient = new javax.swing.JLabel();
         PanneauSud = new javax.swing.JPanel();
+        panelCloture = new javax.swing.JPanel();
+        boutonCloture = new javax.swing.JButton();
         nomUtilisateur = new javax.swing.JLabel();
         PanneauCentral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -251,26 +245,46 @@ public class AffichagePatient extends javax.swing.JPanel {
 
         PanneauSud.setBackground(new java.awt.Color(255, 255, 255));
         PanneauSud.setPreferredSize(new java.awt.Dimension(707, 50));
+        PanneauSud.setLayout(new java.awt.BorderLayout());
+
+        panelCloture.setBackground(new java.awt.Color(255, 255, 255));
+
+        boutonCloture.setBackground(new java.awt.Color(255, 255, 255));
+        boutonCloture.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        boutonCloture.setForeground(new java.awt.Color(4, 66, 144));
+        boutonCloture.setText("Cloturer le séjour");
+        boutonCloture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonClotureActionPerformed(evt);
+            }
+        });
 
         nomUtilisateur.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         nomUtilisateur.setText("nomUtilisateur \n");
 
-        javax.swing.GroupLayout PanneauSudLayout = new javax.swing.GroupLayout(PanneauSud);
-        PanneauSud.setLayout(PanneauSudLayout);
-        PanneauSudLayout.setHorizontalGroup(
-            PanneauSudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauSudLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(nomUtilisateur, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
-        );
-        PanneauSudLayout.setVerticalGroup(
-            PanneauSudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanneauSudLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelClotureLayout = new javax.swing.GroupLayout(panelCloture);
+        panelCloture.setLayout(panelClotureLayout);
+        panelClotureLayout.setHorizontalGroup(
+            panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClotureLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(nomUtilisateur)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
+                .addComponent(boutonCloture)
                 .addContainerGap())
         );
+        panelClotureLayout.setVerticalGroup(
+            panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClotureLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nomUtilisateur)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(panelClotureLayout.createSequentialGroup()
+                .addComponent(boutonCloture)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        PanneauSud.add(panelCloture, java.awt.BorderLayout.CENTER);
 
         add(PanneauSud, java.awt.BorderLayout.PAGE_END);
 
@@ -289,7 +303,11 @@ public class AffichagePatient extends javax.swing.JPanel {
 
         panelSejourEtBoutons.setBackground(new java.awt.Color(255, 255, 255));
 
-        MenuDeroulantSejours.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Séjour1", "Séjour2", "Séjour3", "Séjour4" }));
+        MenuDeroulantSejours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuDeroulantSejoursActionPerformed(evt);
+            }
+        });
 
         Ajout.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         Ajout.setText("Ajouter un(e) :");
@@ -350,13 +368,13 @@ public class AffichagePatient extends javax.swing.JPanel {
         panelSejourEtBoutonsLayout.setVerticalGroup(
             panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSejourEtBoutonsLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(MenuDeroulantSejours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Ajout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelBoutons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         PanneauCentral.add(panelSejourEtBoutons, java.awt.BorderLayout.NORTH);
@@ -368,13 +386,133 @@ public class AffichagePatient extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonExamenBiologiqueActionPerformed
 
-    public void setBoutonsVisibles(boolean visibles) {
-        BoutonAnesthesie.setVisible(visibles);
-        BoutonConsultation.setVisible(visibles);
-        BoutonExamenBiologique.setVisible(visibles);
-        BoutonPrescription.setVisible(visibles);
-        BoutonRadiologie.setVisible(visibles);
+    private void boutonClotureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonClotureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boutonClotureActionPerformed
+
+    private void MenuDeroulantSejoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantSejoursActionPerformed
+        remplirActes();
+    }//GEN-LAST:event_MenuDeroulantSejoursActionPerformed
+
+    /**
+     * Remplit les champs de l'interface avec les informations du patient
+     *
+     * @param idPatient  l'identifiant du patient à afficher
+     */
+    public void remplirChampsPatient(String idPatient) {
+        // On récupère les informations du patient
+        try {
+            // On effectue une recherche dans la table Patient avec l'IPP du patient sélectionné
+            ResultSet resultat = dialogueBD.rechercheTable(
+                    "Patient",
+                    new HashMap<String, String>() {{
+                        put("idPatient", (String) idPatient);
+                    }},
+                    false);
+            // On se positionne sur le premier (et unique) résultat
+            resultat.next();
+            // On remplit les champs
+            NomPrenomPatient.setText(resultat.getString("nom").trim() + " " + resultat.getString("prenom").trim());
+            DateNaissancePatient.setText(resultat.getString("dateNaissance").substring(0, 10));
+            SexePatient.setText(resultat.getString("sexe"));
+            IPPPatient.setText("IPP : " + resultat.getString("idPatient"));
+            AdressePatient.setText(resultat.getString("adresse").trim()); // On enlève les espaces inutiles
+            TelephonePatient.setText(resultat.getString("telephone"));
+            FumeurPatient.setText(Objects.equals(resultat.getString("fumeur"), "Y") ? "Oui" : "Non");
+            AlcoolPatient.setText(Objects.equals(resultat.getString("alcool"), "Y") ? "Oui" : "Non");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    /**
+     * Remplit le menu déroulant des séjours du patient
+     *
+     * @param idPatient  l'identifiant du patient sélectionné
+     */
+    public void remplirSejours(String idPatient) {
+        // On récupère les séjours du patient
+
+        // On effectue une recherche dans la table Sejour avec l'IPP du patient sélectionné
+        try (ResultSet resultat = dialogueBD.rechercheTable(
+                "Sejour",
+                new HashMap<String, String>() {{
+                    put("idPatient", (String) idPatient);
+                }},
+                false)) {
+
+            // On ajoute chaque séjour du patient dans le menu déroulant
+            while (resultat.next()) {
+                // On construit le texte à afficher dans le menu déroulant
+                // Si le séjour est une consultation, on affiche "Consultation n°" suivi de l'identifiant du séjour
+                // Sinon, on affiche "Séjour n°" suivi de l'identifiant du séjour
+                StringBuilder infoSejour = new StringBuilder(Objects.equals(resultat.getString("Consultation"), "Y") ? "Consultation n°" : "Séjour n°");
+                infoSejour.append(resultat.getString("idSejour"));
+                infoSejour.append(" en ").append(dialogueBD.getNomService(resultat.getString("idService")));
+                System.out.println(dialogueBD.getNomService(resultat.getString("idService")));
+                infoSejour.append(" du ").append(resultat.getString("dateDebut"), 0, 10);
+                if (resultat.getString("dateFin") != null) {
+                    infoSejour.append(" au ").append(resultat.getString("dateFin"), 0, 10);
+                }
+
+
+                // Si le séjour est ouvert, on le met en premier
+                if (Objects.equals(resultat.getString("ouvert"), "Y")) {
+                    MenuDeroulantSejours.insertItemAt(infoSejour, 0);
+                } else { // Sinon, on l'ajoute à la fin
+                    MenuDeroulantSejours.addItem(infoSejour);
+                }
+                // On sélectionne le premier séjour par défaut
+                MenuDeroulantSejours.setSelectedIndex(0);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Remplit la liste des actes du séjour sélectionné
+     */
+    public void remplirActes() {
+        // On récupère les actes du séjour sélectionné
+        // On effectue une recherche dans la table Acte avec l'identifiant du séjour sélectionné
+        String sejourSelectionne = MenuDeroulantSejours.getSelectedItem().toString();
+        // On extrait l'identifiant du séjour
+        assert sejourSelectionne != null;
+        if (sejourSelectionne.contains("Consultation")) {
+            // On récupère l'identifiant de la consultation
+            sejourSelectionne = sejourSelectionne.substring(15);
+        } else {
+            // On récupère l'identifiant du séjour
+            sejourSelectionne = sejourSelectionne.substring(9);
+        }
+        // On enlève les caractères après l'identifiant
+        String idSejour = sejourSelectionne.substring(0, sejourSelectionne.indexOf(" "));
+        System.out.println("id serjour : " +idSejour);
+        ArrayList<String> actes = new ArrayList<>();
+        try (ResultSet resultat = dialogueBD.rechercheTable(
+                "Acte",
+                new HashMap<String, String>() {{
+                    put("idSejour", idSejour);
+                }},
+                false)) {
+            // On ajoute chaque acte du séjour dans la liste
+            while (resultat.next()) {
+                // On construit le texte à afficher dans la liste
+                // On affiche le nom de l'acte suivi de la date de réalisation
+                StringBuilder infoActe = new StringBuilder(resultat.getString("nom"));
+                if(resultat.getString("dateRealisationActe") != null) {
+                    infoActe.append(" le ").append(resultat.getString("dateRealisationActe"), 0, 10);
+                }
+                actes.add(infoActe.toString());
+            }
+            jList1.setListData(actes.toArray(new String[0]));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Adresse;
@@ -402,10 +540,12 @@ public class AffichagePatient extends javax.swing.JPanel {
     private javax.swing.JLabel SexePatient;
     private javax.swing.JLabel Telephone;
     private javax.swing.JLabel TelephonePatient;
+    private javax.swing.JButton boutonCloture;
     private javax.swing.JList jList1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomUtilisateur;
+    private javax.swing.JPanel panelCloture;
     private javax.swing.JPanel panelSejourEtBoutons;
     // End of variables declaration//GEN-END:variables
 }

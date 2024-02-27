@@ -44,6 +44,8 @@ public class Accueil extends javax.swing.JFrame {
 
     private final DialogueBD dialogueBD;
     private Utilisateur utilisateur;
+    private JTable tablePatients;
+    private JScrollPane scrollPaneTable;
     public Accueil() {
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
@@ -74,6 +76,14 @@ public class Accueil extends javax.swing.JFrame {
         this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // On crée une JTable pour afficher les patients qui seront récupérés par la recherche
+        this.tablePatients = new JTable();
+        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePatientsMouseClicked(evt);
+            }
+        });
     }
 
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
@@ -104,7 +114,12 @@ public class Accueil extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
         labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
-
+        this.tablePatients = new JTable();
+        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePatientsMouseClicked(evt);
+            }
+        });
     }
 
     /**
@@ -435,6 +450,28 @@ public class Accueil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tablePatientsMouseClicked(java.awt.event.MouseEvent evt) {
+
+        if (evt.getClickCount() == 2) {    // Si l'utilisateur double clique sur une ligne de la JTable
+            int selectedRow = tablePatients.getSelectedRow(); // On récupère la ligne sélectionnée
+            if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
+                // On récupère l'IPP du patient sélectionné
+                Object idPatient = tablePatients.getValueAt(selectedRow, 0);
+                System.out.println("Selected: " + idPatient);
+                // On crée un nouveau panel pour afficher les informations du patient
+                AffichagePatient affichagePatient = new AffichagePatient((String) idPatient, utilisateur, dialogueBD);
+                // On enlève le panel actuel du panneau principal central
+                PanneauPrincipale.remove(scrollPaneTable);
+                // On ajoute le nouveau panel au panneau principal central
+                PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
+                // On actualise le panneau principal central
+                PanneauPrincipale.revalidate();
+                PanneauPrincipale.repaint();
+
+
+            }
+        }
+    }
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonPatientsActionPerformed
@@ -489,7 +526,7 @@ public class Accueil extends javax.swing.JFrame {
         }
 
         //On crée une JTable avec le modèle de table
-        JTable tablePatients = new JTable(modelTable);
+        this.tablePatients.setModel(modelTable);
         //On définit la taille de la police de la JTable
         tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
         tablePatients.setRowHeight(30);
@@ -512,7 +549,7 @@ public class Accueil extends javax.swing.JFrame {
         tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         //On crée un JScrollPane avec la JTable
-        JScrollPane scrollPaneTable = new JScrollPane(tablePatients);
+        scrollPaneTable = new JScrollPane(tablePatients);
         // On change la couleur de fond de la JTable et du JScrollPane
         tablePatients.setBackground(new Color(236, 242, 254));
         scrollPaneTable.setBackground(new Color(236, 242, 254));
@@ -524,10 +561,8 @@ public class Accueil extends javax.swing.JFrame {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (row % 2 == 0) {
-
                     c.setBackground(new java.awt.Color(236, 242, 254));
                 } else {
-
                     c.setBackground(new java.awt.Color(244, 247, 254));
                 }
                 if (isSelected) {
@@ -542,9 +577,6 @@ public class Accueil extends javax.swing.JFrame {
         // On ajoute la JTable au JScrollPane
         scrollPaneTable.setViewportView(tablePatients);
 
-
-
-
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
         //On supprime tous les composants du panneau principal
         for(Component component : PanneauPrincipale.getComponents()){
@@ -554,12 +586,6 @@ public class Accueil extends javax.swing.JFrame {
         PanneauPrincipale.add(scrollPaneTable, java.awt.BorderLayout.CENTER);
         //On actualise le panneau principal
         PanneauPrincipale.revalidate();
-
-//        // On affiche le panel AffichagePatient
-//        AffichagePatient affichagePatient = new AffichagePatient("",utilisateur.getPrenom() +" "+ utilisateur.getNom());
-//        affichagePatient.setVisible(true);
-//        //On ajoute le panel AffichagePatient au panneau principal
-//        PanneauPrincipale.add(affichagePatient, java.awt.BorderLayout.CENTER);
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     /**
