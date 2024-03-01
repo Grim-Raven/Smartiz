@@ -5,6 +5,7 @@
  */
 package ui;
 import fc.DialogueBD;
+import fc.Utilisateur;
 
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -167,14 +169,22 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
         String identifiant = textFieldIdentifiant.getText();
         String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
-        String requete = "SELECT idPersonnelMedical, mdp " +
+        String requeteConnexion = "SELECT * " +
                 "FROM PersonnelMedical " +
                 "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + motDePasse + "'";
+        ResultSet resultat = dialogueBD.requete(requeteConnexion);
         // On vérifie si l'identifiant et le mot de passe sont corrects
-        if(dialogueBD.requete(requete).next()){
+        if(resultat.next()){
             // Si c'est le cas, on ouvre l'interface de l'application
             System.out.println("Connexion réussie");
-            new Accueil(dialogueBD, identifiant, Langues.getSelectedItem().toString()).setVisible(true);
+            //On crée un Utilisateur avec les informations récupérées de la BD
+            Utilisateur utilisateur = new Utilisateur(
+                    resultat.getString("nom"),
+                    resultat.getString("prenom"),
+                    true,
+                    Langues.getSelectedItem().toString(),
+                    resultat.getInt("idService"));
+            new Accueil(dialogueBD, utilisateur).setVisible(true);
             this.dispose();
         }
         else{
@@ -187,8 +197,14 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldIdentifiantActionPerformed
 
+    // Pour permettre à l'utilisateur de se connecter en appuyant sur la touche "Entrée"
     private void PasswordFieldMotDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldMotDePasseActionPerformed
-        // TODO add your handling code here:
+        try {
+            // On appelle la méthode SeConnecterActionPerformed pour se connecter
+            SeConnecterActionPerformed(evt);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
 
     private void LanguesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanguesActionPerformed

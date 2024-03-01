@@ -32,7 +32,7 @@ public class TestDialogue2 {
         filtre.put(clef, valeur);
         // On exécute la requête
         try {
-            ResultSet resultat = dialogueBD.rechercheTable(table, filtre);
+            ResultSet resultat = dialogueBD.rechercheTable(table, filtre, false);
             assertTrue(resultat.next());
             System.out.println(resultat.getString("nom"));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class TestDialogue2 {
         filtre.put(null, null);
         try {
             // On exécute la requête
-            ResultSet resultat = dialogueBD.rechercheTable(table, filtre);
+            ResultSet resultat = dialogueBD.rechercheTable(table, filtre, false);
             assertTrue(resultat.next());
             System.out.println(resultat.getString("nom"));
             //Affiche le résultat obtenu
@@ -79,7 +79,7 @@ public class TestDialogue2 {
         filtre.put(clef2, valeur2);
         try {
             // On exécute la requête
-            ResultSet resultat = dialogueBD.rechercheTable(table, filtre);
+            ResultSet resultat = dialogueBD.rechercheTable(table, filtre, false);
             assertTrue(resultat.next());
             //Affiche le résultat obtenu
             System.out.println(resultat.getString("nom"));

@@ -227,11 +227,6 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="labelLogo">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ui/Image/Logo_Smartiz.png"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -259,7 +254,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="DateDeNaissance" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="TexteDateDeNaissance" max="32767" attributes="0"/>
+                              <Component id="texteDateNaissance" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -278,7 +273,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TexteIPP" pref="254" max="32767" attributes="0"/>
+                                  <Component id="texteIPP" pref="254" max="32767" attributes="0"/>
                                   <Component id="textePrenom" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -295,7 +290,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="RechercherUnPatient" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TexteIPP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="texteIPP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BoutonRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="IPP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -313,7 +308,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="DateDeNaissance" min="-2" max="-2" attributes="0"/>
-                          <Component id="TexteDateDeNaissance" min="-2" max="-2" attributes="0"/>
+                          <Component id="texteDateNaissance" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -332,7 +327,10 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="TexteIPP">
+            <Component class="javax.swing.JTextField" name="texteIPP">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="idPatient" noResource="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="BoutonRechercher">
               <Properties>
@@ -371,6 +369,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="texteNom">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="nom" noResource="true"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="texteNomActionPerformed"/>
               </Events>
@@ -384,6 +385,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textePrenom">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="prenom" noResource="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="DateDeNaissance">
               <Properties>
@@ -393,7 +397,10 @@
                 <Property name="text" type="java.lang.String" value="Date de Naissance"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="TexteDateDeNaissance">
+            <Component class="javax.swing.JTextField" name="texteDateNaissance">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="dateNaissance" noResource="true"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

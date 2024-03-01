@@ -286,6 +286,7 @@ public class DialogueBD {
         }
         return null;
     }
+
     /**
      * Méthode de recherche d'une table dans la base de données
      * @param table la table dque l'on cherche
@@ -294,7 +295,7 @@ public class DialogueBD {
      * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
     */
 
-    public ResultSet rechercheTable(String table, HashMap<String, String> data) throws SQLException{
+    public ResultSet rechercheTable(String table, HashMap<String, String> data, boolean sensibleCasse) throws SQLException{
         // On construit la requête de recherche dans la table
         StringBuilder recherche = new StringBuilder("SELECT * FROM ").append(table).append(" WHERE ");
 
@@ -308,8 +309,13 @@ public class DialogueBD {
                 // On se met sur la première ligne du résultat
                 resultatType.next();
                 //On récupère la clé
+                if(!sensibleCasse){
+                    recherche.append("UPPER(").append(entry.getKey()).append(") = ");
+                }else{
                 recherche.append(entry.getKey()).append("= ");
+                }
                 // On récupère le type de la colonne
+                System.out.println(entry.getKey().toString());
                 String typeColonne = resultatType.getString("DATA_TYPE");
 
                 switch (typeColonne) {
@@ -320,8 +326,12 @@ public class DialogueBD {
                         recherche.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD') AND ");
                         break;
                     default: // Pour les chaînes de caractères, on ajoute des guillemets simples
-                        recherche.append("'").append(entry.getValue());
-                        recherche.append("' AND ");
+                        String charSQL = "'"+entry.getValue()+"'";
+                        if(!sensibleCasse){
+                            recherche.append("UPPER(").append(charSQL).append(") AND ");
+                        }else{
+                            recherche.append(charSQL).append(" AND ");
+                        }
                         break;
                 }
             }
@@ -340,4 +350,52 @@ public class DialogueBD {
         return requete(requete);
     }
 
+    /**
+     * Méthode de récupération des patients d'un service de la base de données
+     * @param idService l'identifiant du service
+     * @return les patients du service
+     */
+    public ResultSet getPatientsService(String idService){
+        // Construction de la requête
+        HashMap<String, String> dataService = new HashMap<>();
+        dataService.put("idService", idService);
+        try {
+            return rechercheTable("Patient", dataService, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Méthode de récupération des patients de la base de données sur le critère de leurs données
+     * @param dataPatient les données du patient
+     * @return les patients correspondant aux données
+     */
+    public ResultSet getPatients(HashMap<String, String> dataPatient) {
+        try {
+            return rechercheTable("Patient", dataPatient, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Méthode de récupération du nom d'un service via son Id
+     * @param idService l'identifiant du service
+     * @return Le nom du Service
+     */
+    public String getNomService(String idService) {
+        // On construit la requête pour récupérer le service du personnel médical
+        String requete = "SELECT nomService FROM Service WHERE idService = " + idService;
+        ResultSet resultSet = requete(requete);
+        try {
+            if (resultSet.next()) {
+                // On retourne le service du personnel médical
+                return resultSet.getString("nomService").trim();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        return null;
+    }
 }

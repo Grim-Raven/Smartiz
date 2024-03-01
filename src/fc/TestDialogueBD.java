@@ -216,6 +216,50 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
             System.out.println(ex);
         }
     }
+
+    @Test // Test de la récupération des dossiers patients d'un service
+    public void testGetPatientsService(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On Cherche les patients qui ont un séjour ouvert dans le service
+        ResultSet resultat = dialogueBD.getPatientsService("1");
+        // On vérifie si le test est réussi
+        try {
+            assertTrue(resultat.next());
+            // On imprime l'id de tous les patients
+            System.out.println(resultat.getString("idPatient"));
+            while(resultat.next()){ // Tant qu'il y a des patients
+                System.out.println(resultat.getString("idPatient"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test // Test de la récupération des patients par la recherche
+    public void testGetPatientsRecherche(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée les données de la recherche
+        HashMap<String, String> data = new HashMap<>();
+        data.put("prenom", "Jean");
+        data.put("idService", "1");
+        // On fait la requête avec les données
+        ResultSet resultat = dialogueBD.getPatients(data);
+        // On vérifie si le test est réussi
+        try {
+            assertTrue(resultat.next());
+            // On imprime le nom de tous les patients
+            System.out.println(resultat.getString("nom"));
+            while(resultat.next()){ // Tant qu'il y a des patients
+                System.out.println(resultat.getString("nom"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

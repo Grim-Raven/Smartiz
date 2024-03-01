@@ -6,10 +6,16 @@
 package ui;
 
 import fc.DialogueBD;
+import fc.Utilisateur;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  *
@@ -30,15 +36,17 @@ public class Accueil extends javax.swing.JFrame {
     protected int hauteur1;
     //L'attribut hauteur2 correspond à la hauteur du panneau Nord
     protected int hauteur2;
-    //L'attribut largeurCentré correspond à 1/4 de largeur - largeur1
+    //L'attribut largeurCentrée correspond à 1/4 de largeur - largeur1
     protected int largeurCentree;
     
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
 
     private final DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private JTable tablePatients;
+    private JScrollPane scrollPaneTable;
     public Accueil() {
-        initComponents();
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -47,26 +55,38 @@ public class Accueil extends javax.swing.JFrame {
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
         largeur1 = largeur/5;
-        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        //L'attribut largeurCentrée correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur-largeur1)/4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
         hauteur2 = hauteur/5;
-        
         initComponents();
-        
+
+        // On met le logo de l'application
+        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png"))));
         //Le panneau Ouest prend pour dimension longueur1 et hauteur 
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
 
+        this.utilisateur = new Utilisateur("Cot","Harry",true, "Français",1);
         this.dialogueBD = new DialogueBD();
         this.dialogueBD.connect();
+        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
+        // On met la Jframe en plein écran
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // On crée une JTable pour afficher les patients qui seront récupérés par la recherche
+        this.tablePatients = new JTable();
+        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePatientsMouseClicked(evt);
+            }
+        });
     }
 
-    public Accueil(DialogueBD dialogueBD, String idUtilisateur, String langue) {
-        initComponents();
+    public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -75,21 +95,31 @@ public class Accueil extends javax.swing.JFrame {
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
         largeur1 = largeur/5;
-        //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
+        //L'attribut largeurCentrÃ© correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur-largeur1)/4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
         hauteur2 = hauteur/5;
-
         initComponents();
-
         //Le panneau Ouest prend pour dimension longueur1 et hauteur
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
         this.dialogueBD = dialogueBD;
-        this.setTitle("Bienvenue "+dialogueBD.getNomUtilisateur(idUtilisateur));
+        // On affiche le nom de l'utilisateur en Titre de la JFrame
+        this.utilisateur = utilisateur;
+        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
+        // On met la Jframe en plein écran
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // On met le logo de l'application
+        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
+        this.tablePatients = new JTable();
+        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePatientsMouseClicked(evt);
+            }
+        });
     }
 
     /**
@@ -113,7 +143,7 @@ public class Accueil extends javax.swing.JFrame {
         labelLogo = new javax.swing.JLabel();
         PanneauRecherche = new java.awt.Panel();
         RechercherUnPatient = new javax.swing.JLabel();
-        TexteIPP = new javax.swing.JTextField();
+        texteIPP = new javax.swing.JTextField();
         BoutonRechercher = new javax.swing.JButton();
         IPP = new javax.swing.JLabel();
         Nom = new javax.swing.JLabel();
@@ -121,7 +151,7 @@ public class Accueil extends javax.swing.JFrame {
         Prenom = new javax.swing.JLabel();
         textePrenom = new javax.swing.JTextField();
         DateDeNaissance = new javax.swing.JLabel();
-        TexteDateDeNaissance = new javax.swing.JTextField();
+        texteDateNaissance = new javax.swing.JTextField();
         PanneauPrincipale = new javax.swing.JPanel();
         PanneauPrincipaleNord = new javax.swing.JPanel();
         PanneauPrincipalOuest = new javax.swing.JPanel();
@@ -218,8 +248,6 @@ public class Accueil extends javax.swing.JFrame {
 
         PanneauLogo.setPreferredSize(new Dimension(largeur1,hauteur2));
 
-        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Image/Logo_Smartiz.png"))); // NOI18N
-
         javax.swing.GroupLayout PanneauLogoLayout = new javax.swing.GroupLayout(PanneauLogo);
         PanneauLogo.setLayout(PanneauLogoLayout);
         PanneauLogoLayout.setHorizontalGroup(
@@ -244,6 +272,8 @@ public class Accueil extends javax.swing.JFrame {
         RechercherUnPatient.setText(" Rechercher un patient :");
         RechercherUnPatient.setPreferredSize(new Dimension(400,75));
 
+        texteIPP.setName("idPatient"); // NOI18N
+
         BoutonRechercher.setBackground(new java.awt.Color(4, 66, 114));
         BoutonRechercher.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonRechercher.setForeground(new java.awt.Color(255, 255, 255));
@@ -261,6 +291,7 @@ public class Accueil extends javax.swing.JFrame {
         Nom.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         Nom.setText("Nom ");
 
+        texteNom.setName("nom"); // NOI18N
         texteNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 texteNomActionPerformed(evt);
@@ -270,8 +301,12 @@ public class Accueil extends javax.swing.JFrame {
         Prenom.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         Prenom.setText("Prénom");
 
+        textePrenom.setName("prenom"); // NOI18N
+
         DateDeNaissance.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         DateDeNaissance.setText("Date de Naissance");
+
+        texteDateNaissance.setName("dateNaissance"); // NOI18N
 
         javax.swing.GroupLayout PanneauRechercheLayout = new javax.swing.GroupLayout(PanneauRecherche);
         PanneauRecherche.setLayout(PanneauRechercheLayout);
@@ -283,7 +318,7 @@ public class Accueil extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanneauRechercheLayout.createSequentialGroup()
                         .addComponent(DateDeNaissance)
                         .addGap(18, 18, 18)
-                        .addComponent(TexteDateDeNaissance))
+                        .addComponent(texteDateNaissance))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanneauRechercheLayout.createSequentialGroup()
                         .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanneauRechercheLayout.createSequentialGroup()
@@ -298,7 +333,7 @@ public class Accueil extends javax.swing.JFrame {
                                 .addComponent(IPP)))
                         .addGap(18, 18, 18)
                         .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TexteIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(texteIPP, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                             .addComponent(textePrenom))))
                 .addGap(18, 18, 18)
                 .addComponent(BoutonRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +345,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RechercherUnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TexteIPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texteIPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BoutonRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IPP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,7 +359,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanneauRechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DateDeNaissance)
-                    .addComponent(TexteDateDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(texteDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -415,6 +450,28 @@ public class Accueil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tablePatientsMouseClicked(java.awt.event.MouseEvent evt) {
+
+        if (evt.getClickCount() == 2) {    // Si l'utilisateur double clique sur une ligne de la JTable
+            int selectedRow = tablePatients.getSelectedRow(); // On récupère la ligne sélectionnée
+            if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
+                // On récupère l'IPP du patient sélectionné
+                Object idPatient = tablePatients.getValueAt(selectedRow, 0);
+                System.out.println("Selected: " + idPatient);
+                // On crée un nouveau panel pour afficher les informations du patient
+                AffichagePatient affichagePatient = new AffichagePatient((String) idPatient, utilisateur, dialogueBD);
+                // On enlève le panel actuel du panneau principal central
+                PanneauPrincipale.remove(scrollPaneTable);
+                // On ajoute le nouveau panel au panneau principal central
+                PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
+                // On actualise le panneau principal central
+                PanneauPrincipale.revalidate();
+                PanneauPrincipale.repaint();
+
+
+            }
+        }
+    }
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonPatientsActionPerformed
@@ -424,7 +481,111 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
-        // TODO add your handling code here:
+        // -------------------- On récupère la liste des patients qui correspondent à la recherche ---------------------
+        // On récupère les champs de la recherche dans une HashMap
+        HashMap<String,String> dataPatient = new HashMap<>();
+        // Pour chaque component, on vérifie si c'est un JTextField, si c'est le cas, on ajoute le contenu du JTextField dans la HashMap
+        for(Component component : PanneauRecherche.getComponents()){
+            if(component instanceof JTextField){
+                JTextField textField = (JTextField) component;
+                if(!textField.getText().isEmpty()) { // On vérifie que le JTextField ne soit pas vide
+                    dataPatient.put(textField.getName(), textField.getText());
+                }
+            }
+        }
+        // On ne veut que les patients du service de l'utilisateur
+        dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
+        //On récupère les patients qui correspondent à la recherche
+        ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
+
+
+        // ---------------------------- On crée une JTable pour afficher les patients ---------------------------------
+        //On crée un modèle de table
+        DefaultTableModel modelTable = new DefaultTableModel();
+        //On ajoute les colonnes de la table
+        modelTable.addColumn("IPP");
+        modelTable.addColumn("Nom");
+        modelTable.addColumn("Prénom");
+        modelTable.addColumn("Date de Naissance");
+
+        // Ajout des patients dans le modèle de table
+        try{
+            while (resultSetPatients.next()) {
+                // On ajoute les informations des patients qui correspondent à la recherche dans le modèle de table
+                modelTable.addRow(new Object[]{resultSetPatients.getString("idPatient"),
+                                              resultSetPatients.getString("nom").trim(),
+                                              resultSetPatients.getString("prenom").trim(),
+                                              resultSetPatients.getString("dateNaissance").substring(0,10)});
+                System.out.println(resultSetPatients.getString("idPatient") +" - " +
+                        resultSetPatients.getString("nom").trim() + " " +
+                        resultSetPatients.getString("prenom").trim() + " - " +
+                        resultSetPatients.getString("dateNaissance").substring(0,10));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        //On crée une JTable avec le modèle de table
+        this.tablePatients.setModel(modelTable);
+        //On définit la taille de la police de la JTable
+        tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
+        tablePatients.setRowHeight(30);
+        tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
+
+        // On change la couleur de fond de l'entête de la JTable
+        tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBackground(new Color(4,66,114));
+                setForeground(Color.WHITE);
+                return this;
+            }
+        });
+        // On empêche l'utilisateur de modifier les données de la JTable
+        tablePatients.setDefaultEditor(Object.class, null);
+        // On définit un modèle de sélection de la JTable à un seul Patient
+        tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //On crée un JScrollPane avec la JTable
+        scrollPaneTable = new JScrollPane(tablePatients);
+        // On change la couleur de fond de la JTable et du JScrollPane
+        tablePatients.setBackground(new Color(236, 242, 254));
+        scrollPaneTable.setBackground(new Color(236, 242, 254));
+        scrollPaneTable.getViewport().setBackground(new Color(236, 242, 254));
+
+        // On change la couleur de fond des lignes de la JTable
+        tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (row % 2 == 0) {
+                    c.setBackground(new java.awt.Color(236, 242, 254));
+                } else {
+                    c.setBackground(new java.awt.Color(244, 247, 254));
+                }
+                if (isSelected) {
+                    // En gris si la ligne est sélectionnée
+                    c.setBackground(new java.awt.Color(50, 115, 244));
+                }
+                return c;
+            }
+        });
+
+        PanneauPrincipale.setBackground(new java.awt.Color(236, 242, 254));
+        // On ajoute la JTable au JScrollPane
+        scrollPaneTable.setViewportView(tablePatients);
+
+        // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
+        //On supprime tous les composants du panneau principal
+        for(Component component : PanneauPrincipale.getComponents()){
+            PanneauPrincipale.remove(component);
+        }
+        //On ajoute le JScrollPane au panneau principal
+        PanneauPrincipale.add(scrollPaneTable, java.awt.BorderLayout.CENTER);
+        //On actualise le panneau principal
+        PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     /**
@@ -486,9 +647,9 @@ public class Accueil extends javax.swing.JFrame {
     private java.awt.Panel PanneauRecherche;
     private javax.swing.JLabel Prenom;
     private javax.swing.JLabel RechercherUnPatient;
-    private javax.swing.JTextField TexteDateDeNaissance;
-    private javax.swing.JTextField TexteIPP;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JTextField texteDateNaissance;
+    private javax.swing.JTextField texteIPP;
     private javax.swing.JTextField texteNom;
     private javax.swing.JTextField textePrenom;
     // End of variables declaration//GEN-END:variables
