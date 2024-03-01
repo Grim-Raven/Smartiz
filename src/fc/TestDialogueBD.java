@@ -21,18 +21,19 @@ public class TestDialogueBD {
     }
 
     @Test // Test de connexion par un utilisateur du DPI avec un couple id/mdp correct
-public void testRequeteConnexionDpiPositive() {
+public void testRequeteConnexionDpiPositive() throws SQLException {
         DialogueBD dialogueBD = new DialogueBD();
         // On se connecte à la base de données
         dialogueBD.connect();
         // On crée une requête de connexion avec un couple id/mdp correct
         String requete = "SELECT idPersonnelMedical, mdp "
                 + "FROM PersonnelMedical "
-                + "WHERE idPersonnelMedical = " + "1111" + " AND mdp = '" + "mdp" + "'";
+                + "WHERE idPersonnelMedical = " + "1111" + " AND mdp = '" + Hashage.sha256("mdp") + "'";
         // On exécute la requête
         ResultSet resultSet = dialogueBD.requete(requete);
+        resultSet.next();
         // Le couple id/mdp est correct.
-        assertNotNull(resultSet);
+        assertEquals("1111", resultSet.getString("idPersonnelMedical"));
     }
     @Test // Test de connexion par un utilisateur du DPI avec un couple id/mdp incorrect
 public void testRequeteConnexionDpiNegative() throws SQLException {
@@ -173,7 +174,7 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         // On crée des données pour une localisation géographique à insérer
         HashMap<String, String> data = new HashMap<>();
         data.put("idPersonnelMedical", "2222");
-        data.put("mdp", "mdp");
+        data.put("mdp", Hashage.sha256("mdp"));
         data.put("nom", "Doe");
         data.put("prenom", "John");
         data.put("poste", "medecin");

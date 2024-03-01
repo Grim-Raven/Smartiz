@@ -378,7 +378,6 @@ public class DialogueBD {
             throw new RuntimeException(e);
         }
     }
-
     /**
      * Méthode de récupération du nom d'un service via son Id
      * @param idService l'identifiant du service

@@ -5,6 +5,7 @@
  */
 package ui;
 import fc.DialogueBD;
+import fc.Hashage;
 import fc.Utilisateur;
 
 import javax.swing.JOptionPane;
@@ -169,9 +170,11 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
         String identifiant = textFieldIdentifiant.getText();
         String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
+        // On hash le mot de passe avec sha-256
+        String hashedMotDePasse = Hashage.sha256(motDePasse);
         String requeteConnexion = "SELECT * " +
                 "FROM PersonnelMedical " +
-                "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + motDePasse + "'";
+                "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
         ResultSet resultat = dialogueBD.requete(requeteConnexion);
         // On vérifie si l'identifiant et le mot de passe sont corrects
         if(resultat.next()){

@@ -109,7 +109,7 @@ public class Accueil extends javax.swing.JFrame {
         this.dialogueBD = dialogueBD;
         // On affiche le nom de l'utilisateur en Titre de la JFrame
         this.utilisateur = utilisateur;
-        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
+        this.setTitle("Bienvenue "+ utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
