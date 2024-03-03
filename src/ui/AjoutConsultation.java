@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package ui;
+import fc.DialogueBD;
+import fc.Utilisateur;
+
+import javax.swing.*;
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -14,10 +21,31 @@ public class AjoutConsultation extends javax.swing.JFrame {
     /**
      * Creates new form AjoutConsultation
      */
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
     public AjoutConsultation() {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        this.dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        this.utilisateur = new Utilisateur("Cot","Harry",true,"Français",1,1111);
+        this.idSejour = "1";
+        MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
+        initMedecin();
+    }
+
+    public AjoutConsultation(DialogueBD dialogueBD, Utilisateur utilisateur, String idSejour) {
+        initComponents();
+        //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
+        setResizable(false);
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
+        initMedecin();
     }
 
     /**
@@ -54,6 +82,11 @@ public class AjoutConsultation extends javax.swing.JFrame {
 
         MenuDeroulantService.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
+        MenuDeroulantService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuDeroulantServiceActionPerformed(evt);
+            }
+        });
 
         Medecin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Medecin.setText("Médecin");
@@ -149,9 +182,57 @@ public class AjoutConsultation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    public void initMedecin(){
+        // On crée un filtre de service pour trouver tous les medecins du service
+        HashMap<String, String> filtre = new HashMap<>() ;
+        filtre.put("idService", dialogueBD.getIdService(MenuDeroulantService.getSelectedItem().toString()));
+        System.out.println(MenuDeroulantService.getSelectedItem().toString());
+        // On réinitialise le modèle
+        MenuDeroulantMedecin.setModel(new DefaultComboBoxModel());
+        try {
+            // On exécute la requête
+            ResultSet resultat = dialogueBD.rechercheTable("PersonnelMedical", filtre, false);
+            // On ajoute les médecins à la liste déroulante
+            while(resultat.next()){
+                System.out.println();
+                MenuDeroulantMedecin.addItem(resultat.getString("Prenom").trim() + " " + resultat.getString("Nom").trim() + " - " + resultat.getString("idPersonnelMedical").trim());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
-        // TODO add your handling code here:
+        String nom = "Consultation";
+        String idService = MenuDeroulantService.getSelectedItem().toString();
+        String idPrescripteur = utilisateur.getIdUtilisateur();
+        // On récupère uniquement l'id du médecin
+        String idRealisateur = MenuDeroulantMedecin.getSelectedItem().toString().substring(MenuDeroulantMedecin.getSelectedItem().toString().lastIndexOf("-") + 1).trim();
+        System.out.println(idRealisateur);
+        Date date = DateChooser.getDate();
+        // On récupère un String de la forme yyyy-mm-dd
+        String datePrescription = String.format("%1$tY-%1$tm-%1$td", date);
+        String commentaire = TexteCommentaire.getText();
+        // TODO : ajouter l'id du Sejour, le code, le cout
+        HashMap<String, String> dataActe = new HashMap<>();
+        dataActe.put("Nom", nom);
+        dataActe.put("idService", dialogueBD.getIdService(idService));
+        dataActe.put("idPrescripteur", idPrescripteur);
+        dataActe.put("idRealisateur", idRealisateur);
+        dataActe.put("datePrescription", datePrescription);
+        dataActe.put("Commentaire", commentaire);
+        dataActe.put("idSejour", idSejour);
+         // On insère les données dans la table Acte
+        dialogueBD.insertActe(dataActe);
+        System.out.println("Consultation ajoutée");
+        this.dispose();
     }//GEN-LAST:event_BoutonAjouterActionPerformed
+
+    private void MenuDeroulantServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantServiceActionPerformed
+        // On affiche dans le Menu Medecin tous les medecins du service sélectionné
+        initMedecin();
+    }//GEN-LAST:event_MenuDeroulantServiceActionPerformed
 
     /**
      * @param args the command line arguments

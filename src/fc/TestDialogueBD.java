@@ -207,7 +207,7 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
         data.put("commentaire", "commentaire");
         // On exécute la requête
         try {
-            String idActe =dialogueBD.insertPrescription(data);
+            String idActe =dialogueBD.insertActe(data);
             // On vérifie que la prescription a bien été insérée
             boolean existe =dialogueBD.requete("SELECT * FROM Acte WHERE idActe="+idActe).next();
             assertTrue(existe);

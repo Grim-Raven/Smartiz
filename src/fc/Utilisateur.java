@@ -22,13 +22,16 @@ public class Utilisateur {
 
     private int idService;
 
+    private int idUtilisateur;
+
     // Constructeur pour initialiser tous les attributs
-    public Utilisateur(String nom, String prenom, boolean personnelMedical, String langue, int idService) {
+    public Utilisateur(String nom, String prenom, boolean personnelMedical, String langue, int idService, int idUtilisateur) {
         this.nom = nom;
         this.prenom = prenom;
         this.personnelMedical = personnelMedical;
         this.langue = langue;
         this.idService = idService;
+        this.idUtilisateur = idUtilisateur;
     }
 
     // Getters
@@ -52,4 +55,7 @@ public class Utilisateur {
         return this.idService;
     }
 
+    public String getIdUtilisateur() {
+        return Integer.toString(this.idUtilisateur);
+    }
 }

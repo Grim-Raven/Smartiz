@@ -255,7 +255,7 @@ public class DialogueBD {
      * Méthode d'insertion d'une prescription dans la base de donnée
      * @param data : la HashMap contenant les données de la prescription
      */
-    public String insertPrescription(HashMap<String, String> data){
+    public String insertActe(HashMap<String, String> data){
         try {
         ResultSet requeteID = requete("SELECT MAX(idActe) FROM ACTE");
         requeteID.next();
@@ -397,4 +397,5 @@ public class DialogueBD {
         }
         return null;
     }
+
 }
