@@ -8,6 +8,7 @@ package ui;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
@@ -47,6 +48,8 @@ public class AffichagePatient extends javax.swing.JPanel {
     //Code couleur : bleu clair -> ecf2fe
 
     public DialogueBD dialogueBD;
+    public Utilisateur utilisateur;
+
     public AffichagePatient(String idPatient, Utilisateur utilisateur, DialogueBD dialogueBD) {
 
         //-------- On définit les dimensions du panneau et de ses composants en fonction de la taille de l'écran -------
@@ -71,6 +74,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         // -------------------------------- On initialise les composants de l'interface --------------------------------
         initComponents();
         //On définit le texte du label nomUtilisateur
+        this.utilisateur = utilisateur;
         this.nomUtilisateur.setText(utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
         this.dialogueBD = dialogueBD;
         // On remplit les informations du patient
@@ -332,6 +336,11 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonConsultation.setForeground(new java.awt.Color(4, 66, 114));
         BoutonConsultation.setText("Consultation");
         BoutonConsultation.setToolTipText("");
+        BoutonConsultation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonConsultationActionPerformed(evt);
+            }
+        });
         PanelBoutons.add(BoutonConsultation);
 
         BoutonPrescription.setBackground(new java.awt.Color(236, 242, 254));
@@ -393,6 +402,27 @@ public class AffichagePatient extends javax.swing.JPanel {
     private void MenuDeroulantSejoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantSejoursActionPerformed
         remplirActes();
     }//GEN-LAST:event_MenuDeroulantSejoursActionPerformed
+
+    private void BoutonConsultationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonConsultationActionPerformed
+        String idSejour;
+        // On récupère l'identifiant du séjour sélectionné
+        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
+        }else {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
+        }
+        // On ouvre la fenêtre d'ajout de consultation
+        JFrame AjoutConsultation = new AjoutConsultation(dialogueBD, this.utilisateur, idSejour);
+        // On affiche la fenêtre
+        AjoutConsultation.setVisible(true);
+        // On ajoute un listener pour mettre à jour la liste des actes après l'ajout de la consultation
+        AjoutConsultation.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirActes();
+            }
+        });
+    }//GEN-LAST:event_BoutonConsultationActionPerformed
 
     /**
      * Remplit les champs de l'interface avec les informations du patient

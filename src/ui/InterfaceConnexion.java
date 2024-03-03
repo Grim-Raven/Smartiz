@@ -186,7 +186,8 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                     resultat.getString("prenom"),
                     true,
                     Langues.getSelectedItem().toString(),
-                    resultat.getInt("idService"));
+                    resultat.getInt("idService"),
+                    resultat.getInt("idPersonnelMedical"));
             new Accueil(dialogueBD, utilisateur).setVisible(true);
             this.dispose();
         }

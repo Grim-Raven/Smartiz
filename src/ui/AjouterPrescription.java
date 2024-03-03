@@ -220,7 +220,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         prescriptionData.put("nom", "prescription");
         prescriptionData.put("posologie", nomMedicament + " " + quantite + " " + posologie + " " + voieAdministration);
         prescriptionData.put("commentaire", commentaire);
-        dialogueBD.insertPrescription(prescriptionData);
+        dialogueBD.insertActe(prescriptionData);
 
         // On envoie les données à la base de données
     }//GEN-LAST:event_BoutonAjouterActionPerformed
