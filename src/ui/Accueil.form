@@ -175,6 +175,9 @@
               <Connection code="new Dimension(largeur1,75)" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoutonRechercheCliniqueActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
