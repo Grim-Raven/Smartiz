@@ -202,6 +202,11 @@ public class Accueil extends javax.swing.JFrame {
         BoutonRechercheClinique.setForeground(new java.awt.Color(255, 255, 255));
         BoutonRechercheClinique.setText("Recherche Clinique");
         BoutonRechercheClinique.setPreferredSize(new Dimension(largeur1,75));
+        BoutonRechercheClinique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonRechercheCliniqueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanneauOuestLayout = new javax.swing.GroupLayout(PanneauOuest);
         PanneauOuest.setLayout(PanneauOuestLayout);
@@ -587,6 +592,17 @@ public class Accueil extends javax.swing.JFrame {
         //On actualise le panneau principal
         PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercherActionPerformed
+
+    private void BoutonRechercheCliniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercheCliniqueActionPerformed
+       //On supprime tous les composants du panneau principal
+        for(Component component : PanneauPrincipale.getComponents()){
+            PanneauPrincipale.remove(component);
+        }
+        //On ajoute le JScrollPane au panneau principal
+        PanneauPrincipale.add(new AffichageListeEtude(), java.awt.BorderLayout.CENTER);
+        //On actualise le panneau principal
+        PanneauPrincipale.revalidate();
+    }//GEN-LAST:event_BoutonRechercheCliniqueActionPerformed
 
     /**
      * @param args the command line arguments
