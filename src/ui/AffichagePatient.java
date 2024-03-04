@@ -347,6 +347,11 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonPrescription.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         BoutonPrescription.setForeground(new java.awt.Color(4, 66, 114));
         BoutonPrescription.setText("Prescription");
+        BoutonPrescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonPrescriptionActionPerformed(evt);
+            }
+        });
         PanelBoutons.add(BoutonPrescription);
 
         BoutonExamenBiologique.setBackground(new java.awt.Color(236, 242, 254));
@@ -423,6 +428,29 @@ public class AffichagePatient extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_BoutonConsultationActionPerformed
+
+    private void BoutonPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPrescriptionActionPerformed
+        String idSejour;
+        // On récupère l'identifiant du séjour sélectionné
+        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
+        }else {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
+        }
+        // On ouvre la fenêtre d'ajout de prescription
+        JFrame AjoutPrescription = new AjouterPrescription(dialogueBD, this.utilisateur, idSejour);
+        // On affiche la fenêtre
+        AjoutPrescription.setVisible(true);
+        // On ajoute un listener pour mettre à jour la liste des actes après l'ajout de la prescription
+        AjoutPrescription.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirActes();
+            }
+        });
+
+
+    }//GEN-LAST:event_BoutonPrescriptionActionPerformed
 
     /**
      * Remplit les champs de l'interface avec les informations du patient

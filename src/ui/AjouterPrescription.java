@@ -6,6 +6,7 @@
 package ui;
 
 import fc.DialogueBD;
+import fc.Utilisateur;
 
 import java.util.HashMap;
 
@@ -19,16 +20,15 @@ public class AjouterPrescription extends javax.swing.JFrame {
      * Creates new form AjouterPrescription
      */
     private DialogueBD dialogueBD;
-    public AjouterPrescription() {
-        initComponents();
-        setResizable(false);
-    }
+    private Utilisateur utilisateur;
+    private String idSejour;
 
-    public AjouterPrescription(DialogueBD dialogueBD, String langue) {
+    public AjouterPrescription(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
         this.dialogueBD = dialogueBD;
-        dialogueBD.connect();
-        changerLangue(langue);
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        changerLangue(this.utilisateur.getLangue());
         setResizable(false);
     }
 
@@ -216,11 +216,16 @@ public class AjouterPrescription extends javax.swing.JFrame {
         String voieAdministration = (String) MenuDeroulantVoie.getSelectedItem();
         String commentaire = TexteCommentaire.getText();
         HashMap<String, String> prescriptionData = new HashMap<String, String>();
-        // TODO: ajouter le prescritpeur (utilisateur, le patient cible (dont le dossier est ouvert, le code, le cout ?)
+        // TODO: ajouter la date de prescription, le code, le cout ?)
         prescriptionData.put("nom", "prescription");
         prescriptionData.put("posologie", nomMedicament + " " + quantite + " " + posologie + " " + voieAdministration);
         prescriptionData.put("commentaire", commentaire);
+        prescriptionData.put("idSejour", idSejour);
+        prescriptionData.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        // On envoie les données à la base de données
         dialogueBD.insertActe(prescriptionData);
+        // On ferme la fenêtre
+        this.dispose();
 
         // On envoie les données à la base de données
     }//GEN-LAST:event_BoutonAjouterActionPerformed
@@ -273,7 +278,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterPrescription(new DialogueBD(),"English").setVisible(true);
+                new AjouterPrescription(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111),"3" ).setVisible(true);
             }
         });
     }
