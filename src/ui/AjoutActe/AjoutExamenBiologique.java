@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui;
+package ui.AjoutActe;
 
 /**
  *
@@ -40,7 +40,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ZoneCommentaire = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

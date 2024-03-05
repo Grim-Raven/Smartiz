@@ -5,6 +5,8 @@
  */
 package ui;
 
+import ui.AjoutActe.AjouterPrescription;
+import ui.AjoutActe.AjoutConsultation;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
@@ -114,7 +116,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         nomUtilisateur = new javax.swing.JLabel();
         PanneauCentral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listeActes = new javax.swing.JList();
         panelSejourEtBoutons = new javax.swing.JPanel();
         MenuDeroulantSejours = new javax.swing.JComboBox();
         Ajout = new javax.swing.JLabel();
@@ -296,12 +298,13 @@ public class AffichagePatient extends javax.swing.JPanel {
         PanneauCentral.setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
         PanneauCentral.setLayout(new java.awt.BorderLayout());
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        listeActes.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        listeActes.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listeActes);
 
         PanneauCentral.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -546,7 +549,6 @@ public class AffichagePatient extends javax.swing.JPanel {
         }
         // On enlève les caractères après l'identifiant
         String idSejour = sejourSelectionne.substring(0, sejourSelectionne.indexOf(" "));
-        System.out.println("id serjour : " +idSejour);
         ArrayList<String> actes = new ArrayList<>();
         try (ResultSet resultat = dialogueBD.rechercheTable(
                 "Acte",
@@ -558,13 +560,36 @@ public class AffichagePatient extends javax.swing.JPanel {
             while (resultat.next()) {
                 // On construit le texte à afficher dans la liste
                 // On affiche le nom de l'acte suivi de la date de réalisation
-                StringBuilder infoActe = new StringBuilder(resultat.getString("nom"));
-                if(resultat.getString("dateRealisationActe") != null) {
-                    infoActe.append(" le ").append(resultat.getString("dateRealisationActe"), 0, 10);
+                String typeActe = resultat.getString("nom").trim();
+                StringBuilder infoActe = new StringBuilder(typeActe);
+                // Si la date de réalisation est renseignée, on l'ajoute
+                // On adapte le texte en fonction du type d'acte
+                switch (typeActe) {
+                    case "Consultation":
+                        infoActe.append(" en ").append(dialogueBD.getNomService(resultat.getString("idService")));
+                        if(resultat.getString("dateRealisationActe") == null) {
+                            infoActe.append(" prévue le ").append(resultat.getString("datePrescription"), 0, 10);
+                        }
+                        break;
+                    case "Radiologie":
+                        // TODO
+                        break;
+                    case "Anesthésie":
+                        // TODO
+                        break;
+                    case "Prescription":
+                        infoActe.append(" : ").append(resultat.getString("posologie"));
+                        if(resultat.getString("dateRealisationActe") != null) {
+                            infoActe.append(" administré le ").append(resultat.getString("dateRealisationActe"), 0, 10);
+                        }
+                        break;
+                    case "Examen Biologique":
+                        // TODO
+                        break;
                 }
                 actes.add(infoActe.toString());
             }
-            jList1.setListData(actes.toArray(new String[0]));
+            listeActes.setListData(actes.toArray(new String[0]));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -599,9 +624,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     private javax.swing.JLabel Telephone;
     private javax.swing.JLabel TelephonePatient;
     private javax.swing.JButton boutonCloture;
-    private javax.swing.JList jList1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listeActes;
     private javax.swing.JLabel nomUtilisateur;
     private javax.swing.JPanel panelCloture;
     private javax.swing.JPanel panelSejourEtBoutons;
