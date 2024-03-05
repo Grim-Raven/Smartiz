@@ -43,31 +43,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="zoneCommentaire" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="DemandeVisiteAnesthesie" min="-2" max="-2" attributes="0"/>
+                              <Component id="ValiderRadiologie" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="OperationPrevue" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TypeExamen" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="DateChooser" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="typeExamenValeur" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="Commentaire" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" min="-2" pref="403" max="-2" attributes="0"/>
-                              <Component id="Service" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="Date" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dateRadiologie" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="commentaire" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="MenuDeroulantService" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                  <Component id="BoutonAjouter" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                  <Component id="boutonValiderRadiologie" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="128" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,70 +78,70 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="DemandeVisiteAnesthesie" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="OperationPrevue" min="-2" max="-2" attributes="0"/>
-                      <Component id="DateChooser" min="-2" max="-2" attributes="0"/>
+                  <Component id="ValiderRadiologie" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TypeExamen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="typeExamenValeur" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="Service" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="MenuDeroulantService" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="Commentaire" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Date" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateRadiologie" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="119" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="BoutonAjouter" min="-2" max="-2" attributes="0"/>
+                  <Component id="commentaire" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <Component id="zoneCommentaire" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="boutonValiderRadiologie" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="DemandeVisiteAnesthesie">
+        <Component class="javax.swing.JLabel" name="ValiderRadiologie">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Demande de consultation pr&#xe9;-op&#xe9;ratoire - Anesth&#xe9;sie"/>
+            <Property name="text" type="java.lang.String" value="Valider la radiologie"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="OperationPrevue">
+        <Component class="javax.swing.JLabel" name="TypeExamen">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
+              <Font name="Times New Roman" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Op&#xe9;ration pr&#xe9;vue le : "/>
+            <Property name="text" type="java.lang.String" value="Type d&apos;examen(s) :"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="DateChooser">
-        </Component>
-        <Component class="javax.swing.JButton" name="BoutonAjouter">
+        <Component class="javax.swing.JLabel" name="Date">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="0"/>
+              <Font name="Times New Roman" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ajouter"/>
+            <Property name="text" type="java.lang.String" value="Date : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="Commentaire">
+        <Component class="javax.swing.JLabel" name="commentaire">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
+              <Font name="Times New Roman" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Commentaire"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="zoneCommentaire">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="ZoneCommentaire">
+            <Component class="javax.swing.JTextArea" name="JTextArea">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -146,37 +149,28 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="Service">
+        <Component class="javax.swing.JButton" name="boutonValiderRadiologie">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Service"/>
+            <Property name="text" type="java.lang.String" value="Valider la radiologie"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="MenuDeroulantService">
+        <Component class="javax.swing.JLabel" name="typeExamenValeur">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="17">
-                <StringItem index="0" value="Anapathologie"/>
-                <StringItem index="1" value="Cardiologie"/>
-                <StringItem index="2" value="Chirurgie"/>
-                <StringItem index="3" value="Dermatologie"/>
-                <StringItem index="4" value="Gyn&#xe9;cologie"/>
-                <StringItem index="5" value="H&#xe9;matologie"/>
-                <StringItem index="6" value="Immunologie"/>
-                <StringItem index="7" value="M&#xe9;decine G&#xe9;n&#xe9;rale"/>
-                <StringItem index="8" value="Neurologie"/>
-                <StringItem index="9" value="Obst&#xe9;trie"/>
-                <StringItem index="10" value="Oncologie"/>
-                <StringItem index="11" value="Pneumologie"/>
-                <StringItem index="12" value="Psychiatrie"/>
-                <StringItem index="13" value="Radiologie"/>
-                <StringItem index="14" value="R&#xe9;animation"/>
-                <StringItem index="15" value="Urologie"/>
-                <StringItem index="16" value="Urgence"/>
-              </StringArray>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="16" style="0"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="TypeExamen"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dateRadiologie">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="16" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="dateRadiologie"/>
           </Properties>
         </Component>
       </SubComponents>
