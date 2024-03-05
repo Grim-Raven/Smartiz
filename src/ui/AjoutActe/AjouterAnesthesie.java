@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui;
+package ui.AjoutActe;
 
 /**
  *
@@ -40,7 +40,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         Service = new javax.swing.JLabel();
         MenuDeroulantService = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -52,7 +52,6 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
 
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouter.setText("Ajouter");
-        BoutonAjouter.setActionCommand("Ajouter");
 
         Commentaire.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Commentaire.setText("Commentaire");
@@ -71,30 +70,20 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DemandeVisiteAnesthesie)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(DemandeVisiteAnesthesie))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(OperationPrevue)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Commentaire))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Service)))
+                            .addComponent(Commentaire)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Service))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(MenuDeroulantService, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(MenuDeroulantService, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(170, 170, 170)

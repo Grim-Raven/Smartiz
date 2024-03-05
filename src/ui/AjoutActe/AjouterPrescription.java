@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui;
+package ui.AjoutActe;
 
 import fc.DialogueBD;
 import fc.Utilisateur;
@@ -60,7 +60,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TexteCommentaire = new javax.swing.JTextPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         AjouterUnePrescription.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         AjouterUnePrescription.setText("Ajouter une prescription ");
@@ -217,7 +217,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         String commentaire = TexteCommentaire.getText();
         HashMap<String, String> prescriptionData = new HashMap<String, String>();
         // TODO: ajouter la date de prescription, le code, le cout ?)
-        prescriptionData.put("nom", "prescription");
+        prescriptionData.put("nom", "Prescription");
         prescriptionData.put("posologie", nomMedicament + " " + quantite + " " + posologie + " " + voieAdministration);
         prescriptionData.put("commentaire", commentaire);
         prescriptionData.put("idSejour", idSejour);
