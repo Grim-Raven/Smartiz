@@ -29,7 +29,6 @@ public class AjouterPrescription extends javax.swing.JFrame {
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
         changerLangue(this.utilisateur.getLangue());
-        setResizable(false);
     }
 
     /**
@@ -61,6 +60,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         TexteCommentaire = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         AjouterUnePrescription.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         AjouterUnePrescription.setText("Ajouter une prescription ");
@@ -278,7 +278,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterPrescription(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111),"3" ).setVisible(true);
+                new AjouterPrescription(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3" ).setVisible(true);
             }
         });
     }

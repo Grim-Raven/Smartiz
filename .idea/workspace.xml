@@ -116,13 +116,13 @@
       <recent name="fc" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.InterfaceConnexion">
-    <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
+  <component name="RunManager" selected="Application.AjouterPrescription">
+    <configuration name="AjouterPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.AjoutActe.AjouterPrescription" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ui.*" />
+          <option name="PATTERN" value="ui.AjoutActe.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -190,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AjouterPrescription" />
         <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="Application.InterfaceConnexion" />
         <item itemvalue="JUnit.TestHashage" />
         <item itemvalue="JUnit.TestDialogue2" />
-        <item itemvalue="Application.Accueil" />
       </list>
     </recent_temporary>
   </component>
