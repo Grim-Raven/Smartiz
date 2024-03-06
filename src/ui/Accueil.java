@@ -115,11 +115,7 @@ public class Accueil extends javax.swing.JFrame {
         // On met le logo de l'application
         labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
         this.tablePatients = new JTable();
-        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePatientsMouseClicked(evt);
-            }
-        });
+
     }
 
     /**
@@ -503,84 +499,7 @@ public class Accueil extends javax.swing.JFrame {
         //On récupère les patients qui correspondent à la recherche
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
 
-
-        // ---------------------------- On crée une JTable pour afficher les patients ---------------------------------
-        //On crée un modèle de table
-        DefaultTableModel modelTable = new DefaultTableModel();
-        //On ajoute les colonnes de la table
-        modelTable.addColumn("IPP");
-        modelTable.addColumn("Nom");
-        modelTable.addColumn("Prénom");
-        modelTable.addColumn("Date de Naissance");
-
-        // Ajout des patients dans le modèle de table
-        try{
-            while (resultSetPatients.next()) {
-                // On ajoute les informations des patients qui correspondent à la recherche dans le modèle de table
-                modelTable.addRow(new Object[]{resultSetPatients.getString("idPatient"),
-                                              resultSetPatients.getString("nom").trim(),
-                                              resultSetPatients.getString("prenom").trim(),
-                                              resultSetPatients.getString("dateNaissance").substring(0,10)});
-                System.out.println(resultSetPatients.getString("idPatient") +" - " +
-                        resultSetPatients.getString("nom").trim() + " " +
-                        resultSetPatients.getString("prenom").trim() + " - " +
-                        resultSetPatients.getString("dateNaissance").substring(0,10));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        //On crée une JTable avec le modèle de table
-        this.tablePatients.setModel(modelTable);
-        //On définit la taille de la police de la JTable
-        tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
-        tablePatients.setRowHeight(30);
-        tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
-        tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
-
-        // On change la couleur de fond de l'entête de la JTable
-        tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                setBackground(new Color(4,66,114));
-                setForeground(Color.WHITE);
-                return this;
-            }
-        });
-        // On empêche l'utilisateur de modifier les données de la JTable
-        tablePatients.setDefaultEditor(Object.class, null);
-        // On définit un modèle de sélection de la JTable à un seul Patient
-        tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        //On crée un JScrollPane avec la JTable
-        scrollPaneTable = new JScrollPane(tablePatients);
-        // On change la couleur de fond de la JTable et du JScrollPane
-        tablePatients.setBackground(new Color(236, 242, 254));
-        scrollPaneTable.setBackground(new Color(236, 242, 254));
-        scrollPaneTable.getViewport().setBackground(new Color(236, 242, 254));
-
-        // On change la couleur de fond des lignes de la JTable
-        tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (row % 2 == 0) {
-                    c.setBackground(new java.awt.Color(236, 242, 254));
-                } else {
-                    c.setBackground(new java.awt.Color(244, 247, 254));
-                }
-                if (isSelected) {
-                    // En gris si la ligne est sélectionnée
-                    c.setBackground(new java.awt.Color(50, 115, 244));
-                }
-                return c;
-            }
-        });
-
-        PanneauPrincipale.setBackground(new java.awt.Color(236, 242, 254));
-        // On ajoute la JTable au JScrollPane
-        scrollPaneTable.setViewportView(tablePatients);
+        this.scrollPaneTable = new AfficherListePatients(resultSetPatients);
 
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
         //On supprime tous les composants du panneau principal
