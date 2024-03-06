@@ -153,12 +153,24 @@ public class DialogueBD {
      * @throws SQLException si une erreur SQL survient
      */
     public String insertPatient(HashMap<String, String> data) throws SQLException {
-        // TODO: changer l'ipp pour respecter le cahier des charges
         ResultSet requeteID = requete("SELECT MAX(idPatient) FROM Patient");
         requeteID.next();
         int idPatient = requeteID.getInt(1) + 1;
         insertTable("Patient", String.valueOf(idPatient), "idPatient", data);
         return String.valueOf(idPatient);
+    }
+
+    /**
+     * Méthode d'insertion d'une étude dans la base de données
+     * @param data les données de l'étude à insérer
+     * @throws SQLException si une erreur SQL survient
+     */
+    public String insertEtude(HashMap<String, String> data) throws SQLException {
+        ResultSet requeteID = requete("SELECT MAX(idEtude) FROM Etude");
+        requeteID.next();
+        int idEtude = requeteID.getInt(1) + 1;
+        insertTable("Etude", String.valueOf(idEtude), "idEtude", data);
+        return String.valueOf(idEtude);
     }
 
     /**
@@ -173,7 +185,7 @@ public class DialogueBD {
         requeteID.next();
         int idSejour = requeteID.getInt(1) + 1;
         insertTable("Sejour", String.valueOf(idSejour), "idSejour", data);
-        return String.valueOf(idSejour);
+    return String.valueOf(idSejour);
     }
 
 
@@ -184,14 +196,14 @@ public class DialogueBD {
      * @throws SQLException Si une erreur liée à SQL survient
      */
     public String insertLocG(HashMap<String, String> data) throws SQLException {
-        // On récupère le plus grand id pour une locG
+// On récupère le plus grand id pour une locG
         ResultSet requeteID = requete("SELECT MAX(idLocG) FROM LocalisationG");
         requeteID.next();
-        // On crée un nouvel id en incrémentant de 1 le plus grand id existant
+// On crée un nouvel id en incrémentant de 1 le plus grand id existant
         int idLocG = requeteID.getInt(1) + 1;
         // On insère une nouvelle locG dans la table LOCALISATIONG
         insertTable("LOCALISATIONG", String.valueOf(idLocG), "idLocG", data);
-        // On retourne l'id de la nouvelle locG créée
+// On retourne l'id de la nouvelle locG créée
         return String.valueOf(idLocG);
     }
 
@@ -292,7 +304,7 @@ public class DialogueBD {
      * @param table la table dque l'on cherche
      * @param data les données avec lesquelles on cherche
      * @throws SQLException si une erreur SQL survient
-     * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
+* HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
     */
 
     public ResultSet rechercheTable(String table, HashMap<String, String> data, boolean sensibleCasse) throws SQLException{
@@ -301,13 +313,13 @@ public class DialogueBD {
 
         // On parcourt les données pour les ajouter à la requête
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            // Si la valeur n'est pas nulle, on l'ajoute à la requête
+            // Si la valeur n'est pas nulle, on l'ajoute à la requête 
             if (entry.getValue() != null) {
                 //la HashMap n'est pas vide, donc on a des filtres à prendre en compte
                 ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
-
+                
                 // On se met sur la première ligne du résultat
-                resultatType.next();
+                resultatType.next(); 
                 //On récupère la clé
                 if(!sensibleCasse){
                     recherche.append("UPPER(").append(entry.getKey()).append(") = ");
@@ -317,7 +329,7 @@ public class DialogueBD {
                 // On récupère le type de la colonne
                 System.out.println(entry.getKey().toString());
                 String typeColonne = resultatType.getString("DATA_TYPE");
-
+                
                 switch (typeColonne) {
                     case "NUMBER":
                         recherche.append(entry.getValue()).append(" AND ");
@@ -331,7 +343,7 @@ public class DialogueBD {
                             recherche.append("UPPER(").append(charSQL).append(") AND ");
                         }else{
                             recherche.append(charSQL).append(" AND ");
-                        }
+}
                         break;
                 }
             }
@@ -343,14 +355,14 @@ public class DialogueBD {
         }
         else{
             recherche.setLength(recherche.length() -7); // pour le " WHERE "
-        }
+        } 
         String requete = recherche.toString();
         // On exécute la requête
         System.out.println(requete);
         return requete(requete);
     }
-
-    /**
+    
+/**
      * Méthode de récupération des patients d'un service de la base de données
      * @param idService l'identifiant du service
      * @return les patients du service
@@ -378,6 +390,20 @@ public class DialogueBD {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Méthode de récupération d'une étude de la base de données sur le critère de leurs données
+     * @param dataEtude les données de l'étude
+     * @return les études correspondant aux données
+     */
+    public ResultSet getEtude(HashMap<String, String> dataEtude) {
+        try {
+            return rechercheTable("etudes", dataEtude, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Méthode de récupération du nom d'un service via son Id
      * @param idService l'identifiant du service

@@ -21,7 +21,7 @@ public class TestDialogueBD {
     }
 
     @Test // Test de connexion par un utilisateur du DPI avec un couple id/mdp correct
-public void testRequeteConnexionDpiPositive() throws SQLException {
+    public void testRequeteConnexionDpiPositive() throws SQLException {
         DialogueBD dialogueBD = new DialogueBD();
         // On se connecte à la base de données
         dialogueBD.connect();
@@ -35,8 +35,9 @@ public void testRequeteConnexionDpiPositive() throws SQLException {
         // Le couple id/mdp est correct.
         assertEquals("1111", resultSet.getString("idPersonnelMedical"));
     }
+    
     @Test // Test de connexion par un utilisateur du DPI avec un couple id/mdp incorrect
-public void testRequeteConnexionDpiNegative() throws SQLException {
+    public void testRequeteConnexionDpiNegative() throws SQLException {
         DialogueBD dialogueBD = new DialogueBD();
         // On se connecte à la base de données
         dialogueBD.connect();
@@ -261,6 +262,50 @@ public void testRequeteConnexionDpiNegative() throws SQLException {
             throw new RuntimeException(e);
         }
     }
+
+    @Test // Test de l'insertion d'une étude dans la base de donnée
+    public void testInsertEtude(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour une étude à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("nom", "thérapie cognitive");
+        data.put("idPersonnelMedical", "1111");
+        data.put("idPatient", "1");
+
+        try {
+            String idEtude = dialogueBD.insertEtude(data);
+            // On vérifie que l'étude a bien été insérée
+            assertTrue(dialogueBD.requete("SELECT * FROM etude WHERE idEtude ="+idEtude).next());
+            // On supprime l'étude qui a été créée
+            dialogueBD.requete("DELETE FROM ETUDE WHERE idEtude ="+idEtude);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    @Test // Test de l'insertion d'une étude sans un patient dans la base de donnée
+    public void testInsertEtudeSansPatient(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On crée des données pour une étude à insérer
+        HashMap<String, String> data = new HashMap<>();
+        data.put("nom", "depression des etudiants");
+        data.put("idPersonnelMedical", "1111");
+
+        try {
+            String idEtude = dialogueBD.insertEtude(data);
+            // On vérifie que l'étude a bien été insérée
+            assertTrue(dialogueBD.requete("SELECT * FROM etude WHERE idEtude ="+idEtude).next());
+            // On supprime l'étude qui a été créée
+            dialogueBD.requete("DELETE FROM ETUDE WHERE idEtude ="+idEtude);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
 }
 
 

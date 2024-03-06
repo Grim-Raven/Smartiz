@@ -70,7 +70,7 @@ public class Accueil extends javax.swing.JFrame {
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
 
-        this.utilisateur = new Utilisateur("Cot","Harry",true, "Français",1, 1111);
+        this.utilisateur = new Utilisateur("Cot","Harry",true, "Français",1, 1111,"Y");
         this.dialogueBD = new DialogueBD();
         this.dialogueBD.connect();
         this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());

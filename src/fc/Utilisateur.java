@@ -24,14 +24,17 @@ public class Utilisateur {
 
     private int idUtilisateur;
 
+    private boolean arc;
+
     // Constructeur pour initialiser tous les attributs
-    public Utilisateur(String nom, String prenom, boolean personnelMedical, String langue, int idService, int idUtilisateur) {
+    public Utilisateur(String nom, String prenom, boolean personnelMedical, String langue, int idService, int idUtilisateur, String arc) {
         this.nom = nom;
         this.prenom = prenom;
         this.personnelMedical = personnelMedical;
         this.langue = langue;
         this.idService = idService;
         this.idUtilisateur = idUtilisateur;
+        this.arc = arc.equals("Y")?true: false;
     }
 
     // Getters
@@ -57,5 +60,9 @@ public class Utilisateur {
 
     public String getIdUtilisateur() {
         return Integer.toString(this.idUtilisateur);
+    }
+
+    public boolean isArc() {
+        return this.arc;
     }
 }
