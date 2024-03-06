@@ -90,7 +90,7 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
                     c.setBackground(new java.awt.Color(244, 247, 254));
                 }
                 if (isSelected) {
-                    // En gris si la ligne est sélectionnée
+                    // En gris si la ligne est sélectionnée.
                     c.setBackground(new java.awt.Color(50, 115, 244));
                 }
                 return c;
@@ -107,7 +107,7 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
                 Object idPatient = tablePatients.getValueAt(selectedRow, 0);
                 System.out.println("Selected: " + idPatient);
 
-                // On crée un listener pour prévenir le parent que l'utilisateur a sélectionné un patient
+                // On prévient tous les listeners que l'utilisateur a sélectionné un patient
                 for (AfficherListePatientsListener afficherListePatientsListener : patientSelectioneListenerList) {
                     afficherListePatientsListener.patientSelected((String) idPatient);
                 }
@@ -115,5 +115,9 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
 
             }
         }
+    }
+
+    public void addPatientSelectedListener(AfficherListePatientsListener listener) {
+        patientSelectioneListenerList.add(listener);
     }
 }

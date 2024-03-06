@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="modif de l'affichage des actes dans le dossier patient">
-      <change afterPath="$PROJECT_DIR$/src/fc/AfficherListePatientsListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/AfficherListePatients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Accueil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AfficherListePatients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AfficherListePatients.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,9 +190,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="Application.InterfaceConnexion" />
         <item itemvalue="JUnit.TestHashage" />
-        <item itemvalue="JUnit.TestDialogueBD" />
         <item itemvalue="JUnit.TestDialogue2" />
         <item itemvalue="Application.Accueil" />
       </list>

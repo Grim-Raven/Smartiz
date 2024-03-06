@@ -5,6 +5,7 @@
  */
 package ui;
 
+import fc.AfficherListePatientsListener;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
@@ -21,7 +22,7 @@ import java.util.Objects;
  *
  * @author emmaa
  */
-public class Accueil extends javax.swing.JFrame {
+public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener {
 
     /**
      * Creates new form Accueil
@@ -45,7 +46,7 @@ public class Accueil extends javax.swing.JFrame {
     private final DialogueBD dialogueBD;
     private Utilisateur utilisateur;
     private JTable tablePatients;
-    private JScrollPane scrollPaneTable;
+    private AfficherListePatients scrollPaneTable;
     public Accueil() {
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
@@ -500,6 +501,7 @@ public class Accueil extends javax.swing.JFrame {
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
 
         this.scrollPaneTable = new AfficherListePatients(resultSetPatients);
+        this.scrollPaneTable.addPatientSelectedListener(this);
 
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
         //On supprime tous les composants du panneau principal
@@ -522,6 +524,18 @@ public class Accueil extends javax.swing.JFrame {
         //On actualise le panneau principal
         PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercheCliniqueActionPerformed
+
+    public void patientSelected(String idPatient) {
+        // On crée un nouveau panel pour afficher les informations du patient
+        AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
+        // On enlève le panel actuel du panneau principal central
+        PanneauPrincipale.remove(scrollPaneTable);
+        // On ajoute le nouveau panel au panneau principal central
+        PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
+        // On actualise le panneau principal central
+        PanneauPrincipale.revalidate();
+        PanneauPrincipale.repaint();
+    }
 
     /**
      * @param args the command line arguments
