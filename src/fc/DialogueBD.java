@@ -132,7 +132,12 @@ public class DialogueBD {
                         values.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD'), ");
                         break;
                     default: // Pour les chaînes de caractères, on ajoute des guillemets simples
-                        values.append("'").append(entry.getValue()).append("', ");
+                        String valeurString = entry.getValue();
+                        // Si le texte contient des apostrophes, on les échappe
+                        valeurString = valeurString.replace("'", "''");
+                        // On ajoute les guillemets simples autour de la chaîne de caractères
+                        String charSQL = "'"+valeurString+"'";
+                        values.append(charSQL).append(", ");
                         break;
                 }
             }
@@ -292,7 +297,7 @@ public class DialogueBD {
      * @param identifiant l'identifiant de l'utilisateur
      * @return le nom + prénom de l'utilisateur
      */
-    public String getNomUtilisateur(String identifiant) {
+    public String getNomMedecin(String identifiant) {
         // On construit la requête pour récupérer le nom et le prénom de l'utilisateur
         String requete = "SELECT nom, prenom FROM PersonnelMedical WHERE idPersonnelMedical = '" + identifiant + "'";
         ResultSet resultSet = requete(requete);
@@ -309,7 +314,7 @@ public class DialogueBD {
 
     /**
      * Méthode de recherche d'une table dans la base de données
-     * @param table la table dque l'on cherche
+     * @param table la table que l'on cherche
      * @param data les données avec lesquelles on cherche
      * @throws SQLException si une erreur SQL survient
 * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
@@ -358,7 +363,7 @@ public class DialogueBD {
         }
 
         // On supprime les "AND " à la fin de chaque partie de la requête
-        if (data.size() > 0) {
+        if (!data.isEmpty()) {
             recherche.setLength(recherche.length() - 5); // pour le dernier "AND "
         }
         else{
@@ -432,4 +437,14 @@ public class DialogueBD {
         return null;
     }
 
+    public void validerActe(String idActe, String resultatConsultation) {
+        // On construit la requête pour mettre à jour le résultat de la consultation
+        // Si le résultat contient des apostrophes, on les échappe
+        String resultatEchapee = resultatConsultation.replace("'", "''");
+        // On ajoute les guillemets simples autour de la chaîne de caractères
+        String requete = "UPDATE Acte SET resultat = '" + resultatEchapee + "', valide='Y' WHERE idActe = " + idActe;
+        System.out.println(requete);
+        // On exécute la requête
+        requete(requete);
+    }
 }

@@ -1,30 +1,27 @@
 package fc;
 /**
  * Classe Utilisateur
- *
  * Cette classe permet de créer un objet Utilisateur
- *
  * Un utilisateur est caractérisé par :
  * - son nom
  * - son prénom
  * - son statut de personnel médical
- *
  * Cette classe contient les méthodes pour récupérer les attributs de l'objet
  *
  * @version 1.0
  * @since 2020-03-12
  */
 public class Utilisateur {
-    private String nom;
-    private String prenom;
-    private boolean personnelMedical;
-    private String langue;
+    private final String nom;
+    private final String prenom;
+    private final boolean personnelMedical;
+    private final String langue;
 
-    private int idService;
+    private final int idService;
 
-    private int idUtilisateur;
+    private final int idUtilisateur;
 
-    private boolean arc;
+    private final boolean arc;
 
     // Constructeur pour initialiser tous les attributs
     public Utilisateur(String nom, String prenom, boolean personnelMedical, String langue, int idService, int idUtilisateur, String arc) {
@@ -34,7 +31,7 @@ public class Utilisateur {
         this.langue = langue;
         this.idService = idService;
         this.idUtilisateur = idUtilisateur;
-        this.arc = arc.equals("Y")?true: false;
+        this.arc = arc.equals("Y");
     }
 
     // Getters

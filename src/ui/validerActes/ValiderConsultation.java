@@ -5,19 +5,70 @@
  */
 package ui.validerActes;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+import java.sql.ResultSet;
+
 /**
  *
  * @author emmaa
  */
 public class ValiderConsultation extends javax.swing.JFrame {
 
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    public  String idActe;
     /**
      * Creates new form ValiderConsultation
      */
-    public ValiderConsultation() {
+
+    public ValiderConsultation(String idActe) {
         initComponents();
+        this.dialogueBD = new DialogueBD();
+        dialogueBD.connect();
+        this.utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
+        this.idActe = idActe;
+        remplirChamps(idActe);
+    }
+    public ValiderConsultation(DialogueBD dialogueBD, Utilisateur utilisateur, String idActe) {
+        initComponents();
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idActe = idActe;
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
+        remplirChamps(idActe);
         setResizable(false);
+    }
+
+    private void remplirChamps(String idActe) {
+        //On récupère les informations de la consultation
+        String requeteConsultation = "SELECT * FROM Acte WHERE idActe = " + idActe;
+        ResultSet resultatConsultation = this.dialogueBD.requete(requeteConsultation);
+        try {
+            resultatConsultation.next();
+            // On remplit les champs avec les informations de la consultation
+            nomService.setText(dialogueBD.getNomService(resultatConsultation.getString("idService")));
+            nomMedecin.setText(dialogueBD.getNomMedecin(resultatConsultation.getString("idRealisateur")));
+            dateConsultation.setText(resultatConsultation.getString("dateRealisationActe").substring(0, 10));
+            commentaire.setText(resultatConsultation.getString("commentaire"));
+
+            // On cache le bouton de validation si l'acte a déjà été validé ou si l'utilisateur n'est pas
+            // le médecin prévu pour la consultation
+            boolean valide = resultatConsultation.getString("valide").equals("Y");
+            System.out.println(valide);
+            if(valide || !resultatConsultation.getString("idRealisateur").equals(utilisateur.getIdUtilisateur())) {
+                boutonValiderConsultation.setVisible(false);
+                // On affiche le résultat de la consultation si elle a déjà été validée, sinon on affiche un message
+                if(valide) {
+                    resultat.setText(resultatConsultation.getString("resultat"));
+                    resultat.setEditable(false);
+                }else {
+                    resultat.setText("La consultation n'a pas encore été effectuée");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -30,33 +81,36 @@ public class ValiderConsultation extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        ValiderLaConsultation = new javax.swing.JLabel();
-        Service = new javax.swing.JLabel();
+        validerLaConsultation = new javax.swing.JLabel();
+        serviceLabel = new javax.swing.JLabel();
         nomService = new javax.swing.JLabel();
-        Medecin = new javax.swing.JLabel();
+        medecinLabel = new javax.swing.JLabel();
         nomMedecin = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         dateConsultation = new javax.swing.JLabel();
-        Commentaire = new javax.swing.JLabel();
+        commentaireLabel = new javax.swing.JLabel();
         zoneCommentaire = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        commentaire = new javax.swing.JTextArea();
         boutonValiderConsultation = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resultat = new javax.swing.JTextArea();
+        resultatLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        ValiderLaConsultation.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        ValiderLaConsultation.setText("Valider la consultation");
+        validerLaConsultation.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        validerLaConsultation.setText("Valider la consultation");
 
-        Service.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        Service.setText("Service : ");
+        serviceLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        serviceLabel.setText("Service : ");
 
         nomService.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         nomService.setText("nomService");
 
-        Medecin.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        Medecin.setText("Médecin : ");
+        medecinLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        medecinLabel.setText("Médecin : ");
 
         nomMedecin.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         nomMedecin.setText("nomMedecin");
@@ -67,15 +121,27 @@ public class ValiderConsultation extends javax.swing.JFrame {
         dateConsultation.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         dateConsultation.setText("dateConsultation");
 
-        Commentaire.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        Commentaire.setText("Commentaire : ");
+        commentaireLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        commentaireLabel.setText("Commentaire : ");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        zoneCommentaire.setViewportView(jTextArea1);
+        commentaire.setEditable(false);
+        commentaire.setColumns(20);
+        commentaire.setRows(5);
+        zoneCommentaire.setViewportView(commentaire);
 
         boutonValiderConsultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         boutonValiderConsultation.setText("Valider la consultation");
+        boutonValiderConsultation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonValiderConsultationActionPerformed(evt);
+            }
+        });
+
+        resultat.setColumns(20);
+        resultat.setRows(5);
+        jScrollPane1.setViewportView(resultat);
+
+        resultatLabel.setText("Résultat :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,52 +150,66 @@ public class ValiderConsultation extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ValiderLaConsultation)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Service)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomService))
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(validerLaConsultation)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(serviceLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nomService))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(medecinLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nomMedecin))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(date)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dateConsultation))
+                                    .addComponent(commentaireLabel)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Medecin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomMedecin))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(date)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateConsultation))
-                            .addComponent(Commentaire)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(boutonValiderConsultation)))
+                                .addGap(99, 99, 99)
+                                .addComponent(boutonValiderConsultation)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(resultatLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ValiderLaConsultation)
+                .addComponent(validerLaConsultation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Service)
+                    .addComponent(serviceLabel)
                     .addComponent(nomService))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Medecin)
+                    .addComponent(medecinLabel)
                     .addComponent(nomMedecin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(date)
                     .addComponent(dateConsultation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Commentaire)
+                .addComponent(commentaireLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultatLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(boutonValiderConsultation)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,10 +226,18 @@ public class ValiderConsultation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void boutonValiderConsultationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderConsultationActionPerformed
+        //On récupère le résultat de la consultation
+        String resultatConsultation = resultat.getText();
+        //On met à jour la consultation dans la base de données
+        dialogueBD.validerActe(idActe, resultatConsultation);
+        this.dispose();
+    }//GEN-LAST:event_boutonValiderConsultationActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -176,23 +264,26 @@ public class ValiderConsultation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ValiderConsultation().setVisible(true);
+                new ValiderConsultation("7").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Commentaire;
-    private javax.swing.JLabel Medecin;
-    private javax.swing.JLabel Service;
-    private javax.swing.JLabel ValiderLaConsultation;
     private javax.swing.JButton boutonValiderConsultation;
+    private javax.swing.JTextArea commentaire;
+    private javax.swing.JLabel commentaireLabel;
     private javax.swing.JLabel date;
     private javax.swing.JLabel dateConsultation;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel medecinLabel;
     private javax.swing.JLabel nomMedecin;
     private javax.swing.JLabel nomService;
+    private javax.swing.JTextArea resultat;
+    private javax.swing.JLabel resultatLabel;
+    private javax.swing.JLabel serviceLabel;
+    private javax.swing.JLabel validerLaConsultation;
     private javax.swing.JScrollPane zoneCommentaire;
     // End of variables declaration//GEN-END:variables
 }

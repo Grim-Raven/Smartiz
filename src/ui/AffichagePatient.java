@@ -9,6 +9,7 @@ import ui.AjoutActe.AjouterPrescription;
 import ui.AjoutActe.AjoutConsultation;
 import fc.DialogueBD;
 import fc.Utilisateur;
+import ui.validerActes.ValiderConsultation;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -51,6 +52,7 @@ public class AffichagePatient extends javax.swing.JPanel {
 
     public DialogueBD dialogueBD;
     public Utilisateur utilisateur;
+    public HashMap<String, String> dicoActes = new HashMap<>();
 
     public AffichagePatient(String idPatient, Utilisateur utilisateur, DialogueBD dialogueBD) {
 
@@ -304,6 +306,11 @@ public class AffichagePatient extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listeActes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listeActesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listeActes);
 
         PanneauCentral.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -455,6 +462,36 @@ public class AffichagePatient extends javax.swing.JPanel {
 
     }//GEN-LAST:event_BoutonPrescriptionActionPerformed
 
+    private void listeActesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listeActesMouseClicked
+        // Si l'utilisateur double-clique sur un acte, on ouvre une fenêtre pour le modifier
+        if (evt.getClickCount() == 2) {
+            // On récupère l'identifiant de l'acte sélectionné
+            String acteSelectionne = listeActes.getSelectedValue().toString();
+            String idActe = dicoActes.get(acteSelectionne);
+            String typeActe = acteSelectionne.substring(0, acteSelectionne.indexOf(" "));
+            switch (typeActe) {
+                case "Consultation":
+                    // On ouvre la fenêtre d'affichage/validation de la consultation
+                    System.out.println(dialogueBD);
+                    JFrame AjoutConsultation = new ValiderConsultation(this.dialogueBD, this.utilisateur, idActe);
+                    // On affiche la fenêtre
+                    AjoutConsultation.setVisible(true);
+                    break;
+                case "Radiologie":
+                    // TODO
+                    break;
+                case "Anesthésie":
+                    // TODO
+                    break;
+                case "Prescription":
+                    break;
+                case "Examen":
+                    // TODO
+                    break;
+            }
+        }
+    }//GEN-LAST:event_listeActesMouseClicked
+
     /**
      * Remplit les champs de l'interface avec les informations du patient
      *
@@ -535,6 +572,7 @@ public class AffichagePatient extends javax.swing.JPanel {
      * Remplit la liste des actes du séjour sélectionné
      */
     public void remplirActes() {
+        dicoActes.clear();
         // On récupère les actes du séjour sélectionné
         // On effectue une recherche dans la table Acte avec l'identifiant du séjour sélectionné
         String sejourSelectionne = MenuDeroulantSejours.getSelectedItem().toString();
@@ -588,6 +626,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                         break;
                 }
                 actes.add(infoActe.toString());
+                dicoActes.put(infoActe.toString(), resultat.getString("idActe"));
             }
             listeActes.setListData(actes.toArray(new String[0]));
         } catch (SQLException e) {
