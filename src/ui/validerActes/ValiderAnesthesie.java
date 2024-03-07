@@ -40,7 +40,7 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         boutonValiderConsultationAnesthesie = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

@@ -40,7 +40,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         ZoneCommentaire = new javax.swing.JTextArea();
         BoutonValiderExamenBiologique = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

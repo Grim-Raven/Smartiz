@@ -70,7 +70,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         BoutonAjouter = new javax.swing.JButton();
         DateChooser = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -214,15 +214,16 @@ public class AjoutConsultation extends javax.swing.JFrame {
         // On récupère un String de la forme yyyy-mm-dd
         String datePrescription = String.format("%1$tY-%1$tm-%1$td", date);
         String commentaire = TexteCommentaire.getText();
-        // TODO : ajouter l'id du Sejour, le code, le cout
+        // TODO : ajouter le code, le cout
         HashMap<String, String> dataActe = new HashMap<>();
         dataActe.put("Nom", nom);
         dataActe.put("idService", dialogueBD.getIdService(idService));
         dataActe.put("idPrescripteur", idPrescripteur);
         dataActe.put("idRealisateur", idRealisateur);
-        dataActe.put("datePrescription", datePrescription);
+        dataActe.put("dateRealisationActe", datePrescription);
         dataActe.put("Commentaire", commentaire);
         dataActe.put("idSejour", idSejour);
+        dataActe.put("valide", "N");
          // On insère les données dans la table Acte
         dialogueBD.insertActe(dataActe);
         System.out.println("Consultation ajoutée");

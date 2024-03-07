@@ -40,7 +40,7 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         typeExamenValeur = new javax.swing.JLabel();
         dateRadiologie = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

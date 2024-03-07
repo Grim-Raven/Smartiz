@@ -244,8 +244,6 @@ public class AjouterPrescription extends javax.swing.JFrame {
             BoutonAjouter.setText("Add");
             MenuDeroulantVoie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auricular", "Intravenous", "Intramuscular", "Intrathecal", "Nasal", "Oral", "Rectal", "Subcutaneous", "Sublingual", "Transdermal", "Vaginal" }));
         }
-
-
     }
 
     /**
