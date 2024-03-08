@@ -5,6 +5,9 @@
  */
 package ui.AjoutActe;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,20 @@ public class AjouterRadiologie extends javax.swing.JFrame {
     /**
      * Creates new form AjouterRadiologie
      */
-    public AjouterRadiologie() {
+    
+        private DialogueBD dialogueBD;
+        private Utilisateur utilisateur;
+        private String idSejour;
+        
+    public AjouterRadiologie(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        changerLangue(this.utilisateur.getLangue());
+       
     }
 
     /**
@@ -165,7 +178,22 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void changerLangue(String langue) {
+         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+         //On remplace chaque composant par son équivalent anglais
+        if(langue.equals("English")){
+            DemandeExamenRadiologie.setText("Request for radiological examination");
+            TypeExamen.setText("Type(s) of examination(s)");
+            Commentaire.setText("Comment");
+            BoutonEchographie.setText("Ultrasound");
+            BoutonIRM.setText("MRI");
+            BoutonRadiographie.setText("X-Ray");
+            BoutonScanner.setText("");
+            BoutonScintigraphie.setText("Scintigraphy");
+            BoutonTomographie.setText("Tomography");
+            BoutonAjouter.setText("Add");      
+            
+        }}
     /**
      * @param args the command line arguments
      */
@@ -196,7 +224,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterRadiologie().setVisible(true);
+                new AjouterRadiologie(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3").setVisible(true);
             }
         });
     }
