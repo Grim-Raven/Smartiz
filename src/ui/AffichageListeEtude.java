@@ -8,6 +8,9 @@ package ui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -35,8 +38,11 @@ public class AffichageListeEtude extends javax.swing.JPanel {
     protected int hauteurInfo;
     //L'attribut hauteurCentral correspond à la hauteur du panneau central
     protected int hauteurCentral;
+
+    public DialogueBD dialogueBD;
+    public Utilisateur utilisateur;
     
-    public AffichageListeEtude() {
+    public AffichageListeEtude(DialogueBD dialogueBD, Utilisateur utilisateur) {
          //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         //On stocke la largeur de l'écran dans la variable largeur
@@ -55,6 +61,9 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         largeurBouton = largeurCentree / 8;
         hauteurInfo = 1;
         initComponents();
+        //On stocke les données de l'utilisateur et la connexion à la BD
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
     }
 
     /**
@@ -150,7 +159,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
     private void BoutonCreerEtudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerEtudeActionPerformed
         //On ouvre le formulaire pour créer une étude 
-        AjouterEtude ajoutEtude = new AjouterEtude();
+        AjouterEtude ajoutEtude = new AjouterEtude(dialogueBD,utilisateur.getLangue());
         ajoutEtude.setVisible(true);
     }//GEN-LAST:event_BoutonCreerEtudeActionPerformed
 

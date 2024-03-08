@@ -121,8 +121,11 @@ public class DialogueBD {
                 ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 
                 resultatType.next(); // On se met sur la première ligne du résultat
+                System.out.println("resultatType = "+resultatType);
                 // On récupère le type de la colonne
+                System.out.println("DATA_TYPE = " + resultatType.getString("DATA_TYPE"));
                 String typeColonne = resultatType.getString("DATA_TYPE");
+                System.out.println("typeColonne= "+ typeColonne);
 
                 switch (typeColonne) {
                     case "NUMBER":
@@ -151,7 +154,7 @@ public class DialogueBD {
 
         String requete = columns.toString() + values;
         // On exécute la requête
-        System.out.println(requete);
+        System.out.println("requete = "+requete);
         requete(requete);
     }
 
@@ -174,10 +177,12 @@ public class DialogueBD {
      * @throws SQLException si une erreur SQL survient
      */
     public String insertEtude(HashMap<String, String> data) throws SQLException {
-        ResultSet requeteID = requete("SELECT MAX(idEtude) FROM Etude");
+        ResultSet requeteID = requete("SELECT MAX(idEtude) from ETUDE");
         requeteID.next();
+        System.out.println(requeteID);
         int idEtude = requeteID.getInt(1) + 1;
-        insertTable("Etude", String.valueOf(idEtude), "idEtude", data);
+        System.out.println("idEtude = "+ idEtude);
+        insertTable("etude", String.valueOf(idEtude),"idEtude",data);
         return String.valueOf(idEtude);
     }
 

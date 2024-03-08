@@ -520,7 +520,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             PanneauPrincipale.remove(component);
         }
         //On ajoute le JScrollPane au panneau principal
-        PanneauPrincipale.add(new AffichageListeEtude(), java.awt.BorderLayout.CENTER);
+        PanneauPrincipale.add(new AffichageListeEtude(dialogueBD,utilisateur), java.awt.BorderLayout.CENTER);
         //On actualise le panneau principal
         PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercheCliniqueActionPerformed

@@ -60,7 +60,6 @@
                               <Component id="IntituleEtude" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="NomPraticienHospitalier" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="DateDemarrage" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="DateChooser" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                               <Component id="Duree" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -76,6 +75,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="RadioButtonAnnees" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="DateChooser" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -103,9 +103,9 @@
                   <Component id="TextNomPraticienHospitalier" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="DateDemarrage" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Component id="DateChooser" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="Duree" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -183,8 +183,6 @@
             <Property name="text" type="java.lang.String" value="Date de d&#xe9;marrage"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="DateChooser">
-        </Component>
         <Component class="javax.swing.JButton" name="BoutonCreer">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -192,6 +190,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cr&#xe9;er"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoutonCreerActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="Duree">
           <Properties>
@@ -235,6 +236,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ann&#xe9;es"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="DateChooser">
         </Component>
       </SubComponents>
     </Container>
