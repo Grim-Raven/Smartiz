@@ -5,6 +5,9 @@
  */
 package ui.AjoutActe;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,19 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
     /**
      * Creates new form AjouterAnesthesie
      */
-    public AjouterAnesthesie() {
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+
+    public AjouterAnesthesie(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        changerLangue(this.utilisateur.getLangue());
+
     }
 
     /**
@@ -126,6 +138,20 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            BoutonAjouter.setText("Add");
+            Commentaire.setText("Comment");
+            DemandeVisiteAnesthesie.setText("Pre-operative consultation request - Anesthesia");
+            OperationPrevue.setText("Operation scheduled for");
+            Service.setText("Medical service");
+            MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Anapathology", "Cardiologie", "Dermatology", "Emergency", "General Medecine", "Gynecology", "Hematology", "Immunology", "Intensive Care", "Neurology", "Obstetrics", "Oncology", "Psychiatrie", "Radiology", "Respiratory Medecine", "Surgery", "Urology"}));
+
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -156,7 +182,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterAnesthesie().setVisible(true);
+                new AjouterAnesthesie(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3").setVisible(true);
             }
         });
     }

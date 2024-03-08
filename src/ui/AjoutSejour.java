@@ -5,6 +5,9 @@
  */
 package ui;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,19 @@ public class AjoutSejour extends javax.swing.JFrame {
     /**
      * Creates new form AjoutSejour
      */
-    public AjoutSejour() {
+    
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+    
+    public AjoutSejour(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
         //Pour empÃªcher le redimensionnement de la fenÃªtre 
         setResizable(false);
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -247,13 +259,11 @@ public class AjoutSejour extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
 
         pack();
@@ -266,6 +276,28 @@ public class AjoutSejour extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public void changerLangue(String langue){
+        if(langue.equals("English")){
+            AjouterUnSejour.setText("Add a stay");
+            DateDebut.setText("start date");
+            DateFin.setText("end date");
+            ConsultationOui.setText("Yes");
+            ConsultationNon.setText("Non");
+            Service.setText("Medical services");
+            MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Anapathology", "Cardiologie", "Dermatology", "Emergency", "General Medecine", "Gynecology", "Hematology", "Immunology", "Intensive Care", "Neurology", "Obstetrics", "Oncology", "Psychiatrie", "Radiology", "Respiratory Medecine", "Surgery", "Urology"}));
+            MedRef.setText("Referring physician");
+            LocGeo.setText("Geographical location");
+            ServiceGeo.setText("Medical services");
+            MenuDeroulantServiceGeo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Anapathology", "Cardiologie", "Dermatology", "Emergency", "General Medecine", "Gynecology", "Hematology", "Immunology", "Intensive Care", "Neurology", "Obstetrics", "Oncology", "Psychiatrie", "Radiology", "Respiratory Medecine", "Surgery", "Urology"}));
+            Chambre.setText("Room");
+            ChambrePorte.setText("Door");
+            ChambreFenetre.setText("Window");
+            Box.setText("Cubicle");
+            Numerochambre.setText("Room number");
+            BoutonAjouter.setText("Add");
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,7 +325,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjoutSejour().setVisible(true);
+                new AjoutSejour(new DialogueBD(),new Utilisateur("Cot","Harry",true,"English", 1,1111,"Y"),"3").setVisible(true);
             }
         });
     }

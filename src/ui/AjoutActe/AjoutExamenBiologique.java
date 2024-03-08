@@ -5,6 +5,9 @@
  */
 package ui.AjoutActe;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,19 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
     /**
      * Creates new form AjoutExamenBiologique
      */
-    public AjoutExamenBiologique() {
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+
+    public AjoutExamenBiologique(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idSejour = idSejour;
+        changerLangue(this.utilisateur.getLangue());
+
     }
 
     /**
@@ -123,6 +135,18 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            AjouterUnExamenBiologique.setText("Add a biological examination");
+            TypeDExamen.setText("Type of examination");
+            Commentaire.setText("Comment");
+            BoutonAjouter.setText("Add");
+            MenuDeroulantTypeExamen.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Biochemistry","Genetic","Hematology","Immunology","Microbiology","Serology"}));           
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -150,7 +174,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjoutExamenBiologique().setVisible(true);
+                new AjoutExamenBiologique(new DialogueBD(),new Utilisateur("Cot","Harry",true,"English", 1,1111,"Y"),"3").setVisible(true);
             }
         });
     }

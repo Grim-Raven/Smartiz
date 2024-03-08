@@ -29,7 +29,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
      */
     // L'attribut longueur correspond à la longueur de l'écran
     protected int largeur;
-        //L'attribut longueur1 correspond à la longueur du panneau Ouest
+    //L'attribut longueur1 correspond à la longueur du panneau Ouest
     protected int largeur1;
     // L'attribut hauteur correspond à la hauteur de l'écran
     protected int hauteur;
@@ -39,14 +39,14 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     protected int hauteur2;
     //L'attribut largeurCentrée correspond à 1/4 de largeur - largeur1
     protected int largeurCentree;
-    
+
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
-
     private final DialogueBD dialogueBD;
     private Utilisateur utilisateur;
     private JTable tablePatients;
     private AfficherListePatients scrollPaneTable;
+
     public Accueil() {
         //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,13 +55,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         //On stocke la hauteur de l'écran dans la variable hauteur 
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
-        largeur1 = largeur/5;
+        largeur1 = largeur / 5;
         //L'attribut largeurCentrée correspond à 1/4 de (largeur-largeur1)
-        largeurCentree = (largeur-largeur1)/4;
+        largeurCentree = (largeur - largeur1) / 4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
-        hauteur2 = hauteur/5;
+        hauteur2 = hauteur / 5;
         initComponents();
 
         // On met le logo de l'application
@@ -71,10 +71,10 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         //Le panneau Nord prend pour dimension longueur2 et hauteur2
         PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
 
-        this.utilisateur = new Utilisateur("Cot","Harry",true, "Français",1, 1111,"Y");
+        this.utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
         this.dialogueBD = new DialogueBD();
         this.dialogueBD.connect();
-        this.setTitle("Bienvenue "+ utilisateur.getPrenom() + " " + utilisateur.getNom());
+        this.setTitle("Bienvenue " + utilisateur.getPrenom() + " " + utilisateur.getNom());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -85,6 +85,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                 tablePatientsMouseClicked(evt);
             }
         });
+        changerLangue(this.utilisateur.getLangue());
     }
 
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
@@ -95,13 +96,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         //On stocke la hauteur de l'écran dans la variable hauteur
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
-        largeur1 = largeur/5;
+        largeur1 = largeur / 5;
         //L'attribut largeurCentrÃ© correspond à 1/4 de (largeur-largeur1)
-        largeurCentree = (largeur-largeur1)/4;
+        largeurCentree = (largeur - largeur1) / 4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
-        hauteur2 = hauteur/5;
+        hauteur2 = hauteur / 5;
         initComponents();
         //Le panneau Ouest prend pour dimension longueur1 et hauteur
         PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
@@ -110,13 +111,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         this.dialogueBD = dialogueBD;
         // On affiche le nom de l'utilisateur en Titre de la JFrame
         this.utilisateur = utilisateur;
-        this.setTitle("Bienvenue "+ utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
+        this.setTitle("Bienvenue " + utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
         // On met la Jframe en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
         labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
         this.tablePatients = new JTable();
-
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -470,7 +471,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                 PanneauPrincipale.revalidate();
                 PanneauPrincipale.repaint();
 
-
             }
         }
     }
@@ -485,12 +485,12 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
         // -------------------- On récupère la liste des patients qui correspondent à la recherche ---------------------
         // On récupère les champs de la recherche dans une HashMap
-        HashMap<String,String> dataPatient = new HashMap<>();
+        HashMap<String, String> dataPatient = new HashMap<>();
         // Pour chaque component, on vérifie si c'est un JTextField, si c'est le cas, on ajoute le contenu du JTextField dans la HashMap
-        for(Component component : PanneauRecherche.getComponents()){
-            if(component instanceof JTextField){
+        for (Component component : PanneauRecherche.getComponents()) {
+            if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
-                if(!textField.getText().isEmpty()) { // On vérifie que le JTextField ne soit pas vide
+                if (!textField.getText().isEmpty()) { // On vérifie que le JTextField ne soit pas vide
                     dataPatient.put(textField.getName(), textField.getText());
                 }
             }
@@ -505,7 +505,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
 
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------
         //On supprime tous les composants du panneau principal
-        for(Component component : PanneauPrincipale.getComponents()){
+        for (Component component : PanneauPrincipale.getComponents()) {
             PanneauPrincipale.remove(component);
         }
         //On ajoute le JScrollPane au panneau principal
@@ -515,8 +515,8 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     private void BoutonRechercheCliniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercheCliniqueActionPerformed
-       //On supprime tous les composants du panneau principal
-        for(Component component : PanneauPrincipale.getComponents()){
+        //On supprime tous les composants du panneau principal
+        for (Component component : PanneauPrincipale.getComponents()) {
             PanneauPrincipale.remove(component);
         }
         //On ajoute le JScrollPane au panneau principal
@@ -540,6 +540,22 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     /**
      * @param args the command line arguments
      */
+    public void changerLangue(String langue) {
+        if (langue.equals("English")) {
+            BoutonMedecins.setText("Physicians");
+            Deconnexion.setText("Disconnection");
+            BoutonServices.setText("Medical Services");
+            BoutonRechercheClinique.setText("Clinical trial");
+            RechercherUnPatient.setText("Search for a patient");
+            BoutonRechercher.setText("Search");
+            Nom.setText("Last name");
+            Prenom.setText("First name");
+            DateDeNaissance.setText("Date of birth");
+            Bienvenue.setText("Welcome");
+            
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

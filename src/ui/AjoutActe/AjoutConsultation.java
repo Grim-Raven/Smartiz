@@ -24,6 +24,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
     private DialogueBD dialogueBD;
     private Utilisateur utilisateur;
     private String idSejour;
+    
     public AjoutConsultation() {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
@@ -34,6 +35,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         this.utilisateur = new Utilisateur("Cot","Harry",true,"Français",1,1111,"Y");
         this.idSejour = "1";
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
+        changerLangue(this.utilisateur.getLangue());
         initMedecin();
     }
 
@@ -45,6 +47,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
+        changerLangue(this.utilisateur.getLangue());
         initMedecin();
     }
 
@@ -235,6 +238,19 @@ public class AjoutConsultation extends javax.swing.JFrame {
         initMedecin();
     }//GEN-LAST:event_MenuDeroulantServiceActionPerformed
 
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            AjouterUneConsultation.setText("Add a consultation");
+            Service.setText("Medical service");
+            MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Anapathology", "Cardiologie", "Dermatology", "Emergency", "General Medecine", "Gynecology", "Hematology", "Immunology", "Intensive Care", "Neurology", "Obstetrics", "Oncology", "Psychiatrie", "Radiology", "Respiratory Medecine", "Surgery", "Urology"}));
+            Medecin.setText("Physician");
+            Commentaire.setText("Comment");
+            BoutonAjouter.setText("Add");
+            
+        }
+        }
     /**
      * @param args the command line arguments
      */
