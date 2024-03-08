@@ -5,17 +5,29 @@
  */
 package ui;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+
+import javax.swing.JTextField;
 /**
  *
  * @author emmaa
  */
 public class AjouterEtude extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AjouterEtude
-     */
-    public AjouterEtude() {
+    public DialogueBD dialogueBD;
+
+    public AjouterEtude(DialogueBD dialogueBD, String langue) {
         initComponents();
+        this.dialogueBD = dialogueBD;
+        // Pour empêcher le redimensionnement de la fenêtre
+        setResizable(false);
+        // On change la langue de l'interface
+        changerLangue(langue);
     }
 
     /**
@@ -37,13 +49,13 @@ public class AjouterEtude extends javax.swing.JFrame {
         NomPraticienHospitalier = new javax.swing.JLabel();
         TextNomPraticienHospitalier = new javax.swing.JTextField();
         DateDemarrage = new javax.swing.JLabel();
-        DateChooser = new com.toedter.calendar.JDateChooser();
         BoutonCreer = new javax.swing.JButton();
         Duree = new javax.swing.JLabel();
         DureeValeur = new javax.swing.JTextField();
         RadioButtonJours = new javax.swing.JRadioButton();
         RadioButtonMois = new javax.swing.JRadioButton();
         RadioButtonAnnees = new javax.swing.JRadioButton();
+        DateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,13 +84,18 @@ public class AjouterEtude extends javax.swing.JFrame {
         });
 
         NomPraticienHospitalier.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        NomPraticienHospitalier.setText("Nom du praticien hospitalier");
+        NomPraticienHospitalier.setText("ID du praticien hospitalier");
 
         DateDemarrage.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         DateDemarrage.setText("Date de démarrage");
 
         BoutonCreer.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonCreer.setText("Créer");
+        BoutonCreer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonCreerActionPerformed(evt);
+            }
+        });
 
         Duree.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Duree.setText("Durée");
@@ -112,7 +129,6 @@ public class AjouterEtude extends javax.swing.JFrame {
                             .addComponent(IntituleEtude)
                             .addComponent(NomPraticienHospitalier)
                             .addComponent(DateDemarrage)
-                            .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Duree)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -124,7 +140,8 @@ public class AjouterEtude extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(RadioButtonMois)))
                                 .addGap(18, 18, 18)
-                                .addComponent(RadioButtonAnnees)))
+                                .addComponent(RadioButtonAnnees))
+                            .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -147,9 +164,9 @@ public class AjouterEtude extends javax.swing.JFrame {
                 .addComponent(TextNomPraticienHospitalier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(DateDemarrage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Duree)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,6 +193,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void MenuDeroulantTypeRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantTypeRechercheActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuDeroulantTypeRechercheActionPerformed
@@ -183,6 +201,85 @@ public class AjouterEtude extends javax.swing.JFrame {
     private void TexteIntituleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteIntituleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TexteIntituleActionPerformed
+
+    private void BoutonCreerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerActionPerformed
+        // On récupère les données saisies par l'utilisateur
+        // On met des guillemets simples pour les CHAR et VARCHAR dans les requêtes SQL
+        String nom = TexteIntitule.getText();
+        String personnelMedical = TextNomPraticienHospitalier.getText();
+        Date date = DateChooser.getDate();
+        String dateDebut = String.format("%1$tY-%1$tm-%1$td", date);
+        System.out.println("dateDebut = "+dateDebut);
+        String duree = DureeValeur.getText();
+        String type = MenuDeroulantTypeRecherche.getSelectedItem().toString();
+        
+        //On vérifie si l'utilisateur a coché la case jour, mois ou année
+        if (RadioButtonJours.isSelected()) {
+            //La case jour a été coché
+            duree = duree + " jours";
+        } else if (RadioButtonMois.isSelected()){
+            //La case mois a été coché
+            duree = duree + " mois";
+        } else{
+            //La case année a été coché
+            duree = duree + " ans";
+        }
+        System.out.println(duree);
+            
+
+        // On crée un dictionnaire contenant les données du patient
+        HashMap<String, String> dataEtude = new HashMap<>();
+        dataEtude.put("nom", nom);
+        dataEtude.put("idPersonnelMedical", personnelMedical);
+        dataEtude.put("DateDebut", dateDebut);
+        dataEtude.put("duree", duree);
+        dataEtude.put("typeRecherche", type);
+
+        // 1 : On insère l'étude dans la base de données
+        try {
+            dialogueBD.insertEtude(dataEtude);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        // On affiche un message de confirmation
+        javax.swing.JOptionPane.showMessageDialog(null, "L'étude a été ajouté avec succès");
+        System.out.println("L'étude a été ajouté avec succès");
+    }//GEN-LAST:event_BoutonCreerActionPerformed
+
+    /**
+     * Permet de changer la langue de l'interface
+     * @param langue : la langue choisie
+     */
+    public void changerLangue(String langue){
+        // Si la langue choisie est le français
+        if(langue.equals("Français")){
+            CreerEtude.setText("Créer une étude");
+            TypeRecherche.setText("Type de Recherche");
+            IntituleEtude.setText("Intitulé de l'étude");
+            NomPraticienHospitalier.setText("ID du praticien hospitalier");
+            DateDemarrage.setText("Date de démarrage");
+            Duree.setText("Durée");
+            BoutonCreer.setText("Créer ");
+            RadioButtonJours.setText("Jours");
+            RadioButtonMois.setText("Mois");
+            RadioButtonAnnees.setText("Années");
+        }
+        // Si la langue choisie est l'anglais
+        else if(langue.equals("English")) {
+            CreerEtude.setText("Create a study");
+            TypeRecherche.setText("Type of research");
+            IntituleEtude.setText("Study title");
+            NomPraticienHospitalier.setText("ID of hospital practitioner");
+            DateDemarrage.setText("Starting date");
+            Duree.setText("duration");
+            BoutonCreer.setText("Create ");
+            RadioButtonJours.setText("Days ");
+            RadioButtonMois.setText("Months ");
+            RadioButtonAnnees.setText("Years ");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -193,6 +290,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -211,12 +309,19 @@ public class AjouterEtude extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        //Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjouterEtude().setVisible(true);
+                // On instancie un objet DialogueBD pour communiquer avec la base de données
+                DialogueBD dialogueBD = new DialogueBD();
+                // On se connecte à la base de données
+                dialogueBD.connect();
+                // On instancie l'interface d'ajout de patient
+                new AjouterEtude(dialogueBD, "Francais").setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
