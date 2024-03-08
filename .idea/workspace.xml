@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/Utilisateur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutActe/AjoutConsultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutActe/AjoutConsultation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterPrescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/validerActes/ValiderAnesthesie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValiderAnesthesie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/validerActes/ValiderConsultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValiderConsultation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/validerActes/ValiderExamenBiologique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValiderExamenBiologique.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/validerActes/ValiderRadiologie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValiderRadiologie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +91,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "afficher-valider-consultation",
+    "git-widget-placeholder": "ajout-update-table",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/untitled",
@@ -266,6 +257,7 @@
       <workItem from="1709720713127" duration="2212000" />
       <workItem from="1709796975737" duration="4172000" />
       <workItem from="1709825273087" duration="3530000" />
+      <workItem from="1709881889391" duration="3562000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />

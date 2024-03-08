@@ -70,33 +70,8 @@ public class DialogueBD {
         return resultSet;
     }
 
-    /**
-     * Vérifie si un patient existe dans la base de données sur le critère de son nom, prénom et date de naissance
-     * (pour éviter les doublons)
-     * @param nomText le nom du patient
-     * @param prenomText le prénom du patient
-     * @param dateNaissanceText la date de naissance du patient
-     * @return true si le patient existe, false sinon
-     */
-    public boolean patientExiste(String nomText, String prenomText, String dateNaissanceText) {
-        // On construit la requête avec le nom, le prénom et la date de naissance du patient
-        String requete = "SELECT * FROM Patient " +
-                "WHERE nom = '" + nomText +
-                "' AND prenom = '" + prenomText +
-                "' AND dateNaissance = TO_DATE('" + dateNaissanceText + "', 'YYYY-MM-DD')";
-        // On exécute la requête
-        ResultSet resultSet = requete(requete);
-        try {
-            // Si le résultat de la requête n'est pas vide, alors le patient existe déjà
-            if (resultSet.next()) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DialogueBD.class.getName());
-    }
-        // Sinon, le patient n'existe pas
-        return false;
-    }
+
+    // ---------------------------------- Méthodes génériques pour les requêtes SQL ----------------------------------
 
     /**
      * Méthode d'insertion dans une table de la base de données
@@ -161,6 +136,116 @@ public class DialogueBD {
     }
 
     /**
+     * Méthode de recherche d'une table dans la base de données
+     * @param table la table que l'on cherche
+     * @param data les données avec lesquelles on cherche
+     * @throws SQLException si une erreur SQL survient
+     * HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
+     */
+    public ResultSet rechercheTable(String table, HashMap<String, String> data, boolean sensibleCasse) throws SQLException{
+        // On construit la requête de recherche dans la table
+        StringBuilder recherche = new StringBuilder("SELECT * FROM ").append(table).append(" WHERE ");
+
+        // On parcourt les données pour les ajouter à la requête
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            // Si la valeur n'est pas nulle, on l'ajoute à la requête
+            if (entry.getValue() != null) {
+                //la HashMap n'est pas vide, donc on a des filtres à prendre en compte
+                ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
+
+                // On se met sur la première ligne du résultat
+                resultatType.next();
+                //On récupère la clé
+                if(!sensibleCasse){
+                    recherche.append("UPPER(").append(entry.getKey()).append(") = ");
+                }else{
+                    recherche.append(entry.getKey()).append("= ");
+                }
+                // On récupère le type de la colonne
+                System.out.println(entry.getKey().toString());
+                String typeColonne = resultatType.getString("DATA_TYPE");
+
+                switch (typeColonne) {
+                    case "NUMBER":
+                        recherche.append(entry.getValue()).append(" AND ");
+                        break;
+                    case "DATE": // Pour les dates, on utilise la fonction TO_DATE
+                        recherche.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD') AND ");
+                        break;
+                    default: // Pour les chaînes de caractères, on ajoute des guillemets simples
+                        String charSQL = "'"+entry.getValue()+"'";
+                        if(!sensibleCasse){
+                            recherche.append("UPPER(").append(charSQL).append(") AND ");
+                        }else{
+                            recherche.append(charSQL).append(" AND ");
+                        }
+                        break;
+                }
+            }
+        }
+
+        // On supprime les "AND " à la fin de chaque partie de la requête
+        if (!data.isEmpty()) {
+            recherche.setLength(recherche.length() - 5); // pour le dernier "AND "
+        }
+        else{
+            recherche.setLength(recherche.length() -7); // pour le " WHERE "
+        }
+        String requete = recherche.toString();
+        // On exécute la requête
+        System.out.println(requete);
+        return requete(requete);
+    }
+
+    public void updateTable(String table, HashMap<String, String> data, String nomClef, String dataClef) throws SQLException {
+        // On construit la requête de mise à jour de la table
+        StringBuilder update = new StringBuilder("UPDATE ").append(table).append(" SET ");
+
+        // On parcourt les données à mettre à jour pour les ajouter à la requête
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            // Si la valeur n'est pas nulle, on l'ajoute à la requête
+            if (entry.getValue() != null) {
+                // On ajoute le nom de la colonne et la valeur à la requête
+                update.append(entry.getKey()).append(" = ");
+                ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
+                try {
+                    // On se met sur la première ligne du résultat
+                    resultatType.next();
+                    // On récupère le type de la colonne
+                    String typeColonne = resultatType.getString("DATA_TYPE");
+
+                    switch (typeColonne) {
+                        case "NUMBER":
+                            update.append(entry.getValue()).append(", ");
+                            break;
+                        case "DATE": // Pour les dates, on utilise la fonction TO_DATE
+                            update.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD'), ");
+                            break;
+                        default: // Pour les chaînes de caractères, on ajoute des guillemets simples
+                            String charSQL = "'"+entry.getValue()+"'";
+                            update.append(charSQL).append(", ");
+                            break;
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        // On supprime les ", " à la fin de chaque partie de la requête
+        if (update.length() > 0) {
+            update.setLength(update.length() - 2); // for last ", "
+        }
+        // On ajoute la condition pour la mise à jour
+        update.append(" WHERE ").append(nomClef).append(" = ").append(dataClef);
+        // On convertit la requête en String
+        String requete = update.toString();
+        // On exécute la requête
+        System.out.println(requete);
+        requete(requete);
+    }
+
+    // ----------------- Méthodes spécifiques pour l'insertion de données dans la base de données -----------------
+    /**
      * Méthode d'insertion d'un patient dans la base de données
      * @param data les données du patient à insérer
      * @throws SQLException si une erreur SQL survient
@@ -201,7 +286,6 @@ public class DialogueBD {
     return String.valueOf(idSejour);
     }
 
-
     /**
      * Méthode d'insertion d'une localisation géographique dans la base de donnée
      * @param data : la HashMap contenant les données de la locG
@@ -232,6 +316,8 @@ public class DialogueBD {
         insertTable("PERSONNELMEDICAL", idPersonnelMedical, "IDPERSONNELMEDICAL",data);
 
     }
+
+    // ----------------- Méthodes spécifiques pour la récupération de données dans la base de données -----------------
 
     /**
      * Méthode de récupération des noms des services de la base de données
@@ -312,69 +398,6 @@ public class DialogueBD {
         return null;
     }
 
-    /**
-     * Méthode de recherche d'une table dans la base de données
-     * @param table la table que l'on cherche
-     * @param data les données avec lesquelles on cherche
-     * @throws SQLException si une erreur SQL survient
-* HashMap : concept de clé-valeur (requête SQL : SELECT * FROM table WHERE clé = valeur)
-    */
-
-    public ResultSet rechercheTable(String table, HashMap<String, String> data, boolean sensibleCasse) throws SQLException{
-        // On construit la requête de recherche dans la table
-        StringBuilder recherche = new StringBuilder("SELECT * FROM ").append(table).append(" WHERE ");
-
-        // On parcourt les données pour les ajouter à la requête
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            // Si la valeur n'est pas nulle, on l'ajoute à la requête 
-            if (entry.getValue() != null) {
-                //la HashMap n'est pas vide, donc on a des filtres à prendre en compte
-                ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
-                
-                // On se met sur la première ligne du résultat
-                resultatType.next(); 
-                //On récupère la clé
-                if(!sensibleCasse){
-                    recherche.append("UPPER(").append(entry.getKey()).append(") = ");
-                }else{
-                recherche.append(entry.getKey()).append("= ");
-                }
-                // On récupère le type de la colonne
-                System.out.println(entry.getKey().toString());
-                String typeColonne = resultatType.getString("DATA_TYPE");
-                
-                switch (typeColonne) {
-                    case "NUMBER":
-                        recherche.append(entry.getValue()).append(" AND ");
-                        break;
-                    case "DATE": // Pour les dates, on utilise la fonction TO_DATE
-                        recherche.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD') AND ");
-                        break;
-                    default: // Pour les chaînes de caractères, on ajoute des guillemets simples
-                        String charSQL = "'"+entry.getValue()+"'";
-                        if(!sensibleCasse){
-                            recherche.append("UPPER(").append(charSQL).append(") AND ");
-                        }else{
-                            recherche.append(charSQL).append(" AND ");
-}
-                        break;
-                }
-            }
-        }
-
-        // On supprime les "AND " à la fin de chaque partie de la requête
-        if (!data.isEmpty()) {
-            recherche.setLength(recherche.length() - 5); // pour le dernier "AND "
-        }
-        else{
-            recherche.setLength(recherche.length() -7); // pour le " WHERE "
-        } 
-        String requete = recherche.toString();
-        // On exécute la requête
-        System.out.println(requete);
-        return requete(requete);
-    }
-    
 /**
      * Méthode de récupération des patients d'un service de la base de données
      * @param idService l'identifiant du service
@@ -437,14 +460,48 @@ public class DialogueBD {
         return null;
     }
 
+    /**
+     * Vérifie si un patient existe dans la base de données sur le critère de son nom, prénom et date de naissance
+     * (pour éviter les doublons)
+     * @param nomText le nom du patient
+     * @param prenomText le prénom du patient
+     * @param dateNaissanceText la date de naissance du patient
+     * @return true si le patient existe, false sinon
+     */
+    public boolean patientExiste(String nomText, String prenomText, String dateNaissanceText) {
+        // On construit la requête avec le nom, le prénom et la date de naissance du patient
+        String requete = "SELECT * FROM Patient " +
+                "WHERE nom = '" + nomText +
+                "' AND prenom = '" + prenomText +
+                "' AND dateNaissance = TO_DATE('" + dateNaissanceText + "', 'YYYY-MM-DD')";
+        // On exécute la requête
+        ResultSet resultSet = requete(requete);
+        try {
+            // Si le résultat de la requête n'est pas vide, alors le patient existe déjà
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        // Sinon, le patient n'existe pas
+        return false;
+    }
+
+    // --------------------------------- Méthodes spécifiques pour l'Update des tables ---------------------------------
     public void validerActe(String idActe, String resultatConsultation) {
         // On construit la requête pour mettre à jour le résultat de la consultation
         // Si le résultat contient des apostrophes, on les échappe
         String resultatEchapee = resultatConsultation.replace("'", "''");
-        // On ajoute les guillemets simples autour de la chaîne de caractères
-        String requete = "UPDATE Acte SET resultat = '" + resultatEchapee + "', valide='Y' WHERE idActe = " + idActe;
-        System.out.println(requete);
-        // On exécute la requête
-        requete(requete);
+        // On met les données à mettre à jour dans une HashMap
+        HashMap<String, String> data = new HashMap<>();
+        data.put("resultat", resultatEchapee);
+        data.put("valide", "Y");
+        //String requete = "UPDATE Acte SET resultat = '" + resultatEchapee + "', valide='Y' WHERE idActe = " + idActe;
+        try {
+            updateTable("Acte", data, "idActe", idActe);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
