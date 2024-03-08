@@ -25,7 +25,7 @@ import java.util.Objects;
  * @author emmaa
  */
 public class AffichagePatient extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form AffichagePatient
      */
@@ -86,8 +86,24 @@ public class AffichagePatient extends javax.swing.JPanel {
         remplirChampsPatient(idPatient);
         remplirSejours(idPatient);
         remplirActes();
+        
+        changerLangue(this.utilisateur.getLangue());
     }
-
+    public void changerLangue(String langue) {
+        if(langue.equals("English")){
+            NeeLe.setText("Born on the : ");
+            Adresse.setText("Address : ");
+            Fumeur.setText("Smoker : ");
+            Alcool.setText("Alcohol : ");
+            Sexe.setText("Sex : ");
+            Telephone.setText("Phone number : ");
+            Ajout.setText("Add : ");
+            BoutonRadiologie.setText("Radiology");
+            BoutonAnesthesie.setText("Anesthesia");
+            BoutonExamenBiologique.setText("Biological Examination");
+            boutonCloture.setText("End stay");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
