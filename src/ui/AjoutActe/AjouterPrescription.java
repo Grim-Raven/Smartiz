@@ -7,7 +7,7 @@ package ui.AjoutActe;
 
 import fc.DialogueBD;
 import fc.Utilisateur;
-
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -58,6 +58,8 @@ public class AjouterPrescription extends javax.swing.JFrame {
         MenuDeroulantVoie = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TexteCommentaire = new javax.swing.JTextPane();
+        labelDate = new javax.swing.JLabel();
+        DateChooserPrescription = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -112,41 +114,55 @@ public class AjouterPrescription extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(TexteCommentaire);
 
+        labelDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        labelDate.setText("Date de la prise :");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TexteNomMedicament)
-                    .addComponent(MenuDeroulantVoie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TexteNomMedicament)
+                            .addComponent(MenuDeroulantVoie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AjouterUnePrescription)
+                                    .addComponent(NomMedicament)
+                                    .addComponent(Posologie)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(Matin)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(Midi)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(Soir))
+                                    .addComponent(VoieAdministration)
+                                    .addComponent(Commentaire))
+                                .addGap(0, 157, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(Quantite)
+                                .addGap(18, 18, 18)
+                                .addComponent(TexteQuantite)
+                                .addGap(18, 18, 18)
+                                .addComponent(MenuDeroulantQuantite, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AjouterUnePrescription)
-                            .addComponent(NomMedicament)
-                            .addComponent(Posologie)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(Matin)
-                                .addGap(34, 34, 34)
-                                .addComponent(Midi)
-                                .addGap(35, 35, 35)
-                                .addComponent(Soir))
-                            .addComponent(VoieAdministration)
-                            .addComponent(Commentaire))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(Quantite)
-                        .addGap(18, 18, 18)
-                        .addComponent(TexteQuantite)
-                        .addGap(18, 18, 18)
-                        .addComponent(MenuDeroulantQuantite, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(166, 166, 166)
+                                .addComponent(BoutonAjouter))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelDate)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(BoutonAjouter)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,10 +189,14 @@ public class AjouterPrescription extends javax.swing.JFrame {
                 .addComponent(VoieAdministration)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuDeroulantVoie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Commentaire)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BoutonAjouter)
                 .addGap(18, 18, 18))
@@ -201,6 +221,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
     }//GEN-LAST:event_MatinActionPerformed
 
     private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        // Récupération des données
         String nomMedicament = TexteNomMedicament.getText();
         String quantite = TexteQuantite.getText()+ MenuDeroulantQuantite.getSelectedItem();
         String posologie = "";
@@ -215,6 +236,11 @@ public class AjouterPrescription extends javax.swing.JFrame {
         }
         String voieAdministration = (String) MenuDeroulantVoie.getSelectedItem();
         String commentaire = TexteCommentaire.getText();
+        Date date = DateChooserPrescription.getDate();
+        String datePrescription = new java.sql.Date(date.getTime()).toString();
+
+
+        // On entre les données dans la HashMap
         HashMap<String, String> prescriptionData = new HashMap<String, String>();
         // TODO: ajouter la date de prescription, le code, le cout ?)
         prescriptionData.put("nom", "Prescription");
@@ -222,6 +248,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         prescriptionData.put("commentaire", commentaire);
         prescriptionData.put("idSejour", idSejour);
         prescriptionData.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        prescriptionData.put("datePrescription", datePrescription);
         // On envoie les données à la base de données
         dialogueBD.insertActe(prescriptionData);
         // On ferme la fenêtre
@@ -285,6 +312,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
     private javax.swing.JLabel AjouterUnePrescription;
     private javax.swing.JButton BoutonAjouter;
     private javax.swing.JLabel Commentaire;
+    private com.toedter.calendar.JDateChooser DateChooserPrescription;
     private javax.swing.JRadioButton Matin;
     private javax.swing.JComboBox MenuDeroulantQuantite;
     private javax.swing.JComboBox MenuDeroulantVoie;
@@ -299,6 +327,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
     private javax.swing.JLabel VoieAdministration;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelDate;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

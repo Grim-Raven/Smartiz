@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterPrescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ValidationPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValidationPrescription.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +70,7 @@
     "Application.ConnexionDB.executor": "Run",
     "Application.InterfaceConnexion.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.ValidationPrescription.executor": "Run",
     "Application.ValiderConsultation.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.TestConnexionDB.executor": "Run",
@@ -91,7 +94,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "ajout-update-table",
+    "git-widget-placeholder": "afficher-valider-prescription",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/untitled",
@@ -117,22 +120,9 @@
       <recent name="fc" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Accueil">
-    <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AjouterPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.AjoutActe.AjouterPrescription" />
+  <component name="RunManager" selected="Application.InterfaceConnexion">
+    <configuration name="AjoutConsultation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.AjoutActe.AjoutConsultation" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -150,6 +140,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValidationPrescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.validerActes.ValidationPrescription" />
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ui.validerActes.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -187,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestDialogueBD" />
-        <item itemvalue="Application.Accueil" />
-        <item itemvalue="Application.ValiderConsultation" />
         <item itemvalue="Application.InterfaceConnexion" />
-        <item itemvalue="Application.AjouterPrescription" />
+        <item itemvalue="Application.ValidationPrescription" />
+        <item itemvalue="Application.AjoutConsultation" />
+        <item itemvalue="Application.ValiderConsultation" />
+        <item itemvalue="JUnit.TestDialogueBD" />
       </list>
     </recent_temporary>
   </component>
@@ -419,7 +422,8 @@
     <MESSAGE value="Liaison entre le bouton d'ajout de prescription et la fonctionnalité" />
     <MESSAGE value="modif de l'affichage des actes dans le dossier patient" />
     <MESSAGE value="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché" />
-    <option name="LAST_COMMIT_MESSAGE" value="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché" />
+    <MESSAGE value="ajout d'une requête pour updater des tables" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout d'une requête pour updater des tables" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

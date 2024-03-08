@@ -9,6 +9,7 @@ import ui.AjoutActe.AjouterPrescription;
 import ui.AjoutActe.AjoutConsultation;
 import fc.DialogueBD;
 import fc.Utilisateur;
+import ui.validerActes.ValidationPrescription;
 import ui.validerActes.ValiderConsultation;
 
 import javax.swing.*;
@@ -472,10 +473,9 @@ public class AffichagePatient extends javax.swing.JPanel {
             switch (typeActe) {
                 case "Consultation":
                     // On ouvre la fenêtre d'affichage/validation de la consultation
-                    System.out.println(dialogueBD);
-                    JFrame AjoutConsultation = new ValiderConsultation(this.dialogueBD, this.utilisateur, idActe);
+                    JFrame afficherConsultation = new ValiderConsultation(this.dialogueBD, this.utilisateur, idActe);
                     // On affiche la fenêtre
-                    AjoutConsultation.setVisible(true);
+                    afficherConsultation.setVisible(true);
                     break;
                 case "Radiologie":
                     // TODO
@@ -484,6 +484,10 @@ public class AffichagePatient extends javax.swing.JPanel {
                     // TODO
                     break;
                 case "Prescription":
+                    // On ouvre la fenêtre d'affichage/validation de la prescription
+                    JFrame afficherPrescription = new ValidationPrescription(dialogueBD, this.utilisateur, idActe);
+                    // On affiche la fenêtre
+                    afficherPrescription.setVisible(true);
                     break;
                 case "Examen":
                     // TODO
