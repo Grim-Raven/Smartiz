@@ -8,14 +8,14 @@ import fc.DialogueBD;
 import fc.Hashage;
 import fc.Utilisateur;
 
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -37,6 +37,19 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         this.dialogueBD.connect();
         //Pour empêcher le redimensionnement de la fenêtre par l'ultilisateur
         setResizable(false);
+        // Chargez l'image
+        Image img = null;
+        try {
+            img = ImageIO.read(getClass().getResource("/ui/Image/Logo_Smartiz.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        // Redimensionnez l'image
+        Image resizedImg = img.getScaledInstance(logoSmartiz.getWidth(), logoSmartiz.getHeight(), Image.SCALE_SMOOTH);
+        // Créez une nouvelle icône ImageIcon avec l'image redimensionnée
+        ImageIcon icon = new ImageIcon(resizedImg);
+        // Définissez cette icône comme icône du JLabel
+        logoSmartiz.setIcon(icon);
         // Le message d'erreur de connexion n'est pas visible par défaut
         labelErreurConnexion.setVisible(false);
     }
@@ -49,7 +62,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelConnexion = new javax.swing.JPanel();
         Identifiant = new javax.swing.JLabel();
         textFieldIdentifiant = new javax.swing.JTextField();
         MotDePasse = new javax.swing.JLabel();
@@ -57,10 +70,12 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         PasswordFieldMotDePasse = new javax.swing.JPasswordField();
         Langues = new javax.swing.JComboBox();
         labelErreurConnexion = new javax.swing.JLabel();
+        panelLogo = new javax.swing.JPanel();
+        logoSmartiz = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panelConnexion.setBackground(new java.awt.Color(255, 255, 255));
 
         Identifiant.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         Identifiant.setText("Identifiant");
@@ -79,11 +94,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         SeConnecter.setText("Se connecter");
         SeConnecter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    SeConnecterActionPerformed(evt);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                SeConnecterActionPerformed(evt);
             }
         });
 
@@ -104,113 +115,81 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         labelErreurConnexion.setForeground(new java.awt.Color(255, 51, 51));
         labelErreurConnexion.setText("Identifiant ou mot de passe incorrect");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(191, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelConnexionLayout = new javax.swing.GroupLayout(panelConnexion);
+        panelConnexion.setLayout(panelConnexionLayout);
+        panelConnexionLayout.setHorizontalGroup(
+            panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConnexionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelErreurConnexion)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelConnexionLayout.createSequentialGroup()
                             .addComponent(Identifiant)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Langues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelConnexionLayout.createSequentialGroup()
+                            .addGroup(panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(MotDePasse)
                                 .addComponent(textFieldIdentifiant)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelConnexionLayout.createSequentialGroup()
+                                    .addGroup(panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(PasswordFieldMotDePasse)
                                         .addComponent(SeConnecter))
                                     .addGap(173, 173, 173)))
                             .addGap(32, 32, 32)))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        panelConnexionLayout.setVerticalGroup(
+            panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConnexionLayout.createSequentialGroup()
+                .addGroup(panelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConnexionLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(Identifiant))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelConnexionLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Langues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textFieldIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(MotDePasse)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordFieldMotDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(SeConnecter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelErreurConnexion)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        getContentPane().add(panelConnexion, java.awt.BorderLayout.EAST);
+
+        panelLogo.setBackground(new java.awt.Color(255, 255, 255));
+
+        logoSmartiz.setText("logo");
+
+        javax.swing.GroupLayout panelLogoLayout = new javax.swing.GroupLayout(panelLogo);
+        panelLogo.setLayout(panelLogoLayout);
+        panelLogoLayout.setHorizontalGroup(
+            panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(logoSmartiz, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        panelLogoLayout.setVerticalGroup(
+            panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(logoSmartiz, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(panelLogo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_SeConnecterActionPerformed
-        // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
-        String identifiant = textFieldIdentifiant.getText();
-        String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
-        // On hash le mot de passe avec sha-256
-        String hashedMotDePasse = Hashage.sha256(motDePasse);
-        String requeteConnexion = "SELECT * " +
-                "FROM PersonnelMedical " +
-                "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
-        ResultSet resultat = dialogueBD.requete(requeteConnexion);
-        // On vérifie si l'identifiant et le mot de passe sont corrects
-        if(resultat.next()){
-            // Si c'est le cas, on ouvre l'interface de l'application
-            System.out.println("Connexion réussie");
-            //On crée un Utilisateur avec les informations récupérées de la BD
-            Utilisateur utilisateur = new Utilisateur(
-                    resultat.getString("nom"),
-                    resultat.getString("prenom"),
-                    true,
-                    Langues.getSelectedItem().toString(),
-                    resultat.getInt("idService"),
-                    resultat.getInt("idPersonnelMedical"),
-                    resultat.getString("arc"));
-            new Accueil(dialogueBD, utilisateur).setVisible(true);
-            this.dispose();
-        }
-        else{
-            // Sinon, on affiche un message d'erreur
-            labelErreurConnexion.setVisible(true);
-        }
-    }//GEN-LAST:event_SeConnecterActionPerformed
-
-    private void textFieldIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIdentifiantActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldIdentifiantActionPerformed
-
-    // Pour permettre à l'utilisateur de se connecter en appuyant sur la touche "Entrée"
-    private void PasswordFieldMotDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldMotDePasseActionPerformed
-        try {
-            // On appelle la méthode SeConnecterActionPerformed pour se connecter
-            SeConnecterActionPerformed(evt);
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-    }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
 
     private void LanguesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanguesActionPerformed
         // On récupère la langue choisie par l'utilisateur
@@ -218,6 +197,52 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         // On change la langue de l'interface
         changerLangue(langue);
     }//GEN-LAST:event_LanguesActionPerformed
+
+    // Pour permettre à l'utilisateur de se connecter en appuyant sur la touche "Entrée"
+    private void PasswordFieldMotDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldMotDePasseActionPerformed
+        // On appelle la méthode SeConnecterActionPerformed pour se connecter
+        SeConnecterActionPerformed(evt);
+    }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
+
+    private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeConnecterActionPerformed
+        // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
+        String identifiant = textFieldIdentifiant.getText();
+        String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
+        // On hash le mot de passe avec sha-256
+        String hashedMotDePasse = Hashage.sha256(motDePasse);
+        String requeteConnexion = "SELECT * " +
+        "FROM PersonnelMedical " +
+        "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+        ResultSet resultat = dialogueBD.requete(requeteConnexion);
+        // On vérifie si l'identifiant et le mot de passe sont corrects
+        try {
+            if(resultat.next()){
+                // Si c'est le cas, on ouvre l'interface de l'application
+                System.out.println("Connexion réussie");
+                //On crée un Utilisateur avec les informations récupérées de la BD
+                Utilisateur utilisateur = new Utilisateur(
+                    resultat.getString("nom"),
+                    resultat.getString("prenom"),
+                    true,
+                    Langues.getSelectedItem().toString(),
+                    resultat.getInt("idService"),
+                    resultat.getInt("idPersonnelMedical"),
+                    resultat.getString("arc"));
+                new Accueil(dialogueBD, utilisateur).setVisible(true);
+                this.dispose();
+            }
+            else{
+                // Sinon, on affiche un message d'erreur
+                labelErreurConnexion.setVisible(true);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_SeConnecterActionPerformed
+
+    private void textFieldIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIdentifiantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldIdentifiantActionPerformed
 
     public void changerLangue(String langue){
         //Changer la langue de l'interface
@@ -278,8 +303,10 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     private javax.swing.JLabel MotDePasse;
     private javax.swing.JPasswordField PasswordFieldMotDePasse;
     private javax.swing.JButton SeConnecter;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelErreurConnexion;
+    private javax.swing.JLabel logoSmartiz;
+    private javax.swing.JPanel panelConnexion;
+    private javax.swing.JPanel panelLogo;
     private javax.swing.JTextField textFieldIdentifiant;
     // End of variables declaration//GEN-END:variables
 }

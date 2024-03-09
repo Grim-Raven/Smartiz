@@ -65,25 +65,19 @@ public class ValidationPrescription extends javax.swing.JFrame {
         EtiquetteVoieAdministration = new javax.swing.JLabel();
         EtiquetteCommentaire = new javax.swing.JLabel();
         texteVoieAdministration = new javax.swing.JLabel();
+        Scroll = new javax.swing.JScrollPane();
+        TexteCommentaire = new javax.swing.JTextPane();
         labelDatePrevue = new javax.swing.JLabel();
         labelDateReelle = new javax.swing.JLabel();
         texteDatePrevue = new javax.swing.JLabel();
         texteDateReelle = new javax.swing.JLabel();
-        Scroll = new javax.swing.JScrollPane();
-        TexteCommentaire = new javax.swing.JTextPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         BoutonValider.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonValider.setText("Valider");
-        BoutonValider.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoutonValiderActionPerformed(evt);
-            }
-        });
 
         EtiquettePrescription.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         EtiquettePrescription.setText("Prescription");
@@ -109,29 +103,22 @@ public class ValidationPrescription extends javax.swing.JFrame {
         texteVoieAdministration.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         texteVoieAdministration.setText("VoieAdministration");
 
+        Scroll.setViewportView(TexteCommentaire);
+
         labelDatePrevue.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        labelDatePrevue.setText("Prévu le :");
+        labelDatePrevue.setText("Date prévue :");
 
         labelDateReelle.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        labelDateReelle.setText("Administré le :");
+        labelDateReelle.setText("Date d'administration :");
 
-        texteDatePrevue.setText("datePrevue");
+        texteDatePrevue.setText("jLabel3");
 
-        texteDateReelle.setText("dateReelle");
-
-        Scroll.setBackground(new java.awt.Color(255, 255, 255));
-
-        TexteCommentaire.setEditable(false);
-        Scroll.setViewportView(TexteCommentaire);
+        texteDateReelle.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BoutonValider)
-                .addGap(216, 216, 216))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +134,6 @@ public class ValidationPrescription extends javax.swing.JFrame {
                                 .addComponent(EtiquetteMédicament1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(texteNomMedicament))
-                            .addComponent(EtiquetteCommentaire)
                             .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(EtiquetteVoieAdministration)
@@ -157,11 +143,16 @@ public class ValidationPrescription extends javax.swing.JFrame {
                                 .addComponent(labelDatePrevue)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(texteDatePrevue))
+                            .addComponent(EtiquetteCommentaire)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelDateReelle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(texteDateReelle)))))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BoutonValider)
+                .addGap(205, 205, 205))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,15 +175,15 @@ public class ValidationPrescription extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDatePrevue)
                     .addComponent(texteDatePrevue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDateReelle)
                     .addComponent(texteDateReelle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EtiquetteCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BoutonValider)
                 .addContainerGap())
         );
@@ -205,9 +196,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
