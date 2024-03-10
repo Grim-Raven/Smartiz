@@ -10,11 +10,8 @@ import fc.DialogueBD;
 import fc.Utilisateur;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -43,50 +40,8 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     //Code couleur : bleu foncé -> 044272
     //Code couleur : bleu clair -> ecf2fe
     private final DialogueBD dialogueBD;
-    private Utilisateur utilisateur;
-    private JTable tablePatients;
+    private final Utilisateur utilisateur;
     private AfficherListePatients scrollPaneTable;
-
-    public Accueil() {
-        //On récupère la taille de l'écran
-        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
-        //On stocke la largeur de l'écran dans la variable largeur
-        largeur = tailleMoniteur.width;
-        //On stocke la hauteur de l'écran dans la variable hauteur 
-        hauteur = tailleMoniteur.height;
-        //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
-        largeur1 = largeur / 5;
-        //L'attribut largeurCentrée correspond à 1/4 de (largeur-largeur1)
-        largeurCentree = (largeur - largeur1) / 4;
-        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
-        hauteur1 = hauteur - hauteur2;
-        //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
-        hauteur2 = hauteur / 5;
-        initComponents();
-
-        // On met le logo de l'application
-        labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png"))));
-        //Le panneau Ouest prend pour dimension longueur1 et hauteur 
-        PanneauOuest.setPreferredSize(new Dimension(largeur1, hauteur1));
-        //Le panneau Nord prend pour dimension longueur2 et hauteur2
-        PanneauNord.setPreferredSize(new Dimension(largeur, hauteur2));
-
-        this.utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
-        this.dialogueBD = new DialogueBD();
-        this.dialogueBD.connect();
-        this.setTitle("Bienvenue " + utilisateur.getPrenom() + " " + utilisateur.getNom());
-        // On met la Jframe en plein écran
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        // On crée une JTable pour afficher les patients qui seront récupérés par la recherche
-        this.tablePatients = new JTable();
-        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePatientsMouseClicked(evt);
-            }
-        });
-        changerLangue(this.utilisateur.getLangue());
-    }
 
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
         //On récupère la taille de l'écran
@@ -116,7 +71,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
         labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
-        this.tablePatients = new JTable();
         changerLangue(this.utilisateur.getLangue());
     }
 
@@ -453,27 +407,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tablePatientsMouseClicked(java.awt.event.MouseEvent evt) {
-
-        if (evt.getClickCount() == 2) {    // Si l'utilisateur double clique sur une ligne de la JTable
-            int selectedRow = tablePatients.getSelectedRow(); // On récupère la ligne sélectionnée
-            if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
-                // On récupère l'IPP du patient sélectionné
-                Object idPatient = tablePatients.getValueAt(selectedRow, 0);
-                System.out.println("Selected: " + idPatient);
-                // On crée un nouveau panel pour afficher les informations du patient
-                AffichagePatient affichagePatient = new AffichagePatient((String) idPatient, utilisateur, dialogueBD);
-                // On enlève le panel actuel du panneau principal central
-                PanneauPrincipale.remove(scrollPaneTable);
-                // On ajoute le nouveau panel au panneau principal central
-                PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
-                // On actualise le panneau principal central
-                PanneauPrincipale.revalidate();
-                PanneauPrincipale.repaint();
-
-            }
-        }
-    }
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonPatientsActionPerformed
@@ -537,9 +470,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         PanneauPrincipale.repaint();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public void changerLangue(String langue) {
         if (langue.equals("English")) {
             BoutonMedecins.setText("Physicians");
@@ -556,6 +487,9 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         }
     }
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -582,8 +516,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
+            final DialogueBD dialogueBD = new DialogueBD();
+            {
+                dialogueBD.connect();
+            }
             public void run() {
-                new Accueil().setVisible(true);
+                new Accueil(dialogueBD, utilisateur).setVisible(true);
             }
         });
     }

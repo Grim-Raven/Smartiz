@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout du logo sur l'interface de connexion">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Accueil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InterfaceConnexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/validerActes/ValidationPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/validerActes/ValidationPrescription.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,74 +60,74 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Accueil.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjoutConsultation.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjoutPatient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjouterPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;Application.InterfaceConnexion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ValidationPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ValiderConsultation.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.TestConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogue2.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testGetPatientsRecherche.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testGetPatientsService.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertLocG.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPatient.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPersonnelMedical.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertSejour.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testPatientExiste.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHashage.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHashage.testsha256.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/src/JCalendar/jcalendar-1.4.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Accueil.executor": "Run",
+    "Application.AjoutConsultation.executor": "Run",
+    "Application.AjoutPatient.executor": "Run",
+    "Application.AjouterPrescription.executor": "Run",
+    "Application.ConnexionDB.executor": "Run",
+    "Application.InterfaceConnexion.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.ValidationPrescription.executor": "Run",
+    "Application.ValiderConsultation.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TestConnexionDB.executor": "Run",
+    "JUnit.TestDialogue2.executor": "Run",
+    "JUnit.TestDialogueBD.executor": "Run",
+    "JUnit.TestDialogueBD.testGetPatientsRecherche.executor": "Run",
+    "JUnit.TestDialogueBD.testGetPatientsService.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertLocG.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertPatient.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertPersonnelMedical.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertPrescription.executor": "Run",
+    "JUnit.TestDialogueBD.testInsertSejour.executor": "Run",
+    "JUnit.TestDialogueBD.testPatientExiste.executor": "Run",
+    "JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor": "Run",
+    "JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor": "Run",
+    "JUnit.TestHashage.executor": "Run",
+    "JUnit.TestHashage.testsha256.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "connexion-personnel-administratif",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/src/JCalendar/jcalendar-1.4.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "oracle"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="fc" />
     </key>
   </component>
   <component name="RunManager" selected="Application.InterfaceConnexion">
-    <configuration name="AjoutConsultation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.AjoutActe.AjoutConsultation" />
+    <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ui.AjoutActe.*" />
+          <option name="PATTERN" value="ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -191,10 +192,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.InterfaceConnexion" />
-        <item itemvalue="Application.ValidationPrescription" />
-        <item itemvalue="Application.AjoutConsultation" />
-        <item itemvalue="Application.ValiderConsultation" />
+        <item itemvalue="Application.Accueil" />
         <item itemvalue="JUnit.TestDialogueBD" />
+        <item itemvalue="Application.ValiderConsultation" />
+        <item itemvalue="Application.ValidationPrescription" />
       </list>
     </recent_temporary>
   </component>
@@ -268,6 +269,7 @@
       <workItem from="1709991112457" duration="80000" />
       <workItem from="1709991200617" duration="111000" />
       <workItem from="1709991320564" duration="1454000" />
+      <workItem from="1710080216582" duration="2806000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -430,7 +432,8 @@
     <MESSAGE value="modif de l'affichage des actes dans le dossier patient" />
     <MESSAGE value="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché" />
     <MESSAGE value="ajout d'une requête pour updater des tables" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout d'une requête pour updater des tables" />
+    <MESSAGE value="Ajout du logo sur l'interface de connexion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout du logo sur l'interface de connexion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -230,11 +230,29 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                     resultat.getString("arc"));
                 new Accueil(dialogueBD, utilisateur).setVisible(true);
                 this.dispose();
-            }
-            else{
+            } else { // On regarde si les identifiants sont ceux d'un personnel administratif
+                requeteConnexion = "SELECT * " +
+                "FROM Administratif " +
+                "WHERE idPersonnel = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+                resultat = dialogueBD.requete(requeteConnexion);
+                if(resultat.next()){
+                    // Si c'est le cas, on ouvre l'interface de l'application
+                    System.out.println("Connexion réussie");
+                    //On crée un Utilisateur avec les informations récupérées de la BD
+                    Utilisateur utilisateur = new Utilisateur(
+                        resultat.getString("nom"),
+                        resultat.getString("prenom"),
+                        false,
+                        Langues.getSelectedItem().toString(),
+                        0,
+                        resultat.getInt("idPersonnel"),
+                        "N");
+                    new Accueil(dialogueBD, utilisateur).setVisible(true);
+                    this.dispose();
+                } else{
                 // Sinon, on affiche un message d'erreur
                 labelErreurConnexion.setVisible(true);
-            }
+            }}
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
