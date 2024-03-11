@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class AfficherListePatients extends javax.swing.JScrollPane {
 
     private javax.swing.JTable tablePatients;
-    private ArrayList<AfficherListePatientsListener> patientSelectioneListenerList = new ArrayList<>();
+    private final ArrayList<AfficherListePatientsListener> patientSelectioneListenerList = new ArrayList<>();
 
 
     public AfficherListePatients(ResultSet resultSetPatients) {

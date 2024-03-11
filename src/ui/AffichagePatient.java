@@ -175,6 +175,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         SexePatient.setText("SexePatient");
 
         IPPPatient.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        IPPPatient.setForeground(new java.awt.Color(4, 66, 114));
         IPPPatient.setText("IPPPatient");
 
         Adresse.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -348,11 +349,6 @@ public class AffichagePatient extends javax.swing.JPanel {
         PanneauCentral.setLayout(new java.awt.BorderLayout());
 
         listeActes.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        listeActes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         listeActes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listeActesMouseClicked(evt);
@@ -364,6 +360,9 @@ public class AffichagePatient extends javax.swing.JPanel {
 
         panelSejourEtBoutons.setBackground(new java.awt.Color(255, 255, 255));
 
+        MenuDeroulantSejours.setBackground(new java.awt.Color(255, 255, 255));
+        MenuDeroulantSejours.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        MenuDeroulantSejours.setForeground(new java.awt.Color(4, 66, 114));
         MenuDeroulantSejours.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuDeroulantSejoursActionPerformed(evt);
@@ -554,7 +553,7 @@ public class AffichagePatient extends javax.swing.JPanel {
             ResultSet resultat = dialogueBD.rechercheTable(
                     "Patient",
                     new HashMap<String, String>() {{
-                        put("idPatient", (String) idPatient);
+                        put("idPatient", idPatient);
                     }},
                     false);
             // On se positionne sur le premier (et unique) résultat
@@ -581,7 +580,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     public void remplirSejours(String idPatient) {
         // On récupère les séjours du patient
 
-        // On effectue une recherche dans la table Sejour avec l'IPP du patient sélectionné
+        // On effectue une recherche dans la table Séjour avec l'IPP du patient sélectionné
         try (ResultSet resultat = dialogueBD.rechercheTable(
                 "Sejour",
                 new HashMap<String, String>() {{

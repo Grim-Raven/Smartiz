@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="..">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="ajout de la localisation géographique dans l'affichage d'un patient">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutPatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AfficherListePatients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AfficherListePatients.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +269,7 @@
       <workItem from="1709991320564" duration="1454000" />
       <workItem from="1710080216582" duration="3192000" />
       <workItem from="1710083922792" duration="2121000" />
-      <workItem from="1710176488728" duration="1764000" />
+      <workItem from="1710176488728" duration="2767000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -398,7 +399,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710177616561</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="ajout de la localisation géographique dans l'affichage d'un patient">
+      <option name="closed" value="true" />
+      <created>1710178487149</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710178487149</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +459,8 @@
     <MESSAGE value="Ajout du logo sur l'interface de connexion" />
     <MESSAGE value="ajout de la connxion pour un personnel administratif" />
     <MESSAGE value=".." />
-    <option name="LAST_COMMIT_MESSAGE" value=".." />
+    <MESSAGE value="ajout de la localisation géographique dans l'affichage d'un patient" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout de la localisation géographique dans l'affichage d'un patient" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
