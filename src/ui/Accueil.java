@@ -52,7 +52,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         hauteur = tailleMoniteur.height;
         //L'attribut largeur1 correspond à 1/5 de la largeur de l'écran
         largeur1 = largeur / 5;
-        //L'attribut largeurCentrÃ© correspond à 1/4 de (largeur-largeur1)
+        //L'attribut largeurCentrale correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur - largeur1) / 4;
         //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
         hauteur1 = hauteur - hauteur2;
@@ -67,7 +67,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         // On affiche le nom de l'utilisateur en Titre de la JFrame
         this.utilisateur = utilisateur;
         this.setTitle("Bienvenue " + utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
-        // On met la Jframe en plein écran
+        // On met la JFrame en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // On met le logo de l'application
         labelLogo.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")))); // NOI18N
@@ -428,8 +428,10 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                 }
             }
         }
-        // On ne veut que les patients du service de l'utilisateur
-        dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
+        if(utilisateur.isPersonnelMedical()) {
+            // On ne veut que les patients du service de l'utilisateur
+            dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
+        }
         //On récupère les patients qui correspondent à la recherche
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
 

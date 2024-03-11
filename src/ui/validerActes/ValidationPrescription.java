@@ -72,32 +72,44 @@ public class ValidationPrescription extends javax.swing.JFrame {
         texteDatePrevue = new javax.swing.JLabel();
         texteDateReelle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        BoutonValider.setBackground(new java.awt.Color(255, 255, 255));
         BoutonValider.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonValider.setForeground(new java.awt.Color(4, 66, 114));
         BoutonValider.setText("Valider");
+        BoutonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonValiderActionPerformed(evt);
+            }
+        });
 
         EtiquettePrescription.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        EtiquettePrescription.setForeground(new java.awt.Color(4, 66, 114));
         EtiquettePrescription.setText("Prescription");
 
         texteNomMedicament.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         texteNomMedicament.setText("Médicament");
 
         EtiquetteMédicament1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        EtiquetteMédicament1.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteMédicament1.setText("Médicament : ");
 
         quantite.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         quantite.setText("Quantité+unité+quand");
 
         EtiquettePosologie.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        EtiquettePosologie.setForeground(new java.awt.Color(4, 66, 114));
         EtiquettePosologie.setText("Posologie : ");
 
         EtiquetteVoieAdministration.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        EtiquetteVoieAdministration.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteVoieAdministration.setText("Voie d'administration : ");
 
         EtiquetteCommentaire.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        EtiquetteCommentaire.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteCommentaire.setText("Commentaire : ");
 
         texteVoieAdministration.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -106,9 +118,11 @@ public class ValidationPrescription extends javax.swing.JFrame {
         Scroll.setViewportView(TexteCommentaire);
 
         labelDatePrevue.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        labelDatePrevue.setForeground(new java.awt.Color(4, 66, 114));
         labelDatePrevue.setText("Date prévue :");
 
         labelDateReelle.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        labelDateReelle.setForeground(new java.awt.Color(4, 66, 114));
         labelDateReelle.setText("Date d'administration :");
 
         texteDatePrevue.setText("jLabel3");
@@ -212,6 +226,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
         data.put("valide", "Y");
         data.put("idRealisateur", String.valueOf(utilisateur.getIdUtilisateur()));
         data.put("dateRealisationActe", dateSQL);
+        data.put("commentaire", TexteCommentaire.getText());
         try {
             dialogueBD.updateTable("Acte", data, "idActe", idPrescription);
         } catch (SQLException e) {
@@ -249,9 +264,10 @@ public class ValidationPrescription extends javax.swing.JFrame {
                 texteDatePrevue.setText(datePrevue);
                 texteDateReelle.setText(dateReelle);
 
-                // Visibilité du bouton "valider"
+                // Visibilité du bouton "valider" et modification du commentaire
                 if (resultatPrescription.getString("valide").equals("Y")) {
-                    BoutonValider.setVisible(false);
+                    BoutonValider.setVisible(false); // On cache le bouton "valider"
+                    TexteCommentaire.setEditable(false); // On rend le commentaire non modifiable
                 }
                 this.pack();
                 this.revalidate();

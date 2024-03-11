@@ -50,13 +50,6 @@ public class DialogueBD {
      * @return le résultat de la requête
      */
     public ResultSet requete(String requete) {
-        // Protection contre les SQL injections
-        if (requete.toUpperCase().contains(" OR ")) {
-            // un utilisateur ne peut pas rajouter de 'or 1=1' dans la requête pour outrepasser un where
-            throw new IllegalArgumentException("Requête non valide");
-        }
-        // On ne veut pas le mot clé
-
         System.out.println(requete);
         ResultSet resultSet = null;
         Statement statement;

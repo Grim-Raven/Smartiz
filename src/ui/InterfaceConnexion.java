@@ -11,10 +11,6 @@ import fc.Utilisateur;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,12 +31,12 @@ public class InterfaceConnexion extends javax.swing.JFrame {
         initComponents();
         this.dialogueBD = dialogueBD;
         this.dialogueBD.connect();
-        //Pour empêcher le redimensionnement de la fenêtre par l'ultilisateur
+        //Pour empêcher le redimensionnement de la fenêtre par l'utilisateur
         setResizable(false);
         // Chargez l'image
-        Image img = null;
+        Image img;
         try {
-            img = ImageIO.read(getClass().getResource("/ui/Image/Logo_Smartiz.png"));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/ui/Image/Logo_Smartiz.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -160,7 +156,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                 .addComponent(SeConnecter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelErreurConnexion)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelConnexion, java.awt.BorderLayout.EAST);
@@ -207,54 +203,61 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeConnecterActionPerformed
         // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
         String identifiant = textFieldIdentifiant.getText();
-        String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
-        // On hash le mot de passe avec sha-256
-        String hashedMotDePasse = Hashage.sha256(motDePasse);
-        String requeteConnexion = "SELECT * " +
-        "FROM PersonnelMedical " +
-        "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
-        ResultSet resultat = dialogueBD.requete(requeteConnexion);
-        // On vérifie si l'identifiant et le mot de passe sont corrects
-        try {
-            if(resultat.next()){
-                // Si c'est le cas, on ouvre l'interface de l'application
-                System.out.println("Connexion réussie");
-                //On crée un Utilisateur avec les informations récupérées de la BD
-                Utilisateur utilisateur = new Utilisateur(
-                    resultat.getString("nom"),
-                    resultat.getString("prenom"),
-                    true,
-                    Langues.getSelectedItem().toString(),
-                    resultat.getInt("idService"),
-                    resultat.getInt("idPersonnelMedical"),
-                    resultat.getString("arc"));
-                new Accueil(dialogueBD, utilisateur).setVisible(true);
-                this.dispose();
-            } else { // On regarde si les identifiants sont ceux d'un personnel administratif
-                requeteConnexion = "SELECT * " +
-                "FROM Administratif " +
-                "WHERE idPersonnel = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
-                resultat = dialogueBD.requete(requeteConnexion);
-                if(resultat.next()){
+        // On vérifie qu'il n'y a que des numéros dans l'identifiant, protège des injections SQL de type "1 OR 1=1"
+        if(!identifiant.matches("[0-9]+")) {
+            labelErreurConnexion.setVisible(true);
+        } else {
+
+            String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
+            // On hash le mot de passe avec sha-256
+            String hashedMotDePasse = Hashage.sha256(motDePasse);
+            String requeteConnexion = "SELECT * " +
+                    "FROM PersonnelMedical " +
+                    "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+            ResultSet resultat = dialogueBD.requete(requeteConnexion);
+            // On vérifie si l'identifiant et le mot de passe sont corrects
+            try {
+                if (resultat.next()) {
                     // Si c'est le cas, on ouvre l'interface de l'application
                     System.out.println("Connexion réussie");
                     //On crée un Utilisateur avec les informations récupérées de la BD
                     Utilisateur utilisateur = new Utilisateur(
-                        resultat.getString("nom"),
-                        resultat.getString("prenom"),
-                        false,
-                        Langues.getSelectedItem().toString(),
-                        0,
-                        resultat.getInt("idPersonnel"),
-                        "N");
+                            resultat.getString("nom"),
+                            resultat.getString("prenom"),
+                            true,
+                            Objects.requireNonNull(Langues.getSelectedItem()).toString(),
+                            resultat.getInt("idService"),
+                            resultat.getInt("idPersonnelMedical"),
+                            resultat.getString("arc"));
                     new Accueil(dialogueBD, utilisateur).setVisible(true);
                     this.dispose();
-                } else{
-                // Sinon, on affiche un message d'erreur
-                labelErreurConnexion.setVisible(true);
-            }}
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+                } else { // On regarde si les identifiants sont ceux d'un personnel administratif
+                    requeteConnexion = "SELECT * " +
+                            "FROM Administratif " +
+                            "WHERE idPersonnel = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+                    resultat = dialogueBD.requete(requeteConnexion);
+                    if (resultat.next()) {
+                        // Si c'est le cas, on ouvre l'interface de l'application
+                        System.out.println("Connexion réussie");
+                        //On crée un Utilisateur avec les informations récupérées de la BD
+                        Utilisateur utilisateur = new Utilisateur(
+                                resultat.getString("nom"),
+                                resultat.getString("prenom"),
+                                false,
+                                Objects.requireNonNull(Langues.getSelectedItem()).toString(),
+                                0,
+                                resultat.getInt("idPersonnel"),
+                                "N");
+                        new Accueil(dialogueBD, utilisateur).setVisible(true);
+                        this.dispose();
+                    } else {
+                        // Sinon, on affiche un message d'erreur
+                        labelErreurConnexion.setVisible(true);
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }//GEN-LAST:event_SeConnecterActionPerformed
 
@@ -283,7 +286,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

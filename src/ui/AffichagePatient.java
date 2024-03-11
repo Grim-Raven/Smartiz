@@ -68,10 +68,10 @@ public class AffichagePatient extends javax.swing.JPanel {
         largeur1 = largeur / 5;
         //L'attribut largeurCentré correspond à 1/4 de (largeur-largeur1)
         largeurCentree = (largeur - largeur1) / 4;
-        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
-        hauteur1 = hauteur - hauteur2;
         //L'attribut hauteur 2 correspond à 1/5 de la hauteur de l'écran
         hauteur2 = hauteur / 5;
+        //L'attribut hauteur1 correspond à 4/5 de la hauteur de l'écran
+        hauteur1 = hauteur - hauteur2;
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
         largeurBouton = largeurCentree / 8;
         hauteurInfo = 1;
@@ -129,6 +129,10 @@ public class AffichagePatient extends javax.swing.JPanel {
         FumeurPatient = new javax.swing.JLabel();
         Alcool = new javax.swing.JLabel();
         AlcoolPatient = new javax.swing.JLabel();
+        labelChambre = new javax.swing.JLabel();
+        texteChambre = new javax.swing.JLabel();
+        labelLit = new javax.swing.JLabel();
+        texteLit = new javax.swing.JLabel();
         PanneauSud = new javax.swing.JPanel();
         panelCloture = new javax.swing.JPanel();
         boutonCloture = new javax.swing.JButton();
@@ -201,6 +205,20 @@ public class AffichagePatient extends javax.swing.JPanel {
         AlcoolPatient.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         AlcoolPatient.setText("AlcoolPatient");
 
+        labelChambre.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        labelChambre.setForeground(new java.awt.Color(4, 66, 114));
+        labelChambre.setText("Chambre :");
+
+        texteChambre.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        texteChambre.setText("chambre");
+
+        labelLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        labelLit.setForeground(new java.awt.Color(4, 66, 114));
+        labelLit.setText("Lit :");
+
+        texteLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        texteLit.setText("lit");
+
         javax.swing.GroupLayout PanneauNordLayout = new javax.swing.GroupLayout(PanneauNord);
         PanneauNord.setLayout(PanneauNordLayout);
         PanneauNordLayout.setHorizontalGroup(
@@ -232,11 +250,19 @@ public class AffichagePatient extends javax.swing.JPanel {
                         .addComponent(Fumeur)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FumeurPatient)
-                        .addGap(109, 109, 109)
+                        .addGap(34, 34, 34)
                         .addComponent(Alcool)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AlcoolPatient)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(AlcoolPatient)
+                        .addGap(87, 87, 87)
+                        .addComponent(labelChambre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(texteChambre)
+                        .addGap(29, 29, 29)
+                        .addComponent(labelLit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(texteLit)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         PanneauNordLayout.setVerticalGroup(
             PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +288,12 @@ public class AffichagePatient extends javax.swing.JPanel {
                     .addComponent(Fumeur)
                     .addComponent(FumeurPatient)
                     .addComponent(Alcool)
-                    .addComponent(AlcoolPatient))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(AlcoolPatient)
+                    .addComponent(labelChambre)
+                    .addComponent(texteChambre)
+                    .addComponent(labelLit)
+                    .addComponent(texteLit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(PanneauNord, java.awt.BorderLayout.PAGE_START);
@@ -303,7 +333,7 @@ public class AffichagePatient extends javax.swing.JPanel {
             .addGroup(panelClotureLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nomUtilisateur)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelClotureLayout.createSequentialGroup()
                 .addComponent(boutonCloture)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -685,9 +715,13 @@ public class AffichagePatient extends javax.swing.JPanel {
     private javax.swing.JButton boutonCloture;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelChambre;
+    private javax.swing.JLabel labelLit;
     private javax.swing.JList listeActes;
     private javax.swing.JLabel nomUtilisateur;
     private javax.swing.JPanel panelCloture;
     private javax.swing.JPanel panelSejourEtBoutons;
+    private javax.swing.JLabel texteChambre;
+    private javax.swing.JLabel texteLit;
     // End of variables declaration//GEN-END:variables
 }
