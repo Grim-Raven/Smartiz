@@ -598,12 +598,12 @@ public class AjoutPatient extends javax.swing.JFrame {
             // On récupère le service géographique sélectionné par l'utilisateur
             String serviceGeo = (String) MeneDeroulantServiceGeo.getSelectedItem();
             String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
-            String idLit = buttonGroupChambreBox.getSelection().getActionCommand();
+            String Lit = buttonGroupChambreBox.getSelection().getActionCommand();
             String idPiece = TexteNumeroChambre.getText();
             // On crée un dictionnaire contenant les données de la localisation géographique
             HashMap<String, String> dataLocG = new HashMap<>();
             dataLocG.put("idService", idServiceGeo);
-            dataLocG.put("idLit", idLit);
+            dataLocG.put("Lit", Lit);
             dataLocG.put("idPiece", idPiece);
             // On insère la localisation géographique dans la base de données et on récupère son id
             String idLocG = dialogueBD.insertLocG(dataLocG);
