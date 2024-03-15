@@ -85,11 +85,9 @@ public class DialogueBD {
             if (entry.getValue() != null) {
                 // On ajoute le nom de la colonne et la valeur à la requête
                 columns.append(entry.getKey()).append(", ");
-                System.out.println("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 ResultSet resultatType = requete("SELECT DATA_TYPE FROM USER_TAB_COLUMNS WHERE table_name = '"+table.toUpperCase()+"' AND column_name = '"+entry.getKey().toUpperCase()+"'");
                 
                 resultatType.next(); // On se met sur la première ligne du résultat
-                System.out.println("resultatType = "+resultatType);
                 // On récupère le type de la colonne
                 System.out.println("DATA_TYPE = " + resultatType.getString("DATA_TYPE"));
                 String typeColonne = resultatType.getString("DATA_TYPE");
@@ -291,14 +289,14 @@ public class DialogueBD {
      * @throws SQLException Si une erreur liée à SQL survient
      */
     public String insertLocG(HashMap<String, String> data) throws SQLException {
-// On récupère le plus grand id pour une locG
+        // On récupère le plus grand id pour une locG
         ResultSet requeteID = requete("SELECT MAX(idLocG) FROM LocalisationG");
         requeteID.next();
-// On crée un nouvel id en incrémentant de 1 le plus grand id existant
+        // On crée un nouvel id en incrémentant de 1 le plus grand id existant
         int idLocG = requeteID.getInt(1) + 1;
         // On insère une nouvelle locG dans la table LOCALISATIONG
         insertTable("LOCALISATIONG", String.valueOf(idLocG), "idLocG", data);
-// On retourne l'id de la nouvelle locG créée
+        // On retourne l'id de la nouvelle locG créée
         return String.valueOf(idLocG);
     }
 

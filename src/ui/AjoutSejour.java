@@ -18,17 +18,17 @@ public class AjoutSejour extends javax.swing.JFrame {
      * Creates new form AjoutSejour
      */
     
-    private DialogueBD dialogueBD;
-    private Utilisateur utilisateur;
-    private String idSejour;
+    private final DialogueBD dialogueBD;
+    private final Utilisateur utilisateur;
+    private final String idPatient;
     
-    public AjoutSejour(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
+    public AjoutSejour(DialogueBD dialogueBD, Utilisateur utilisateur,String idPatient) {
         initComponents();
-        //Pour empÃªcher le redimensionnement de la fenÃªtre 
+        //Pour empêcher le redimensionnement de la fenêtre
         setResizable(false);
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
-        this.idSejour = idSejour;
+        this.idPatient = idPatient;
         changerLangue(this.utilisateur.getLangue());
     }
 
@@ -45,9 +45,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         AjouterUnSejour = new javax.swing.JLabel();
         DateDebut = new javax.swing.JLabel();
-        TexteDateDebut = new javax.swing.JTextField();
         DateFin = new javax.swing.JLabel();
-        TexteDateFin = new javax.swing.JTextField();
         BoutonAjouter = new javax.swing.JButton();
         Consultation = new javax.swing.JLabel();
         ConsultationOui = new javax.swing.JRadioButton();
@@ -68,6 +66,8 @@ public class AjoutSejour extends javax.swing.JFrame {
         Box3 = new javax.swing.JRadioButton();
         Numerochambre = new javax.swing.JLabel();
         TexteNumeroChambre = new javax.swing.JTextField();
+        dateDebut = new com.toedter.calendar.JDateChooser();
+        dateFin = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,9 +168,7 @@ public class AjoutSejour extends javax.swing.JFrame {
                                     .addComponent(Consultation)
                                     .addComponent(DateDebut)
                                     .addComponent(AjouterUnSejour)
-                                    .addComponent(TexteDateDebut)
                                     .addComponent(DateFin, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TexteDateFin)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(ConsultationOui)
                                         .addGap(49, 49, 49)
@@ -196,7 +194,10 @@ public class AjoutSejour extends javax.swing.JFrame {
                                             .addGap(18, 18, 18)
                                             .addComponent(Box3))
                                         .addComponent(Box)))
-                                .addComponent(MenuDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(MenuDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(dateFin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(dateDebut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(181, 181, 181)
                         .addComponent(BoutonAjouter)))
@@ -209,12 +210,12 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addComponent(AjouterUnSejour)
                 .addGap(18, 18, 18)
                 .addComponent(DateDebut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TexteDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DateFin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TexteDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Consultation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,7 +264,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,9 +274,6 @@ public class AjoutSejour extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuDeroulantServiceGeoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
     public void changerLangue(String langue){
         if(langue.equals("English")){
@@ -298,6 +296,10 @@ public class AjoutSejour extends javax.swing.JFrame {
             BoutonAjouter.setText("Add");
         }
     }
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -352,11 +354,11 @@ public class AjoutSejour extends javax.swing.JFrame {
     private javax.swing.JLabel Numerochambre;
     private javax.swing.JLabel Service;
     private javax.swing.JLabel ServiceGeo;
-    private javax.swing.JTextField TexteDateDebut;
-    private javax.swing.JTextField TexteDateFin;
     private javax.swing.JTextField TexteMedRef;
     private javax.swing.JTextField TexteNumeroChambre;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser dateDebut;
+    private com.toedter.calendar.JDateChooser dateFin;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

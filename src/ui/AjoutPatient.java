@@ -8,10 +8,12 @@ package ui;
 import fc.DialogueBD;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Date;
+import javax.swing.JTextField;
 
 /**
- *
  * @author emmaa
  */
 public class AjoutPatient extends javax.swing.JFrame {
@@ -21,6 +23,7 @@ public class AjoutPatient extends javax.swing.JFrame {
      */
 
     private final DialogueBD dialogueBD;
+
     public AjoutPatient(DialogueBD dialogueBD, String langue) {
         initComponents();
         this.dialogueBD = dialogueBD;
@@ -54,7 +57,6 @@ public class AjoutPatient extends javax.swing.JFrame {
         Prenom = new javax.swing.JLabel();
         TextePrenom = new javax.swing.JTextField();
         DateNaissance = new javax.swing.JLabel();
-        TexteDateNaissance = new javax.swing.JTextField();
         sexe = new javax.swing.JLabel();
         Femme = new javax.swing.JRadioButton();
         Homme = new javax.swing.JRadioButton();
@@ -69,6 +71,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         TextePays = new javax.swing.JTextField();
         telephone = new javax.swing.JLabel();
         TexteTelephone = new javax.swing.JTextField();
+        dateNaissanceChooser = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         fumeur = new javax.swing.JLabel();
         FumeurOui = new javax.swing.JRadioButton();
@@ -84,7 +87,6 @@ public class AjoutPatient extends javax.swing.JFrame {
         MenuDeroulantService = new javax.swing.JComboBox();
         DateDebut = new javax.swing.JLabel();
         DateFin = new javax.swing.JLabel();
-        TexteDateFin = new javax.swing.JTextField();
         Consultation = new javax.swing.JLabel();
         ConsultationOui = new javax.swing.JRadioButton();
         ConsultationNon = new javax.swing.JRadioButton();
@@ -100,8 +102,10 @@ public class AjoutPatient extends javax.swing.JFrame {
         Box3 = new javax.swing.JRadioButton();
         NumeroChambre = new javax.swing.JLabel();
         TexteNumeroChambre = new javax.swing.JTextField();
-        TexteDateDebut = new javax.swing.JFormattedTextField();
+        dateDebutChooser = new com.toedter.calendar.JDateChooser();
+        dateFinChooser = new com.toedter.calendar.JDateChooser();
         boutonAjouter = new javax.swing.JButton();
+        labelIncomplet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,14 +114,15 @@ public class AjoutPatient extends javax.swing.JFrame {
         TexteAjouterUnPatient.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         TexteAjouterUnPatient.setText("Ajouter un patient ");
 
-        OngletIdentite.setBackground(new java.awt.Color(204, 255, 204));
+        OngletIdentite.setBackground(new java.awt.Color(255, 255, 255));
+        OngletIdentite.setForeground(new java.awt.Color(4, 66, 114));
         OngletIdentite.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         Nom.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        Nom.setText("Nom");
+        Nom.setText("Nom *");
 
         TexteNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,10 +131,10 @@ public class AjoutPatient extends javax.swing.JFrame {
         });
 
         Prenom.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        Prenom.setText("Prénom");
+        Prenom.setText("Prénom *");
 
         DateNaissance.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        DateNaissance.setText("Date de Naissance");
+        DateNaissance.setText("Date de Naissance *");
 
         sexe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         sexe.setText("Sexe");
@@ -154,6 +159,8 @@ public class AjoutPatient extends javax.swing.JFrame {
         telephone.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         telephone.setText("Téléphone");
 
+        dateNaissanceChooser.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -164,7 +171,6 @@ public class AjoutPatient extends javax.swing.JFrame {
                     .addComponent(TexteTelephone)
                     .addComponent(TexteNom)
                     .addComponent(TextePrenom)
-                    .addComponent(TexteDateNaissance)
                     .addComponent(TexteAdresse)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,9 +185,9 @@ public class AjoutPatient extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(Pays)
                                 .addGap(36, 36, 36))
-                            .addComponent(TextePays)))
+                            .addComponent(TextePays, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(sexe)
                             .addComponent(Nom)
                             .addComponent(Prenom)
@@ -192,8 +198,9 @@ public class AjoutPatient extends javax.swing.JFrame {
                                 .addComponent(Homme))
                             .addComponent(Adresse)
                             .addComponent(Voie)
-                            .addComponent(telephone))
-                        .addGap(0, 273, Short.MAX_VALUE)))
+                            .addComponent(telephone)
+                            .addComponent(dateNaissanceChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,8 +217,8 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(DateNaissance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TexteDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateNaissanceChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(sexe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -237,7 +244,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addComponent(telephone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         OngletIdentite.addTab("Identité", jPanel2);
@@ -288,7 +295,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                                     .addComponent(AlcoolNon)
                                     .addComponent(FumeurNon)))
                             .addComponent(donneesSociales))
-                        .addGap(0, 289, Short.MAX_VALUE)))
+                        .addGap(0, 380, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -309,7 +316,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(donneesSociales)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -321,6 +328,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         Service.setText("Service");
 
         MenuDeroulantService.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        MenuDeroulantService.setForeground(new java.awt.Color(4, 66, 114));
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
         MenuDeroulantService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,13 +337,13 @@ public class AjoutPatient extends javax.swing.JFrame {
         });
 
         DateDebut.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        DateDebut.setText("Date de début (AAAA-MM-JJ)");
+        DateDebut.setText("Date de début *");
 
         DateFin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        DateFin.setText("Date de fin (AAAA-MM-JJ)");
+        DateFin.setText("Date de fin");
 
         Consultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        Consultation.setText("Consultation");
+        Consultation.setText("Consultation *");
 
         buttonGroupConsultation.add(ConsultationOui);
         ConsultationOui.setText("Oui");
@@ -362,10 +370,12 @@ public class AjoutPatient extends javax.swing.JFrame {
         buttonGroupChambreBox.add(ChambrePorte);
         ChambrePorte.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambrePorte.setText("Porte");
+        ChambrePorte.setActionCommand("P");
 
         buttonGroupChambreBox.add(ChambreFenetre);
         ChambreFenetre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambreFenetre.setText("Fenêtre");
+        ChambreFenetre.setActionCommand("F");
 
         Box.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Box.setText("Box");
@@ -385,12 +395,10 @@ public class AjoutPatient extends javax.swing.JFrame {
         NumeroChambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         NumeroChambre.setText("Numéro de chambre");
 
-        TexteDateDebut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-mm-dd"))));
-        TexteDateDebut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TexteDateDebutActionPerformed(evt);
-            }
-        });
+        dateDebutChooser.setBackground(new java.awt.Color(255, 255, 255));
+        dateDebutChooser.setDate(new Date());
+
+        dateFinChooser.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -399,18 +407,12 @@ public class AjoutPatient extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TexteDateFin)
                     .addComponent(MenuDeroulantService, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(MeneDeroulantServiceGeo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TexteNumeroChambre)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DateDebut)
                             .addComponent(Consultation)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(ConsultationOui)
-                                .addGap(27, 27, 27)
-                                .addComponent(ConsultationNon))
                             .addComponent(Service)
                             .addComponent(LocGeo)
                             .addComponent(ServiceGeo)
@@ -429,9 +431,17 @@ public class AjoutPatient extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(Box3))
                             .addComponent(NumeroChambre)
-                            .addComponent(DateFin))
-                        .addGap(0, 101, Short.MAX_VALUE))
-                    .addComponent(TexteDateDebut))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(DateDebut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(DateFin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(ConsultationOui)
+                                .addGap(27, 27, 27)
+                                .addComponent(ConsultationNon))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dateFinChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(dateDebutChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 166, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -440,12 +450,12 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(DateDebut)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TexteDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateDebutChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(DateFin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TexteDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateFinChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(Consultation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -476,39 +486,47 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addComponent(NumeroChambre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         OngletIdentite.addTab("Séjour", jPanel4);
 
+        boutonAjouter.setBackground(new java.awt.Color(255, 255, 255));
         boutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        boutonAjouter.setForeground(new java.awt.Color(4, 66, 114));
         boutonAjouter.setText("Ajouter");
         boutonAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    boutonAjouterActionPerformed(evt);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                boutonAjouterActionPerformed(evt);
             }
         });
+
+        labelIncomplet.setForeground(new java.awt.Color(255, 51, 51));
+        labelIncomplet.setText("Veuillez remplir tous les champs marqués d'une *");
+        labelIncomplet.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OngletIdentite)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TexteAjouterUnPatient)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(OngletIdentite)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TexteAjouterUnPatient)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(boutonAjouter)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addComponent(boutonAjouter)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelIncomplet)
+                .addGap(123, 123, 123))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,9 +534,11 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TexteAjouterUnPatient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OngletIdentite, javax.swing.GroupLayout.PREFERRED_SIZE, 537, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OngletIdentite, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(boutonAjouter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIncomplet)
                 .addContainerGap())
         );
 
@@ -530,7 +550,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
         );
 
         pack();
@@ -540,135 +560,144 @@ public class AjoutPatient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TexteNomActionPerformed
 
-    private void boutonAjouterActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_boutonAjouterActionPerformed
+    private void boutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAjouterActionPerformed
         // On s'assure que le patient n'existe pas déjà (en se basant sur le nom, le prénom et la date de naissance)
-        if(dialogueBD.patientExiste(TexteNom.getText(), TextePrenom.getText(), TexteDateNaissance.getText())){
-            // Si le patient existe déjà, on affiche un message d'erreur
-            javax.swing.JOptionPane.showMessageDialog(null, "Le patient existe déjà");
-            System.out.println("Le patient existe déjà");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Format de la date
+
+        if (!champsRemplis()) {
+            labelIncomplet.setVisible(true);
+        } else {
+            if (dialogueBD.patientExiste(TexteNom.getText(), TextePrenom.getText(), sdf.format(dateNaissanceChooser.getDate()))) {
+                // Si le patient existe déjà, on affiche un message d'erreur
+                javax.swing.JOptionPane.showMessageDialog(null, "Le patient existe déjà");
+                System.out.println("Le patient existe déjà");
+            } else {
+                // ------------------------ Récupération des données saisies par l'utilisateur ------------------------
+                // On récupère les données saisies par l'utilisateur relatives au PATIENT
+                String nom = TexteNom.getText();
+                String prenom = TextePrenom.getText();
+                String telephone = TexteTelephone.getText();
+                String adresse = TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText();
+                String donneesSociales = TexteDonneesSociales.getText();
+                String dateNaissance = sdf.format(dateNaissanceChooser.getDate());
+                // On récupère le sexe du patient (Femme, Homme ou null si rien n'est sélectionné)
+                String sexe = Femme.isSelected() ? "F" : (Homme.isSelected() ? "M" : null);
+                // On récupère si le patient est fumeur ou non (Oui, Non ou null si rien n'est sélectionné)
+                String fumeur = FumeurOui.isSelected() ? "Y" : (FumeurNon.isSelected() ? "N" : null);
+                // On récupère si le patient consomme de l'alcool ou non (Oui, Non ou null si rien n'est sélectionné)
+                String alcool = AlcoolOui.isSelected() ? "Y" : (AlcoolNon.isSelected() ? "N" : null);
+                // On crée un dictionnaire contenant les données du patient
+                HashMap<String, String> dataPatient = new HashMap<>();
+                dataPatient.put("nom", nom);
+                dataPatient.put("prenom", prenom);
+                dataPatient.put("dateNaissance", dateNaissance);
+                dataPatient.put("sexe", sexe);
+                dataPatient.put("adresse", adresse);
+                dataPatient.put("dossierVisible", "Y");
+                dataPatient.put("vivant", "Y");
+                dataPatient.put("telephone", telephone);
+                dataPatient.put("fumeur", fumeur);
+                dataPatient.put("alcool", alcool);
+                dataPatient.put("donneesSociales", donneesSociales);
+
+                // On récupère les données relatives à la LOCALISATION GEOGRAPHIQUE
+                // On récupère le service géographique sélectionné par l'utilisateur
+                String serviceGeo = (String) MeneDeroulantServiceGeo.getSelectedItem();
+                String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
+                String Lit = null;
+                if (buttonGroupChambreBox.getSelection() != null) {
+                    Lit = buttonGroupChambreBox.getSelection().getActionCommand();
+                }
+                System.out.println("LIIIIIIIT" + Lit);
+                String idPiece = "-1";
+                if (!TexteNumeroChambre.getText().isEmpty()) {
+                    idPiece = TexteNumeroChambre.getText();
+                }
+                // On crée un dictionnaire contenant les données de la localisation géographique
+                HashMap<String, String> dataLocG = new HashMap<>();
+                dataLocG.put("idService", idServiceGeo);
+                dataLocG.put("Lit", Lit);
+                dataLocG.put("idPiece", idPiece);
+
+                // On récupère les données relatives au SÉJOUR
+                // On récupère les dates de début et de fin du séjour au format AAAA-MM-JJ
+                String dateDebut = sdf.format(dateDebutChooser.getDate());
+                String dateFin = null;
+                if (dateFinChooser.getDate() != null) {
+                    dateFin = sdf.format(dateFinChooser.getDate());
+                }
+                String consultation = ConsultationOui.isSelected() ? "Y" : (ConsultationNon.isSelected() ? "N" : null);
+                String service = (String) MenuDeroulantService.getSelectedItem();
+                // On crée un dictionnaire contenant les données du séjour
+                HashMap<String, String> dataSejour = new HashMap<>();
+                dataSejour.put("dateDebut", dateDebut);
+                dataSejour.put("dateFin", dateFin);
+                dataSejour.put("consultation", consultation);
+                dataSejour.put("ouvert", "Y");
+                dataSejour.put("idService", dialogueBD.getIdService(service));
+
+                // TODO : Ajouter le médecin référent
+
+                // ------------------------ Insertion dans la base de données ------------------------
+                // 1 - On insère le patient dans la base de données et on récupère son id
+                String idPatient;
+                try {
+                    idPatient = dialogueBD.insertPatient(dataPatient);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                dataSejour.put("idPatient", idPatient);
+                dataLocG.put("idPatient", idPatient);
+
+                // 2 - On insère la localisation géographique dans la base de données et on récupère son id
+                String idLocG;
+                try {
+                    idLocG = dialogueBD.insertLocG(dataLocG);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                dataSejour.put("idLocG", idLocG); // On ajoute l'id de la localisation géographique au dictionnaire des données du séjour
+
+                // 3 - On insère le séjour dans la base de données
+                try {
+                    dialogueBD.insertSejour(dataSejour);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                // On affiche un message de confirmation
+                javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
+                System.out.println("Le patient a été ajouté avec succès");
+            }
         }
         // Si le patient n'existe pas, on l'ajoute à la base de données
-        else{
-            // On récupère les données saisies par l'utilisateur
-            // On met des guillemets simples pour les CHAR et VARCHAR dans les requêtes SQL
-            String nom = TexteNom.getText();
-            String prenom = TextePrenom.getText();
-            String telephone = TexteTelephone.getText();
-            String adresse = TexteAdresse.getText() + "-" + TexteCodePostal.getText() + " " + TexteVille.getText() + "-" + TextePays.getText();
-            String donneesSociales = TexteDonneesSociales.getText();
-            String dateNaissance = TexteDateNaissance.getText();
-
-            // On récupère le sexe du patient (Femme, Homme ou null si rien n'est sélectionné)
-            String sexe = Femme.isSelected() ? "F" : (Homme.isSelected() ? "M" : null);
-            // On récupère si le patient est fumeur ou non (Oui, Non ou null si rien n'est sélectionné)
-            String fumeur = FumeurOui.isSelected() ? "Y" : (FumeurNon.isSelected() ? "N" : null);
-            // On récupère si le patient consomme de l'alcool ou non (Oui, Non ou null si rien n'est sélectionné)
-            String alcool = AlcoolOui.isSelected() ? "Y" : (AlcoolNon.isSelected() ? "N" : null);
-
-            String service = (String) MenuDeroulantService.getSelectedItem();
-
-            // On crée un dictionnaire contenant les données du patient
-            // TODO : changer les valeurs null par ce qui devra correspondre plus tard (idService, idLocG)
-            // TODO : gérer la création d'un séjour et la liaison avec le patient
-            HashMap<String, String> dataPatient = new HashMap<>();
-            dataPatient.put("nom", nom);
-            dataPatient.put("prenom", prenom);
-            dataPatient.put("dateNaissance", dateNaissance);
-            dataPatient.put("sexe", sexe);
-            dataPatient.put("adresse", adresse);
-            dataPatient.put("dossierVisible", "Y");
-            dataPatient.put("vivant", "Y");
-            dataPatient.put("telephone", telephone);
-            dataPatient.put("fumeur", fumeur);
-            dataPatient.put("alcool", alcool);
-            dataPatient.put("donneesSociales", donneesSociales);
-            dataPatient.put("idService", null);
-            dataPatient.put("idLocG", null);
-
-
-
-            // 1 : On insère le patient dans la base de données
-            String idPatient = dialogueBD.insertPatient(dataPatient);
-            // On affiche un message de confirmation
-            javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
-            System.out.println("Le patient a été ajouté avec succès");
-
-            // 2 : On ajoute le séjour associé au patient
-            // 2.1 : On crée dans un premier temps la localisation géographique
-            // On récupère le service géographique sélectionné par l'utilisateur
-            String serviceGeo = (String) MeneDeroulantServiceGeo.getSelectedItem();
-            String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
-            String Lit = buttonGroupChambreBox.getSelection().getActionCommand();
-            String idPiece = TexteNumeroChambre.getText();
-            // On crée un dictionnaire contenant les données de la localisation géographique
-            HashMap<String, String> dataLocG = new HashMap<>();
-            dataLocG.put("idService", idServiceGeo);
-            dataLocG.put("Lit", Lit);
-            dataLocG.put("idPiece", idPiece);
-            // On insère la localisation géographique dans la base de données et on récupère son id
-            String idLocG = dialogueBD.insertLocG(dataLocG);
-
-            // On récupère les données relatives au séjour saisies par l'utilisateur
-            String dateDebut = TexteDateDebut.getText();
-            String dateFin = TexteDateFin.getText();
-            String consultation = ConsultationOui.isSelected() ? "Y" : (ConsultationNon.isSelected() ? "N" : null);
-            // On crée un dictionnaire contenant les données du séjour
-            HashMap<String, String> dataSejour = new HashMap<>();
-            dataSejour.put("idPatient", idPatient);
-            dataSejour.put("dateDebut", dateDebut);
-            dataSejour.put("dateFin", dateFin);
-            dataSejour.put("consultation", consultation);
-            dataSejour.put("ouvert", "Y");
-            dataSejour.put("idLocG", idLocG);
-            // TODO : Ajouter le médecin référent
-            // On insère le séjour dans la base de données
-            dialogueBD.insertSejour(dataSejour);
-
-        }
-
-
-
     }//GEN-LAST:event_boutonAjouterActionPerformed
 
+    /**
+     * Permet de vérifier si tous les champs obligatoires sont remplis
+     *
+     * @return true si tous les champs obligatoires sont remplis, false sinon
+     */
+    public boolean champsRemplis() {
+        // On vérifie si le nom, le prénom et la date de naissance sont remplis
+        if (TexteNom.getText().equals("") || TextePrenom.getText().equals("") || dateNaissanceChooser.getDate() == null) {
+            return false;
+        }
+        // On vérifie si le service, la date de début et la consultation sont remplis
+        if (dateDebutChooser.getDate() == null || buttonGroupConsultation.getSelection() == null) {
+            return false;
+        }
+        labelIncomplet.setVisible(false);
+        return true;
+    }
 
     /**
      * Permet de changer la langue de l'interface
+     *
      * @param langue : la langue choisie
      */
-    public void changerLangue(String langue){
-        // Si la langue choisie est le français
-        if(langue.equals("Français")){
-            TexteAjouterUnPatient.setText("Ajouter un patient");
-            Nom.setText("Nom");
-            Prenom.setText("Prénom");
-            DateNaissance.setText("Date de Naissance");
-            sexe.setText("Sexe");
-            Femme.setText("Femme");
-            Homme.setText("Homme");
-            Adresse.setText("Adresse");
-            Voie.setText("N° et nom de voie");
-            CodePostal.setText("Code Postal");
-            Ville.setText("Ville");
-            Pays.setText("Pays");
-            telephone.setText("Téléphone");
-            fumeur.setText("Fumeur");
-            FumeurOui.setText("OUI");
-            FumeurNon.setText("NON");
-            alcool.setText("Alcool");
-            AlcoolOui.setText("OUI");
-            AlcoolNon.setText("NON");
-            donneesSociales.setText("Données sociales");
-            Service.setText("Service");
-            boutonAjouter.setText("Ajouter");
-
-            // On change le titre des onglets
-            OngletIdentite.setTitleAt(0, "Identité");
-            OngletIdentite.setTitleAt(1, "Données Médicales");
-            OngletIdentite.setTitleAt(2, "Service");
-
-        }
-        // Si la langue choisie est l'anglais
-        else if(langue.equals("English")) {
+    public void changerLangue(String langue) {
+        if (langue.equals("English")) {
             TexteAjouterUnPatient.setText("Add a patient");
             Nom.setText("Name");
             Prenom.setText("First name");
@@ -695,7 +724,6 @@ public class AjoutPatient extends javax.swing.JFrame {
     }
 
 
-
     private void MenuDeroulantServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantServiceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuDeroulantServiceActionPerformed
@@ -704,10 +732,6 @@ public class AjoutPatient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsultationNonActionPerformed
 
-    private void TexteDateDebutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteDateDebutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TexteDateDebutActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -715,7 +739,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -783,9 +807,6 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JTextField TexteAdresse;
     private javax.swing.JLabel TexteAjouterUnPatient;
     private javax.swing.JTextField TexteCodePostal;
-    private javax.swing.JFormattedTextField TexteDateDebut;
-    private javax.swing.JTextField TexteDateFin;
-    private javax.swing.JTextField TexteDateNaissance;
     private javax.swing.JTextPane TexteDonneesSociales;
     private javax.swing.JTextField TexteNom;
     private javax.swing.JTextField TexteNumeroChambre;
@@ -802,6 +823,9 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupConsultation;
     private javax.swing.ButtonGroup buttonGroupFumeur;
     private javax.swing.ButtonGroup buttonGroupSexe;
+    private com.toedter.calendar.JDateChooser dateDebutChooser;
+    private com.toedter.calendar.JDateChooser dateFinChooser;
+    private com.toedter.calendar.JDateChooser dateNaissanceChooser;
     private javax.swing.JLabel donneesSociales;
     private javax.swing.JLabel fumeur;
     private javax.swing.JPanel jPanel1;
@@ -809,6 +833,7 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelIncomplet;
     private javax.swing.JLabel sexe;
     private javax.swing.JLabel telephone;
     // End of variables declaration//GEN-END:variables
