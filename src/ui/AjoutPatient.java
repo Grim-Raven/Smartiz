@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Date;
-import javax.swing.JTextField;
+
 
 /**
  * @author emmaa
@@ -92,7 +92,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         ConsultationNon = new javax.swing.JRadioButton();
         LocGeo = new javax.swing.JLabel();
         ServiceGeo = new javax.swing.JLabel();
-        MeneDeroulantServiceGeo = new javax.swing.JComboBox();
+        MenuDeroulantServiceGeo = new javax.swing.JComboBox();
         Chambre = new javax.swing.JLabel();
         ChambrePorte = new javax.swing.JRadioButton();
         ChambreFenetre = new javax.swing.JRadioButton();
@@ -107,7 +107,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         boutonAjouter = new javax.swing.JButton();
         labelIncomplet = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -362,7 +362,7 @@ public class AjoutPatient extends javax.swing.JFrame {
         ServiceGeo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ServiceGeo.setText("Service");
 
-        MeneDeroulantServiceGeo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
+        MenuDeroulantServiceGeo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
 
         Chambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Chambre.setText("Chambre");
@@ -408,7 +408,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MenuDeroulantService, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MeneDeroulantServiceGeo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MenuDeroulantServiceGeo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TexteNumeroChambre)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,7 +470,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ServiceGeo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MeneDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MenuDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Chambre)
@@ -602,13 +602,12 @@ public class AjoutPatient extends javax.swing.JFrame {
 
                 // On récupère les données relatives à la LOCALISATION GEOGRAPHIQUE
                 // On récupère le service géographique sélectionné par l'utilisateur
-                String serviceGeo = (String) MeneDeroulantServiceGeo.getSelectedItem();
+                String serviceGeo = (String) MenuDeroulantServiceGeo.getSelectedItem();
                 String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
                 String Lit = null;
                 if (buttonGroupChambreBox.getSelection() != null) {
                     Lit = buttonGroupChambreBox.getSelection().getActionCommand();
                 }
-                System.out.println("LIIIIIIIT" + Lit);
                 String idPiece = "-1";
                 if (!TexteNumeroChambre.getText().isEmpty()) {
                     idPiece = TexteNumeroChambre.getText();
@@ -680,7 +679,7 @@ public class AjoutPatient extends javax.swing.JFrame {
      */
     public boolean champsRemplis() {
         // On vérifie si le nom, le prénom et la date de naissance sont remplis
-        if (TexteNom.getText().equals("") || TextePrenom.getText().equals("") || dateNaissanceChooser.getDate() == null) {
+        if (TexteNom.getText().isEmpty() || TextePrenom.getText().isEmpty() || dateNaissanceChooser.getDate() == null) {
             return false;
         }
         // On vérifie si le service, la date de début et la consultation sont remplis
@@ -795,8 +794,8 @@ public class AjoutPatient extends javax.swing.JFrame {
     private javax.swing.JRadioButton FumeurOui;
     private javax.swing.JRadioButton Homme;
     private javax.swing.JLabel LocGeo;
-    private javax.swing.JComboBox MeneDeroulantServiceGeo;
     private javax.swing.JComboBox MenuDeroulantService;
+    private javax.swing.JComboBox MenuDeroulantServiceGeo;
     private javax.swing.JLabel Nom;
     private javax.swing.JLabel NumeroChambre;
     private javax.swing.JTabbedPane OngletIdentite;

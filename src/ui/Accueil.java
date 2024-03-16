@@ -13,16 +13,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
- *
+ * Page d'accueil de l'application
  * @author Antoine
  */
 public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener {
 
     /**
-     * Creates new form Accueil2
+     * Creates new form Accueil
      */
 
     //Code couleur : bleu foncé -> 044272
@@ -31,13 +30,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private final Utilisateur utilisateur;
     private AfficherListePatients scrollPaneTable;
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
-//On récupère la taille de l'écran
-        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
-        //On stocke la largeur de l'écran dans la variable largeur
-
         initComponents();
-        //Le panneau Ouest prend pour dimension longueur1 et hauteur
-
         this.dialogueBD = dialogueBD;
         // On affiche le nom de l'utilisateur en Titre de la JFrame
         this.utilisateur = utilisateur;
@@ -52,12 +45,15 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         changerLangue(this.utilisateur.getLangue());
     }
 
+    /**
+     * Méthode pour afficher les boutons en fonction du type d'utilisateur
+     */
     public void affichageBoutons() {
         if (!utilisateur.isPersonnelMedical()) {
-            PanneauOuest.remove(BoutonMedecins);
-            PanneauOuest.remove(BoutonRechercheClinique);
             BoutonMedecins.setVisible(false);
             BoutonRechercheClinique.setVisible(false);
+        }else{
+            boutonNouveauPatient.setVisible(false);
         }
         this.pack();
     }
@@ -93,6 +89,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         BoutonMedecins = new javax.swing.JButton();
         BoutonPatients = new javax.swing.JButton();
         BoutonRechercheClinique = new javax.swing.JButton();
+        boutonNouveauPatient = new javax.swing.JButton();
         PanneauNord = new javax.swing.JPanel();
         PanneauRecherche = new javax.swing.JPanel();
         RechercherUnPatient = new javax.swing.JLabel();
@@ -175,6 +172,19 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             }
         });
         panelBoutons.add(BoutonRechercheClinique);
+        panelBoutons.add(Box.createRigidArea(new Dimension(0, 10))); // 10 est la hauteur de l'espace
+
+        boutonNouveauPatient.setBackground(new java.awt.Color(4, 66, 114));
+        boutonNouveauPatient.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
+        boutonNouveauPatient.setForeground(new java.awt.Color(255, 255, 255));
+        boutonNouveauPatient.setText("Nouveau Patient");
+        boutonNouveauPatient.setMaximumSize(new java.awt.Dimension(217, 35));
+        boutonNouveauPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonNouveauPatientActionPerformed(evt);
+            }
+        });
+        panelBoutons.add(boutonNouveauPatient);
         panelBoutons.add(Box.createRigidArea(new Dimension(0, 10))); // 10 est la hauteur de l'espace
 
         javax.swing.GroupLayout PanneauOuestLayout = new javax.swing.GroupLayout(PanneauOuest);
@@ -463,12 +473,23 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercheCliniqueActionPerformed
 
+    private void boutonNouveauPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNouveauPatientActionPerformed
+        // On crée un nouveau JFrame pour ajouter un patient
+        AjoutPatient ajoutPatient = new AjoutPatient(dialogueBD, utilisateur.getLangue());
+        // On affiche le JFrame
+        ajoutPatient.setVisible(true);
+    }//GEN-LAST:event_boutonNouveauPatientActionPerformed
+
+    /**
+     * Méthode appelée lorsqu'un patient est sélectionné dans la liste des patients
+     * @param idPatient : l'identifiant du patient sélectionné
+     */
     public void patientSelected(String idPatient) {
         if(utilisateur.isPersonnelMedical()) { // Si l'utilisateur est un personnel médical
-            // On crée un nouveau panel pour afficher les informations du patient
-            AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
             // On enlève le panel actuel du panneau principal central
             PanneauPrincipale.remove(scrollPaneTable);
+            // On crée un nouveau panel pour afficher les informations du patient
+            AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
             // On ajoute le nouveau panel au panneau principal central
             PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
             // On actualise le panneau principal central
@@ -476,6 +497,12 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             PanneauPrincipale.repaint();
         }else{ // Si l'utilisateur est un personnel administratif, on lui permet d'ouvrir un séjour
             // TODO : Ouvrir un séjour
+            // On crée un nouveau JFrame pour ouvrir un séjour
+            AjoutSejour ajoutSejour = new AjoutSejour(dialogueBD, utilisateur, idPatient);
+            // On affiche le JFrame
+            ajoutSejour.setVisible(true);
+
+
         }
 
     }
@@ -504,21 +531,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -557,6 +569,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private javax.swing.JPanel PanneauRecherche;
     private javax.swing.JLabel Prenom;
     private javax.swing.JLabel RechercherUnPatient;
+    private javax.swing.JButton boutonNouveauPatient;
     private javax.swing.JLabel labelLogo;
     private javax.swing.JPanel panelBoutons;
     private javax.swing.JTextField texteDateNaissance;

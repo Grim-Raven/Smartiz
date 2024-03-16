@@ -8,6 +8,10 @@ package ui;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
 /**
  *
  * @author emmaa
@@ -41,7 +45,8 @@ public class AjoutSejour extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroupChambreBox = new javax.swing.ButtonGroup();
+        buttonGroupConsultation = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         AjouterUnSejour = new javax.swing.JLabel();
         DateDebut = new javax.swing.JLabel();
@@ -66,10 +71,12 @@ public class AjoutSejour extends javax.swing.JFrame {
         Box3 = new javax.swing.JRadioButton();
         Numerochambre = new javax.swing.JLabel();
         TexteNumeroChambre = new javax.swing.JTextField();
-        dateDebut = new com.toedter.calendar.JDateChooser();
-        dateFin = new com.toedter.calendar.JDateChooser();
+        dateDebutChooser = new com.toedter.calendar.JDateChooser();
+        dateFinChooser = new com.toedter.calendar.JDateChooser();
+        labelIncomplet = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(464, 607));
@@ -78,20 +85,29 @@ public class AjoutSejour extends javax.swing.JFrame {
         AjouterUnSejour.setText("Ajouter un séjour ");
 
         DateDebut.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        DateDebut.setText("Date de début ");
+        DateDebut.setText("Date de début *");
 
         DateFin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         DateFin.setText("Date de fin ");
 
+        BoutonAjouter.setBackground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouter.setForeground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setText("Ajouter");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         Consultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        Consultation.setText("Consultation");
+        Consultation.setText("Consultation *");
 
+        buttonGroupConsultation.add(ConsultationOui);
         ConsultationOui.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         ConsultationOui.setText("Oui");
 
+        buttonGroupConsultation.add(ConsultationNon);
         ConsultationNon.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         ConsultationNon.setText("Non");
         ConsultationNon.setToolTipText("");
@@ -108,11 +124,6 @@ public class AjoutSejour extends javax.swing.JFrame {
         LocGeo.setText("Localisation géographique ");
 
         MenuDeroulantServiceGeo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Anapathologie", "Cardiologie", "Chirurgie", "Dermatologie", "Gynécologie", "Hématologie", "Immunologie", "Médecine Générale", "Neurologie", "Obstétrie", "Oncologie", "Pneumologie", "Psychiatrie", "Radiologie", "Réanimation", "Urologie", "Urgence" }));
-        MenuDeroulantServiceGeo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuDeroulantServiceGeoActionPerformed(evt);
-            }
-        });
 
         ServiceGeo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ServiceGeo.setText("Service");
@@ -120,36 +131,40 @@ public class AjoutSejour extends javax.swing.JFrame {
         Chambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Chambre.setText("Chambre ");
 
-        buttonGroup1.add(ChambrePorte);
+        buttonGroupChambreBox.add(ChambrePorte);
         ChambrePorte.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambrePorte.setText("Porte");
-        ChambrePorte.setActionCommand("'P'");
+        ChambrePorte.setActionCommand("P");
 
-        buttonGroup1.add(ChambreFenetre);
+        buttonGroupChambreBox.add(ChambreFenetre);
         ChambreFenetre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         ChambreFenetre.setText("Fenêtre");
-        ChambreFenetre.setActionCommand("'F'");
+        ChambreFenetre.setActionCommand("F");
 
         Box.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Box.setText("Box");
 
-        buttonGroup1.add(Box1);
+        buttonGroupChambreBox.add(Box1);
         Box1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box1.setText("1");
         Box1.setActionCommand("'1'");
 
-        buttonGroup1.add(Box2);
+        buttonGroupChambreBox.add(Box2);
         Box2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box2.setText("2");
         Box2.setActionCommand("'2'");
 
-        buttonGroup1.add(Box3);
+        buttonGroupChambreBox.add(Box3);
         Box3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box3.setText("3");
         Box3.setActionCommand("'3'");
 
         Numerochambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Numerochambre.setText("Numéro de chambre");
+
+        labelIncomplet.setForeground(new java.awt.Color(255, 51, 51));
+        labelIncomplet.setText("Veuillez remplir tous les champs marqués d'une *");
+        labelIncomplet.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,11 +211,14 @@ public class AjoutSejour extends javax.swing.JFrame {
                                         .addComponent(Box)))
                                 .addComponent(MenuDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(dateFin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addComponent(dateDebut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(dateFinChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(dateDebutChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(BoutonAjouter)))
+                        .addGap(182, 182, 182)
+                        .addComponent(BoutonAjouter))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(labelIncomplet)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,11 +229,11 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(DateDebut)
                 .addGap(12, 12, 12)
-                .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateDebutChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DateFin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateFinChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Consultation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -251,9 +269,11 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addComponent(Numerochambre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonAjouter)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIncomplet)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,17 +284,89 @@ public class AjoutSejour extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuDeroulantServiceGeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantServiceGeoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuDeroulantServiceGeoActionPerformed
+    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        if(champsRemplis()){
+            // On crée un objet SimpleDateFormat pour formater les dates
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            // On récupère les données relatives à la LOCALISATION GEOGRAPHIQUE
+            // On récupère le service géographique sélectionné par l'utilisateur
+            String serviceGeo = (String) MenuDeroulantServiceGeo.getSelectedItem();
+            String idServiceGeo = dialogueBD.getIdService(serviceGeo); // On récupère l'id du service géographique
+            String Lit = null;
+            if (buttonGroupChambreBox.getSelection() != null) {
+                Lit = buttonGroupChambreBox.getSelection().getActionCommand();
+            }
+            String idPiece = "-1";
+            if (!TexteNumeroChambre.getText().isEmpty()) {
+                idPiece = TexteNumeroChambre.getText();
+            }
+            // On crée un dictionnaire contenant les données de la localisation géographique
+            HashMap<String, String> dataLocG = new HashMap<>();
+            dataLocG.put("idService", idServiceGeo);
+            dataLocG.put("Lit", Lit);
+            dataLocG.put("idPiece", idPiece);
 
-    
+            // On récupère les données relatives au SÉJOUR
+            // On récupère les dates de début et de fin du séjour au format AAAA-MM-JJ
+            String dateDebut = sdf.format(dateDebutChooser.getDate());
+            String dateFin = null;
+            if (dateFinChooser.getDate() != null) {
+                dateFin = sdf.format(dateFinChooser.getDate());
+            }
+            String consultation = ConsultationOui.isSelected() ? "Y" : (ConsultationNon.isSelected() ? "N" : null);
+            String service = (String) MenuDeroulantService.getSelectedItem();
+            // On crée un dictionnaire contenant les données du séjour
+            HashMap<String, String> dataSejour = new HashMap<>();
+            dataSejour.put("dateDebut", dateDebut);
+            dataSejour.put("dateFin", dateFin);
+            dataSejour.put("consultation", consultation);
+            dataSejour.put("ouvert", "Y");
+            dataSejour.put("idService", dialogueBD.getIdService(service));
+            dataSejour.put("idPatient", idPatient);
+
+            // TODO : Ajouter le médecin référent
+
+            // 1 - On insère la localisation géographique dans la base de données et on récupère son id
+            String idLocG;
+            try {
+                idLocG = dialogueBD.insertLocG(dataLocG);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            dataSejour.put("idLocG", idLocG); // On ajoute l'id de la localisation géographique au dictionnaire des données du séjour
+
+            // 2 - On insère le séjour dans la base de données
+            try {
+                dialogueBD.insertSejour(dataSejour);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_BoutonAjouterActionPerformed
+
+    private boolean champsRemplis() {
+        // On vérifie si le service, la date de début et la consultation sont remplis
+        if (dateDebutChooser.getDate() == null || buttonGroupConsultation.getSelection() == null) {
+            labelIncomplet.setVisible(true);
+            return false;
+        }
+        labelIncomplet.setVisible(false);
+        return true;
+    }
+
+    /**
+     * Méthode pour changer la langue de l'interface
+     * @param langue : anglais ou français
+     */
     public void changerLangue(String langue){
         if(langue.equals("English")){
             AjouterUnSejour.setText("Add a stay");
@@ -356,9 +448,11 @@ public class AjoutSejour extends javax.swing.JFrame {
     private javax.swing.JLabel ServiceGeo;
     private javax.swing.JTextField TexteMedRef;
     private javax.swing.JTextField TexteNumeroChambre;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private com.toedter.calendar.JDateChooser dateDebut;
-    private com.toedter.calendar.JDateChooser dateFin;
+    private javax.swing.ButtonGroup buttonGroupChambreBox;
+    private javax.swing.ButtonGroup buttonGroupConsultation;
+    private com.toedter.calendar.JDateChooser dateDebutChooser;
+    private com.toedter.calendar.JDateChooser dateFinChooser;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelIncomplet;
     // End of variables declaration//GEN-END:variables
 }
