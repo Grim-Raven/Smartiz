@@ -4,11 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Corrigé le code AjoutPatient">
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un Patient et d'un séjour via l'accueil quand on est un personnel Administratif">
+      <change afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/blobs/version" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/hapi_base_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/acknowledgements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/ADT_A01.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Create_A_Message.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Create_A_Message.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Run_Test_Panel.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Run_Test_Panel.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/id_file" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/log4j.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-base-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-examples-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-hl7overhttp-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v21-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v22-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v23-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v231-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v24-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v25-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v251-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v26-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/log4j-1.2.17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/slf4j-api-1.6.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/slf4j-log4j12-1.6.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-base-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-base-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.1-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.1-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.1-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v231-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v231-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v24-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v24-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v25-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v25-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v251-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v251-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v26-2.2-beta1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v26-2.2-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fc/hl7/receptionHL7.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Accueil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Accueil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutPatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AjoutSejour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutSejour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,15 +66,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="connexion-personnel-administratif" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,10 +143,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "connexion-personnel-administratif",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/src/JCalendar/jcalendar-1.4.jar",
+    "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/lib/hapi-dist-2.2-all/lib/slf4j-log4j12-1.6.6.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -107,7 +155,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.editor",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -279,6 +327,8 @@
       <workItem from="1710517817151" duration="9696000" />
       <workItem from="1710604395154" duration="282000" />
       <workItem from="1710604685190" duration="4602000" />
+      <workItem from="1710691148239" duration="71000" />
+      <workItem from="1710691227412" duration="2471000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
