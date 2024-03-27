@@ -29,6 +29,8 @@ public class ValiderConsultation extends javax.swing.JFrame {
         this.utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
         this.idActe = idActe;
         remplirChamps(idActe);
+        //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
+        changerLangue(this.utilisateur.getLangue());
     }
     public ValiderConsultation(DialogueBD dialogueBD, Utilisateur utilisateur, String idActe) {
         initComponents();
@@ -38,6 +40,8 @@ public class ValiderConsultation extends javax.swing.JFrame {
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         remplirChamps(idActe);
         setResizable(false);
+        //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
+        changerLangue(this.utilisateur.getLangue());
     }
 
     private void remplirChamps(String idActe) {
@@ -88,17 +92,17 @@ public class ValiderConsultation extends javax.swing.JFrame {
         nomMedecin = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         dateConsultation = new javax.swing.JLabel();
-        commentaireLabel = new javax.swing.JLabel();
-        zoneCommentaire = new javax.swing.JScrollPane();
-        commentaire = new javax.swing.JTextArea();
-        boutonValiderConsultation = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        resultat = new javax.swing.JTextArea();
         resultatLabel = new javax.swing.JLabel();
+        zoneCommentaire = new javax.swing.JScrollPane();
+        resultat = new javax.swing.JTextArea();
+        boutonValiderConsultation = new javax.swing.JButton();
+        commentaireLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        commentaire = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         validerLaConsultation.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         validerLaConsultation.setText("Valider la consultation");
@@ -121,27 +125,24 @@ public class ValiderConsultation extends javax.swing.JFrame {
         dateConsultation.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         dateConsultation.setText("dateConsultation");
 
-        commentaireLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        commentaireLabel.setText("Commentaire : ");
-
-        commentaire.setEditable(false);
-        commentaire.setColumns(20);
-        commentaire.setRows(5);
-        zoneCommentaire.setViewportView(commentaire);
-
-        boutonValiderConsultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        boutonValiderConsultation.setText("Valider la consultation");
-        boutonValiderConsultation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonValiderConsultationActionPerformed(evt);
-            }
-        });
+        resultatLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        resultatLabel.setText("Résultat");
 
         resultat.setColumns(20);
         resultat.setRows(5);
-        jScrollPane1.setViewportView(resultat);
+        zoneCommentaire.setViewportView(resultat);
 
-        resultatLabel.setText("Résultat :");
+        boutonValiderConsultation.setBackground(new java.awt.Color(4, 66, 114));
+        boutonValiderConsultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        boutonValiderConsultation.setForeground(new java.awt.Color(255, 255, 255));
+        boutonValiderConsultation.setText("Valider la consultation");
+
+        commentaireLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        commentaireLabel.setText("Commentaire");
+
+        commentaire.setColumns(20);
+        commentaire.setRows(5);
+        jScrollPane1.setViewportView(commentaire);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,18 +169,18 @@ public class ValiderConsultation extends javax.swing.JFrame {
                                         .addComponent(date)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(dateConsultation))
-                                    .addComponent(commentaireLabel)))
+                                    .addComponent(resultatLabel)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(boutonValiderConsultation)))
+                                .addContainerGap()
+                                .addComponent(commentaireLabel)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(resultatLabel)
+                .addGap(98, 98, 98)
+                .addComponent(boutonValiderConsultation)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,16 +201,16 @@ public class ValiderConsultation extends javax.swing.JFrame {
                     .addComponent(date)
                     .addComponent(dateConsultation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(commentaireLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resultatLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(commentaireLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(boutonValiderConsultation)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +234,18 @@ public class ValiderConsultation extends javax.swing.JFrame {
         dialogueBD.validerActe(idActe, resultatConsultation);
         this.dispose();
     }//GEN-LAST:event_boutonValiderConsultationActionPerformed
-
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            validerLaConsultation.setText("Validate the consultation");
+            boutonValiderConsultation.setText("Validate");
+            serviceLabel.setText("Medical service");
+            medecinLabel.setText("Physician");
+            resultatLabel.setText("Comment");
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

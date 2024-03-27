@@ -5,6 +5,9 @@
  */
 package ui;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author Clémence
@@ -14,9 +17,15 @@ public class AjoutPersonnelMedical extends javax.swing.JFrame {
     /**
      * Creates new form AjoutMedecin
      */
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+    
     public AjoutPersonnelMedical() {
         initComponents();
         setResizable(false); 
+        //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -250,7 +259,24 @@ public class AjoutPersonnelMedical extends javax.swing.JFrame {
     private void ChampNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChampNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ChampNomActionPerformed
-
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            TexteAjouterUnMédecin.setText("Add medical staff");
+            EtiquetteNom.setText("Last name");
+            EtiquettePrenom.setText("First name");
+            EtiquetteRPPS.setText("RPPS number");
+            EtiquetteID.setText("Password");
+            EtiquetteDate.setText("End date of contract");
+            EtiquetteService.setText("Medical service");
+            EtiquettePoste.setText("Profession");
+            EtiquetteRC.setText("Clinical research");
+            CheckAttachéRC.setText("Clinical research associate");
+            BoutonAjouterSpé.setText("Add a department");
+            BoutonAjouter.setText("Add");
+      }
+    }
     /**
      * @param args the command line arguments
      */

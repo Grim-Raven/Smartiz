@@ -35,6 +35,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         this.utilisateur = new Utilisateur("Cot","Harry",true,"Français",1,1111,"Y");
         this.idSejour = "1";
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
+        //Pour mettre l'interface en Anglais
         changerLangue(this.utilisateur.getLangue());
         initMedecin();
     }

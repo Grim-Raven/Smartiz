@@ -5,6 +5,9 @@
  */
 package ui.validerActes;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,16 @@ public class ValiderRadiologie extends javax.swing.JFrame {
     /**
      * Creates new form ValiderRadiologie
      */
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+    
     public ValiderRadiologie() {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -40,9 +49,9 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         typeExamenValeur = new javax.swing.JLabel();
         dateRadiologie = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         ValiderRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         ValiderRadiologie.setText("Valider la radiologie");
@@ -61,7 +70,9 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         JTextArea.setRows(5);
         zoneCommentaire.setViewportView(JTextArea);
 
+        boutonValiderRadiologie.setBackground(new java.awt.Color(4, 66, 114));
         boutonValiderRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        boutonValiderRadiologie.setForeground(new java.awt.Color(255, 255, 255));
         boutonValiderRadiologie.setText("Valider la radiologie");
 
         typeExamenValeur.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -132,7 +143,17 @@ public class ValiderRadiologie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            ValiderRadiologie.setText("Validate radiology");
+            boutonValiderRadiologie.setText("Validate");
+            TypeExamen.setText("Type of medical examination");
+            JTextArea.setText("Comment");
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
