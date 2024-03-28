@@ -7,7 +7,8 @@ package ui.AjoutActe;
 
 import fc.DialogueBD;
 import fc.Utilisateur;
-
+import java.util.Date;
+import java.util.HashMap;
 /**
  *
  * @author emmaa
@@ -28,8 +29,8 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
+        //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
-
     }
 
     /**
@@ -54,7 +55,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         DemandeVisiteAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         DemandeVisiteAnesthesie.setText("Demande de consultation pré-opératoire - Anesthésie");
@@ -62,8 +63,15 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         OperationPrevue.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         OperationPrevue.setText("Opération prévue le : ");
 
+        BoutonAjouter.setBackground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouter.setForeground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setText("Ajouter");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         Commentaire.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Commentaire.setText("Commentaire");
@@ -137,6 +145,27 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        // Récupération des données
+        Date date = DateChooser.getDate();
+        String dateOperation = new java.sql.Date(date.getTime()).toString();
+        String nomService = MenuDeroulantService.getSelectedItem().toString();
+        String commentaire = nomService + " - " + ZoneCommentaire.getText();
+        
+        //On entre les données dans la hashmap
+        HashMap<String, String> anesthesieData = new HashMap<String, String>();
+        anesthesieData.put("nom","Anesthésie");
+        anesthesieData.put("datePrescription",dateOperation);
+        anesthesieData.put("commentaire", commentaire);
+        anesthesieData.put("idSejour", idSejour);
+        anesthesieData.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        // On envoie les données à la base de données
+        dialogueBD.insertActe(anesthesieData);
+        // On ferme la fenêtre
+        this.dispose();
+        
+    }//GEN-LAST:event_BoutonAjouterActionPerformed
 
     public void changerLangue(String langue) {
         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
