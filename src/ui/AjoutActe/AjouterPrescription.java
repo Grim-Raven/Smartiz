@@ -115,7 +115,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TexteCommentaire);
 
         labelDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        labelDate.setText("Date de la prise :");
+        labelDate.setText("Date de la prise");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -141,7 +141,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
                                         .addComponent(Soir))
                                     .addComponent(VoieAdministration)
                                     .addComponent(Commentaire))
-                                .addGap(0, 157, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(Quantite)
@@ -157,11 +157,11 @@ public class AjouterPrescription extends javax.swing.JFrame {
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(labelDate)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 166, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -189,14 +189,14 @@ public class AjouterPrescription extends javax.swing.JFrame {
                 .addComponent(VoieAdministration)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuDeroulantVoie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(labelDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Commentaire)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BoutonAjouter)
                 .addGap(18, 18, 18))

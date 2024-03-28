@@ -5,6 +5,9 @@
  */
 package ui.validerActes;
 
+import fc.DialogueBD;
+import fc.Utilisateur;
+
 /**
  *
  * @author emmaa
@@ -14,10 +17,16 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
     /**
      * Creates new form ValiderAnesthesie
      */
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idSejour;
+    
     public ValiderAnesthesie() {
         initComponents();
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -40,9 +49,9 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         boutonValiderConsultationAnesthesie = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         validerConsultationAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         validerConsultationAnesthesie.setText("Valider la consultation pré-opératoire - Anesthésie");
@@ -66,7 +75,9 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         zoneCommentaire.setViewportView(jTextArea1);
 
+        boutonValiderConsultationAnesthesie.setBackground(new java.awt.Color(4, 66, 114));
         boutonValiderConsultationAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        boutonValiderConsultationAnesthesie.setForeground(new java.awt.Color(255, 255, 255));
         boutonValiderConsultationAnesthesie.setText("Valider la consultation pré-opératoire");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -131,7 +142,17 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void changerLangue(String langue) {
+        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //On remplace chaque composant par son équivalent anglais
+        if (langue.equals("English")) {
+            validerConsultationAnesthesie.setText("Validate the pre-operative consultation - Anesthesia");
+            boutonValiderConsultationAnesthesie.setText("Validate");
+            operation.setText("Operation scheduled for");
+            commentaire.setText("Comment");
+            service.setText("Medical service");
+      }
+    }
     /**
      * @param args the command line arguments
      */
