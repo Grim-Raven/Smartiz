@@ -5,8 +5,7 @@
  */
 package ui;
 
-import ui.AjoutActe.AjouterPrescription;
-import ui.AjoutActe.AjoutConsultation;
+import ui.AjoutActe.*;
 import fc.DialogueBD;
 import fc.Utilisateur;
 import ui.validerActes.ValidationPrescription;
@@ -20,14 +19,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import ui.AjoutActe.AjoutExamenBiologique;
-import ui.AjoutActe.AjouterAnesthesie;
 
 /**
  * @author emmaa
  */
 public class AffichagePatient extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form AffichagePatient
      */
@@ -88,11 +85,12 @@ public class AffichagePatient extends javax.swing.JPanel {
         remplirChampsPatient(idPatient);
         remplirSejours(idPatient);
         remplirActes();
-        
+
         changerLangue(this.utilisateur.getLangue());
     }
+
     public void changerLangue(String langue) {
-        if(langue.equals("English")){
+        if (langue.equals("English")) {
             NeeLe.setText("Born on the : ");
             Adresse.setText("Address : ");
             Fumeur.setText("Smoker : ");
@@ -106,6 +104,7 @@ public class AffichagePatient extends javax.swing.JPanel {
             boutonCloture.setText("End stay");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +151,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonPrescription = new javax.swing.JButton();
         BoutonExamenBiologique = new javax.swing.JButton();
 
-        setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
+        setPreferredSize(new Dimension(largeur - largeur1, hauteur1));
         setLayout(new java.awt.BorderLayout());
 
         PanneauNord.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,100 +206,98 @@ public class AffichagePatient extends javax.swing.JPanel {
         AlcoolPatient.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         AlcoolPatient.setText("AlcoolPatient");
 
-        labelChambre.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        labelChambre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         labelChambre.setForeground(new java.awt.Color(4, 66, 114));
         labelChambre.setText("Chambre :");
 
-        texteChambre.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        texteChambre.setText("chambrePatient");
+        texteChambre.setText("jLabel1");
 
-        labelLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        labelLit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         labelLit.setForeground(new java.awt.Color(4, 66, 114));
-        labelLit.setText("Lit : ");
+        labelLit.setText("Lit :");
 
-        texteLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        texteLit.setText("litPatient");
+        texteLit.setText("jLabel3");
 
         javax.swing.GroupLayout PanneauNordLayout = new javax.swing.GroupLayout(PanneauNord);
         PanneauNord.setLayout(PanneauNordLayout);
         PanneauNordLayout.setHorizontalGroup(
-            PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauNordLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanneauNordLayout.createSequentialGroup()
-                        .addComponent(NeeLe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DateNaissancePatient)
-                        .addGap(64, 64, 64)
-                        .addComponent(Sexe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SexePatient)
-                        .addGap(67, 67, 67)
-                        .addComponent(Telephone)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TelephonePatient))
-                    .addGroup(PanneauNordLayout.createSequentialGroup()
-                        .addComponent(NomPrenomPatient)
-                        .addGap(41, 41, 41)
-                        .addComponent(IPPPatient))
-                    .addGroup(PanneauNordLayout.createSequentialGroup()
-                        .addComponent(Adresse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdressePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanneauNordLayout.createSequentialGroup()
-                        .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanneauNordLayout.createSequentialGroup()
-                                .addComponent(Fumeur)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(FumeurPatient))
-                            .addGroup(PanneauNordLayout.createSequentialGroup()
-                                .addComponent(labelChambre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(texteChambre)))
-                        .addGap(97, 97, 97)
-                        .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanneauNordLayout.createSequentialGroup()
-                                .addComponent(Alcool)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AlcoolPatient))
-                            .addGroup(PanneauNordLayout.createSequentialGroup()
-                                .addComponent(labelLit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(texteLit)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                .addComponent(NeeLe)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(DateNaissancePatient)
+                                                .addGap(64, 64, 64)
+                                                .addComponent(Sexe)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(SexePatient)
+                                                .addGap(67, 67, 67)
+                                                .addComponent(Telephone)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(TelephonePatient))
+                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                .addComponent(NomPrenomPatient)
+                                                .addGap(41, 41, 41)
+                                                .addComponent(IPPPatient))
+                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                .addComponent(Adresse)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(AdressePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                                .addComponent(Fumeur)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(FumeurPatient))
+                                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                                .addComponent(labelChambre)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(texteChambre)))
+                                                .addGap(109, 109, 109)
+                                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                                .addComponent(labelLit)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(texteLit))
+                                                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                                                .addComponent(Alcool)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(AlcoolPatient)))))
+                                .addContainerGap(21, Short.MAX_VALUE))
         );
         PanneauNordLayout.setVerticalGroup(
-            PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanneauNordLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NomPrenomPatient)
-                    .addComponent(IPPPatient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NeeLe)
-                    .addComponent(DateNaissancePatient)
-                    .addComponent(Sexe)
-                    .addComponent(SexePatient)
-                    .addComponent(Telephone)
-                    .addComponent(TelephonePatient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Adresse)
-                    .addComponent(AdressePatient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Fumeur)
-                    .addComponent(FumeurPatient)
-                    .addComponent(Alcool)
-                    .addComponent(AlcoolPatient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelChambre)
-                    .addComponent(texteChambre)
-                    .addComponent(labelLit)
-                    .addComponent(texteLit)))
+                PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(NomPrenomPatient)
+                                        .addComponent(IPPPatient))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(NeeLe)
+                                        .addComponent(DateNaissancePatient)
+                                        .addComponent(Sexe)
+                                        .addComponent(SexePatient)
+                                        .addComponent(Telephone)
+                                        .addComponent(TelephonePatient))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Adresse)
+                                        .addComponent(AdressePatient))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Fumeur)
+                                        .addComponent(FumeurPatient)
+                                        .addComponent(Alcool)
+                                        .addComponent(AlcoolPatient))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(labelChambre)
+                                        .addComponent(texteChambre)
+                                        .addComponent(labelLit)
+                                        .addComponent(texteLit)))
         );
 
         add(PanneauNord, java.awt.BorderLayout.PAGE_START);
@@ -327,23 +324,23 @@ public class AffichagePatient extends javax.swing.JPanel {
         javax.swing.GroupLayout panelClotureLayout = new javax.swing.GroupLayout(panelCloture);
         panelCloture.setLayout(panelClotureLayout);
         panelClotureLayout.setHorizontalGroup(
-            panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClotureLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nomUtilisateur)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
-                .addComponent(boutonCloture)
-                .addContainerGap())
+                panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClotureLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(nomUtilisateur)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
+                                .addComponent(boutonCloture)
+                                .addContainerGap())
         );
         panelClotureLayout.setVerticalGroup(
-            panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelClotureLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nomUtilisateur)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelClotureLayout.createSequentialGroup()
-                .addComponent(boutonCloture)
-                .addGap(0, 0, Short.MAX_VALUE))
+                panelClotureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelClotureLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(nomUtilisateur)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelClotureLayout.createSequentialGroup()
+                                .addComponent(boutonCloture)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         PanneauSud.add(panelCloture, java.awt.BorderLayout.CENTER);
@@ -351,14 +348,25 @@ public class AffichagePatient extends javax.swing.JPanel {
         add(PanneauSud, java.awt.BorderLayout.PAGE_END);
 
         PanneauCentral.setBackground(new java.awt.Color(255, 255, 255));
-        PanneauCentral.setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
+        PanneauCentral.setPreferredSize(new Dimension(largeur - largeur1, hauteur1));
         PanneauCentral.setLayout(new java.awt.BorderLayout());
 
         listeActes.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         listeActes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        listeActes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listeActesMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(listeActes);
 
@@ -382,6 +390,11 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         BoutonRadiologie.setForeground(new java.awt.Color(4, 66, 114));
         BoutonRadiologie.setText("Radiologie");
+        BoutonRadiologie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonRadiologieActionPerformed(evt);
+            }
+        });
         PanelBoutons.add(BoutonRadiologie);
 
         BoutonAnesthesie.setBackground(new java.awt.Color(236, 242, 254));
@@ -432,27 +445,27 @@ public class AffichagePatient extends javax.swing.JPanel {
         javax.swing.GroupLayout panelSejourEtBoutonsLayout = new javax.swing.GroupLayout(panelSejourEtBoutons);
         panelSejourEtBoutons.setLayout(panelSejourEtBoutonsLayout);
         panelSejourEtBoutonsLayout.setHorizontalGroup(
-            panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSejourEtBoutonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PanelBoutons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSejourEtBoutonsLayout.createSequentialGroup()
-                        .addComponent(Ajout)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(MenuDeroulantSejours, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSejourEtBoutonsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(PanelBoutons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSejourEtBoutonsLayout.createSequentialGroup()
+                                                .addComponent(Ajout)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(MenuDeroulantSejours, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         panelSejourEtBoutonsLayout.setVerticalGroup(
-            panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSejourEtBoutonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MenuDeroulantSejours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Ajout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelBoutons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                panelSejourEtBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSejourEtBoutonsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(MenuDeroulantSejours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Ajout)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PanelBoutons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         PanneauCentral.add(panelSejourEtBoutons, java.awt.BorderLayout.NORTH);
@@ -463,9 +476,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     private void BoutonExamenBiologiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonExamenBiologiqueActionPerformed
         String idSejour;
         // On récupère l'identifiant du séjour sélectionné
-        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        }else {
+        } else {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
         }
         // On ouvre la fenêtre de demande d'examen biologique 
@@ -493,9 +506,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     private void BoutonConsultationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonConsultationActionPerformed
         String idSejour;
         // On récupère l'identifiant du séjour sélectionné
-        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        }else {
+        } else {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
         }
         // On ouvre la fenêtre d'ajout de consultation
@@ -506,7 +519,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         AjoutConsultation.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                remplirActes();
+                remplirActes(); // On met à jour la liste des actes après l'ajout de la consultation
             }
         });
     }//GEN-LAST:event_BoutonConsultationActionPerformed
@@ -514,9 +527,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     private void BoutonPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPrescriptionActionPerformed
         String idSejour;
         // On récupère l'identifiant du séjour sélectionné
-        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        }else {
+        } else {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
         }
         // On ouvre la fenêtre d'ajout de prescription
@@ -527,7 +540,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         AjoutPrescription.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                remplirActes();
+                remplirActes(); // On met à jour la liste des actes après l'ajout de la prescription
             }
         });
 
@@ -570,9 +583,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     private void BoutonAnesthesieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAnesthesieActionPerformed
         String idSejour;
         // On récupère l'identifiant du séjour sélectionné
-        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        }else {
+        } else {
             idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
         }
         // On ouvre la fenêtre de demande de pré-consultation en anesthésie 
@@ -583,15 +596,35 @@ public class AffichagePatient extends javax.swing.JPanel {
         AjouterAnesthesie.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                remplirActes();
+                remplirActes(); // On met à jour la liste des actes après l'ajout de la pré-consultation en anesthésie
             }
         });
     }//GEN-LAST:event_BoutonAnesthesieActionPerformed
 
+    private void BoutonRadiologieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRadiologieActionPerformed
+        String idSejour;
+        // On récupère l'identifiant du séjour sélectionné
+        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
+        } else {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
+        }
+        // On ouvre la fenêtre de demande de d'examen radiologique
+        JFrame AjouterRadiologie = new AjouterRadiologie(dialogueBD, this.utilisateur, idSejour);
+        // On affiche la fenêtre
+        AjouterRadiologie.setVisible(true);
+        AjouterRadiologie.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirActes(); // On met à jour la liste des actes après l'ajout de l'examen radiologique
+            }
+        });
+    }//GEN-LAST:event_BoutonRadiologieActionPerformed
+
     /**
      * Remplit les champs de l'interface avec les informations du patient
      *
-     * @param idPatient  l'identifiant du patient à afficher
+     * @param idPatient l'identifiant du patient à afficher
      */
     public void remplirChampsPatient(String idPatient) {
         // On récupère les informations du patient
@@ -622,7 +655,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     /**
      * Remplit le menu déroulant des séjours du patient
      *
-     * @param idPatient  l'identifiant du patient sélectionné
+     * @param idPatient l'identifiant du patient sélectionné
      */
     public void remplirSejours(String idPatient) {
         // On récupère les séjours du patient
@@ -712,7 +745,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                 switch (typeActe) {
                     case "Consultation":
                         infoActe.append(" en ").append(dialogueBD.getNomService(resultat.getString("idService")));
-                        if(resultat.getString("dateRealisationActe") == null) {
+                        if (resultat.getString("dateRealisationActe") == null) {
                             infoActe.append(" prévue le ").append(resultat.getString("datePrescription"), 0, 10);
                         }
                         break;
@@ -720,16 +753,16 @@ public class AffichagePatient extends javax.swing.JPanel {
                         // TODO
                         break;
                     case "Anesthésie":
-                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"),0,10);
+                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"), 0, 10);
                         break;
                     case "Prescription":
                         infoActe.append(" : ").append(resultat.getString("posologie"));
-                        if(resultat.getString("dateRealisationActe") != null) {
+                        if (resultat.getString("dateRealisationActe") != null) {
                             infoActe.append(" administré le ").append(resultat.getString("dateRealisationActe"), 0, 10);
                         }
                         break;
                     case "Examen Biologique":
-                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" - demandé le : ").append(resultat.getString("datePrescription"),0,10);
+                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" - demandé le : ").append(resultat.getString("datePrescription"), 0, 10);
                         break;
                 }
                 actes.add(infoActe.toString());

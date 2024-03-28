@@ -8,6 +8,8 @@ package ui.AjoutActe;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
+import java.util.HashMap;
+
 /**
  *
  * @author emmaa
@@ -18,9 +20,9 @@ public class AjouterRadiologie extends javax.swing.JFrame {
      * Creates new form AjouterRadiologie
      */
     
-        private DialogueBD dialogueBD;
-        private Utilisateur utilisateur;
-        private String idSejour;
+        private final DialogueBD dialogueBD;
+        private final Utilisateur utilisateur;
+        private final String idSejour;
         
     public AjouterRadiologie(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
@@ -42,6 +44,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupTypeExamen = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         DemandeExamenRadiologie = new javax.swing.JLabel();
         TypeExamen = new javax.swing.JLabel();
@@ -52,7 +55,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         BoutonScintigraphie = new javax.swing.JRadioButton();
         BoutonTomographie = new javax.swing.JRadioButton();
         Date = new javax.swing.JLabel();
-        DateChooser = new com.toedter.calendar.JDateChooser();
+        dateExamen = new com.toedter.calendar.JDateChooser();
         Commentaire = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ZoneCommentaire = new javax.swing.JTextArea();
@@ -66,23 +69,29 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         DemandeExamenRadiologie.setText("Demande d'examen(s) radiologique(s)");
 
         TypeExamen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        TypeExamen.setText("Type(s) d'examen(s)");
+        TypeExamen.setText("Type d'examen");
 
+        buttonGroupTypeExamen.add(BoutonRadiographie);
         BoutonRadiographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonRadiographie.setText("Radiographie");
 
+        buttonGroupTypeExamen.add(BoutonEchographie);
         BoutonEchographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonEchographie.setText("Echographie");
 
+        buttonGroupTypeExamen.add(BoutonScanner);
         BoutonScanner.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScanner.setText("Scanner");
 
+        buttonGroupTypeExamen.add(BoutonIRM);
         BoutonIRM.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonIRM.setText("IRM");
 
+        buttonGroupTypeExamen.add(BoutonScintigraphie);
         BoutonScintigraphie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScintigraphie.setText("Scintigraphie");
 
+        buttonGroupTypeExamen.add(BoutonTomographie);
         BoutonTomographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonTomographie.setText("Tomographie");
 
@@ -96,8 +105,15 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         ZoneCommentaire.setRows(5);
         jScrollPane1.setViewportView(ZoneCommentaire);
 
+        BoutonAjouter.setBackground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouter.setForeground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setText("Ajouter");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,7 +130,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
                             .addComponent(Date)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(DateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dateExamen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(BoutonRadiographie)
@@ -155,7 +171,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(Date)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Commentaire)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,6 +194,29 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        // Récupération des données
+        String typeExamen = buttonGroupTypeExamen.getSelection().getActionCommand();
+        String dateExamen = DemandeExamenRadiologie.getText().substring(0, 10);
+        String commentaire = ZoneCommentaire.getText();
+
+
+        HashMap<String, String> donnees = new HashMap<>();
+        donnees.put("nom", typeExamen);
+        donnees.put("dateExamen", dateExamen);
+        donnees.put("commentaire", commentaire);
+        donnees.put("idSejour", idSejour);
+        donnees.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        donnees.put("valide", "N");
+
+        // Ajout de l'examen radiologique
+        dialogueBD.insertActe(donnees);
+    }//GEN-LAST:event_BoutonAjouterActionPerformed
+    /**
+     * Méthode pour changer la langue de l'interface
+     * @param langue
+     */
     public void changerLangue(String langue) {
          //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
          //On remplace chaque composant par son équivalent anglais
@@ -239,10 +278,11 @@ public class AjouterRadiologie extends javax.swing.JFrame {
     private javax.swing.JRadioButton BoutonTomographie;
     private javax.swing.JLabel Commentaire;
     private javax.swing.JLabel Date;
-    private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JLabel DemandeExamenRadiologie;
     private javax.swing.JLabel TypeExamen;
     private javax.swing.JTextArea ZoneCommentaire;
+    private javax.swing.ButtonGroup buttonGroupTypeExamen;
+    private com.toedter.calendar.JDateChooser dateExamen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

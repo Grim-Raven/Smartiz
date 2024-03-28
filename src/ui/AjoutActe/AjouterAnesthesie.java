@@ -160,6 +160,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         anesthesieData.put("commentaire", commentaire);
         anesthesieData.put("idSejour", idSejour);
         anesthesieData.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        anesthesieData.put("Valide", "N");
         // On envoie les données à la base de données
         dialogueBD.insertActe(anesthesieData);
         // On ferme la fenêtre
