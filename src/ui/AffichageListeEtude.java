@@ -5,9 +5,24 @@
  */
 package ui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.MouseEvent;
 
+import java.util.ArrayList;
+
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+
+
+import fc.AfficherListeEtudesListener;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
@@ -41,7 +56,14 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
     public DialogueBD dialogueBD;
     public Utilisateur utilisateur;
+    private javax.swing.JTable tableEtude;
+    private AffichageListeEtude scrollPaneTable;
+    private ArrayList<AfficherListeEtudesListener> etudeSelectioneListenerList = new ArrayList<>();
     
+    /**
+     * @param dialogueBD
+     * @param utilisateur
+     */
     public AffichageListeEtude(DialogueBD dialogueBD, Utilisateur utilisateur) {
          //On récupère la taille de l'écran
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
@@ -60,10 +82,13 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
         largeurBouton = largeurCentree / 8;
         hauteurInfo = 1;
-        initComponents();
+        
         //On stocke les données de l'utilisateur et la connexion à la BD
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
+
+        initComponents(dialogueBD.getEtude());
+        System.out.println("c'est fait");
     }
 
     /**
@@ -73,7 +98,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(ResultSet resultSetEtude) {
 
         PanneauNord = new javax.swing.JPanel();
         ListeEtudeClinique = new javax.swing.JLabel();
@@ -81,7 +106,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         PanneauSud = new javax.swing.JPanel();
         PanneauCentre = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListeEtude = new javax.swing.JList();
+        DefaultTableModel modelTable = new DefaultTableModel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
@@ -145,17 +170,89 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         PanneauCentre.setBackground(new java.awt.Color(255, 255, 255));
         PanneauCentre.setLayout(new java.awt.BorderLayout());
 
-        ListeEtude.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        //On ajoute les colonnes de la table
+        modelTable.addColumn("ID de l'étude");
+        modelTable.addColumn("nom");
+        modelTable.addColumn("ID Personnel Médical responsable");
+        modelTable.addColumn("Type de Recherche");
+        System.out.println("tableau est crée");
+
+        // Ajout des études dans le modèle de table
+        try {
+            while (resultSetEtude.next()) {
+                // On ajoute les informations des études qui correspondent à la recherche dans le modèle de table
+                modelTable.addRow(new Object[]{resultSetEtude.getString("idEtude"),
+                resultSetEtude.getString("nom").trim(),
+                resultSetEtude.getString("IDPERSONNELMEDICAL").trim(),
+                resultSetEtude.getString("TYPERECHERCHE")});
+                System.out.println("études récupérés");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+         //On crée une JTable avec le modèle de table
+        tableEtude = new JTable(modelTable);
+        System.out.println("tableau crée et ajouté");
+        tableEtude.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableEtudeMouseClicked((MouseEvent) evt);
+            }
         });
-        jScrollPane1.setViewportView(ListeEtude);
 
-        PanneauCentre.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        //On définit la taille de la police de la JTable
+        tableEtude.setFont(new java.awt.Font("Times New Roman", 0, 24));
+        tableEtude.setRowHeight(30);
+        tableEtude.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        tableEtude.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
 
-        add(PanneauCentre, java.awt.BorderLayout.CENTER);
-    }// </editor-fold>//GEN-END:initComponents
+        // On change la couleur de fond de l'entête de la JTable
+        tableEtude.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBackground(new Color(4, 66, 114));
+                setForeground(Color.WHITE);
+                return this;
+            }
+        });
+        // On empêche l'utilisateur de modifier les données de la JTable
+        tableEtude.setDefaultEditor(Object.class, null);
+        // On définit un modèle de sélection de la JTable à une seule étude
+        tableEtude.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //On ajoute la JTable dans un JScrollPane
+        jScrollPane1 = new JScrollPane(tableEtude);
+        PanneauCentre.add(jScrollPane1);
+        // On change la couleur de fond de la JTable et du JScrollPane
+        tableEtude.setBackground(new Color(236, 242, 254));
+        this.setBackground(new Color(236, 242, 254));
+        JViewport viewport = jScrollPane1.getViewport();
+        if (viewport != null && viewport.getView() instanceof JComponent) {
+            ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
+        }
+        System.out.println("couleur de fond changé");
+
+        // On change la couleur de fond des lignes de la JTable
+        tableEtude.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (row % 2 == 0) {
+                    c.setBackground(new java.awt.Color(236, 242, 254));
+                } else {
+                    c.setBackground(new java.awt.Color(244, 247, 254));
+                }
+                if (isSelected) {
+                    // En gris si la ligne est sélectionnée.
+                    c.setBackground(new java.awt.Color(50, 115, 244));
+                }
+                return c;
+            }
+        });
+
+        this.add(tableEtude);
+    }
 
     private void BoutonCreerEtudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerEtudeActionPerformed
         //On ouvre le formulaire pour créer une étude 
@@ -163,10 +260,28 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         ajoutEtude.setVisible(true);
     }//GEN-LAST:event_BoutonCreerEtudeActionPerformed
 
+    private void tableEtudeMouseClicked(MouseEvent evt) {
+        if (((java.awt.event.MouseEvent) evt).getClickCount() == 2) {    // Si l'utilisateur double clique sur une ligne de la JTable
+            int selectedRow = tableEtude.getSelectedRow(); // On récupère la ligne sélectionnée
+            if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
+                // On récupère l'ID de l'étude sélectionné
+                Object idEtude = tableEtude.getValueAt(selectedRow, 0);
+                System.out.println("Selected: " + idEtude);
+
+                // On prévient tous les listeners que l'utilisateur a sélectionné une étude
+                for (AfficherListeEtudesListener afficherListeEtudesListener : etudeSelectioneListenerList) {
+                    afficherListeEtudesListener.etudeSelected((String) idEtude);
+                }
+            }
+        }
+    }
+    
+    public void addEtudeSelectedListener(AfficherListeEtudesListener listener) {
+        etudeSelectioneListenerList.add(listener);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonCreerEtude;
-    private javax.swing.JList ListeEtude;
     private javax.swing.JLabel ListeEtudeClinique;
     private javax.swing.JPanel PanneauCentre;
     private javax.swing.JPanel PanneauNord;

@@ -263,6 +263,26 @@ public class TestDialogueBD {
         }
     }
 
+    @Test // Test de la récupération des études
+    public void testGetEtude(){
+        DialogueBD dialogueBD = new DialogueBD();
+        // On se connecte à la base de données
+        dialogueBD.connect();
+        // On fait la requête avec les données
+        ResultSet resultat = dialogueBD.getEtude();
+        // On vérifie si le test est réussi
+        try {
+            assertTrue(resultat.next());
+            // On imprime le nom de toutes les études
+            System.out.println(resultat.getString("nom"));
+            while(resultat.next()){ // Tant qu'il y a des études
+                System.out.println(resultat.getString("nom"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Test // Test de l'insertion d'une étude dans la base de donnée
     public void testInsertEtude(){
         DialogueBD dialogueBD = new DialogueBD();

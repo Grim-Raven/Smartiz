@@ -437,9 +437,10 @@ public class DialogueBD {
      * @param dataEtude les données de l'étude
      * @return les études correspondant aux données
      */
-    public ResultSet getEtude(HashMap<String, String> dataEtude) {
+    public ResultSet getEtude() {
+        HashMap<String, String> dataEtude = new HashMap<>(); // Crée un HashMap vide
         try {
-            return rechercheTable("etudes", dataEtude, false);
+            return rechercheTable("etude", dataEtude, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
