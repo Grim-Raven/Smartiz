@@ -51,6 +51,7 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
                 tablePatientsMouseClicked(evt);
             }
         });
+        
         //On définit la taille de la police de la JTable
         tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
         tablePatients.setRowHeight(30);

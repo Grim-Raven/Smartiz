@@ -84,7 +84,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         });
 
         NomPraticienHospitalier.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        NomPraticienHospitalier.setText("ID du praticien hospitalier");
+        NomPraticienHospitalier.setText("Nom du praticien hospitalier");
 
         DateDemarrage.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         DateDemarrage.setText("Date de démarrage");
@@ -121,7 +121,7 @@ public class AjouterEtude extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TextNomPraticienHospitalier)
                     .addComponent(TexteIntitule)
-                    .addComponent(MenuDeroulantTypeRecherche, 0, 469, Short.MAX_VALUE)
+                    .addComponent(MenuDeroulantTypeRecherche, 0, 472, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CreerEtude)
@@ -245,7 +245,6 @@ public class AjouterEtude extends javax.swing.JFrame {
         
         // On affiche un message de confirmation
         javax.swing.JOptionPane.showMessageDialog(null, "L'étude a été ajouté avec succès");
-        System.out.println("L'étude a été ajouté avec succès");
     }//GEN-LAST:event_BoutonCreerActionPerformed
 
     /**
@@ -316,7 +315,7 @@ public class AjouterEtude extends javax.swing.JFrame {
                 DialogueBD dialogueBD = new DialogueBD();
                 // On se connecte à la base de données
                 dialogueBD.connect();
-                // On instancie l'interface d'ajout de patient
+                // On instancie l'interface d'ajout d'étude
                 new AjouterEtude(dialogueBD, "Francais").setVisible(true);
             }
         });

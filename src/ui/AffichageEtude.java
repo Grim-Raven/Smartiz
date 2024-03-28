@@ -5,14 +5,23 @@
  */
 package ui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+
+import fc.AfficherListePatientsListener;
+import fc.AfficherListeEtudesListener;
+import fc.DialogueBD;
+import fc.Utilisateur;
 
 /**
  *
  * @author emmaa
  */
-public class AffichageEtude extends javax.swing.JPanel {
+public class AffichageEtude extends javax.swing.JPanel implements AfficherListePatientsListener{
 
     /**
      * Creates new form AffichageEtude
@@ -36,8 +45,15 @@ public class AffichageEtude extends javax.swing.JPanel {
     protected int hauteurInfo;
     //L'attribut hauteurCentral correspond à la hauteur du panneau central
     protected int hauteurCentral;
+
+    private DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
+    private String idEtude;
+    private ArrayList<AfficherListeEtudesListener> etudeSelectioneListenerList = new ArrayList<>();
+    private ArrayList<AfficherListePatientsListener> patientSelectioneListenerList = new ArrayList<>();
+ 
     
-    public AffichageEtude() {
+    public AffichageEtude(String idEtude,  DialogueBD dialogueBD, Utilisateur utilisateur) {
         initComponents();
         //-------- On définit les dimensions du panneau et de ses composants en fonction de la taille de l'écran -------
         //On récupère la taille de l'écran
@@ -57,6 +73,12 @@ public class AffichageEtude extends javax.swing.JPanel {
         //L'attribut largeurBouton correspond à 1/8 de la largeur de largeurCentree
         largeurBouton = largeurCentree / 8;
         hauteurInfo = 1;
+
+        //On initialise les données de l'étude
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idEtude = idEtude;
+        remplirChampsEtude(idEtude);
     }
 
     /**
@@ -78,13 +100,13 @@ public class AffichageEtude extends javax.swing.JPanel {
         DateDemarrageValeur = new javax.swing.JLabel();
         DureeEtude = new javax.swing.JLabel();
         DureeEtudeValeur = new javax.swing.JLabel();
-        PanneauSud = new javax.swing.JPanel();
         PanneauCentre = new javax.swing.JPanel();
         PatientsParticipants = new javax.swing.JLabel();
         BoutonAjouterUnPatientEtude = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ListePatientsEtude = new javax.swing.JList();
+        ListePatients = new javax.swing.JPanel();
+        BoutonAjouterVolontaire = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
         setLayout(new java.awt.BorderLayout());
 
@@ -121,7 +143,7 @@ public class AffichageEtude extends javax.swing.JPanel {
         DureeEtude.setText("Durée de l'étude : ");
 
         DureeEtudeValeur.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        DureeEtudeValeur.setText("dureeEtude");
+        DureeEtudeValeur.setText("duree Etude");
 
         javax.swing.GroupLayout PanneauNordLayout = new javax.swing.GroupLayout(PanneauNord);
         PanneauNord.setLayout(PanneauNordLayout);
@@ -147,7 +169,7 @@ public class AffichageEtude extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TypeRechercheValeur))
                     .addComponent(IntituleEtudeClinique))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         PanneauNordLayout.setVerticalGroup(
             PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,27 +195,12 @@ public class AffichageEtude extends javax.swing.JPanel {
 
         add(PanneauNord, java.awt.BorderLayout.PAGE_START);
 
-        PanneauSud.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout PanneauSudLayout = new javax.swing.GroupLayout(PanneauSud);
-        PanneauSud.setLayout(PanneauSudLayout);
-        PanneauSudLayout.setHorizontalGroup(
-            PanneauSudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 799, Short.MAX_VALUE)
-        );
-        PanneauSudLayout.setVerticalGroup(
-            PanneauSudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        add(PanneauSud, java.awt.BorderLayout.PAGE_END);
-
         PanneauCentre.setBackground(new java.awt.Color(255, 255, 255));
         PanneauCentre.setPreferredSize(new java.awt.Dimension(799, 280));
 
         PatientsParticipants.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         PatientsParticipants.setForeground(new java.awt.Color(4, 66, 114));
-        PatientsParticipants.setText("Patients participants à l'étude ");
+        PatientsParticipants.setText("Patients participant à l'étude ");
 
         BoutonAjouterUnPatientEtude.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouterUnPatientEtude.setForeground(new java.awt.Color(4, 66, 114));
@@ -204,12 +211,16 @@ public class AffichageEtude extends javax.swing.JPanel {
             }
         });
 
-        ListePatientsEtude.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        ListePatients.setLayout(new java.awt.BorderLayout());
+
+        BoutonAjouterVolontaire.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouterVolontaire.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonAjouterVolontaire.setText("Ajouter un volontaire sain ");
+        BoutonAjouterVolontaire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterVolontaireActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(ListePatientsEtude);
 
         javax.swing.GroupLayout PanneauCentreLayout = new javax.swing.GroupLayout(PanneauCentre);
         PanneauCentre.setLayout(PanneauCentreLayout);
@@ -218,10 +229,13 @@ public class AffichageEtude extends javax.swing.JPanel {
             .addGroup(PanneauCentreLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BoutonAjouterUnPatientEtude)
-                    .addComponent(PatientsParticipants)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(ListePatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanneauCentreLayout.createSequentialGroup()
+                        .addComponent(BoutonAjouterUnPatientEtude)
+                        .addGap(18, 18, 18)
+                        .addComponent(BoutonAjouterVolontaire))
+                    .addComponent(PatientsParticipants))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         PanneauCentreLayout.setVerticalGroup(
             PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,10 +243,12 @@ public class AffichageEtude extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(PatientsParticipants)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BoutonAjouterUnPatientEtude)
+                .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BoutonAjouterUnPatientEtude)
+                    .addComponent(BoutonAjouterVolontaire))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addComponent(ListePatients, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         add(PanneauCentre, java.awt.BorderLayout.CENTER);
@@ -242,23 +258,123 @@ public class AffichageEtude extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonAjouterUnPatientEtudeActionPerformed
 
+    private void BoutonAjouterVolontaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterVolontaireActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BoutonAjouterVolontaireActionPerformed
+
+    public void remplirChampsEtude(String idEtude) {
+    // On récupère les informations de l'étude
+    try {
+    // On effectue une recherche dans la table Etude avec l'ID de l'étude sélectionné
+        ResultSet resultat = dialogueBD.rechercheTable(
+                "Etude",
+                new HashMap<String, String>() {
+                    {
+                    put("idEtude", (String) idEtude);
+                    }
+                },
+                false);
+        // On se positionne sur le premier (et unique) résultat
+        resultat.next();
+        // On remplit les champs
+        IntituleEtudeClinique.setText(resultat.getString("nom"));
+        TypeRechercheValeur.setText(resultat.getString("TYPERECHERCHE"));
+        DateDemarrageValeur.setText(resultat.getString("DATEDEBUT").substring(0,10));
+        DureeEtudeValeur.setText(resultat.getString("DUREE")); 
+        
+        //Recherche dans la table PersonnelMedical le nom du PH avec l'ID Personnel Medical associé
+        String idPersoMedical = resultat.getString("IDPERSONNELMEDICAL");
+        ResultSet ph = dialogueBD.rechercheTable(
+            "PersonnelMedical",
+            new HashMap<String, String>() {
+                {
+                put("IDPERSONNELMEDICAL", (String) idPersoMedical);                    
+                }
+            },
+            false);
+        // On se positionne sur le premier (et unique) résultat
+        ph.next();
+        //On récupère le nom et prénom du PH pour remplir le champs
+        nomPraticien.setText(ph.getString("nom").trim() + " " + ph.getString("prenom").trim());                
+        //On récupère les patients de l'étude
+        String requete = "SELECT * FROM EtudePatient NATURAL JOIN Patient WHERE idEtude = " + idEtude;
+        ResultSet resultatPatients = dialogueBD.requete(requete);
+        AfficherListePatients afficherListePatients = new AfficherListePatients(resultatPatients);
+        afficherListePatients.addPatientSelectedListener(this);
+
+        //On supprime tous les composants du panneau central
+        for (Component component : PanneauCentre.getComponents()) {
+            PanneauCentre.remove(component);
+        }
+        //On met à jour le tableau et on ajoute les patients de l'étude dans le tableau
+        ListePatients.add(afficherListePatients, BorderLayout.CENTER);
+        ListePatients.repaint();
+        ListePatients.revalidate();
+
+        System.out.println("le tableau a été ajouté");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addpatientSelectedListener(AfficherListePatientsListener listener) {
+        patientSelectioneListenerList.add(listener);
+    }
+
+    @Override
+    public void patientSelected(String idPatient) {
+        for(AfficherListePatientsListener listener : patientSelectioneListenerList){
+            listener.patientSelected(idPatient);
+        }
+        
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AffichageEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AffichageEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AffichageEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AffichageEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonAjouterUnPatientEtude;
+    private javax.swing.JButton BoutonAjouterVolontaire;
     private javax.swing.JLabel DateDemarrage;
     private javax.swing.JLabel DateDemarrageValeur;
     private javax.swing.JLabel DureeEtude;
     private javax.swing.JLabel DureeEtudeValeur;
     private javax.swing.JLabel IntituleEtudeClinique;
-    private javax.swing.JList ListePatientsEtude;
+    private javax.swing.JPanel ListePatients;
     private javax.swing.JPanel PanneauCentre;
     private javax.swing.JPanel PanneauNord;
-    private javax.swing.JPanel PanneauSud;
     private javax.swing.JLabel PatientsParticipants;
     private javax.swing.JLabel PraticienHospitaliier;
     private javax.swing.JLabel TypeRecherche;
     private javax.swing.JLabel TypeRechercheValeur;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomPraticien;
     // End of variables declaration//GEN-END:variables
+
 }

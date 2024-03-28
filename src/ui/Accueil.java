@@ -6,6 +6,7 @@
 package ui;
 
 import fc.AfficherListePatientsListener;
+import fc.AfficherListeEtudesListener;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
@@ -18,7 +19,7 @@ import java.util.HashMap;
  * Page d'accueil de l'application
  * @author Antoine
  */
-public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener {
+public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener, AfficherListeEtudesListener{
 
     /**
      * Creates new form Accueil
@@ -468,7 +469,9 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             PanneauPrincipale.remove(component);
         }
         //On ajoute le JScrollPane au panneau principal
-        PanneauPrincipale.add(new AffichageListeEtude(dialogueBD,utilisateur), java.awt.BorderLayout.CENTER);
+        AffichageListeEtude listeEtude = new AffichageListeEtude(dialogueBD,utilisateur);
+        PanneauPrincipale.add(listeEtude, java.awt.BorderLayout.CENTER);
+        listeEtude.addEtudeSelectedListener(this);
         //On actualise le panneau principal
         PanneauPrincipale.revalidate();
     }//GEN-LAST:event_BoutonRechercheCliniqueActionPerformed
@@ -487,25 +490,43 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     public void patientSelected(String idPatient) {
         if(utilisateur.isPersonnelMedical()) { // Si l'utilisateur est un personnel médical
             // On enlève le panel actuel du panneau principal central
-            PanneauPrincipale.remove(scrollPaneTable);
-            // On crée un nouveau panel pour afficher les informations du patient
-            AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
-            // On ajoute le nouveau panel au panneau principal central
-            PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
-            // On actualise le panneau principal central
-            PanneauPrincipale.revalidate();
-            PanneauPrincipale.repaint();
-        }else{ // Si l'utilisateur est un personnel administratif, on lui permet d'ouvrir un séjour
+        // On crée un nouveau panel pour afficher les informations du patient
+        AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
+        //On supprime tous les composants du panneau principal
+        for (Component component : PanneauPrincipale.getComponents()) {
+            PanneauPrincipale.remove(component);
+        }
+        // On ajoute le nouveau panel au panneau principal central
+        PanneauPrincipale.add(affichagePatient, BorderLayout.CENTER);
+        // On actualise le panneau principal central
+        PanneauPrincipale.revalidate();
+        PanneauPrincipale.repaint();
+        }
+        else{ // Si l'utilisateur est un personnel administratif, on lui permet d'ouvrir un séjour
             // TODO : Ouvrir un séjour
             // On crée un nouveau JFrame pour ouvrir un séjour
             AjoutSejour ajoutSejour = new AjoutSejour(dialogueBD, utilisateur, idPatient);
             // On affiche le JFrame
             ajoutSejour.setVisible(true);
-
-
-        }
-
+            }
     }
+
+    public void etudeSelected(String idEtude) {
+        // On crée un nouveau panel pour afficher les informations du patient
+        AffichageEtude affichageEtude = new AffichageEtude(idEtude, dialogueBD, utilisateur);
+        affichageEtude.addpatientSelectedListener(this);
+        //On supprime tous les composants du panneau principal
+        for (Component component : PanneauPrincipale.getComponents()) {
+            PanneauPrincipale.remove(component);
+        }
+        // On ajoute le nouveau panel au panneau principal central
+        PanneauPrincipale.add(affichageEtude, BorderLayout.CENTER);
+        // On actualise le panneau principal central
+        PanneauPrincipale.revalidate();
+        PanneauPrincipale.repaint();
+    }
+
+
     /**
      * @param args the command line arguments
      */
