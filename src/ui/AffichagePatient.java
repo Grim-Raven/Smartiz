@@ -20,6 +20,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import ui.AjoutActe.AjoutExamenBiologique;
+import ui.AjoutActe.AjouterAnesthesie;
 
 /**
  * @author emmaa
@@ -175,7 +177,6 @@ public class AffichagePatient extends javax.swing.JPanel {
         SexePatient.setText("SexePatient");
 
         IPPPatient.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        IPPPatient.setForeground(new java.awt.Color(4, 66, 114));
         IPPPatient.setText("IPPPatient");
 
         Adresse.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -211,14 +212,14 @@ public class AffichagePatient extends javax.swing.JPanel {
         labelChambre.setText("Chambre :");
 
         texteChambre.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        texteChambre.setText("chambre");
+        texteChambre.setText("chambrePatient");
 
         labelLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         labelLit.setForeground(new java.awt.Color(4, 66, 114));
-        labelLit.setText("Lit :");
+        labelLit.setText("Lit : ");
 
         texteLit.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        texteLit.setText("lit");
+        texteLit.setText("litPatient");
 
         javax.swing.GroupLayout PanneauNordLayout = new javax.swing.GroupLayout(PanneauNord);
         PanneauNord.setLayout(PanneauNordLayout);
@@ -248,22 +249,26 @@ public class AffichagePatient extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AdressePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanneauNordLayout.createSequentialGroup()
-                        .addComponent(Fumeur)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FumeurPatient)
-                        .addGap(34, 34, 34)
-                        .addComponent(Alcool)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AlcoolPatient)
-                        .addGap(87, 87, 87)
-                        .addComponent(labelChambre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(texteChambre)
-                        .addGap(29, 29, 29)
-                        .addComponent(labelLit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(texteLit)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addComponent(Fumeur)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FumeurPatient))
+                            .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addComponent(labelChambre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(texteChambre)))
+                        .addGap(97, 97, 97)
+                        .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addComponent(Alcool)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AlcoolPatient))
+                            .addGroup(PanneauNordLayout.createSequentialGroup()
+                                .addComponent(labelLit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(texteLit)))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         PanneauNordLayout.setVerticalGroup(
             PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,12 +294,13 @@ public class AffichagePatient extends javax.swing.JPanel {
                     .addComponent(Fumeur)
                     .addComponent(FumeurPatient)
                     .addComponent(Alcool)
-                    .addComponent(AlcoolPatient)
+                    .addComponent(AlcoolPatient))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(PanneauNordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelChambre)
                     .addComponent(texteChambre)
                     .addComponent(labelLit)
-                    .addComponent(texteLit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(texteLit)))
         );
 
         add(PanneauNord, java.awt.BorderLayout.PAGE_START);
@@ -349,10 +355,10 @@ public class AffichagePatient extends javax.swing.JPanel {
         PanneauCentral.setLayout(new java.awt.BorderLayout());
 
         listeActes.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        listeActes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listeActesMouseClicked(evt);
-            }
+        listeActes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(listeActes);
 
@@ -360,9 +366,6 @@ public class AffichagePatient extends javax.swing.JPanel {
 
         panelSejourEtBoutons.setBackground(new java.awt.Color(255, 255, 255));
 
-        MenuDeroulantSejours.setBackground(new java.awt.Color(255, 255, 255));
-        MenuDeroulantSejours.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        MenuDeroulantSejours.setForeground(new java.awt.Color(4, 66, 114));
         MenuDeroulantSejours.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuDeroulantSejoursActionPerformed(evt);
@@ -385,6 +388,11 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         BoutonAnesthesie.setForeground(new java.awt.Color(4, 66, 114));
         BoutonAnesthesie.setText("Anesthésie");
+        BoutonAnesthesie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAnesthesieActionPerformed(evt);
+            }
+        });
         PanelBoutons.add(BoutonAnesthesie);
 
         BoutonConsultation.setBackground(new java.awt.Color(236, 242, 254));
@@ -453,7 +461,25 @@ public class AffichagePatient extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonExamenBiologiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonExamenBiologiqueActionPerformed
-        // TODO add your handling code here:
+        String idSejour;
+        // On récupère l'identifiant du séjour sélectionné
+        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
+        }else {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
+        }
+        // On ouvre la fenêtre de demande d'examen biologique 
+        JFrame AjoutExamenBiologique = new AjoutExamenBiologique(dialogueBD, this.utilisateur, idSejour);
+        // On affiche la fenêtre
+        AjoutExamenBiologique.setVisible(true);
+        // On ajoute un listener pour mettre à jour la liste des actes après l'ajout de la demande
+        AjoutExamenBiologique.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirActes();
+            }
+        });
+
     }//GEN-LAST:event_BoutonExamenBiologiqueActionPerformed
 
     private void boutonClotureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonClotureActionPerformed
@@ -540,6 +566,27 @@ public class AffichagePatient extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_listeActesMouseClicked
+
+    private void BoutonAnesthesieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAnesthesieActionPerformed
+        String idSejour;
+        // On récupère l'identifiant du séjour sélectionné
+        if(MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
+        }else {
+            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
+        }
+        // On ouvre la fenêtre de demande de pré-consultation en anesthésie 
+        JFrame AjouterAnesthesie = new AjouterAnesthesie(dialogueBD, this.utilisateur, idSejour);
+        // On affiche la fenêtre
+        AjouterAnesthesie.setVisible(true);
+        // On ajoute un listener pour mettre à jour la liste des actes après l'ajout de la prescription
+        AjouterAnesthesie.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirActes();
+            }
+        });
+    }//GEN-LAST:event_BoutonAnesthesieActionPerformed
 
     /**
      * Remplit les champs de l'interface avec les informations du patient
@@ -673,7 +720,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                         // TODO
                         break;
                     case "Anesthésie":
-                        // TODO
+                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"),0,10);
                         break;
                     case "Prescription":
                         infoActe.append(" : ").append(resultat.getString("posologie"));
@@ -682,7 +729,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                         }
                         break;
                     case "Examen Biologique":
-                        // TODO
+                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" - demandé le : ").append(resultat.getString("datePrescription"),0,10);
                         break;
                 }
                 actes.add(infoActe.toString());

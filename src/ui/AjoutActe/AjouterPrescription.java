@@ -25,9 +25,12 @@ public class AjouterPrescription extends javax.swing.JFrame {
 
     public AjouterPrescription(DialogueBD dialogueBD, Utilisateur utilisateur,String idSejour) {
         initComponents();
+        //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
+        setResizable(false);
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
+        //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
     }
 
@@ -58,8 +61,8 @@ public class AjouterPrescription extends javax.swing.JFrame {
         MenuDeroulantVoie = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TexteCommentaire = new javax.swing.JTextPane();
-        labelDate = new javax.swing.JLabel();
         DateChooserPrescription = new com.toedter.calendar.JDateChooser();
+        labelDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -98,6 +101,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         VoieAdministration.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         VoieAdministration.setText("Voie d'administration");
 
+        BoutonAjouter.setBackground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouter.setText("Ajouter");
         BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +119,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TexteCommentaire);
 
         labelDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        labelDate.setText("Date de la prise");
+        labelDate.setText("Date ");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -156,12 +160,12 @@ public class AjouterPrescription extends javax.swing.JFrame {
                                 .addComponent(BoutonAjouter))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(labelDate)))
+                                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 166, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelDate)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -189,14 +193,14 @@ public class AjouterPrescription extends javax.swing.JFrame {
                 .addComponent(VoieAdministration)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MenuDeroulantVoie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(labelDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DateChooserPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Commentaire)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BoutonAjouter)
                 .addGap(18, 18, 18))
@@ -253,8 +257,6 @@ public class AjouterPrescription extends javax.swing.JFrame {
         dialogueBD.insertActe(prescriptionData);
         // On ferme la fenêtre
         this.dispose();
-
-        // On envoie les données à la base de données
     }//GEN-LAST:event_BoutonAjouterActionPerformed
 
     public void changerLangue(String langue) {

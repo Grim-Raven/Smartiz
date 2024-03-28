@@ -7,6 +7,8 @@ package ui.AjoutActe;
 
 import fc.DialogueBD;
 import fc.Utilisateur;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
+        //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
 
     }
@@ -54,20 +57,27 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         AjouterUnExamenBiologique.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         AjouterUnExamenBiologique.setText("Ajouter un examen biologique ");
 
         Date.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        Date.setText("Date");
+        Date.setText("Date de demande");
 
         TypeDExamen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TypeDExamen.setText("Type d'examen");
 
+        BoutonAjouter.setBackground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        BoutonAjouter.setForeground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setText("Ajouter");
         BoutonAjouter.setActionCommand("");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         MenuDeroulantTypeExamen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Biochimie", "Génétique", "Hématologie", "Immunologie", "Microbiologie", "Sérologie" }));
 
@@ -132,6 +142,26 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+        // Récupération des données
+        Date date = DateChooser.getDate();
+        String commentaire = (String) MenuDeroulantTypeExamen.getSelectedItem()+ " "+ ZoneCommentaire.getText();
+        String dateExamenBio = new java.sql.Date(date.getTime()).toString();
+        
+        //On entre les données dans la hashmap
+        HashMap<String, String> examenBioData = new HashMap<String, String>();
+        examenBioData.put("nom", "Examen Biologique");
+        examenBioData.put("datePrescription",dateExamenBio);
+        examenBioData.put("commentaire",commentaire);
+        examenBioData.put("idSejour",idSejour);
+        examenBioData.put("idPrescripteur", utilisateur.getIdUtilisateur());
+        // On envoie les données à la base de données
+        dialogueBD.insertActe(examenBioData);
+        // On ferme la fenêtre
+        this.dispose();
+        
+    }//GEN-LAST:event_BoutonAjouterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,7 +204,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AjoutExamenBiologique(new DialogueBD(),new Utilisateur("Cot","Harry",true,"English", 1,1111,"Y"),"3").setVisible(true);
+                new AjoutExamenBiologique(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3").setVisible(true);
             }
         });
     }
