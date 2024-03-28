@@ -4,59 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Ajout d'un Patient et d'un séjour via l'accueil quand on est un personnel Administratif">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/blobs/version" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/hapi_base_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/acknowledgements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/ADT_A01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Create_A_Message.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Create_A_Message.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Run_Test_Panel.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/Run_Test_Panel.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/id_file" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/examples/log4j.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-base-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-examples-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-hl7overhttp-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v21-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v22-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v23-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v231-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v24-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v25-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v251-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v26-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/log4j-1.2.17.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/slf4j-api-1.6.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/slf4j-log4j12-1.6.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/license.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-base-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-base-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.1-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v21-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.1-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v22-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.1-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v23-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v231-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v231-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v24-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v24-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v25-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v25-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v251-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v251-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v26-2.2-beta1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hapi-dist-2.2-all/src/hapi-structures-v26-2.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fc/hl7/receptionHL7.java" afterDir="false" />
+    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="Premiers Tests">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/hapi_structures_v24_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_6_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_log4j12_1_6_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/id_file" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fc/hl7/TestHL7.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/hl7/receptionHL7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/hl7/receptionHL7.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="connexion-personnel-administratif" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,84 +68,73 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.Accueil.executor": "Run",
-    "Application.Accueil2.executor": "Run",
-    "Application.AjoutConsultation.executor": "Run",
-    "Application.AjoutPatient.executor": "Run",
-    "Application.AjouterPrescription.executor": "Run",
-    "Application.ConnexionDB.executor": "Run",
-    "Application.InterfaceConnexion.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.ValidationPrescription.executor": "Run",
-    "Application.ValiderConsultation.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.TestConnexionDB.executor": "Run",
-    "JUnit.TestDialogue2.executor": "Run",
-    "JUnit.TestDialogueBD.executor": "Run",
-    "JUnit.TestDialogueBD.testGetPatientsRecherche.executor": "Run",
-    "JUnit.TestDialogueBD.testGetPatientsService.executor": "Run",
-    "JUnit.TestDialogueBD.testInsertLocG.executor": "Run",
-    "JUnit.TestDialogueBD.testInsertPatient.executor": "Run",
-    "JUnit.TestDialogueBD.testInsertPersonnelMedical.executor": "Run",
-    "JUnit.TestDialogueBD.testInsertPrescription.executor": "Run",
-    "JUnit.TestDialogueBD.testInsertSejour.executor": "Run",
-    "JUnit.TestDialogueBD.testPatientExiste.executor": "Run",
-    "JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor": "Run",
-    "JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor": "Run",
-    "JUnit.TestHashage.executor": "Run",
-    "JUnit.TestHashage.testsha256.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/lib/hapi-dist-2.2-all/lib/slf4j-log4j12-1.6.6.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Accueil.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Accueil2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AjoutConsultation.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AjoutPatient.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AjouterPrescription.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ConnexionDB.executor&quot;: &quot;Run&quot;,
+    &quot;Application.InterfaceConnexion.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ValidationPrescription.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ValiderConsultation.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.TestConnexionDB.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogue2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testGetPatientsRecherche.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testGetPatientsService.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testInsertLocG.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testInsertPatient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testInsertPersonnelMedical.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testInsertPrescription.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testInsertSejour.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testPatientExiste.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHL7.testEnvoieDemandeRadio.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHL7.testEnvoiePatient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHashage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHashage.testsha256.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hl7&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/src/main/resources/log4j.properties&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="fc" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Accueil">
+  <component name="RunManager" selected="JUnit.TestHL7.testEnvoieDemandeRadio">
     <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.Accueil2" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Accueil2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.Accueil2" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -209,41 +159,62 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ValiderConsultation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.validerActes.ValiderConsultation" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.validerActes.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDialogueBD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestHL7.testEnvoieDemandeRadio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="fc.*" />
+          <option name="PATTERN" value="fc.hl7.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="fc" />
-      <option name="MAIN_CLASS_NAME" value="fc.TestDialogueBD" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="fc.hl7" />
+      <option name="MAIN_CLASS_NAME" value="fc.hl7.TestHL7" />
+      <option name="METHOD_NAME" value="testEnvoieDemandeRadio" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestHL7.testEnvoiePatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <classpathModifications>
+        <entry path="C:\Users\Antoine\Desktop\Informatique\Java\Smartiz\src\main\resources\log4j.properties" />
+      </classpathModifications>
+      <module name="Smartiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fc.hl7.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="fc.hl7" />
+      <option name="MAIN_CLASS_NAME" value="fc.hl7.TestHL7" />
+      <option name="METHOD_NAME" value="testEnvoiePatient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Accueil" />
+      <item itemvalue="Application.AjoutPatient" />
+      <item itemvalue="JUnit.TestHL7.testEnvoieDemandeRadio" />
+      <item itemvalue="JUnit.TestHL7.testEnvoiePatient" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestHL7.testEnvoieDemandeRadio" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestHL7.testEnvoiePatient" />
         <item itemvalue="Application.Accueil" />
         <item itemvalue="Application.AjoutPatient" />
-        <item itemvalue="Application.Accueil2" />
-        <item itemvalue="JUnit.TestDialogueBD" />
-        <item itemvalue="Application.ValiderConsultation" />
       </list>
     </recent_temporary>
   </component>
@@ -329,6 +300,11 @@
       <workItem from="1710604685190" duration="4602000" />
       <workItem from="1710691148239" duration="71000" />
       <workItem from="1710691227412" duration="2471000" />
+      <workItem from="1711354652175" duration="88000" />
+      <workItem from="1711533391328" duration="5115000" />
+      <workItem from="1711546812548" duration="6883000" />
+      <workItem from="1711609993013" duration="6451000" />
+      <workItem from="1711617936068" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
       <option name="closed" value="true" />
@@ -482,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710528253437</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Premiers Tests">
+      <option name="closed" value="true" />
+      <created>1711354700180</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711354700180</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,19 +521,19 @@
     <MESSAGE value="ajout de la localisation géographique dans l'affichage d'un patient" />
     <MESSAGE value="changements de couleurs dans l'UI" />
     <MESSAGE value="Corrigé le code AjoutPatient" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigé le code AjoutPatient" />
+    <MESSAGE value="Premiers Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Premiers Tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="4" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="ca.uhn.hl7v2.HL7Exception" package="ca.uhn.hl7v2" />
+          <option name="timeStamp" value="5" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

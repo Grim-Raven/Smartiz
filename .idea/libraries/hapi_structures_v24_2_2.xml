@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="hapi-structures-v24-2.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hapi-dist-2.2-all/lib/hapi-structures-v24-2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
