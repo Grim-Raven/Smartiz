@@ -5,9 +5,17 @@
  */
 package ui.AjoutActe;
 
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.model.Message;
 import fc.DialogueBD;
 import fc.Utilisateur;
+import fc.hl7.messageHL7;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -199,11 +207,11 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
+    private void BoutonAjouterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
         // Récupération des données
         //TODO : Rendre des champs obligatoires
         String typeExamen = buttonGroupTypeExamen.getSelection().getActionCommand();
-        String dateExamen = new java.sql.Date(DateChooserExamen.getDate().getTime()).toString();
+        String dateExamen = new Date(DateChooserExamen.getDate().getTime()).toString();
         String commentaire = ZoneCommentaire.getText();
 
         // Création de la HashMap pour l'ajout de l'examen radiologique dans la base de données
@@ -214,19 +222,54 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         dataSQL.put("idSejour", idSejour);
         dataSQL.put("idPrescripteur", utilisateur.getIdUtilisateur());
         dataSQL.put("valide", "N");
-        // Ajout de l'examen radiologique
-        dialogueBD.insertActe(dataSQL);
+
+        // Ajout de l'examen radiologique à la BD
+        String idActe = dialogueBD.insertActe(dataSQL);
         System.out.println("Ajouté à la base de données");
+
+        // Création de la HashMap pour l'envoie de l'examen radiologique au SIR via HL7
+        HashMap<String, String> dataHL7 = new HashMap<>();
+        // Remplissage des informations sur la demande
+        dataHL7.put("idDemande", idActe);
+        dataHL7.put("codeExamen", "RADIO");
+        dataHL7.put("nomExamen", typeExamen);
+        dataHL7.put("commentaire", commentaire);
+        dataHL7.put("dateExamen",dateExamen.replace("-",""));
+        // Remplissage des informations relatives au patient
+        // On récupère les informations du patient lié au séjour dans lequel l'acte est inclus
+        String requete =
+                "SELECT * "+
+                "FROM Sejour JOIN Patient USING(idPatient) "+
+                "WHERE idSejour="+idSejour;
+        ResultSet resultPatient = dialogueBD.requete(requete);
+        try {
+            resultPatient.next(); // Positionnement sur la 1ère ligne
+            dataHL7.put("nom",resultPatient.getString("nom"));
+            dataHL7.put("prenom", resultPatient.getString("prenom"));
+            dataHL7.put("idPatient", resultPatient.getString("idPatient"));
+            // Retrait des "-" dans la date de naissance
+            dataHL7.put("dateNaissance", resultPatient.getString("dateNaissance").substring(0,10).replace("-",""));
+            dataHL7.put("sexe", resultPatient.getString("sexe"));
+            // Envoi de la demande
+            //TODO : Faire quelque chose si pas de réponse
+            Message reponse = messageHL7.envoieDemandeRadio(dataHL7);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (HL7Exception e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // Fermeture de la fenêtre
         this.dispose();
     }//GEN-LAST:event_BoutonAjouterActionPerformed
     /**
      * Méthode pour changer la langue de l'interface
-     * @param langue
+     * @param langue Langue choisie pour l'interface
      */
     public void changerLangue(String langue) {
-         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+         //Si la langue sélectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
          //On remplace chaque composant par son équivalent anglais
         if(langue.equals("English")){
             DemandeExamenRadiologie.setText("Request for radiological examination");

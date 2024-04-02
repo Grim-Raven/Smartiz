@@ -63,10 +63,16 @@ public class messageHL7 {
         pid.getAdministrativeSex().setValue(dataDemande.get("sexe"));
 
         // Remplissage des informations de la demande
+        // id de la demande
         obr.getPlacerOrderNumber().getEntityIdentifier().setValue(dataDemande.get("idDemande"));
+        // code de la demande (RADIO)
         obr.getUniversalServiceIdentifier().getIdentifier().setValue(dataDemande.get("codeExamen"));
+        // nom de la demande (Ex : Radiologie du thorax)
         obr.getUniversalServiceIdentifier().getText().setValue(dataDemande.get("nomExamen"));
-        obr.getObservationDateTime().getTimeOfAnEvent().setValue(dataDemande.get("dateDemande"));
+        // date de l'examen (date prévue de l'examen, EX : 20240415)
+        obr.getObservationDateTime().getTimeOfAnEvent().setValue(dataDemande.get("dateExamen"));
+        // commentaire (commentaire du médecin qui crée la demande d'examen)
+        obr.getReasonForStudy(0).getText().setValue(dataDemande.get("commentaire"));
         // Envoie du message HL7
         return envoieMessageHL7(oml);
     }

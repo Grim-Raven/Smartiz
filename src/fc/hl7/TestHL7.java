@@ -31,7 +31,8 @@ public class TestHL7 {
             dataDemande.put("codeExamen", "RADIO");
             dataDemande.put("nomExamen", "Radiologie du thorax");
             LocalDate dateDuJour = LocalDate.now();
-            dataDemande.put("dateDemande", dateDuJour.toString().replace("-", ""));
+            dataDemande.put("dateExamen", dateDuJour.toString().replace("-", ""));
+            dataDemande.put("commentaire", "Faut lui faire la radio svp merci");
 
             // Envoi de la demande
             Message reponse = messageHL7.envoieDemandeRadio(dataDemande);
