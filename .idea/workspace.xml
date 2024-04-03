@@ -4,138 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="ajout listener bouton">
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+    <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="Ajout radiologie à la BD ok">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Smartiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Smartiz.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/hl7/TestHL7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/hl7/TestHL7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterRadiologie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterRadiologie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="hl7" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Grim-Raven&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="87f9a5ee-4ca5-4ce8-930f-9ae9702c93d7" />
-        <option name="url" value="https://github.com/Grim-Raven/Smartiz.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
+  &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2bAJ7RVOxihrZR6oTSO97uvvOa0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2eMiWiuQHncffviSNVCCYkPI5Rb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Accueil.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Accueil2.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjoutConsultation.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjoutPatient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AjouterPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;Application.InterfaceConnexion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ValidationPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ValiderConsultation.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.TestConnexionDB.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogue2.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testGetPatientsRecherche.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testGetPatientsService.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertLocG.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPatient.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPersonnelMedical.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertPrescription.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testInsertSejour.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testPatientExiste.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiNegative.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDialogueBD.testRequeteConnexionDpiPositive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHL7.testEnvoieDemandeRadio.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHL7.testEnvoiePatient.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHashage.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHashage.testsha256.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/lib/hapi-dist-2.2-all/lib/log4j-1.2.17.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Accueil.executor": "Run",
+    "Application.AjouterRadiologie.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "ajout-radiologie",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/marti/OneDrive/Desktop 2/Informatique/Java Projets/Smartiz/lib/hapi-dist-2.2-all/lib/slf4j-log4j12-1.6.6.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.sync",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="fc" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.TestHL7.testEnvoieDemandeRadio">
+}]]></component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.Accueil2" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AjoutPatient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.AjoutPatient" />
       <module name="Smartiz" />
       <extension name="coverage">
         <pattern>
@@ -154,55 +71,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestHL7.testEnvoieDemandeRadio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fc.hl7.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="fc.hl7" />
-      <option name="MAIN_CLASS_NAME" value="fc.hl7.TestHL7" />
-      <option name="METHOD_NAME" value="testEnvoieDemandeRadio" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestHL7.testEnvoiePatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <classpathModifications>
-        <entry path="C:\Users\Antoine\Desktop\Informatique\Java\Smartiz\src\main\resources\log4j.properties" />
-      </classpathModifications>
-      <module name="Smartiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fc.hl7.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="fc.hl7" />
-      <option name="MAIN_CLASS_NAME" value="fc.hl7.TestHL7" />
-      <option name="METHOD_NAME" value="testEnvoiePatient" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.Accueil" />
-      <item itemvalue="Application.AjoutPatient" />
-      <item itemvalue="JUnit.TestHL7.testEnvoieDemandeRadio" />
-      <item itemvalue="JUnit.TestHL7.testEnvoiePatient" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestHL7.testEnvoieDemandeRadio" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.TestHL7.testEnvoiePatient" />
         <item itemvalue="Application.Accueil" />
-        <item itemvalue="Application.AjoutPatient" />
       </list>
     </recent_temporary>
   </component>
@@ -210,328 +82,37 @@
     <attachedChunks>
       <set>
         <option value="jdk-1.8.0_402-corretto-1.8.0_402-4caba194b151-ae57be32" />
-        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9d259c5c-b7bb-4ece-93b6-d335cab58dca" name="Changes" comment="" />
-      <created>1705651783555</created>
+      <changelist id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="" />
+      <created>1711720893806</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1705651783555</updated>
-      <workItem from="1707660655456" duration="210000" />
-      <workItem from="1707660889735" duration="971000" />
-      <workItem from="1707662369478" duration="1185000" />
-      <workItem from="1707663584043" duration="564000" />
-      <workItem from="1707664184646" duration="165000" />
-      <workItem from="1707730203891" duration="5294000" />
-      <workItem from="1707748579618" duration="6732000" />
-      <workItem from="1707836213133" duration="652000" />
-      <workItem from="1708010366603" duration="6194000" />
-      <workItem from="1708017108468" duration="1809000" />
-      <workItem from="1708024122804" duration="925000" />
-      <workItem from="1708025881528" duration="645000" />
-      <workItem from="1708067077199" duration="413000" />
-      <workItem from="1708067510437" duration="4259000" />
-      <workItem from="1708080530641" duration="261000" />
-      <workItem from="1708102890473" duration="1715000" />
-      <workItem from="1708104645594" duration="58000" />
-      <workItem from="1708104720407" duration="12000" />
-      <workItem from="1708104777415" duration="1018000" />
-      <workItem from="1708105832639" duration="1122000" />
-      <workItem from="1708443777604" duration="3279000" />
-      <workItem from="1708511048671" duration="990000" />
-      <workItem from="1708674586646" duration="7217000" />
-      <workItem from="1708693324538" duration="2549000" />
-      <workItem from="1708696077718" duration="6362000" />
-      <workItem from="1708707440626" duration="3312000" />
-      <workItem from="1708710860274" duration="1221000" />
-      <workItem from="1708873341444" duration="4093000" />
-      <workItem from="1708887525710" duration="6110000" />
-      <workItem from="1708939834489" duration="164000" />
-      <workItem from="1709024295357" duration="8538000" />
-      <workItem from="1709041156384" duration="9934000" />
-      <workItem from="1709129527392" duration="2031000" />
-      <workItem from="1709137739227" duration="67000" />
-      <workItem from="1709228881206" duration="764000" />
-      <workItem from="1709301377254" duration="2798000" />
-      <workItem from="1709473142207" duration="1643000" />
-      <workItem from="1709474849348" duration="8161000" />
-      <workItem from="1709494971425" duration="89000" />
-      <workItem from="1709564185192" duration="5640000" />
-      <workItem from="1709628840428" duration="2315000" />
-      <workItem from="1709631313387" duration="365000" />
-      <workItem from="1709667484325" duration="38000" />
-      <workItem from="1709718455233" duration="2030000" />
-      <workItem from="1709720713127" duration="2212000" />
-      <workItem from="1709796975737" duration="4172000" />
-      <workItem from="1709825273087" duration="3530000" />
-      <workItem from="1709881889391" duration="3562000" />
-      <workItem from="1709933346156" duration="524000" />
-      <workItem from="1709933941056" duration="2292000" />
-      <workItem from="1709937169495" duration="165000" />
-      <workItem from="1709991112457" duration="80000" />
-      <workItem from="1709991200617" duration="111000" />
-      <workItem from="1709991320564" duration="1454000" />
-      <workItem from="1710080216582" duration="3192000" />
-      <workItem from="1710083922792" duration="2121000" />
-      <workItem from="1710176488728" duration="7978000" />
-      <workItem from="1710266674391" duration="1700000" />
-      <workItem from="1710354268854" duration="3341000" />
-      <workItem from="1710444998682" duration="568000" />
-      <workItem from="1710516513880" duration="1289000" />
-      <workItem from="1710517817151" duration="9696000" />
-      <workItem from="1710604395154" duration="282000" />
-      <workItem from="1710604685190" duration="4602000" />
-      <workItem from="1710691148239" duration="71000" />
-      <workItem from="1710691227412" duration="2471000" />
-      <workItem from="1711354652175" duration="88000" />
-      <workItem from="1711533391328" duration="5115000" />
-      <workItem from="1711546812548" duration="6883000" />
-      <workItem from="1711609993013" duration="6451000" />
-      <workItem from="1711617936068" duration="312000" />
+      <updated>1711720893806</updated>
+      <workItem from="1711720893911" duration="3412000" />
+      <workItem from="1711728051392" duration="3818000" />
+      <workItem from="1711880955007" duration="465000" />
     </task>
-    <task id="LOCAL-00001" summary="Rédaction des tests de la class DialogueBD&#10;&#10;Test de Connexion à la base de donnée Oracle et requête pour qu'un utilisateur se connecte">
+    <task id="LOCAL-00001" summary="Ajout radiologie à la BD ok">
       <option name="closed" value="true" />
-      <created>1707155739563</created>
+      <created>1711724285576</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1707155739564</updated>
+      <updated>1711724285576</updated>
     </task>
-    <task id="LOCAL-00002" summary="Liaison entre le nf et l'iu pour l'ajour d'un patient">
-      <option name="closed" value="true" />
-      <created>1707664306813</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1707664306813</updated>
-    </task>
-    <task id="LOCAL-00003" summary="changement du tableau contenant les infos du patient en HashMap">
-      <option name="closed" value="true" />
-      <created>1707735479819</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1707735479819</updated>
-    </task>
-    <task id="LOCAL-00004" summary="changement du tableau contenant les infos du patient en HashMap">
-      <option name="closed" value="true" />
-      <created>1707753532031</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1707753532031</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Après le merge avec Ajout Sejour">
-      <option name="closed" value="true" />
-      <created>1707754555336</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1707754555336</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Changements dans la classe DialogueDB pour l'insertion dans la BD">
-      <option name="closed" value="true" />
-      <created>1708076078645</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1708076078645</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée">
-      <option name="closed" value="true" />
-      <created>1708079557970</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1708079557970</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test">
-      <option name="closed" value="true" />
-      <created>1708446393443</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1708446393443</updated>
-    </task>
-    <task id="LOCAL-00009" summary="L'accueil s'ouvre en plein écran">
-      <option name="closed" value="true" />
-      <created>1708684341577</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1708684341577</updated>
-    </task>
-    <task id="LOCAL-00010" summary="nom utilisateur sur l'accueil">
-      <option name="closed" value="true" />
-      <created>1708698905730</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1708698905730</updated>
-    </task>
-    <task id="LOCAL-00011" summary="nom utilisateur sur l'accueil">
-      <option name="closed" value="true" />
-      <created>1708703094596</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1708703094596</updated>
-    </task>
-    <task id="LOCAL-00012" summary="recherche des patients via l'accueil.">
-      <option name="closed" value="true" />
-      <created>1708892397038</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1708892397038</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Affichage du resultat de la recherche sur l'accueil">
-      <option name="closed" value="true" />
-      <created>1708962842589</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1708962842589</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Liaison entre le bouton d'ajout de prescription et la fonctionnalité">
-      <option name="closed" value="true" />
-      <created>1709566134544</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1709566134544</updated>
-    </task>
-    <task id="LOCAL-00015" summary="ajout de la connxion pour un personnel administratif">
-      <option name="closed" value="true" />
-      <created>1710083772102</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1710083772102</updated>
-    </task>
-    <task id="LOCAL-00016" summary="..">
-      <option name="closed" value="true" />
-      <created>1710177616561</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1710177616561</updated>
-    </task>
-    <task id="LOCAL-00017" summary="ajout de la localisation géographique dans l'affichage d'un patient">
-      <option name="closed" value="true" />
-      <created>1710178487149</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1710178487149</updated>
-    </task>
-    <task id="LOCAL-00018" summary="changements de couleurs dans l'UI">
-      <option name="closed" value="true" />
-      <created>1710179281022</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1710179281022</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Corrigé le code AjoutPatient">
-      <option name="closed" value="true" />
-      <created>1710528253437</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1710528253437</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Premiers Tests">
-      <option name="closed" value="true" />
-      <created>1711354700180</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1711354700180</updated>
-    </task>
-    <task id="LOCAL-00021" summary="ajout listener bouton">
-      <option name="closed" value="true" />
-      <created>1712146670037</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1712146670037</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Liaison entre le nf et l'iu pour l'ajour d'un patient" />
-    <MESSAGE value="changement du tableau contenant les infos du patient en HashMap" />
-    <MESSAGE value="Après le merge avec Ajout Sejour" />
-    <MESSAGE value="Changements dans la classe DialogueDB pour l'insertion dans la BD" />
-    <MESSAGE value="Finalisation de l'ajout d'un patient avec ajout du séjour et de la locG associée" />
-    <MESSAGE value="Ajout d'un personnel médical côté fc, avec le test correspondant dans le fichier test" />
-    <MESSAGE value="L'accueil s'ouvre en plein écran" />
-    <MESSAGE value="nom utilisateur sur l'accueil" />
-    <MESSAGE value="recherche des patients via l'accueil." />
-    <MESSAGE value="recherche des patients via l'accueil.Ajout de l'insensibilité à la casse" />
-    <MESSAGE value="Affichage du resultat de la recherche sur l'accueil" />
-    <MESSAGE value="Ajout du hashage du mot de passe avec sha-256 au moment de la connexion et dans la base de donnée" />
-    <MESSAGE value="Liaison entre le bouton d'ajout de consultation avec la fonctionalité + actualisation de la liste d'actes une fois la consultation ajoutée" />
-    <MESSAGE value="Liaison entre le bouton d'ajout de prescription et la fonctionnalité" />
-    <MESSAGE value="modif de l'affichage des actes dans le dossier patient" />
-    <MESSAGE value="Possibilité d'ouvrir une consultation et de la valider avec les résultats si l'on est le médecin qui y est rattaché" />
-    <MESSAGE value="ajout d'une requête pour updater des tables" />
-    <MESSAGE value="Ajout du logo sur l'interface de connexion" />
-    <MESSAGE value="ajout de la connxion pour un personnel administratif" />
-    <MESSAGE value=".." />
-    <MESSAGE value="ajout de la localisation géographique dans l'affichage d'un patient" />
-    <MESSAGE value="changements de couleurs dans l'UI" />
-    <MESSAGE value="Corrigé le code AjoutPatient" />
-    <MESSAGE value="Premiers Tests" />
-    <MESSAGE value="ajout listener bouton" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout listener bouton" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="4" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="ca.uhn.hl7v2.HL7Exception" package="ca.uhn.hl7v2" />
-          <option name="timeStamp" value="5" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Ajout radiologie à la BD ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout radiologie à la BD ok" />
   </component>
 </project>
