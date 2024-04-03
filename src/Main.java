@@ -19,7 +19,7 @@ public class Main {
         });
 
         // On instancie un objet receptionHL7 pour recevoir des messages HL7
-        receptionHL7 hl7Receiver = new receptionHL7();
+        receptionHL7 hl7Receiver = new receptionHL7(dialogueBD);
 
         // On crée un nouveau thread pour la réception des messages HL7
         Thread hl7Thread = new Thread(new Runnable() {

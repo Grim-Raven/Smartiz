@@ -44,6 +44,11 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         labelLogo.setIcon(new ImageIcon(scaledImage));
         affichageBoutons();
         changerLangue(this.utilisateur.getLangue());
+        // Chargez l'image à partir du fichier
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/ui/Image/Logo_serpent.png");
+
+        // Définissez l'image comme icône de la fenêtre
+        this.setIconImage(icon);
     }
 
     /**

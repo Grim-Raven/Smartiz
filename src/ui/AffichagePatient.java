@@ -690,7 +690,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                     try (ResultSet resultatChambre = dialogueBD.rechercheTable(
                             "LocalisationG",
                             new HashMap<String, String>() {{
-                                put("idLocG", resultat.getString("IdLocG"));
+                                put("idPatient", idPatient);
                             }},
                             false)) {
                         resultatChambre.next();

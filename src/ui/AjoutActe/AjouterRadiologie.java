@@ -71,7 +71,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
         DemandeExamenRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         DemandeExamenRadiologie.setText("Demande d'examen(s) radiologique(s)");
@@ -79,35 +79,35 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         TypeExamen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TypeExamen.setText("Type(s) d'examen(s)");
 
+        BoutonRadiographie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonRadiographie);
         BoutonRadiographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonRadiographie.setText("Radiographie");
-        BoutonRadiographie.setActionCommand("Radiographie");
 
+        BoutonEchographie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonEchographie);
         BoutonEchographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonEchographie.setText("Echographie");
-        BoutonEchographie.setActionCommand("Echographie");
 
+        BoutonScanner.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonScanner);
         BoutonScanner.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScanner.setText("Scanner");
-        BoutonScanner.setActionCommand("Scanner");
 
+        BoutonIRM.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonIRM);
         BoutonIRM.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonIRM.setText("IRM");
-        BoutonIRM.setActionCommand("IRM");
 
+        BoutonScintigraphie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonScintigraphie);
         BoutonScintigraphie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScintigraphie.setText("Scintigraphie");
-        BoutonScintigraphie.setActionCommand("Scintigraphie");
 
+        BoutonTomographie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonTomographie);
         BoutonTomographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonTomographie.setText("Tomographie");
-        BoutonTomographie.setActionCommand("Tomographie");
 
         Date.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Date.setText("Date");
@@ -121,11 +121,6 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouter.setText("Ajouter");
-        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoutonAjouterActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,6 +215,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         dataSQL.put("dateRealisationActe", dateExamen);
         dataSQL.put("commentaire", commentaire);
         dataSQL.put("idSejour", idSejour);
+        dataSQL.put("idService", "15");
         dataSQL.put("idPrescripteur", utilisateur.getIdUtilisateur());
         dataSQL.put("valide", "N");
 
@@ -244,8 +240,8 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         ResultSet resultPatient = dialogueBD.requete(requete);
         try {
             resultPatient.next(); // Positionnement sur la 1ère ligne
-            dataHL7.put("nom",resultPatient.getString("nom"));
-            dataHL7.put("prenom", resultPatient.getString("prenom"));
+            dataHL7.put("nom",resultPatient.getString("nom").trim());
+            dataHL7.put("prenom", resultPatient.getString("prenom").trim());
             dataHL7.put("idPatient", resultPatient.getString("idPatient"));
             // Retrait des "-" dans la date de naissance
             dataHL7.put("dateNaissance", resultPatient.getString("dateNaissance").substring(0,10).replace("-",""));

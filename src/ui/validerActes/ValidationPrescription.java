@@ -68,17 +68,17 @@ public class ValidationPrescription extends javax.swing.JFrame {
         Scroll = new javax.swing.JScrollPane();
         TexteCommentaire = new javax.swing.JTextPane();
         labelDatePrevue = new javax.swing.JLabel();
-        labelDateReelle = new javax.swing.JLabel();
         texteDatePrevue = new javax.swing.JLabel();
+        labelDateReelle = new javax.swing.JLabel();
         texteDateReelle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
-        BoutonValider.setBackground(new java.awt.Color(255, 255, 255));
-        BoutonValider.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        BoutonValider.setForeground(new java.awt.Color(4, 66, 114));
+        BoutonValider.setBackground(new java.awt.Color(4, 66, 114));
+        BoutonValider.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BoutonValider.setForeground(new java.awt.Color(255, 255, 255));
         BoutonValider.setText("Valider");
         BoutonValider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,29 +87,24 @@ public class ValidationPrescription extends javax.swing.JFrame {
         });
 
         EtiquettePrescription.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        EtiquettePrescription.setForeground(new java.awt.Color(4, 66, 114));
         EtiquettePrescription.setText("Prescription");
 
         texteNomMedicament.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         texteNomMedicament.setText("Médicament");
 
         EtiquetteMédicament1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        EtiquetteMédicament1.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteMédicament1.setText("Médicament : ");
 
         quantite.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         quantite.setText("Quantité+unité+quand");
 
         EtiquettePosologie.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        EtiquettePosologie.setForeground(new java.awt.Color(4, 66, 114));
         EtiquettePosologie.setText("Posologie : ");
 
         EtiquetteVoieAdministration.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        EtiquetteVoieAdministration.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteVoieAdministration.setText("Voie d'administration : ");
 
         EtiquetteCommentaire.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        EtiquetteCommentaire.setForeground(new java.awt.Color(4, 66, 114));
         EtiquetteCommentaire.setText("Commentaire : ");
 
         texteVoieAdministration.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -118,55 +113,54 @@ public class ValidationPrescription extends javax.swing.JFrame {
         Scroll.setViewportView(TexteCommentaire);
 
         labelDatePrevue.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        labelDatePrevue.setForeground(new java.awt.Color(4, 66, 114));
-        labelDatePrevue.setText("Date prévue :");
+        labelDatePrevue.setText("Date prévue:");
+
+        texteDatePrevue.setText("jLabel1");
 
         labelDateReelle.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        labelDateReelle.setForeground(new java.awt.Color(4, 66, 114));
-        labelDateReelle.setText("Date d'administration :");
+        labelDateReelle.setText("Date de réalisation :");
 
-        texteDatePrevue.setText("jLabel3");
-
-        texteDateReelle.setText("jLabel4");
+        texteDateReelle.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EtiquettePrescription)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EtiquettePrescription)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(EtiquettePosologie)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(quantite, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(EtiquetteMédicament1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(texteNomMedicament))
-                            .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(EtiquetteVoieAdministration)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(texteVoieAdministration, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelDatePrevue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(texteDatePrevue))
-                            .addComponent(EtiquetteCommentaire)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelDateReelle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(texteDateReelle)))))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(EtiquettePosologie)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quantite, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(EtiquetteMédicament1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(texteNomMedicament))
+                                    .addComponent(EtiquetteCommentaire)
+                                    .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(EtiquetteVoieAdministration)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(texteVoieAdministration, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(labelDatePrevue)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(texteDatePrevue)
+                                        .addGap(75, 75, 75)
+                                        .addComponent(labelDateReelle)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(texteDateReelle))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(222, 222, 222)
+                        .addComponent(BoutonValider)))
                 .addContainerGap(33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BoutonValider)
-                .addGap(205, 205, 205))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,21 +179,19 @@ public class ValidationPrescription extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EtiquetteVoieAdministration, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(texteVoieAdministration))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDatePrevue)
-                    .addComponent(texteDatePrevue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(texteDatePrevue)
                     .addComponent(labelDateReelle)
                     .addComponent(texteDateReelle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EtiquetteCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BoutonValider)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,7 +202,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -224,6 +216,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
         // Mise à jour de la prescription
         HashMap<String, String> data = new HashMap<>();
         data.put("valide", "Y");
+        data.put("idRealisateur", String.valueOf(utilisateur.getIdUtilisateur()));
         data.put("idRealisateur", String.valueOf(utilisateur.getIdUtilisateur()));
         data.put("dateRealisationActe", dateSQL);
         data.put("commentaire", TexteCommentaire.getText());
