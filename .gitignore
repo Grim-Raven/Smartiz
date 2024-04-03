@@ -2,6 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+/.idea/copilot/chatSessions/00000000000.xd
 
 ### Eclipse ###
 .apt_generated
