@@ -115,12 +115,12 @@ public class ValidationPrescription extends javax.swing.JFrame {
         labelDatePrevue.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         labelDatePrevue.setText("Date prévue:");
 
-        texteDatePrevue.setText("jLabel1");
+        texteDatePrevue.setText("prevue");
 
         labelDateReelle.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         labelDateReelle.setText("Date de réalisation :");
 
-        texteDateReelle.setText("jLabel2");
+        texteDateReelle.setText("réelle");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
