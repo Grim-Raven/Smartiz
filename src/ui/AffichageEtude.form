@@ -209,14 +209,10 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="ListePatients" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="BoutonAjouterUnPatientEtude" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BoutonAjouterVolontaire" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="BoutonAjouterUnPatientEtude" min="-2" max="-2" attributes="0"/>
                       <Component id="PatientsParticipants" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="437" max="32767" attributes="0"/>
+                  <EmptySpace pref="579" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -226,10 +222,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="PatientsParticipants" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BoutonAjouterUnPatientEtude" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BoutonAjouterVolontaire" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="BoutonAjouterUnPatientEtude" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="ListePatients" pref="326" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -267,20 +260,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
         </Container>
-        <Component class="javax.swing.JButton" name="BoutonAjouterVolontaire">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="72" green="42" red="4" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ajouter un volontaire sain "/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoutonAjouterVolontaireActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

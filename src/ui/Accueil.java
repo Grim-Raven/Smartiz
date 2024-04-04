@@ -494,7 +494,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
      */
     public void patientSelected(String idPatient) {
         if(utilisateur.isPersonnelMedical()) { // Si l'utilisateur est un personnel médical
-            // On enlève le panel actuel du panneau principal central
+        // On enlève le panel actuel du panneau principal central
         // On crée un nouveau panel pour afficher les informations du patient
         AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
         //On supprime tous les composants du panneau principal

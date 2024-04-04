@@ -6,7 +6,6 @@
 package ui;
 
 import fc.DialogueBD;
-
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
