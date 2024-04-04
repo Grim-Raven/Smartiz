@@ -219,10 +219,13 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
             .addGroup(PanneauCentreLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ListePatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonAjouterUnPatientEtude)
-                    .addComponent(PatientsParticipants))
-                .addContainerGap(579, Short.MAX_VALUE))
+                    .addComponent(ListePatients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PanneauCentreLayout.createSequentialGroup()
+                        .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BoutonAjouterUnPatientEtude)
+                            .addComponent(PatientsParticipants))
+                        .addGap(0, 567, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         PanneauCentreLayout.setVerticalGroup(
             PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,9 +246,13 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         //On ouvre le formulaire pour ajouter un patient à l'étude
         AjoutPatientEtude ajoutPatientEtude = new AjoutPatientEtude(dialogueBD, utilisateur,idEtude);
         ajoutPatientEtude.setVisible(true);
+        // On met à jour le tableau des patients de l'étude après l'ajout d'un patient
+        // Une fois que le formulaire est fermé
         ajoutPatientEtude.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent we){
-                remplirChampsEtude(idEtude);
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                remplirChampsEtude(idEtude); // On met à jour la liste des actes après l'ajout de l'examen radiologique
+                System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             }
         });
     }//GEN-LAST:event_BoutonAjouterUnPatientEtudeActionPerformed
@@ -253,7 +260,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
     public void remplirChampsEtude(String idEtude) {
     // On récupère les informations de l'étude
     try {
-    // On effectue une recherche dans la table Etude avec l'ID de l'étude sélectionné
+    // On effectue une recherche dans la table Etude avec l'ID de l'étude sélectionnée
         ResultSet resultat = dialogueBD.rechercheTable(
                 "Etude",
                 new HashMap<String, String>() {
@@ -290,15 +297,14 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         AfficherListePatients afficherListePatients = new AfficherListePatients(resultatPatients);
         afficherListePatients.addPatientSelectedListener(this);
 
-        //On supprime tous les composants du panneau central
-        for (Component component : PanneauCentre.getComponents()) {
-            PanneauCentre.remove(component);
+        //On supprime tous les composants du panneau ListePatients
+        for (Component component : ListePatients.getComponents()) {
+            ListePatients.remove(component);
         }
         //On met à jour le tableau et on ajoute les patients de l'étude dans le tableau
         ListePatients.add(afficherListePatients, BorderLayout.CENTER);
-        ListePatients.repaint();
-        ListePatients.revalidate();
-
+        this.repaint();
+        this.revalidate();
         System.out.println("le tableau a été ajouté");
         } catch (SQLException e) {
             throw new RuntimeException(e);
