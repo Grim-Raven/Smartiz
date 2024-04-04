@@ -14,6 +14,7 @@ import ca.uhn.hl7v2.HapiContext;
 
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.HashMap;
 
 
@@ -35,11 +36,14 @@ public class messageHL7{
             // On envoie le message et on attend la réponse
             return connection.getInitiator().sendAndReceive(message);
         } catch (HL7Exception e) {
-            throw new RuntimeException(e);
+            return null;
+
         } catch (LLPException e) {
-            throw new RuntimeException(e);
+            return null;
+        } catch (ConnectException e) {
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 

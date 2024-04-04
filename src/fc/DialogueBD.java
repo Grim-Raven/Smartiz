@@ -245,9 +245,20 @@ public class DialogueBD {
      * @throws SQLException si une erreur SQL survient
      */
     public String insertPatient(HashMap<String, String> data) throws SQLException {
-        ResultSet requeteID = requete("SELECT MAX(idPatient) FROM Patient");
+        // On récupère l'année actuelle '
+        String annee = String.valueOf(java.time.LocalDate.now().getYear()).substring(2);
+        // On récupère le plus grand id pour un patient qui commence par l'année actuelle (YY)
+        ResultSet requeteID = requete("SELECT MAX(idPatient) FROM Patient WHERE idPatient LIKE '"+annee+"%'");
+        int idPatient;
         requeteID.next();
-        int idPatient = requeteID.getInt(1) + 1;
+        if(requeteID.getInt(1) != 0){
+            // S'il y a un patient avec un id qui commence par l'année actuelle, on incrémente de 1
+            System.out.println("MAX ID = "+requeteID.getInt(1));
+            idPatient = requeteID.getInt(1) + 1;
+        }else{
+            // Sinon, on crée un nouvel id qui commence par l'année actuelle et se termine par 0000000
+            idPatient = Integer.parseInt(annee+"0000000");
+        }
         insertTable("Patient", String.valueOf(idPatient), "idPatient", data);
         return String.valueOf(idPatient);
     }
