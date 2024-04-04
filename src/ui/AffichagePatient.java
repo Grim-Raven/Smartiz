@@ -767,8 +767,11 @@ public class AffichagePatient extends javax.swing.JPanel {
                             infoActe.append(" prévue le ").append(resultat.getString("datePrescription"), 0, 10);
                         }
                         break;
-                    case "Radiologie":
+                    default: // Radiologie Echo, Radiologie Scanner, IRM, ...
                         // TODO
+                        if("Radiologie Echographie Scanner IRM Scintigraphie Tomographie".contains(typeActe)) {
+                            infoActe.append(" : ").append(resultat.getString("commentaire")==null?"":resultat.getString("commentaire")).append(" - prévu le : ").append(resultat.getString("dateRealisationActe"), 0, 10);
+                        }
                         break;
                     case "Anesthésie":
                         infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"), 0, 10);

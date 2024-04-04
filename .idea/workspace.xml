@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="fixed">
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/AffichageEtude.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichageEtude.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "fix-actualisation-etude",
+    "git-widget-placeholder": "validation-actes",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz",
@@ -111,6 +110,7 @@
       <workItem from="1712212337325" duration="5228000" />
       <workItem from="1712219662431" duration="514000" />
       <workItem from="1712220183170" duration="2127000" />
+      <workItem from="1712222894882" duration="1804000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout radiologie à la BD ok">
       <option name="closed" value="true" />
@@ -165,8 +165,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ui/AffichageEtude.java</url>
-          <line>254</line>
+          <line>261</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/AffichagePatient.java</url>
+          <line>772</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
