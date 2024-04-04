@@ -648,16 +648,7 @@ public class AffichagePatient extends javax.swing.JPanel {
             FumeurPatient.setText(Objects.equals(resultat.getString("fumeur"), "Y") ? "Oui" : "Non");
             AlcoolPatient.setText(Objects.equals(resultat.getString("alcool"), "Y") ? "Oui" : "Non");
             // On récupère les informations de la chambre
-            try (ResultSet resultatChambre = dialogueBD.rechercheTable(
-                    "LocalisationG",
-                    new HashMap<String, String>() {{
-                        put("idPatient", idPatient);
-                    }},
-                    false)) {
-                resultatChambre.next();
-                texteChambre.setText(resultatChambre.getString("idPiece"));
-                texteLit.setText(resultatChambre.getString("Lit"));
-            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -678,7 +669,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                     put("idPatient", (String) idPatient);
                 }},
                 false)) {
-
+            ArrayList<String> listeNumeroSejour = new ArrayList<>();
             // On ajoute chaque séjour du patient dans le menu déroulant
             while (resultat.next()) {
                 // On construit le texte à afficher dans le menu déroulant
@@ -694,15 +685,41 @@ public class AffichagePatient extends javax.swing.JPanel {
                 }
 
 
+
                 // Si le séjour est ouvert, on le met en premier et on récupère les informations de la chambre
                 if (Objects.equals(resultat.getString("ouvert"), "Y")) {
                     MenuDeroulantSejours.insertItemAt(infoSejour, 0);
+                    listeNumeroSejour.add(0, resultat.getString("idSejour"));
                 } else { // Sinon, on l'ajoute à la fin
                     MenuDeroulantSejours.addItem(infoSejour);
+                    listeNumeroSejour.add(resultat.getString("idSejour"));
                 }
                 // On sélectionne le premier séjour par défaut
                 MenuDeroulantSejours.setSelectedIndex(0);
             }
+            // On récupère l'id de la localisation du patient pour le séjour sélectionné
+            String requeteLocG = "SELECT idLocG FROM Sejour WHERE idSejour = " + listeNumeroSejour.get(0);
+            try (ResultSet resultatLocG = dialogueBD.requete(requeteLocG)) {
+                resultatLocG.next();
+                remplirChambre(resultatLocG.getString("idLocG"));
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void remplirChambre(String idLocG) {
+        try (ResultSet resultatChambre = dialogueBD.rechercheTable(
+                "LocalisationG",
+                new HashMap<String, String>() {{
+                    put("idLocG", idLocG);
+                }},
+                false)) {
+            resultatChambre.next();
+            texteChambre.setText(resultatChambre.getString("idPiece"));
+            texteLit.setText(resultatChambre.getString("Lit"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -727,6 +744,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         }
         // On enlève les caractères après l'identifiant
         String idSejour = sejourSelectionne.substring(0, sejourSelectionne.indexOf(" "));
+        remplirChambre(idSejour);
         ArrayList<String> actes = new ArrayList<>();
         try (ResultSet resultat = dialogueBD.rechercheTable(
                 "Acte",

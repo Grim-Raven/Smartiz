@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="fixed" />
+
+    <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/DialogueBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/DialogueBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fc/hl7/messageHL7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AffichagePatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AffichagePatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterRadiologie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/AjoutActe/AjouterRadiologie.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,31 +40,8 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Accueil.executor": "Run",
-    "Application.AjouterRadiologie.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Antoine/Desktop/Informatique/Java/Smartiz/lib/hapi-dist-2.2-all/lib/slf4j-api-1.6.6.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "settings.sync",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Accueil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Accueil" />
@@ -111,6 +99,7 @@
       <workItem from="1712147048084" duration="3088000" />
       <workItem from="1712150404291" duration="9130000" />
       <workItem from="1712210956377" duration="1076000" />
+      <workItem from="1712212337325" duration="5228000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout radiologie à la BD ok">
       <option name="closed" value="true" />

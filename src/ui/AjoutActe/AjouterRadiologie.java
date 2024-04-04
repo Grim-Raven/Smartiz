@@ -83,31 +83,37 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         buttonGroupTypeExamen.add(BoutonRadiographie);
         BoutonRadiographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonRadiographie.setText("Radiographie");
+        BoutonRadiographie.setActionCommand("Radiographie");
 
         BoutonEchographie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonEchographie);
         BoutonEchographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonEchographie.setText("Echographie");
+        BoutonEchographie.setActionCommand("Echographie");
 
         BoutonScanner.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonScanner);
         BoutonScanner.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScanner.setText("Scanner");
+        BoutonScanner.setActionCommand("Scanner");
 
         BoutonIRM.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonIRM);
         BoutonIRM.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonIRM.setText("IRM");
+        BoutonIRM.setActionCommand("IRM");
 
         BoutonScintigraphie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonScintigraphie);
         BoutonScintigraphie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonScintigraphie.setText("Scintigraphie");
+        BoutonScintigraphie.setActionCommand("Scintigraphie");
 
         BoutonTomographie.setBackground(new java.awt.Color(236, 242, 254));
         buttonGroupTypeExamen.add(BoutonTomographie);
         BoutonTomographie.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonTomographie.setText("Tomographie");
+        BoutonTomographie.setActionCommand("Tomographie");
 
         Date.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Date.setText("Date");
@@ -121,6 +127,11 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BoutonAjouter.setText("Ajouter");
+        BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonAjouterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,7 +234,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         String idActe = dialogueBD.insertActe(dataSQL);
         System.out.println("Ajouté à la base de données");
 
-        // Création de la HashMap pour l'envoie de l'examen radiologique au SIR via HL7
+        // Création de la HashMap pour l'envoi de l'examen radiologique au SIR via HL7
         HashMap<String, String> dataHL7 = new HashMap<>();
         // Remplissage des informations sur la demande
         dataHL7.put("idDemande", idActe);

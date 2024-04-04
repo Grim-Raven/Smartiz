@@ -121,6 +121,8 @@ public class ValidationPrescription extends javax.swing.JFrame {
         labelDateReelle.setText("Date de réalisation :");
 
         texteDateReelle.setText("reelle");
+        texteDateReelle.setText("réelle");
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
