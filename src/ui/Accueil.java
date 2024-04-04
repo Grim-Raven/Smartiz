@@ -30,6 +30,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private final DialogueBD dialogueBD;
     private final Utilisateur utilisateur;
     private AfficherListePatients scrollPaneTable;
+    
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
         initComponents();
         this.dialogueBD = dialogueBD;
@@ -489,7 +490,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
      */
     public void patientSelected(String idPatient) {
         if(utilisateur.isPersonnelMedical()) { // Si l'utilisateur est un personnel médical
-            // On enlève le panel actuel du panneau principal central
+        // On enlève le panel actuel du panneau principal central
         // On crée un nouveau panel pour afficher les informations du patient
         AffichagePatient affichagePatient = new AffichagePatient(idPatient, utilisateur, dialogueBD);
         //On supprime tous les composants du panneau principal
@@ -556,7 +557,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", false, "Français", 1, 2222, "Y");
+            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 2222, "Y");
             final DialogueBD dialogueBD = new DialogueBD();
             {
                 dialogueBD.connect();

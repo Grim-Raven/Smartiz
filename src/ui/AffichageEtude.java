@@ -104,7 +104,6 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         PatientsParticipants = new javax.swing.JLabel();
         BoutonAjouterUnPatientEtude = new javax.swing.JButton();
         ListePatients = new javax.swing.JPanel();
-        BoutonAjouterVolontaire = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new Dimension(largeur-largeur1,hauteur1));
@@ -213,15 +212,6 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
 
         ListePatients.setLayout(new java.awt.BorderLayout());
 
-        BoutonAjouterVolontaire.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        BoutonAjouterVolontaire.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonAjouterVolontaire.setText("Ajouter un volontaire sain ");
-        BoutonAjouterVolontaire.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoutonAjouterVolontaireActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanneauCentreLayout = new javax.swing.GroupLayout(PanneauCentre);
         PanneauCentre.setLayout(PanneauCentreLayout);
         PanneauCentreLayout.setHorizontalGroup(
@@ -230,12 +220,9 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
                 .addGap(26, 26, 26)
                 .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ListePatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanneauCentreLayout.createSequentialGroup()
-                        .addComponent(BoutonAjouterUnPatientEtude)
-                        .addGap(18, 18, 18)
-                        .addComponent(BoutonAjouterVolontaire))
+                    .addComponent(BoutonAjouterUnPatientEtude)
                     .addComponent(PatientsParticipants))
-                .addContainerGap(437, Short.MAX_VALUE))
+                .addContainerGap(579, Short.MAX_VALUE))
         );
         PanneauCentreLayout.setVerticalGroup(
             PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,9 +230,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
                 .addContainerGap()
                 .addComponent(PatientsParticipants)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanneauCentreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BoutonAjouterUnPatientEtude)
-                    .addComponent(BoutonAjouterVolontaire))
+                .addComponent(BoutonAjouterUnPatientEtude)
                 .addGap(18, 18, 18)
                 .addComponent(ListePatients, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
@@ -255,12 +240,15 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonAjouterUnPatientEtudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterUnPatientEtudeActionPerformed
-        // TODO add your handling code here:
+        //On ouvre le formulaire pour ajouter un patient à l'étude
+        AjoutPatientEtude ajoutPatientEtude = new AjoutPatientEtude(dialogueBD, utilisateur,idEtude);
+        ajoutPatientEtude.setVisible(true);
+        ajoutPatientEtude.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent we){
+                remplirChampsEtude(idEtude);
+            }
+        });
     }//GEN-LAST:event_BoutonAjouterUnPatientEtudeActionPerformed
-
-    private void BoutonAjouterVolontaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterVolontaireActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BoutonAjouterVolontaireActionPerformed
 
     public void remplirChampsEtude(String idEtude) {
     // On récupère les informations de l'étude
@@ -361,7 +349,6 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonAjouterUnPatientEtude;
-    private javax.swing.JButton BoutonAjouterVolontaire;
     private javax.swing.JLabel DateDemarrage;
     private javax.swing.JLabel DateDemarrageValeur;
     private javax.swing.JLabel DureeEtude;

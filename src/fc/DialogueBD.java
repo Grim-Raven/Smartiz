@@ -267,6 +267,22 @@ public class DialogueBD {
         return String.valueOf(idEtude);
     }
 
+    
+    /**
+     * Méthode d'insertion dans la table PatientEtude dans la base de données
+     * @param data l'ID du patient et de l'étude
+     * @throws SQLException si une erreur SQL survient
+     */
+    public String insertPatientEtude(HashMap<String, String> data) throws SQLException {
+        ResultSet requeteID = requete("SELECT MAX(idEtude) from EtudePatient");
+        requeteID.next();
+        System.out.println(requeteID);
+        int idEtude = requeteID.getInt(1) + 1;
+        System.out.println("idEtude = "+ idEtude);
+        insertTable("EtudePatient", String.valueOf(idEtude),"idEtude",data);
+        return String.valueOf(idEtude);
+    }
+
     /**
      * Méthode d'insertion d'un nouveau séjour dans la base de donnée
      *
@@ -312,6 +328,8 @@ public class DialogueBD {
         insertTable("PERSONNELMEDICAL", idPersonnelMedical, "IDPERSONNELMEDICAL",data);
 
     }
+
+
 
     // ----------------- Méthodes spécifiques pour la récupération de données dans la base de données -----------------
 
