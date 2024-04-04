@@ -647,6 +647,17 @@ public class AffichagePatient extends javax.swing.JPanel {
             TelephonePatient.setText(resultat.getString("telephone"));
             FumeurPatient.setText(Objects.equals(resultat.getString("fumeur"), "Y") ? "Oui" : "Non");
             AlcoolPatient.setText(Objects.equals(resultat.getString("alcool"), "Y") ? "Oui" : "Non");
+            // On récupère les informations de la chambre
+            try (ResultSet resultatChambre = dialogueBD.rechercheTable(
+                    "LocalisationG",
+                    new HashMap<String, String>() {{
+                        put("idPatient", idPatient);
+                    }},
+                    false)) {
+                resultatChambre.next();
+                texteChambre.setText(resultatChambre.getString("idPiece"));
+                texteLit.setText(resultatChambre.getString("Lit"));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -686,17 +697,6 @@ public class AffichagePatient extends javax.swing.JPanel {
                 // Si le séjour est ouvert, on le met en premier et on récupère les informations de la chambre
                 if (Objects.equals(resultat.getString("ouvert"), "Y")) {
                     MenuDeroulantSejours.insertItemAt(infoSejour, 0);
-                    // On récupère les informations de la chambre
-                    try (ResultSet resultatChambre = dialogueBD.rechercheTable(
-                            "LocalisationG",
-                            new HashMap<String, String>() {{
-                                put("idPatient", idPatient);
-                            }},
-                            false)) {
-                        resultatChambre.next();
-                        texteChambre.setText(resultatChambre.getString("idPiece"));
-                        texteLit.setText(resultatChambre.getString("Lit"));
-                    }
                 } else { // Sinon, on l'ajoute à la fin
                     MenuDeroulantSejours.addItem(infoSejour);
                 }

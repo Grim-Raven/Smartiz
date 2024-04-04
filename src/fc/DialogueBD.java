@@ -425,7 +425,6 @@ public class DialogueBD {
 
     /**
      * Méthode de récupération d'une étude de la base de données sur le critère de leurs données
-     * @param dataEtude les données de l'étude
      * @return les études correspondant aux données
      */
     public ResultSet getEtude() {
