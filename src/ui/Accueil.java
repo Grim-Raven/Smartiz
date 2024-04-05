@@ -12,14 +12,23 @@ import fc.Utilisateur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JViewport;
 
 /**
  * Page d'accueil de l'application
+ *
  * @author Antoine
  */
-public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener, AfficherListeEtudesListener{
+public class Accueil extends javax.swing.JFrame implements AfficherListePatientsListener, AfficherListeEtudesListener {
 
     /**
      * Creates new form Accueil
@@ -30,6 +39,10 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private final DialogueBD dialogueBD;
     private final Utilisateur utilisateur;
     private AfficherListePatients scrollPaneTable;
+    private javax.swing.JTable tablePatients;
+    private javax.swing.JScrollPane jScrollPane1;
+    private final ArrayList<AfficherListePatientsListener> patientSelectioneListenerList = new ArrayList<>();
+
     public Accueil(DialogueBD dialogueBD, Utilisateur utilisateur) {
         initComponents();
         this.dialogueBD = dialogueBD;
@@ -58,11 +71,12 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         if (!utilisateur.isPersonnelMedical()) {
             BoutonMedecins.setVisible(false);
             BoutonRechercheClinique.setVisible(false);
-        }else{
+        } else {
             boutonNouveauPatient.setVisible(false);
         }
         this.pack();
     }
+
     public void changerLangue(String langue) {
         if (langue.equals("English")) {
             BoutonMedecins.setText("Physicians");
@@ -444,7 +458,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                 }
             }
         }
-        if(utilisateur.isPersonnelMedical()) {
+        if (utilisateur.isPersonnelMedical()) {
             // On ne veut que les patients du service de l'utilisateur si c'est un personnel médical
             dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
         }
@@ -471,7 +485,231 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
-        // TODO add your handling code here:
+        //On crée un modèle de table
+        DefaultTableModel modelTable = new DefaultTableModel();
+        //On ajoute les colonnes de la table
+        modelTable.addColumn("IPP");
+        modelTable.addColumn("Nom");
+        modelTable.addColumn("Prénom");
+        modelTable.addColumn("Date de Naissance");
+
+        //On s'assure que le tableau soit créé
+        System.out.println("tableau est créé");
+
+        //Un radiologue souhaite affiche les patients dont un acte de radiologie a été demandé
+        //On vérifie que l'utilisateur est bien un radiologue (l'id du service de Radiologie est 15)
+        if (this.utilisateur.getIdService() == 15) {
+            modelTable.addColumn("Acte Radiologie");
+            modelTable.addColumn("Date de demande");
+            ResultSet resultat = null;
+            //On recherche les actes qui appartiennent au domaine de radiologie
+            String[] typesActes1 = {"Radiographie", "Echographie", "Scanner", "IRM", "Tomographie", "Scintigraphie"};
+            try {
+                //Pour chaque type d'acte, on récupère les résultats et on applique le traitement correspondant
+                for (String typeActe : typesActes1) {
+                    resultat = dialogueBD.rechercheTable("Acte", new HashMap<String, String>() {
+                        {
+                            put("nom", typeActe);
+                        }
+                    }, false);
+
+                    //Tant qu'il existe un acte de Radiologie on récupère l'id du séjour correspondant
+                    while (resultat.next()) {
+                        String typeActe2;
+                        typeActe2 = resultat.getString("nom").trim();
+                        if (typeActe2.equals("Radiographie") || typeActe2.equals("Echographie") || typeActe2.equals("Scanner") || typeActe2.equals("IRM") || typeActe2.equals("Tomographie") || typeActe2.equals("Scintigraphie")) {
+                            System.out.println("Il existe un acte de radiologie");
+                            int idSejour = resultat.getInt("idsejour");
+                            //On récupère le type d'acte de radiologie
+                            String acte = typeActe2;
+                            //On récupère la date de la demande de l'acte
+                            String date = resultat.getString("dateRealisationActe");
+
+                            //On fait une recherche pour récupérer l'information sur l'ouverture du séjour
+                            HashMap<String, String> conditions = new HashMap<>();
+                            conditions.put("idsejour", String.valueOf(idSejour));
+                            ResultSet resultatSejour = dialogueBD.rechercheTable("Sejour", conditions, true);
+
+                            if (resultatSejour.next()) {
+                                System.out.println("Il existe un séjour correspondant");
+                                // Récupération de la valeur de l'attribut "ouvert"
+                                String ouvert = resultatSejour.getString("OUVERT");
+
+                                //Si le séjour est ouvert, on récupère les informations du patient
+                                if (ouvert.equals("Y")) {
+                                    System.out.println("séjourt ouvert");
+                                    int idPatient = resultatSejour.getInt("idpatient");
+                                    String nomPatient = "";
+                                    String prenomPatient = "";
+                                    String dateNaissance = "";
+
+                                    HashMap<String, String> conditionsPatient = new HashMap<>();
+                                    conditionsPatient.put("idpatient", String.valueOf(idPatient));
+                                    ResultSet resultatPatient = dialogueBD.rechercheTable("Patient", conditionsPatient, true);
+                                    try {
+                                        if (resultatPatient.next()) {
+                                            System.out.println("Patient trouvé");
+                                            nomPatient = resultatPatient.getString("nom").trim();
+                                            prenomPatient = resultatPatient.getString("prenom").trim();
+                                            dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
+                                            modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance.substring(0,10), acte, date});
+                                            System.out.println("ligne ajoutée");
+                                        }
+                                    } catch (SQLException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                } else {
+                                    System.out.println("Le séjour est fermé");
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        //Un anesthésiste souhaite afficher
+        if (this.utilisateur.getIdService() == 18) {
+
+            modelTable.addColumn("Opération prévue le");
+            ResultSet resultat = null;
+            try {
+                resultat = dialogueBD.rechercheTable("Acte", new HashMap<String, String>() {
+                    {
+                        put("nom", "Anesthésie");
+                    }
+                }, false);
+                //Tant qu'il existe un acte de demande d'anesthésie, on récupère l'id du séjour correspondant
+                while (resultat.next()) {
+                    String typeActe3;
+                    typeActe3 = resultat.getString("nom").trim();
+                    System.out.println("Il existe un acte de radiologie");
+                    //On récupère la valeur de idSejour
+                    int idSejour = resultat.getInt("idsejour");
+                    //On récupère la valeur de nom
+                    String idService = resultat.getString("nom");
+                    //On récupère la date de la demande de l'acte
+                    String date = resultat.getString("datePrescription").substring(0, 10);
+
+                    //On fait une recherche pour récupérer l'information sur l'ouverture du séjour
+                    HashMap<String, String> conditions = new HashMap<>();
+                    conditions.put("idsejour", String.valueOf(idSejour));
+                    ResultSet resultatSejour = dialogueBD.rechercheTable("Sejour", conditions, true);
+
+                    if (resultatSejour.next()) {
+                        System.out.println("Il existe un séjour correspondant");
+                        // Récupération de la valeur de l'attribut "ouvert"
+                        String ouvert = resultatSejour.getString("OUVERT");
+
+                        //Si le séjour est ouvert, on récupère les informations du patient
+                        if (ouvert.equals("Y")) {
+                            System.out.println("séjourt ouvert");
+                            int idPatient = resultatSejour.getInt("idpatient");
+                            String nomPatient = "";
+                            String prenomPatient = "";
+                            String dateNaissance = "";
+                            HashMap<String, String> conditionsPatient = new HashMap<>();
+                            conditionsPatient.put("idpatient", String.valueOf(idPatient));
+                            ResultSet resultatPatient = dialogueBD.rechercheTable("Patient", conditionsPatient, true);
+
+                            try {
+                                if (resultatPatient.next()) {
+                                    System.out.println("Patient trouvé");
+                                    nomPatient = resultatPatient.getString("nom").trim();
+                                    prenomPatient = resultatPatient.getString("prenom").trim();
+                                    dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
+                                    modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance, date});
+                                    System.out.println("ligne ajoutée");
+                                }
+
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+
+            //On crée une JTable avec le modèle de table
+            this.tablePatients = new JTable(modelTable);
+            System.out.println("tableau créé et ajouté");
+            //On ajoute un listener pour pouvoir cliquer sur la ligne du patient
+            tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    tablePatientsMouseClicked(evt);
+                }
+            });
+
+            //On définit la taille de la police de la JTable
+            tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
+            tablePatients.setRowHeight(30);
+            tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
+            tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
+
+            // On change la couleur de fond de l'entête de la JTable
+            tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    setBackground(new Color(4, 66, 114));
+                    setForeground(Color.WHITE);
+                    return this;
+                }
+            });
+            // On empêche l'utilisateur de modifier les données de la JTable
+            tablePatients.setDefaultEditor(Object.class, null);
+            // On définit un modèle de sélection de la JTable à un seul Patient
+            tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+            //On ajoute la JTable dans un JScrollPane
+            jScrollPane1 = new javax.swing.JScrollPane();
+            jScrollPane1.add(tablePatients);
+            System.out.println("Table ajouté dans un JScrollPane");
+
+            // On change la couleur de fond des lignes de la JTable
+            tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    if (row % 2 == 0) {
+                        c.setBackground(new java.awt.Color(236, 242, 254));
+                    } else {
+                        c.setBackground(new java.awt.Color(244, 247, 254));
+                    }
+                    if (isSelected) {
+                        // En gris si la ligne est sélectionnée.
+                        c.setBackground(new java.awt.Color(50, 115, 244));
+                    }
+                    return c;
+
+                }
+            });
+            jScrollPane1.setViewportView(tablePatients);
+            //On supprime tous les composants du panneau principal
+            for (Component component : PanneauPrincipale.getComponents()) {
+                PanneauPrincipale.remove(component);
+            }
+            PanneauPrincipale.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+            PanneauPrincipale.revalidate();
+            // On change la couleur de fond de la JTable et du JScrollPane
+            tablePatients.setBackground(new Color(236, 242, 254));
+            this.setBackground(new Color(236, 242, 254));
+            JViewport viewport = jScrollPane1.getViewport();
+            if (viewport != null && viewport.getView() instanceof JComponent) {
+                ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
+                System.out.println("couleur de fond changée");
+            } else {
+                System.out.println("couleur de fond PAS changée");
+            }
+
     }//GEN-LAST:event_BoutonPatientsActionPerformed
 
     private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
@@ -480,13 +718,30 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         new InterfaceConnexion(new DialogueBD()).setVisible(true);
     }//GEN-LAST:event_DeconnexionActionPerformed
 
+    private void tablePatientsMouseClicked(MouseEvent evt) {
+        if (evt.getClickCount() == 2) {    // Si l'utilisateur double clique sur une ligne de la JTable
+            int selectedRow = tablePatients.getSelectedRow(); // On récupère la ligne sélectionnée
+            if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
+                // On récupère l'IPP du patient sélectionné
+                Object idPatient = tablePatients.getValueAt(selectedRow, 0);
+                System.out.println("Selected: " + idPatient);
+
+                this.patientSelected("" + idPatient);
+
+            }
+        }
+    }
+
+    public void addPatientSelectedListener(AfficherListePatientsListener listener) {
+        patientSelectioneListenerList.add(listener);
+    }
     private void BoutonRechercheCliniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercheCliniqueActionPerformed
         //On supprime tous les composants du panneau principal
         for (Component component : PanneauPrincipale.getComponents()) {
             PanneauPrincipale.remove(component);
         }
         //On ajoute le JScrollPane au panneau principal
-        AffichageListeEtude listeEtude = new AffichageListeEtude(dialogueBD,utilisateur);
+        AffichageListeEtude listeEtude = new AffichageListeEtude(dialogueBD, utilisateur);
         PanneauPrincipale.add(listeEtude, java.awt.BorderLayout.CENTER);
         listeEtude.addEtudeSelectedListener(this);
         //On actualise le panneau principal
@@ -501,7 +756,9 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     }//GEN-LAST:event_boutonNouveauPatientActionPerformed
 
     /**
-     * Méthode appelée lorsqu'un patient est sélectionné dans la liste des patients
+     * Méthode appelée lorsqu'un patient est sélectionné dans la liste des
+     * patients
+     *
      * @param idPatient : l'identifiant du patient sélectionné
      */
     public void patientSelected(String idPatient) {
@@ -525,7 +782,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             AjoutSejour ajoutSejour = new AjoutSejour(dialogueBD, utilisateur, idPatient);
             // On affiche le JFrame
             ajoutSejour.setVisible(true);
-            }
+        }
     }
 
     public void etudeSelected(String idEtude) {
@@ -542,7 +799,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         PanneauPrincipale.revalidate();
         PanneauPrincipale.repaint();
     }
-
 
     /**
      * @param args the command line arguments
@@ -575,9 +831,11 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         java.awt.EventQueue.invokeLater(new Runnable() {
             final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
             final DialogueBD dialogueBD = new DialogueBD();
+
             {
                 dialogueBD.connect();
             }
+
             public void run() {
                 new Accueil(dialogueBD, utilisateur).setVisible(true);
             }
