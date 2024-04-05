@@ -75,7 +75,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             Prenom.setText("First name");
             DateDeNaissance.setText("Date of birth");
             Bienvenue.setText("Welcome");
-
+            IPP.setText("PPI");
         }
     }
 
@@ -127,6 +127,11 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         Deconnexion.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         Deconnexion.setForeground(new java.awt.Color(255, 255, 255));
         Deconnexion.setText("Déconnexion");
+        Deconnexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeconnexionActionPerformed(evt);
+            }
+        });
 
         panelBoutons.setBackground(new java.awt.Color(236, 242, 254));
         panelBoutons.setLayout(new javax.swing.BoxLayout(panelBoutons, javax.swing.BoxLayout.Y_AXIS));
@@ -171,6 +176,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         BoutonRechercheClinique.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         BoutonRechercheClinique.setForeground(new java.awt.Color(255, 255, 255));
         BoutonRechercheClinique.setText("Recherche Clinique");
+        BoutonRechercheClinique.setMaximumSize(new java.awt.Dimension(217, 35));
         BoutonRechercheClinique.setMinimumSize(new java.awt.Dimension(217, 25));
         BoutonRechercheClinique.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,6 +473,12 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonPatientsActionPerformed
+
+    private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
+        System.out.println("veut se fermer");
+        this.dispose();
+        new InterfaceConnexion(new DialogueBD()).setVisible(true);
+    }//GEN-LAST:event_DeconnexionActionPerformed
 
     private void BoutonRechercheCliniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercheCliniqueActionPerformed
         //On supprime tous les composants du panneau principal

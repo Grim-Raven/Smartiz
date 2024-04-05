@@ -19,8 +19,7 @@ import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-
+import javax.swing.table.TableRowSorter;
 
 import fc.AfficherListeEtudesListener;
 import fc.DialogueBD;
@@ -86,9 +85,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         //On stocke les données de l'utilisateur et la connexion à la BD
         this.dialogueBD = dialogueBD;
         this.utilisateur = utilisateur;
-
         initComponents(dialogueBD.getEtude());
-        System.out.println("c'est fait");
     }
 
     /**
@@ -117,12 +114,24 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
         ListeEtudeClinique.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         ListeEtudeClinique.setForeground(new java.awt.Color(4, 66, 114));
-        ListeEtudeClinique.setText("Liste des études cliniques");
+        //On vérifie la langue pour la traduire dans la langue souhaitée
+        if(utilisateur.getLangue().equals("English")){
+            ListeEtudeClinique.setText("List of clinical studies");
+        }
+        else{
+            ListeEtudeClinique.setText("Liste des études cliniques");
+        }
 
         BoutonCreerEtude.setBackground(new java.awt.Color(255, 255, 255));
         BoutonCreerEtude.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         BoutonCreerEtude.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonCreerEtude.setText("Créer une étude");
+        //On vérifie la langue pour la traduire dans la langue souhaitée
+        if(utilisateur.getLangue().equals("English")){
+            BoutonCreerEtude.setText("Create a study");
+        }
+        else{
+            BoutonCreerEtude.setText("Créer une étude");
+        }
         BoutonCreerEtude.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BoutonCreerEtudeActionPerformed(evt);
@@ -175,7 +184,6 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         modelTable.addColumn("nom");
         modelTable.addColumn("ID Personnel Médical responsable");
         modelTable.addColumn("Type de Recherche");
-        System.out.println("tableau est crée");
 
         // Ajout des études dans le modèle de table
         try {
@@ -185,7 +193,6 @@ public class AffichageListeEtude extends javax.swing.JPanel {
                 resultSetEtude.getString("nom").trim(),
                 resultSetEtude.getString("IDPERSONNELMEDICAL").trim(),
                 resultSetEtude.getString("TYPERECHERCHE")});
-                System.out.println("études récupérés");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -193,7 +200,15 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
          //On crée une JTable avec le modèle de table
         tableEtude = new JTable(modelTable);
-        System.out.println("tableau crée et ajouté");
+
+        // Création d'un TableRowSorter et liaison avec la table
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelTable);
+        tableEtude.setRowSorter(sorter);
+
+        // Tri des lignes en fonction de la première colonne
+        sorter.setSortable(1, true); // Permet de trier la colonne 0
+        sorter.toggleSortOrder(0);
+
         tableEtude.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableEtudeMouseClicked((MouseEvent) evt);
@@ -224,6 +239,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         //On ajoute la JTable dans un JScrollPane
         jScrollPane1 = new JScrollPane(tableEtude);
         PanneauCentre.add(jScrollPane1);
+
         // On change la couleur de fond de la JTable et du JScrollPane
         tableEtude.setBackground(new Color(236, 242, 254));
         this.setBackground(new Color(236, 242, 254));
@@ -231,7 +247,6 @@ public class AffichageListeEtude extends javax.swing.JPanel {
         if (viewport != null && viewport.getView() instanceof JComponent) {
             ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
         }
-        System.out.println("couleur de fond changé");
 
         // On change la couleur de fond des lignes de la JTable
         tableEtude.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -256,7 +271,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
     private void BoutonCreerEtudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerEtudeActionPerformed
         //On ouvre le formulaire pour créer une étude 
-        AjouterEtude ajoutEtude = new AjouterEtude(dialogueBD,utilisateur.getLangue());
+        AjouterEtude ajoutEtude = new AjouterEtude(dialogueBD,utilisateur);
         ajoutEtude.setVisible(true);
     }//GEN-LAST:event_BoutonCreerEtudeActionPerformed
 

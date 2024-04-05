@@ -12,8 +12,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 
 /**
@@ -213,7 +216,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
             String hashedMotDePasse = Hashage.sha256(motDePasse);
             String requeteConnexion = "SELECT * " +
                     "FROM PersonnelMedical " +
-                    "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+                    "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "' AND (select sysdate from dual) < DateFinContrat";
             ResultSet resultat = dialogueBD.requete(requeteConnexion);
             // On vérifie si l'identifiant et le mot de passe sont corrects
             try {

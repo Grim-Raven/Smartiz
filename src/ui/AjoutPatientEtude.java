@@ -37,6 +37,7 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
         this.utilisateur = utilisateur;
         this.idEtude = idEtude;
         initComponents();
+        changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -264,6 +265,16 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void changerLangue(String langue){
+        if(langue.equals("English")){
+            BoutonRechercher.setText("Search");
+            IPP.setText("PPI");
+            Nom.setText("Last Name");
+            Prenom.setText("First Name");
+            RechercherUnPatient.setText("Search for a patient");
         }
     }
 
