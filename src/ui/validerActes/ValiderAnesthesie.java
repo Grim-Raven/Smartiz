@@ -5,6 +5,10 @@
  */
 package ui.validerActes;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+
 import fc.DialogueBD;
 import fc.Utilisateur;
 
@@ -19,14 +23,19 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
      */
     private DialogueBD dialogueBD;
     private Utilisateur utilisateur;
-    private String idSejour;
+    private String idActe;
     
-    public ValiderAnesthesie() {
+    public ValiderAnesthesie(DialogueBD dialogueBD, Utilisateur utilisateur, String idActe) {
         initComponents();
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idActe = idActe;
+        remplirChamps(this.idActe);
+
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
         //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
-        changerLangue(this.utilisateur.getLangue());
+        //changerLangue(this.utilisateur.getLangue());
     }
 
     /**
@@ -46,10 +55,10 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         nomService = new javax.swing.JLabel();
         commentaire = new javax.swing.JLabel();
         zoneCommentaire = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        texteCom = new javax.swing.JTextArea();
         boutonValiderConsultationAnesthesie = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
@@ -71,9 +80,9 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         commentaire.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         commentaire.setText("Commentaire : ");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        zoneCommentaire.setViewportView(jTextArea1);
+        texteCom.setColumns(20);
+        texteCom.setRows(5);
+        zoneCommentaire.setViewportView(texteCom);
 
         boutonValiderConsultationAnesthesie.setBackground(new java.awt.Color(4, 66, 114));
         boutonValiderConsultationAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -142,6 +151,56 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void remplirChamps(String idActe){
+        String requete = ("SELECT * FROM ACTE where idActe = " + idActe);
+        ResultSet resultset = dialogueBD.requete(requete);
+
+        //On parcourt le Resulset pour récupérer les infos de l'acte
+        try {
+            resultset.next();
+            nomService.setText(dialogueBD.getNomService(resultset.getString("idService")));
+            dateOperation.setText(resultset.getString("dateRealisationActe"));
+            texteCom.setText(resultset.getString("commentaire"));
+            
+            // On cache le bouton de validation si l'acte a déjà été validé 
+            boolean valide = resultset.getString("valide").equals("Y");
+            System.out.println(valide);
+            if(valide) {
+                boutonValiderConsultationAnesthesie.setVisible(false);
+            }
+            else{
+                boutonValiderConsultationAnesthesie.setVisible(true);
+                boutonValiderConsultationAnesthesie.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        BoutonValiderConsultationAnesthesieActionPerformed(evt);
+                    }
+                });
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+
+    private void BoutonValiderConsultationAnesthesieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderConsultationActionPerformed
+        String resultat = "";
+        //On met à jour la consultation dans la base de données
+        dialogueBD.validerActe(idActe, resultat);
+        String rajout = texteCom.getText();
+        // On crée un dictionnaire contenant les données de la pré-consultation
+        HashMap<String, String> dataAnesthesie = new HashMap<>();
+        dataAnesthesie.put("commentaire", rajout);
+        //On update les données de la pré-consultation
+        try {
+            dialogueBD.updateTable("acte", dataAnesthesie, "idActe", this.idActe);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        this.dispose();
+    }//GEN-LAST:event_boutonValiderConsultationActionPerformed
+
     public void changerLangue(String langue) {
         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
@@ -183,7 +242,7 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ValiderAnesthesie().setVisible(true);
+                //new ValiderAnesthesie().setVisible(true);
             }
         });
     }
@@ -193,10 +252,10 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
     private javax.swing.JLabel commentaire;
     private javax.swing.JLabel dateOperation;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel nomService;
     private javax.swing.JLabel operation;
     private javax.swing.JLabel service;
+    private javax.swing.JTextArea texteCom;
     private javax.swing.JLabel validerConsultationAnesthesie;
     private javax.swing.JScrollPane zoneCommentaire;
     // End of variables declaration//GEN-END:variables
