@@ -8,24 +8,54 @@ package ui.validerActes;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
+import java.sql.ResultSet;
+
 /**
- *
  * @author emmaa
  */
 public class ValiderExamenBiologique extends javax.swing.JFrame {
 
-    private DialogueBD dialogueBD;
-    private Utilisateur utilisateur;
-    private String idSejour;
+    private final DialogueBD dialogueBD;
+    private final Utilisateur utilisateur;
+    private final String idActe;
+
     /**
      * Creates new form ValiderExamenBiologique
      */
-    public ValiderExamenBiologique() {
+    public ValiderExamenBiologique(DialogueBD dialogueBD, Utilisateur utilisateur, String idActe) {
         initComponents();
+        this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        this.idActe = idActe;
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        remplirChamps();
         //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
         changerLangue(this.utilisateur.getLangue());
+    }
+
+    private void remplirChamps() {
+        String requete = "SELECT * FROM acte WHERE idActe = " + idActe;
+        ResultSet resultat = dialogueBD.requete(requete);
+        try {
+            if (resultat.next()) {
+                String commentaire = resultat.getString("commentaire");
+                String type = commentaire.substring(0, commentaire.indexOf(" "));
+                commentaire = commentaire.substring(commentaire.indexOf(" ") + 1);
+                TypeExamenBiologique.setText(type);
+                dateExamenBiologique.setText(resultat.getString("dateActe").substring(0, 10));
+                ZoneCommentaire.setText(commentaire);
+                if(resultat.getString("commentaire") == null){
+                    ZoneCommentaire.setText("Aucun commentaire");
+                }
+                texteResultat.setText(resultat.getString("resultat"));
+                if(resultat.getString("resultat") == null){
+                    texteResultat.setText("Aucun résultat");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -46,9 +76,12 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         commentaire = new javax.swing.JLabel();
         zoneCommentaire = new javax.swing.JScrollPane();
         ZoneCommentaire = new javax.swing.JTextArea();
+        labelResultat = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        texteResultat = new javax.swing.JTextArea();
         BoutonValiderExamenBiologique = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
@@ -74,6 +107,13 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         ZoneCommentaire.setRows(5);
         zoneCommentaire.setViewportView(ZoneCommentaire);
 
+        labelResultat.setText("Resultat :");
+
+        texteResultat.setEditable(false);
+        texteResultat.setColumns(20);
+        texteResultat.setRows(5);
+        jScrollPane1.setViewportView(texteResultat);
+
         BoutonValiderExamenBiologique.setBackground(new java.awt.Color(4, 66, 114));
         BoutonValiderExamenBiologique.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         BoutonValiderExamenBiologique.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,61 +123,67 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(zoneCommentaire)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ValiderExamenBiologique)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TypeExamen)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TypeExamenBiologique))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Date)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateExamenBiologique))
-                            .addComponent(commentaire))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(BoutonValiderExamenBiologique)
-                .addContainerGap(108, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1)
+                                        .addComponent(zoneCommentaire, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(ValiderExamenBiologique)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(TypeExamen)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(TypeExamenBiologique))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(Date)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(dateExamenBiologique))
+                                                        .addComponent(commentaire)
+                                                        .addComponent(labelResultat))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addComponent(BoutonValiderExamenBiologique)
+                                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ValiderExamenBiologique)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TypeExamen)
-                    .addComponent(TypeExamenBiologique))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Date)
-                    .addComponent(dateExamenBiologique))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(commentaire)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BoutonValiderExamenBiologique)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ValiderExamenBiologique)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(TypeExamen)
+                                        .addComponent(TypeExamenBiologique))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Date)
+                                        .addComponent(dateExamenBiologique))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(commentaire)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelResultat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BoutonValiderExamenBiologique)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -145,7 +191,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
 
 
     public void changerLangue(String langue) {
-        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //Si la langue sélectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
         if (langue.equals("English")) {
             ValiderExamenBiologique.setText("Validate the biological examination");
@@ -153,42 +199,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
             TypeExamen.setText("Type of medical examination");
             ZoneCommentaire.setText("Comment");
         }
-        
-    }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ValiderExamenBiologique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ValiderExamenBiologique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ValiderExamenBiologique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ValiderExamenBiologique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ValiderExamenBiologique().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -201,6 +212,9 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
     private javax.swing.JLabel commentaire;
     private javax.swing.JLabel dateExamenBiologique;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelResultat;
+    private javax.swing.JTextArea texteResultat;
     private javax.swing.JScrollPane zoneCommentaire;
     // End of variables declaration//GEN-END:variables
 }
