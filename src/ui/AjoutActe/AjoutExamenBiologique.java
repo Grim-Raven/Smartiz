@@ -145,7 +145,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
     private void BoutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
         // Récupération des données
         Date date = DateChooser.getDate();
-        String commentaire = (String) MenuDeroulantTypeExamen.getSelectedItem()+ " "+ ZoneCommentaire.getText();
+        String commentaire = MenuDeroulantTypeExamen.getSelectedItem()+ " "+ ZoneCommentaire.getText();
         String dateExamenBio = new java.sql.Date(date.getTime()).toString();
         
         //On entre les données dans la hashmap
@@ -162,9 +162,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BoutonAjouterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
     public void changerLangue(String langue) {
         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
@@ -177,6 +175,9 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

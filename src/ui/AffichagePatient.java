@@ -10,6 +10,7 @@ import fc.DialogueBD;
 import fc.Utilisateur;
 import ui.validerActes.ValidationPrescription;
 import ui.validerActes.ValiderConsultation;
+import ui.validerActes.ValiderRadiologie;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -561,8 +562,12 @@ public class AffichagePatient extends javax.swing.JPanel {
                     // On affiche la fenêtre
                     afficherConsultation.setVisible(true);
                     break;
-                case "Radiologie":
+                default:
                     // TODO
+                    if("Radiographie IRM Scanner Echographie Scintigraphie Tomographie".contains(typeActe)){
+                        JFrame afficherRadiologie = new ValiderRadiologie(this.utilisateur, idActe, dialogueBD);
+                        afficherRadiologie.setVisible(true);
+                    }
                     break;
                 case "Anesthésie":
                     // TODO
@@ -767,8 +772,16 @@ public class AffichagePatient extends javax.swing.JPanel {
                             infoActe.append(" prévue le ").append(resultat.getString("datePrescription"), 0, 10);
                         }
                         break;
-                    case "Radiologie":
-                        // TODO
+                    default: // Radiologie Echo, Radiologie Scanner, IRM, ...
+                        if("Radiologie Echographie Scanner IRM Scintigraphie Tomographie".contains(typeActe)) {
+                            infoActe.append(" : ").append(resultat.getString("commentaire")==null?"":resultat.getString("commentaire"));
+                            if(resultat.getString("valide").equals("Y")){
+                                infoActe.append(" - réalisé le : ");
+                            }else {
+                                infoActe.append(" - prévu le : ");
+                            }
+                            infoActe.append(resultat.getString("dateRealisationActe"), 0, 10);
+                        }
                         break;
                     case "Anesthésie":
                         infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"), 0, 10);

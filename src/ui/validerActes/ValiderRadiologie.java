@@ -8,8 +8,9 @@ package ui.validerActes;
 import fc.DialogueBD;
 import fc.Utilisateur;
 
+import java.sql.ResultSet;
+
 /**
- *
  * @author emmaa
  */
 public class ValiderRadiologie extends javax.swing.JFrame {
@@ -20,13 +21,39 @@ public class ValiderRadiologie extends javax.swing.JFrame {
     private DialogueBD dialogueBD;
     private Utilisateur utilisateur;
     private String idSejour;
-    
-    public ValiderRadiologie() {
+
+    public ValiderRadiologie(Utilisateur utilisateur, String idActe, DialogueBD dialogueBD) {
         initComponents();
+        this.utilisateur = utilisateur;
+        this.dialogueBD = dialogueBD;
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
+        remplirRadiologie(idActe);
         //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
         changerLangue(this.utilisateur.getLangue());
+    }
+
+    private void remplirRadiologie(String idActe) {
+        //On récupère les informations de la radiologie à partir de la base de données
+        String requete = "SELECT * FROM Acte WHERE idActe = " + idActe;
+        ResultSet resultSet = dialogueBD.requete(requete);
+        try {
+            if (resultSet.next()) {
+                typeExamenValeur.setText(resultSet.getString("nom"));
+                dateRadiologie.setText(resultSet.getString("dateRealisationActe").substring(0, 10));
+
+                texteCommentaire.setText(resultSet.getString("commentaire"));
+                if(resultSet.getString("commentaire") == null){
+                    texteCommentaire.setText("Aucun commentaire");
+                }
+                texteResultat.setText(resultSet.getString("resultat"));
+                if(resultSet.getString("resultat") == null){
+                    texteResultat.setText("Aucun résultat");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -38,42 +65,35 @@ public class ValiderRadiologie extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelInfos = new javax.swing.JPanel();
         ValiderRadiologie = new javax.swing.JLabel();
         TypeExamen = new javax.swing.JLabel();
         Date = new javax.swing.JLabel();
-        commentaire = new javax.swing.JLabel();
-        zoneCommentaire = new javax.swing.JScrollPane();
-        JTextArea = new javax.swing.JTextArea();
-        boutonValiderRadiologie = new javax.swing.JButton();
         typeExamenValeur = new javax.swing.JLabel();
         dateRadiologie = new javax.swing.JLabel();
+        panelCommentaire = new javax.swing.JPanel();
+        zoneCommentaire = new javax.swing.JScrollPane();
+        texteCommentaire = new javax.swing.JTextArea();
+        commentaire = new javax.swing.JLabel();
+        panelResultat = new javax.swing.JPanel();
+        labelResultat = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        texteResultat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 242, 254));
 
-        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
+        panelInfos.setBackground(new java.awt.Color(236, 242, 254));
 
         ValiderRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        ValiderRadiologie.setText("Valider la radiologie");
+        ValiderRadiologie.setText("Imagerie");
 
         TypeExamen.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        TypeExamen.setText("Type d'examen(s) :");
+        TypeExamen.setText("Type d'imagerie :");
         TypeExamen.setToolTipText("");
 
         Date.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         Date.setText("Date : ");
-
-        commentaire.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        commentaire.setText("Commentaire");
-
-        JTextArea.setColumns(20);
-        JTextArea.setRows(5);
-        zoneCommentaire.setViewportView(JTextArea);
-
-        boutonValiderRadiologie.setBackground(new java.awt.Color(4, 66, 114));
-        boutonValiderRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        boutonValiderRadiologie.setForeground(new java.awt.Color(255, 255, 255));
-        boutonValiderRadiologie.setText("Valider la radiologie");
 
         typeExamenValeur.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         typeExamenValeur.setText("TypeExamen");
@@ -81,79 +101,124 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         dateRadiologie.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         dateRadiologie.setText("dateRadiologie");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelInfosLayout = new javax.swing.GroupLayout(panelInfos);
+        panelInfos.setLayout(panelInfosLayout);
+        panelInfosLayout.setHorizontalGroup(
+            panelInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInfosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(zoneCommentaire)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ValiderRadiologie)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TypeExamen)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(typeExamenValeur))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Date)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateRadiologie))
-                            .addComponent(commentaire))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(boutonValiderRadiologie)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGroup(panelInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ValiderRadiologie)
+                    .addGroup(panelInfosLayout.createSequentialGroup()
+                        .addComponent(TypeExamen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(typeExamenValeur))
+                    .addGroup(panelInfosLayout.createSequentialGroup()
+                        .addComponent(Date)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateRadiologie)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelInfosLayout.setVerticalGroup(
+            panelInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInfosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ValiderRadiologie)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TypeExamen)
                     .addComponent(typeExamenValeur))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Date)
                     .addComponent(dateRadiologie))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(commentaire)
-                .addGap(11, 11, 11)
-                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boutonValiderRadiologie)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        getContentPane().add(panelInfos, java.awt.BorderLayout.NORTH);
+
+        panelCommentaire.setBackground(new java.awt.Color(236, 242, 254));
+
+        texteCommentaire.setEditable(false);
+        texteCommentaire.setColumns(20);
+        texteCommentaire.setRows(5);
+        zoneCommentaire.setViewportView(texteCommentaire);
+
+        commentaire.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        commentaire.setText("Commentaire");
+
+        javax.swing.GroupLayout panelCommentaireLayout = new javax.swing.GroupLayout(panelCommentaire);
+        panelCommentaire.setLayout(panelCommentaireLayout);
+        panelCommentaireLayout.setHorizontalGroup(
+            panelCommentaireLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommentaireLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCommentaireLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zoneCommentaire, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addGroup(panelCommentaireLayout.createSequentialGroup()
+                        .addComponent(commentaire)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        panelCommentaireLayout.setVerticalGroup(
+            panelCommentaireLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommentaireLayout.createSequentialGroup()
+                .addComponent(commentaire)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        getContentPane().add(panelCommentaire, java.awt.BorderLayout.CENTER);
+
+        panelResultat.setBackground(new java.awt.Color(236, 242, 254));
+
+        labelResultat.setText("Resultat :");
+
+        texteResultat.setEditable(false);
+        texteResultat.setColumns(20);
+        texteResultat.setRows(5);
+        jScrollPane1.setViewportView(texteResultat);
+
+        javax.swing.GroupLayout panelResultatLayout = new javax.swing.GroupLayout(panelResultat);
+        panelResultat.setLayout(panelResultatLayout);
+        panelResultatLayout.setHorizontalGroup(
+            panelResultatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelResultatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addGroup(panelResultatLayout.createSequentialGroup()
+                        .addComponent(labelResultat)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelResultatLayout.setVerticalGroup(
+            panelResultatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultatLayout.createSequentialGroup()
+                .addComponent(labelResultat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(panelResultat, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     public void changerLangue(String langue) {
         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
         if (langue.equals("English")) {
-            ValiderRadiologie.setText("Validate radiology");
-            boutonValiderRadiologie.setText("Validate");
-            TypeExamen.setText("Type of medical examination");
-            JTextArea.setText("Comment");
+            ValiderRadiologie.setText("Imagery");
+            labelResultat.setText("Result :");
+            TypeExamen.setText("Type of Imagery");
+            texteCommentaire.setText("Comment");
         }
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -161,7 +226,7 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -182,22 +247,26 @@ public class ValiderRadiologie extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ValiderRadiologie().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ValiderRadiologie().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Date;
-    private javax.swing.JTextArea JTextArea;
     private javax.swing.JLabel TypeExamen;
     private javax.swing.JLabel ValiderRadiologie;
-    private javax.swing.JButton boutonValiderRadiologie;
     private javax.swing.JLabel commentaire;
     private javax.swing.JLabel dateRadiologie;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelResultat;
+    private javax.swing.JPanel panelCommentaire;
+    private javax.swing.JPanel panelInfos;
+    private javax.swing.JPanel panelResultat;
+    private javax.swing.JTextArea texteCommentaire;
+    private javax.swing.JTextArea texteResultat;
     private javax.swing.JLabel typeExamenValeur;
     private javax.swing.JScrollPane zoneCommentaire;
     // End of variables declaration//GEN-END:variables
