@@ -51,7 +51,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         this.setTitle("Bienvenue " + utilisateur.getPrenom().trim() + " " + utilisateur.getNom().trim());
         // On met la JFrame en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ImageIcon iconeSmartiz = new ImageIcon(getClass().getResource("/ui/Image/Logo_Smartiz.png"));
+        ImageIcon iconeSmartiz = new ImageIcon(Accueil.class.getResource("/ui/Image/Logo_Smartiz.png"));
         Image imageSmartiz = iconeSmartiz.getImage();
         Image scaledImage = imageSmartiz.getScaledInstance(labelLogo.getWidth(), labelLogo.getHeight(), Image.SCALE_SMOOTH);
         labelLogo.setIcon(new ImageIcon(scaledImage));

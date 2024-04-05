@@ -257,6 +257,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
             // Retrait des "-" dans la date de naissance
             dataHL7.put("dateNaissance", resultPatient.getString("dateNaissance").substring(0,10).replace("-",""));
             dataHL7.put("sexe", resultPatient.getString("sexe"));
+            dataHL7.put("adresse", resultPatient.getString("adresse"));
             // Envoi de la demande
             //TODO : Faire quelque chose si pas de réponse
             Message reponse = messageHL7.envoieDemandeRadio(dataHL7);

@@ -156,7 +156,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         //On entre les données dans la hashmap
         HashMap<String, String> anesthesieData = new HashMap<String, String>();
         anesthesieData.put("nom","Anesthésie");
-        anesthesieData.put("datePrescription",dateOperation);
+        anesthesieData.put("dateRealisationActe",dateOperation);
         anesthesieData.put("commentaire", commentaire);
         anesthesieData.put("idSejour", idSejour);
         anesthesieData.put("idPrescripteur", utilisateur.getIdUtilisateur());

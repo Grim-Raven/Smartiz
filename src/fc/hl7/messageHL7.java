@@ -66,6 +66,7 @@ public class messageHL7{
         pid.getPatientIdentifierList(0).getID().setValue(dataDemande.get("idPatient"));
         pid.getDateTimeOfBirth().getTimeOfAnEvent().setValue(dataDemande.get("dateNaissance"));
         pid.getAdministrativeSex().setValue(dataDemande.get("sexe"));
+        pid.getPatientAddress(0).getAddressType().setValue(dataDemande.get("adresse"));
 
         // Remplissage des informations de la demande
         // id de la demande
