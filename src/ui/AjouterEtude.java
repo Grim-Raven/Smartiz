@@ -20,14 +20,16 @@ import javax.swing.JTextField;
 public class AjouterEtude extends javax.swing.JFrame {
 
     public DialogueBD dialogueBD;
+    private Utilisateur utilisateur;
 
-    public AjouterEtude(DialogueBD dialogueBD, String langue) {
+    public AjouterEtude(DialogueBD dialogueBD, Utilisateur utilisateur) {
         initComponents();
         this.dialogueBD = dialogueBD;
+        this.utilisateur = utilisateur;
+        changerLangue(this.utilisateur.getLangue());
+
         // Pour empêcher le redimensionnement de la fenêtre
         setResizable(false);
-        // On change la langue de l'interface
-        changerLangue(langue);
     }
 
     /**
@@ -252,21 +254,8 @@ public class AjouterEtude extends javax.swing.JFrame {
      * @param langue : la langue choisie
      */
     public void changerLangue(String langue){
-        // Si la langue choisie est le français
-        if(langue.equals("Français")){
-            CreerEtude.setText("Créer une étude");
-            TypeRecherche.setText("Type de Recherche");
-            IntituleEtude.setText("Intitulé de l'étude");
-            NomPraticienHospitalier.setText("ID du praticien hospitalier");
-            DateDemarrage.setText("Date de démarrage");
-            Duree.setText("Durée");
-            BoutonCreer.setText("Créer ");
-            RadioButtonJours.setText("Jours");
-            RadioButtonMois.setText("Mois");
-            RadioButtonAnnees.setText("Années");
-        }
         // Si la langue choisie est l'anglais
-        else if(langue.equals("English")) {
+        if(langue.equals("English")) {
             CreerEtude.setText("Create a study");
             TypeRecherche.setText("Type of research");
             IntituleEtude.setText("Study title");
@@ -310,13 +299,14 @@ public class AjouterEtude extends javax.swing.JFrame {
 
         //Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                // On instancie un objet DialogueBD pour communiquer avec la base de données
-                DialogueBD dialogueBD = new DialogueBD();
-                // On se connecte à la base de données
+            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
+            final DialogueBD dialogueBD = new DialogueBD();
+            {
                 dialogueBD.connect();
+            }
+            public void run() {
                 // On instancie l'interface d'ajout d'étude
-                new AjouterEtude(dialogueBD, "Francais").setVisible(true);
+                new AjouterEtude(dialogueBD, utilisateur).setVisible(true);
             }
         });
         
