@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Smartiz:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment=".">
+    <list default="true" id="d09ff4d4-b33e-4dde-9a37-06e11b507693" name="Changes" comment="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Smartiz_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e7b9e485-8ce7-4756-b798-5a1aa646787a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +46,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -46,6 +56,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -113,6 +127,9 @@
       <workItem from="1712310746177" duration="345000" />
       <workItem from="1712311248585" duration="35000" />
       <workItem from="1712311430216" duration="61000" />
+      <workItem from="1712311562232" duration="217000" />
+      <workItem from="1712311817585" duration="144000" />
+      <workItem from="1712317927136" duration="11226000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout radiologie à la BD ok">
       <option name="closed" value="true" />
@@ -146,7 +163,31 @@
       <option name="project" value="LOCAL" />
       <updated>1712310430299</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient">
+      <option name="closed" value="true" />
+      <created>1712325665912</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712325665912</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient">
+      <option name="closed" value="true" />
+      <created>1712325880709</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712325880709</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient">
+      <option name="closed" value="true" />
+      <created>1712329311551</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712329311551</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,7 +209,8 @@
     <MESSAGE value="reception message ok" />
     <MESSAGE value="fixed" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de la fonctionnalité de visualitation de l'historique de consultation d'un dossier patient" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
