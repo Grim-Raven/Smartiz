@@ -216,7 +216,8 @@ public class DialogueBD {
                             update.append("TO_DATE('").append(entry.getValue()).append("', 'YYYY-MM-DD'), ");
                             break;
                         default: // Pour les chaînes de caractères, on ajoute des guillemets simples
-                            String charSQL = "'"+entry.getValue()+"'";
+                        String valeur = entry.getValue().replace("'", "''");                         
+                        String charSQL = "'"+valeur+"'";
                             update.append(charSQL).append(", ");
                             break;
                     }

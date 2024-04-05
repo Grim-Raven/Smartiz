@@ -32,10 +32,13 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         this.idActe = idActe;
         remplirChamps(this.idActe);
 
+        this.setDefaultCloseOperation(2);
         //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
         setResizable(false);
         //Pour basculer l'interface en anglais lorsqu'elle la langue "English" est sélectionnée
-        //changerLangue(this.utilisateur.getLangue());
+        changerLangue(this.utilisateur.getLangue());
+
+        texteCom.setEditable(false);
     }
 
     /**
@@ -160,13 +163,13 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         try {
             resultset.next();
             nomService.setText(dialogueBD.getNomService(resultset.getString("idService")));
-            dateOperation.setText(resultset.getString("dateRealisationActe"));
+            dateOperation.setText(resultset.getString("dateRealisationActe").substring(0, 10));
             texteCom.setText(resultset.getString("commentaire"));
             
             // On cache le bouton de validation si l'acte a déjà été validé 
             boolean valide = resultset.getString("valide").equals("Y");
             System.out.println(valide);
-            if(valide) {
+            if(valide || (utilisateur.getIdService()!= 18) ) {
                 boutonValiderConsultationAnesthesie.setVisible(false);
             }
             else{
@@ -189,10 +192,10 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         //On met à jour la consultation dans la base de données
         dialogueBD.validerActe(idActe, resultat);
         String rajout = texteCom.getText();
-        // On crée un dictionnaire contenant les données de la pré-consultation
+        // On crée un dictionnaire contenant les données de la consultation pré-opératoire
         HashMap<String, String> dataAnesthesie = new HashMap<>();
         dataAnesthesie.put("commentaire", rajout);
-        //On update les données de la pré-consultation
+        //On met à jour les données de la consultation pré-opératoire
         try {
             dialogueBD.updateTable("acte", dataAnesthesie, "idActe", this.idActe);
         } catch (SQLException e) {
