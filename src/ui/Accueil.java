@@ -480,13 +480,15 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         modelTable.addColumn("Nom");
         modelTable.addColumn("Prénom");
         modelTable.addColumn("Date de Naissance");
-        modelTable.addColumn("Acte Radiologie");
-        modelTable.addColumn("Date de demande");
+        
         //On s'assure que le tableau soit créé
         System.out.println("tableau est créé");
 
+        //Un radiologue souhaite affiche les patients dont un acte de radiologie a été demandé 
         //On vérifie que l'utilisateur est bien un radiologue (l'id du service de Radiologie est 15)
         if (this.utilisateur.getIdService() == 15) {
+            modelTable.addColumn("Acte Radiologie");
+            modelTable.addColumn("Date de demande");
             ResultSet resultat = null;
             //On recherche les actes qui appartiennent au domaine de radiologie
             String[] typesActes1 = {"Radiographie", "Echographie", "Scanner", "IRM", "Tomographie", "Scintigraphie"};
@@ -510,7 +512,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                             String acte = typeActe2;
                             //On récupère la date de la demande de l'acte 
                             String date = resultat.getString("dateRealisationActe");
-                            
+
                             //On fait une recherche pour récupérer l'information sur l'ouverture du séjour 
                             HashMap<String, String> conditions = new HashMap<>();
                             conditions.put("idsejour", String.valueOf(idSejour));
@@ -520,7 +522,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                                 System.out.println("Il existe un séjour correspondant");
                                 // Récupération de la valeur de l'attribut "ouvert"
                                 String ouvert = resultatSejour.getString("OUVERT");
-                                
+
                                 //Si le séjour est ouvert, on récupère les informations du patient 
                                 if (ouvert.equals("Y")) {
                                     System.out.println("séjourt ouvert");
@@ -538,7 +540,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                                             nomPatient = resultatPatient.getString("nom").trim();
                                             prenomPatient = resultatPatient.getString("prenom").trim();
                                             dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
-                                            modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance, acte, date});
+                                            modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance.substring(0,10), acte, date});
                                             System.out.println("ligne ajoutée");
                                         }
                                     } catch (SQLException e) {
@@ -559,78 +561,143 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             }
         }
 
-        //On crée une JTable avec le modèle de table
-        this.tablePatients = new JTable(modelTable);
-        System.out.println("tableau créé et ajouté");
-        //On ajoute un listener pour pouvoir cliquer sur la ligne du patient 
-        tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePatientsMouseClicked(evt);
-            }
-        });
+        //Un anesthésiste souhaite afficher 
+        if (this.utilisateur.getIdService() == 18) {
+            
+            modelTable.addColumn("Opération prévue le");
+            ResultSet resultat = null;
+            try {
+                resultat = dialogueBD.rechercheTable("Acte", new HashMap<String, String>() {
+                    {
+                        put("nom", "Anesthésie");
+                    }
+                }, false);
+                //Tant qu'il existe un acte de demande d'anesthésie, on récupère l'id du séjour correspondant
+                while (resultat.next()) {
+                    String typeActe3;
+                    typeActe3 = resultat.getString("nom").trim();
+                    System.out.println("Il existe un acte de radiologie");
+                    //On récupère la valeur de idSejour
+                    int idSejour = resultat.getInt("idsejour");
+                    //On récupère la valeur de nom
+                    String idService = resultat.getString("nom");
+                    //On récupère la date de la demande de l'acte 
+                    String date = resultat.getString("datePrescription").substring(0, 10);
+                    
+                    //On fait une recherche pour récupérer l'information sur l'ouverture du séjour 
+                    HashMap<String, String> conditions = new HashMap<>();
+                    conditions.put("idsejour", String.valueOf(idSejour));
+                    ResultSet resultatSejour = dialogueBD.rechercheTable("Sejour", conditions, true);
 
-        //On définit la taille de la police de la JTable
-        tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
-        tablePatients.setRowHeight(30);
-        tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
-        tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
+                    if (resultatSejour.next()) {
+                        System.out.println("Il existe un séjour correspondant");
+                        // Récupération de la valeur de l'attribut "ouvert"
+                        String ouvert = resultatSejour.getString("OUVERT");
 
-        // On change la couleur de fond de l'entête de la JTable
-        tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                setBackground(new Color(4, 66, 114));
-                setForeground(Color.WHITE);
-                return this;
-            }
-        });
-        // On empêche l'utilisateur de modifier les données de la JTable
-        tablePatients.setDefaultEditor(Object.class, null);
-        // On définit un modèle de sélection de la JTable à un seul Patient
-        tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                        //Si le séjour est ouvert, on récupère les informations du patient 
+                        if (ouvert.equals("Y")) {
+                            System.out.println("séjourt ouvert");
+                            int idPatient = resultatSejour.getInt("idpatient");
+                            String nomPatient = "";
+                            String prenomPatient = "";
+                            String dateNaissance = "";
+                            HashMap<String, String> conditionsPatient = new HashMap<>();
+                            conditionsPatient.put("idpatient", String.valueOf(idPatient));
+                            ResultSet resultatPatient = dialogueBD.rechercheTable("Patient", conditionsPatient, true);
+                            
+                            try {
+                                if (resultatPatient.next()) {
+                                    System.out.println("Patient trouvé");
+                                    nomPatient = resultatPatient.getString("nom").trim();
+                                    prenomPatient = resultatPatient.getString("prenom").trim();
+                                    dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
+                                    modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance, date});
+                                    System.out.println("ligne ajoutée");
+                                }
 
-        //On ajoute la JTable dans un JScrollPane
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane1.add(tablePatients);
-        System.out.println("Table ajouté dans un JScrollPane");
-
-        // On change la couleur de fond des lignes de la JTable
-        tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (row % 2 == 0) {
-                    c.setBackground(new java.awt.Color(236, 242, 254));
-                } else {
-                    c.setBackground(new java.awt.Color(244, 247, 254));
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
                 }
-                if (isSelected) {
-                    // En gris si la ligne est sélectionnée.
-                    c.setBackground(new java.awt.Color(50, 115, 244));
-                }
-                return c;
-
+            } catch (SQLException ex) {
+                Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-        jScrollPane1.setViewportView(tablePatients);
-        //On supprime tous les composants du panneau principal
-        for (Component component : PanneauPrincipale.getComponents()) {
-            PanneauPrincipale.remove(component);
-        }
-        PanneauPrincipale.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-        PanneauPrincipale.revalidate();
-        // On change la couleur de fond de la JTable et du JScrollPane
-        tablePatients.setBackground(new Color(236, 242, 254));
-        this.setBackground(new Color(236, 242, 254));
-        JViewport viewport = jScrollPane1.getViewport();
-        if (viewport != null && viewport.getView() instanceof JComponent) {
-            ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
-            System.out.println("couleur de fond changée");
-        } else {
-            System.out.println("couleur de fond PAS changée");
-        }
+            }
 
+            //On crée une JTable avec le modèle de table
+            this.tablePatients = new JTable(modelTable);
+            System.out.println("tableau créé et ajouté");
+            //On ajoute un listener pour pouvoir cliquer sur la ligne du patient 
+            tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    tablePatientsMouseClicked(evt);
+                }
+            });
+
+            //On définit la taille de la police de la JTable
+            tablePatients.setFont(new java.awt.Font("Times New Roman", 0, 24));
+            tablePatients.setRowHeight(30);
+            tablePatients.getTableHeader().setPreferredSize(new Dimension(100, 50));
+            tablePatients.getTableHeader().setFont(new java.awt.Font("Times New Roman", 1, 24));
+
+            // On change la couleur de fond de l'entête de la JTable
+            tablePatients.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    setBackground(new Color(4, 66, 114));
+                    setForeground(Color.WHITE);
+                    return this;
+                }
+            });
+            // On empêche l'utilisateur de modifier les données de la JTable
+            tablePatients.setDefaultEditor(Object.class, null);
+            // On définit un modèle de sélection de la JTable à un seul Patient
+            tablePatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+            //On ajoute la JTable dans un JScrollPane
+            jScrollPane1 = new javax.swing.JScrollPane();
+            jScrollPane1.add(tablePatients);
+            System.out.println("Table ajouté dans un JScrollPane");
+
+            // On change la couleur de fond des lignes de la JTable
+            tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    if (row % 2 == 0) {
+                        c.setBackground(new java.awt.Color(236, 242, 254));
+                    } else {
+                        c.setBackground(new java.awt.Color(244, 247, 254));
+                    }
+                    if (isSelected) {
+                        // En gris si la ligne est sélectionnée.
+                        c.setBackground(new java.awt.Color(50, 115, 244));
+                    }
+                    return c;
+
+                }
+            });
+            jScrollPane1.setViewportView(tablePatients);
+            //On supprime tous les composants du panneau principal
+            for (Component component : PanneauPrincipale.getComponents()) {
+                PanneauPrincipale.remove(component);
+            }
+            PanneauPrincipale.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+            PanneauPrincipale.revalidate();
+            // On change la couleur de fond de la JTable et du JScrollPane
+            tablePatients.setBackground(new Color(236, 242, 254));
+            this.setBackground(new Color(236, 242, 254));
+            JViewport viewport = jScrollPane1.getViewport();
+            if (viewport != null && viewport.getView() instanceof JComponent) {
+                ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
+                System.out.println("couleur de fond changée");
+            } else {
+                System.out.println("couleur de fond PAS changée");
+            }
+            
     }//GEN-LAST:event_BoutonPatientsActionPerformed
 
     private void tablePatientsMouseClicked(MouseEvent evt) {

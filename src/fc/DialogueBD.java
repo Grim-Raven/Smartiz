@@ -339,6 +339,19 @@ public class DialogueBD {
         System.out.println(services);
         return services;
     }
+    
+    public String getService(int idService){
+        String requete = "SELECT NOMSERVICE FROM Service WHERE idService = '" + idService + "'";
+        ResultSet resultSet = requete(requete);
+        try {
+            if (resultSet.next()) {
+                return resultSet.getString("nomService");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DialogueBD.class.getName());
+        }
+        return null;
+    }
 
     /**
      * Méthode de récupération de l'identifiant d'un service de la base de données
