@@ -12,6 +12,7 @@ import ui.tracabilite.HistoriqueConsultationDossier;
 import ui.validerActes.ValidationPrescription;
 import ui.validerActes.ValiderConsultation;
 import ui.validerActes.ValiderRadiologie;
+import ui.validerActes.ValiderAnesthesie;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -579,7 +580,10 @@ public class AffichagePatient extends javax.swing.JPanel {
                     }
                     break;
                 case "Anesthésie":
-                    // TODO
+                    // On ouvre la fenêtre d'affichage/validation d'une anesthésie
+                    JFrame afficherAnesthésie = new ValiderAnesthesie(this.dialogueBD, this.utilisateur, idActe);
+                    // On affiche la fenêtre
+                    afficherAnesthésie.setVisible(true);
                     break;
                 case "Prescription":
                     // On ouvre la fenêtre d'affichage/validation de la prescription

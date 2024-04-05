@@ -228,6 +228,7 @@ public class ValiderConsultation extends javax.swing.JFrame {
         dialogueBD.validerActe(idActe, resultatConsultation);
         this.dispose();
     }//GEN-LAST:event_boutonValiderConsultationActionPerformed
+    
     public void changerLangue(String langue) {
         //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
