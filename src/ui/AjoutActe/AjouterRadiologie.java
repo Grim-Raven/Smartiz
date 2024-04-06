@@ -40,6 +40,8 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         this.utilisateur = utilisateur;
         this.idSejour = idSejour;
         changerLangue(this.utilisateur.getLangue());
+        // On met la date du jour par défaut
+        DateChooserExamen.setDate(new java.util.Date());
        
     }
 

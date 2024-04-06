@@ -468,6 +468,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         if (utilisateur.isPersonnelMedical()) {
             // On ne veut que les patients du service de l'utilisateur si c'est un personnel médical
             dataPatient.put("idService", Integer.toString(utilisateur.getIdService()));
+            dataPatient.put("DossierVisible", "Y");
         }
 
         //On récupère les patients qui correspondent à la recherche

@@ -37,6 +37,8 @@ public class AjoutConsultation extends javax.swing.JFrame {
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
         //Pour mettre l'interface en Anglais
         changerLangue(this.utilisateur.getLangue());
+        // On met la date du jour par défaut
+        DateChooser.setDate(new Date());
         initMedecin();
     }
 
@@ -49,6 +51,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         this.idSejour = idSejour;
         MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
         changerLangue(this.utilisateur.getLangue());
+        DateChooser.setDate(new Date());
         initMedecin();
     }
 

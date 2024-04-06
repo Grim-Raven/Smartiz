@@ -57,10 +57,18 @@ public class ValiderConsultation extends javax.swing.JFrame {
             commentaire.setText(resultatConsultation.getString("commentaire"));
 
             // On cache le bouton de validation si l'acte a déjà été validé ou si l'utilisateur n'est pas
+            boolean sejourOuvert;
+            // Récupération de l'état du séjour
+            ResultSet resultatSejour = dialogueBD.requete("SELECT ouvert FROM Sejour WHERE idSejour = " + resultatConsultation.getString("idSejour"));
+            if (resultatSejour.next()) {
+                sejourOuvert = resultatSejour.getString("ouvert").equals("Y");
+            } else {
+                sejourOuvert = false;
+            }
             // le médecin prévu pour la consultation
             boolean valide = resultatConsultation.getString("valide").equals("Y");
             System.out.println(valide);
-            if(valide || !resultatConsultation.getString("idRealisateur").equals(utilisateur.getIdUtilisateur())) {
+            if(valide || !resultatConsultation.getString("idRealisateur").equals(utilisateur.getIdUtilisateur()) || !sejourOuvert) {
                 boutonValiderConsultation.setVisible(false);
                 // On affiche le résultat de la consultation si elle a déjà été validée, sinon on affiche un message
                 if(valide) {

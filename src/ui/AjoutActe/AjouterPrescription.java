@@ -32,6 +32,8 @@ public class AjouterPrescription extends javax.swing.JFrame {
         this.idSejour = idSejour;
         //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
+        // On définit la date minimale pour la date de prescription
+        DateChooserPrescription.setDate(new Date());
     }
 
     /**

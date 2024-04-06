@@ -31,6 +31,8 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         this.idSejour = idSejour;
         //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
+        // On met la date du jour par défaut
+        DateChooser.setDate(new Date());
     }
 
     /**
@@ -55,7 +57,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(236, 242, 254));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         DemandeVisiteAnesthesie.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         DemandeVisiteAnesthesie.setText("Demande de consultation pré-opératoire - Anesthésie");
@@ -63,9 +65,9 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
         OperationPrevue.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         OperationPrevue.setText("Opération prévue le : ");
 
-        BoutonAjouter.setBackground(new java.awt.Color(4, 66, 114));
+        BoutonAjouter.setBackground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        BoutonAjouter.setForeground(new java.awt.Color(255, 255, 255));
+        BoutonAjouter.setForeground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setText("Ajouter");
         BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

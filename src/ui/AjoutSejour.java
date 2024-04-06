@@ -75,8 +75,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         dateFinChooser = new com.toedter.calendar.JDateChooser();
         labelIncomplet = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(464, 607));
@@ -90,9 +89,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         DateFin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         DateFin.setText("Date de fin ");
 
-        BoutonAjouter.setBackground(new java.awt.Color(255, 255, 255));
         BoutonAjouter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        BoutonAjouter.setForeground(new java.awt.Color(4, 66, 114));
         BoutonAjouter.setText("Ajouter");
         BoutonAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,23 +144,23 @@ public class AjoutSejour extends javax.swing.JFrame {
         buttonGroupChambreBox.add(Box1);
         Box1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box1.setText("1");
-        Box1.setActionCommand("'1'");
+        Box1.setActionCommand("1");
 
         buttonGroupChambreBox.add(Box2);
         Box2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box2.setText("2");
-        Box2.setActionCommand("'2'");
+        Box2.setActionCommand("2");
 
         buttonGroupChambreBox.add(Box3);
         Box3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Box3.setText("3");
-        Box3.setActionCommand("'3'");
+        Box3.setActionCommand("3");
 
         Numerochambre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Numerochambre.setText("Numéro de chambre");
 
         labelIncomplet.setForeground(new java.awt.Color(255, 51, 51));
-        labelIncomplet.setText("Veuillez remplir tous les champs marqués d'une *");
+        labelIncomplet.setText("Certains champs sont incomplets");
         labelIncomplet.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -211,15 +208,14 @@ public class AjoutSejour extends javax.swing.JFrame {
                                         .addComponent(Box)))
                                 .addComponent(MenuDeroulantServiceGeo, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(dateFinChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(dateFinChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                                     .addComponent(dateDebutChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(BoutonAjouter))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(181, 181, 181)
+                        .addComponent(BoutonAjouter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelIncomplet)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,13 +224,13 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addComponent(AjouterUnSejour)
                 .addGap(18, 18, 18)
                 .addComponent(DateDebut)
-                .addGap(12, 12, 12)
-                .addComponent(dateDebutChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DateFin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateFinChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateDebutChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(DateFin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateFinChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(Consultation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -269,11 +265,11 @@ public class AjoutSejour extends javax.swing.JFrame {
                 .addComponent(Numerochambre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TexteNumeroChambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoutonAjouter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelIncomplet)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BoutonAjouter)
+                    .addComponent(labelIncomplet))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,9 +280,7 @@ public class AjoutSejour extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
         );
 
         pack();
@@ -349,6 +343,10 @@ public class AjoutSejour extends javax.swing.JFrame {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+            // On rend visible le dossier du patient
+            dialogueBD.requete("UPDATE Patient SET DossierVisible = 'Y' WHERE idPatient = " + idPatient);
+
             this.dispose();
         }
     }//GEN-LAST:event_BoutonAjouterActionPerformed

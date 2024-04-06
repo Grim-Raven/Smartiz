@@ -32,7 +32,8 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
         this.idSejour = idSejour;
         //On appelle la méthode changerLangue pour mettre l'interface en anglais ou en français 
         changerLangue(this.utilisateur.getLangue());
-
+        //On définit la date maximale de demande d'examen biologique à la date du jour
+        DateChooser.setDate(new Date());
     }
 
     /**

@@ -22,6 +22,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
     private final Utilisateur utilisateur;
     private final String idPrescription;
 
+
     /**
      * Creates new form Validation
      */
@@ -236,16 +237,15 @@ public class ValidationPrescription extends javax.swing.JFrame {
         // Récupération des informations de la prescription
         String requete = "SELECT * FROM Acte WHERE idActe = " + idPrescription;
         ResultSet resultatPrescription = dialogueBD.requete(requete);
-        System.out.println("sdfsdfsdfsdf");
         try {
             if (resultatPrescription.next()) {
-                System.out.println("dddd");
                 // Récupération des informations du médicament
                 String infosMedicament = resultatPrescription.getString("posologie");
                 String commentaire = resultatPrescription.getString("commentaire");
-                String nomMedicament = infosMedicament.split(" ")[0];
-                String posologie = infosMedicament.split(" ")[1] + " " + infosMedicament.split(" ")[2];
-                String voieAdministration = infosMedicament.split(" ")[4].trim();
+                String[] infosMedicamentSplit = infosMedicament.split(" ");
+                String nomMedicament = infosMedicamentSplit.length > 0 ? infosMedicamentSplit[0] : "";
+                String posologie = infosMedicamentSplit.length > 2 ? infosMedicamentSplit[1] + " " + infosMedicamentSplit[2] : "";
+                String voieAdministration = infosMedicamentSplit.length > 4 ? infosMedicamentSplit[4].trim() : "";
                 String datePrevue = resultatPrescription.getString("datePrescription").substring(0, 10);
                 String dateReelle = "Non administré";
                 if(resultatPrescription.getString("dateRealisationActe") != null){
@@ -260,7 +260,16 @@ public class ValidationPrescription extends javax.swing.JFrame {
                 texteDateReelle.setText(dateReelle);
 
                 // Visibilité du bouton "valider" et modification du commentaire
-                if (resultatPrescription.getString("valide").equals("Y")) {
+                boolean sejourOuvert;
+                // Récupération de l'état du séjour
+                ResultSet resultatSejour = dialogueBD.requete("SELECT ouvert FROM Sejour WHERE idSejour = " + resultatPrescription.getString("idSejour"));
+                if (resultatSejour.next()) {
+                    sejourOuvert = resultatSejour.getString("ouvert").equals("Y");
+                } else {
+                    sejourOuvert = false;
+                }
+
+                if (resultatPrescription.getString("valide").equals("Y") || !sejourOuvert) {
                     BoutonValider.setVisible(false); // On cache le bouton "valider"
                     TexteCommentaire.setEditable(false); // On rend le commentaire non modifiable
                 }

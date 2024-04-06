@@ -216,9 +216,11 @@ public class AffichagePatient extends javax.swing.JPanel {
         AlcoolPatient.setText("AlcoolPatient");
 
         labelChambre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        labelChambre.setForeground(new java.awt.Color(4, 66, 114));
         labelChambre.setText("Chambre :");
 
         labelLit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        labelLit.setForeground(new java.awt.Color(4, 66, 114));
         labelLit.setText("Lit :");
 
         texteLit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -400,7 +402,7 @@ public class AffichagePatient extends javax.swing.JPanel {
         BoutonRadiologie.setBackground(new java.awt.Color(236, 242, 254));
         BoutonRadiologie.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         BoutonRadiologie.setForeground(new java.awt.Color(4, 66, 114));
-        BoutonRadiologie.setText("Radiologie");
+        BoutonRadiologie.setText("Imagerie");
         BoutonRadiologie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BoutonRadiologieActionPerformed(evt);
@@ -485,13 +487,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonExamenBiologiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonExamenBiologiqueActionPerformed
-        String idSejour;
-        // On récupère l'identifiant du séjour sélectionné
-        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        } else {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
-        }
+        String idSejour = getSejourSelectionne();
         // On ouvre la fenêtre de demande d'examen biologique
         JFrame AjoutExamenBiologique = new AjoutExamenBiologique(dialogueBD, this.utilisateur, idSejour);
         // On affiche la fenêtre
@@ -507,7 +503,9 @@ public class AffichagePatient extends javax.swing.JPanel {
     }//GEN-LAST:event_BoutonExamenBiologiqueActionPerformed
 
     private void boutonClotureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonClotureActionPerformed
-        // TODO add your handling code here:
+        String idSejour = getSejourSelectionne();
+        ClotureSejour clotureSejour =new ClotureSejour(dialogueBD, idSejour);
+        clotureSejour.setVisible(true);
     }//GEN-LAST:event_boutonClotureActionPerformed
 
     private void MenuDeroulantSejoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantSejoursActionPerformed
@@ -515,13 +513,8 @@ public class AffichagePatient extends javax.swing.JPanel {
     }//GEN-LAST:event_MenuDeroulantSejoursActionPerformed
 
     private void BoutonConsultationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonConsultationActionPerformed
-        String idSejour;
         // On récupère l'identifiant du séjour sélectionné
-        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        } else {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
-        }
+        String idSejour = getSejourSelectionne();
         // On ouvre la fenêtre d'ajout de consultation
         JFrame AjoutConsultation = new AjoutConsultation(dialogueBD, this.utilisateur, idSejour);
         // On affiche la fenêtre
@@ -536,13 +529,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     }//GEN-LAST:event_BoutonConsultationActionPerformed
 
     private void BoutonPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPrescriptionActionPerformed
-        String idSejour;
-        // On récupère l'identifiant du séjour sélectionné
-        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        } else {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
-        }
+        String idSejour = getSejourSelectionne();
         // On ouvre la fenêtre d'ajout de prescription
         JFrame AjoutPrescription = new AjouterPrescription(dialogueBD, this.utilisateur, idSejour);
         // On affiche la fenêtre
@@ -599,13 +586,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     }//GEN-LAST:event_listeActesMouseClicked
 
     private void BoutonAnesthesieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonAnesthesieActionPerformed
-        String idSejour;
-        // On récupère l'identifiant du séjour sélectionné
-        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        } else {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
-        }
+        String idSejour = getSejourSelectionne();
         // On ouvre la fenêtre de demande de pré-consultation en anesthésie
         JFrame AjouterAnesthesie = new AjouterAnesthesie(dialogueBD, this.utilisateur, idSejour);
         // On affiche la fenêtre
@@ -620,13 +601,7 @@ public class AffichagePatient extends javax.swing.JPanel {
     }//GEN-LAST:event_BoutonAnesthesieActionPerformed
 
     private void BoutonRadiologieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRadiologieActionPerformed
-        String idSejour;
-        // On récupère l'identifiant du séjour sélectionné
-        if (MenuDeroulantSejours.getSelectedItem().toString().contains("Consultation")) {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(15, 16);
-        } else {
-            idSejour = MenuDeroulantSejours.getSelectedItem().toString().substring(9, 10);
-        }
+        String idSejour = getSejourSelectionne();
         // On ouvre la fenêtre de demande de d'examen radiologique
         JFrame AjouterRadiologie = new AjouterRadiologie(dialogueBD, this.utilisateur, idSejour);
         // On affiche la fenêtre
@@ -645,6 +620,23 @@ public class AffichagePatient extends javax.swing.JPanel {
         // On affiche la fenêtre
         historique.setVisible(true);
     }//GEN-LAST:event_boutonHistoriqueActionPerformed
+
+    /**
+     * Retourne l'identifiant du séjour sélectionné
+     * @return idSejour l'identifiant du séjour sélectionné
+     */
+    public String getSejourSelectionne() {
+        String infoSejour;
+        String texteSejour = MenuDeroulantSejours.getSelectedItem().toString();
+        // On récupère l'identifiant du séjour sélectionné
+        if (texteSejour.contains("Consultation")) {
+            infoSejour = texteSejour.substring(9);
+        } else {
+            infoSejour = texteSejour.substring(9);
+        }
+        int finIdSejour = infoSejour.indexOf(" ");
+        return infoSejour.substring(0, finIdSejour); // l'identifiant du séjour
+    }
 
     /**
      * Remplit les champs de l'interface avec les informations du patient
@@ -708,9 +700,6 @@ public class AffichagePatient extends javax.swing.JPanel {
                 if (resultat.getString("dateFin") != null) {
                     infoSejour.append(" au ").append(resultat.getString("dateFin"), 0, 10);
                 }
-
-
-
                 // Si le séjour est ouvert, on le met en premier et on récupère les informations de la chambre
                 if (Objects.equals(resultat.getString("ouvert"), "Y")) {
                     MenuDeroulantSejours.insertItemAt(infoSejour, 0);
@@ -722,20 +711,22 @@ public class AffichagePatient extends javax.swing.JPanel {
                 // On sélectionne le premier séjour par défaut
                 MenuDeroulantSejours.setSelectedIndex(0);
             }
-            // On récupère l'id de la localisation du patient pour le séjour sélectionné
-            String requeteLocG = "SELECT idLocG FROM Sejour WHERE idSejour = " + listeNumeroSejour.get(0);
-            try (ResultSet resultatLocG = dialogueBD.requete(requeteLocG)) {
-                resultatLocG.next();
-                remplirChambre(resultatLocG.getString("idLocG"));
-            }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void remplirChambre(String idLocG) {
+    private void remplirChambre(String idSejour) {
+        // On récupère l'idLocG du séjour
+        String requeteSejour = "SELECT idLocG FROM Sejour WHERE idSejour = " + idSejour;
+        String idLocG ;
+        try (ResultSet resultatSejour = dialogueBD.requete(requeteSejour)) {
+            resultatSejour.next();
+            idLocG = resultatSejour.getString("idLocG");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // On récupère les informations de la chambre
         try (ResultSet resultatChambre = dialogueBD.rechercheTable(
                 "LocalisationG",
                 new HashMap<String, String>() {{
@@ -770,6 +761,33 @@ public class AffichagePatient extends javax.swing.JPanel {
         // On enlève les caractères après l'identifiant
         String idSejour = sejourSelectionne.substring(0, sejourSelectionne.indexOf(" "));
         remplirChambre(idSejour);
+        // On Active/Désactive le bouton de cloture et les boutons d'ajout d'actes
+        try (ResultSet resultat = dialogueBD.rechercheTable(
+                "Sejour",
+                new HashMap<String, String>() {{
+                    put("idSejour", idSejour);
+                }},
+                false)) {
+            resultat.next();
+            if (resultat.getString("ouvert").equals("Y")) {
+                boutonCloture.setEnabled(true);
+                BoutonAnesthesie.setEnabled(true);
+                BoutonConsultation.setEnabled(true);
+                BoutonExamenBiologique.setEnabled(true);
+                BoutonPrescription.setEnabled(true);
+                BoutonRadiologie.setEnabled(true);
+            } else {
+                boutonCloture.setEnabled(false);
+                BoutonAnesthesie.setEnabled(false);
+                BoutonConsultation.setEnabled(false);
+                BoutonExamenBiologique.setEnabled(false);
+                BoutonPrescription.setEnabled(false);
+                BoutonRadiologie.setEnabled(false);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         ArrayList<String> actes = new ArrayList<>();
         try (ResultSet resultat = dialogueBD.rechercheTable(
                 "Acte",

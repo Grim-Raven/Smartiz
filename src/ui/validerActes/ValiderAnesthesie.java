@@ -166,10 +166,18 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
             dateOperation.setText(resultset.getString("dateRealisationActe").substring(0, 10));
             texteCom.setText(resultset.getString("commentaire"));
             
-            // On cache le bouton de validation si l'acte a déjà été validé 
+            // On cache le bouton de validation si l'acte a déjà été validé
+            boolean sejourOuvert;
+            // Récupération de l'état du séjour
+            ResultSet resultatSejour = dialogueBD.requete("SELECT ouvert FROM Sejour WHERE idSejour = " + resultset.getString("idSejour"));
+            if (resultatSejour.next()) {
+                sejourOuvert = resultatSejour.getString("ouvert").equals("Y");
+            } else {
+                sejourOuvert = false;
+            }
             boolean valide = resultset.getString("valide").equals("Y");
             System.out.println(valide);
-            if(valide || (utilisateur.getIdService()!= 18) ) {
+            if(valide || (utilisateur.getIdService()!= 18) || !sejourOuvert) {
                 boutonValiderConsultationAnesthesie.setVisible(false);
             }
             else{

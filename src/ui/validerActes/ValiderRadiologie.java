@@ -20,7 +20,6 @@ public class ValiderRadiologie extends javax.swing.JFrame {
      */
     private DialogueBD dialogueBD;
     private Utilisateur utilisateur;
-    private String idSejour;
 
     public ValiderRadiologie(Utilisateur utilisateur, String idActe, DialogueBD dialogueBD) {
         initComponents();
