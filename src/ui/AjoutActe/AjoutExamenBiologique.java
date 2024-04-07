@@ -172,6 +172,7 @@ public class AjoutExamenBiologique extends javax.swing.JFrame {
             TypeDExamen.setText("Type of examination");
             Commentaire.setText("Comment");
             BoutonAjouter.setText("Add");
+            Date.setText("Date of request");
             MenuDeroulantTypeExamen.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Biochemistry","Genetic","Hematology","Immunology","Microbiology","Serology"}));           
         }
     }

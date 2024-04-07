@@ -103,10 +103,15 @@ public class AffichagePatient extends javax.swing.JPanel {
             Sexe.setText("Sex : ");
             Telephone.setText("Phone number : ");
             Ajout.setText("Add : ");
-            BoutonRadiologie.setText("Radiology");
+            BoutonRadiologie.setText("Imaging");
             BoutonAnesthesie.setText("Anesthesia");
             BoutonExamenBiologique.setText("Biological Examination");
             boutonCloture.setText("End stay");
+            boutonHistorique.setText("Consultation history");
+            BoutonConsultation.setText("Consultation");
+            BoutonPrescription.setText("Prescription");
+            labelChambre.setText("Room :");
+            labelLit.setText("Bed :");
         }
     }
 
@@ -822,7 +827,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                         }
                         break;
                     case "Anesthésie":
-                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("datePrescription"), 0, 10);
+                        infoActe.append(" : ").append(resultat.getString("commentaire")).append(" // Opération prévue le : ").append(resultat.getString("dateRealisationActe"), 0, 10);
                         break;
                     case "Prescription":
                         infoActe.append(" : ").append(resultat.getString("posologie"));

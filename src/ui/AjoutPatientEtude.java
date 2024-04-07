@@ -201,7 +201,7 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
         //On récupère les patients qui correspondent à la recherche
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
 
-        AfficherListePatients afficherListePatients = new AfficherListePatients(resultSetPatients);
+        AfficherListePatients afficherListePatients = new AfficherListePatients(resultSetPatients, utilisateur.getLangue());
         afficherListePatients.addPatientSelectedListener(this);
 
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------

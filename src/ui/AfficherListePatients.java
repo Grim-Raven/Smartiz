@@ -17,8 +17,18 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
     private final ArrayList<AfficherListePatientsListener> patientSelectioneListenerList = new ArrayList<>();
 
 
-    public AfficherListePatients(ResultSet resultSetPatients) {
+    public AfficherListePatients(ResultSet resultSetPatients, String langue) {
         initComponents(resultSetPatients);
+        changerLangue(langue);
+    }
+
+    private void changerLangue(String langue) {
+        if (langue.equals("English")) {
+            tablePatients.getColumnModel().getColumn(0).setHeaderValue("IPP");
+            tablePatients.getColumnModel().getColumn(1).setHeaderValue("Last Name");
+            tablePatients.getColumnModel().getColumn(2).setHeaderValue("First Name");
+            tablePatients.getColumnModel().getColumn(3).setHeaderValue("Date of Birth");
+        }
     }
 
     private void initComponents(ResultSet resultSetPatients) {
@@ -26,7 +36,7 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
         //On crée un modèle de table
         DefaultTableModel modelTable = new DefaultTableModel();
         //On ajoute les colonnes de la table
-        modelTable.addColumn("IPP");
+        modelTable.addColumn("PPI");
         modelTable.addColumn("Nom");
         modelTable.addColumn("Prénom");
         modelTable.addColumn("Date de Naissance");

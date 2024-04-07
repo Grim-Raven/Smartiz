@@ -474,7 +474,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         //On récupère les patients qui correspondent à la recherche
         ResultSet resultSetPatients = dialogueBD.getPatients(dataPatient);
 
-        this.scrollPaneTable = new AfficherListePatients(resultSetPatients);
+        this.scrollPaneTable = new AfficherListePatients(resultSetPatients, this.utilisateur.getLangue());
         this.scrollPaneTable.addPatientSelectedListener(this);
 
         // ---------------- On affiche la liste des patients qui correspondent à la recherche -----------------------

@@ -45,6 +45,20 @@ public class ValidationPrescription extends javax.swing.JFrame {
         this.idPrescription = idPrescription;
         // Remplissage de la prescription
         remplirPrescription(idPrescription);
+        changerLangue(utilisateur.getLangue());
+    }
+
+    private void changerLangue(String langue) {
+        if (langue.equals("English")) {
+            EtiquettePrescription.setText("Prescription");
+            EtiquetteMédicament1.setText("Medication: ");
+            EtiquettePosologie.setText("Dosage: ");
+            EtiquetteVoieAdministration.setText("Administration route: ");
+            EtiquetteCommentaire.setText("Comment: ");
+            labelDatePrevue.setText("Scheduled date:");
+            labelDateReelle.setText("Realization date:");
+            BoutonValider.setText("Validate");
+        }
     }
 
     /**

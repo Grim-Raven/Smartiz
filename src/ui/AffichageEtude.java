@@ -295,7 +295,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         //On récupère les patients de l'étude
         String requete = "SELECT * FROM EtudePatient NATURAL JOIN Patient WHERE idEtude = " + idEtude;
         ResultSet resultatPatients = dialogueBD.requete(requete);
-        AfficherListePatients afficherListePatients = new AfficherListePatients(resultatPatients);
+        AfficherListePatients afficherListePatients = new AfficherListePatients(resultatPatients, utilisateur.getLangue());
         afficherListePatients.addPatientSelectedListener(this);
 
         //On supprime tous les composants du panneau ListePatients

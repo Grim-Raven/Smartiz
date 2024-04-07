@@ -144,6 +144,11 @@ public class ValiderConsultation extends javax.swing.JFrame {
         boutonValiderConsultation.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         boutonValiderConsultation.setForeground(new java.awt.Color(255, 255, 255));
         boutonValiderConsultation.setText("Valider la consultation");
+        boutonValiderConsultation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonValiderConsultationActionPerformed(evt);
+            }
+        });
 
         commentaireLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         commentaireLabel.setText("Commentaire");
@@ -243,9 +248,11 @@ public class ValiderConsultation extends javax.swing.JFrame {
         if (langue.equals("English")) {
             validerLaConsultation.setText("Validate the consultation");
             boutonValiderConsultation.setText("Validate");
-            serviceLabel.setText("Medical service");
-            medecinLabel.setText("Physician");
-            resultatLabel.setText("Comment");
+            serviceLabel.setText("Medical service :");
+            medecinLabel.setText("Physician :");
+            resultatLabel.setText("Result :");
+            commentaireLabel.setText("Comment :");
+
         }
         
     }

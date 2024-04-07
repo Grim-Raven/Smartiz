@@ -162,9 +162,10 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         //On parcourt le Resulset pour récupérer les infos de l'acte
         try {
             resultset.next();
-            nomService.setText(dialogueBD.getNomService(resultset.getString("idService")));
+            String commentaire = resultset.getString("commentaire");
+            nomService.setText(commentaire.substring(0, commentaire.indexOf(" ")));
             dateOperation.setText(resultset.getString("dateRealisationActe").substring(0, 10));
-            texteCom.setText(resultset.getString("commentaire"));
+            texteCom.setText(commentaire.substring(commentaire.indexOf("-") + 1));
             
             // On cache le bouton de validation si l'acte a déjà été validé
             boolean sejourOuvert;
@@ -218,9 +219,9 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
         if (langue.equals("English")) {
             validerConsultationAnesthesie.setText("Validate the pre-operative consultation - Anesthesia");
             boutonValiderConsultationAnesthesie.setText("Validate");
-            operation.setText("Operation scheduled for");
-            commentaire.setText("Comment");
-            service.setText("Medical service");
+            operation.setText("Operation scheduled for : ");
+            commentaire.setText("Comment :");
+            service.setText("Medical service :");
       }
     }
     /**

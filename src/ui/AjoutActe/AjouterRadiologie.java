@@ -288,7 +288,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
             BoutonEchographie.setText("Ultrasound");
             BoutonIRM.setText("MRI");
             BoutonRadiographie.setText("X-Ray");
-            BoutonScanner.setText("");
+            BoutonScanner.setText("Scanner");
             BoutonScintigraphie.setText("Scintigraphy");
             BoutonTomographie.setText("Tomography");
             BoutonAjouter.setText("Add");      

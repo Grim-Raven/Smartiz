@@ -197,7 +197,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDateRealisation)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(commentaire)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,8 +229,14 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         if (langue.equals("English")) {
             ValiderExamenBiologique.setText("Validate the biological examination");
             BoutonValiderExamenBiologique.setText("Validate");
-            TypeExamen.setText("Type of medical examination");
+            TypeExamen.setText("Type of medical examination :");
             ZoneCommentaire.setText("Comment");
+            labelResultat.setText("Result :");
+            labelDateRealisation.setText("Realized on :");
+            commentaire.setText("Comment :");
+            Date.setText("Prescribed on :");
+
+
         }
 
     }

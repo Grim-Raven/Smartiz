@@ -276,6 +276,7 @@ public class AjouterPrescription extends javax.swing.JFrame {
             VoieAdministration.setText("Intake way");
             Commentaire.setText("Comment");
             BoutonAjouter.setText("Add");
+            labelDate.setText("Date of intake");
             MenuDeroulantVoie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Auricular", "Intravenous", "Intramuscular", "Intrathecal", "Nasal", "Oral", "Rectal", "Subcutaneous", "Sublingual", "Transdermal", "Vaginal" }));
         }
     }
