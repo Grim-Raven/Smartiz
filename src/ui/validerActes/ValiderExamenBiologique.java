@@ -43,7 +43,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
                 String type = commentaire.substring(0, commentaire.indexOf(" "));
                 commentaire = commentaire.substring(commentaire.indexOf(" ") + 1);
                 TypeExamenBiologique.setText(type);
-                dateExamenBiologique.setText(resultat.getString("dateActe").substring(0, 10));
+                dateExamenBiologique.setText(resultat.getString("datePrescription").substring(0, 10));
                 ZoneCommentaire.setText(commentaire);
                 if(resultat.getString("commentaire") == null){
                     ZoneCommentaire.setText("Aucun commentaire");
@@ -51,6 +51,13 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
                 texteResultat.setText(resultat.getString("resultat"));
                 if(resultat.getString("resultat") == null){
                     texteResultat.setText("Aucun résultat");
+                }
+                if(resultat.getString("dateRealisationActe") != null){
+                    jLabel1.setText(resultat.getString("dateRealisationActe").substring(0, 10));
+                }
+                if(resultat.getString("Valide") != null && resultat.getString("Valide").equals("Y")){
+                    BoutonValiderExamenBiologique.setVisible(false);
+                    texteResultat.setEditable(false);
                 }
             }
         } catch (Exception e) {
@@ -76,12 +83,14 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         commentaire = new javax.swing.JLabel();
         zoneCommentaire = new javax.swing.JScrollPane();
         ZoneCommentaire = new javax.swing.JTextArea();
-        labelResultat = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        texteResultat = new javax.swing.JTextArea();
         BoutonValiderExamenBiologique = new javax.swing.JButton();
+        labelResultat = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        texteResultat = new javax.swing.JTextArea();
+        labelDateRealisation = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(236, 242, 254));
 
@@ -95,7 +104,7 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         TypeExamenBiologique.setText("TypeExamenBiologique");
 
         Date.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        Date.setText("Date : ");
+        Date.setText("Prescrit le :");
 
         dateExamenBiologique.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         dateExamenBiologique.setText("dateExamenBiologique");
@@ -103,91 +112,115 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
         commentaire.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         commentaire.setText("Commentaire : ");
 
+        ZoneCommentaire.setEditable(false);
         ZoneCommentaire.setColumns(20);
         ZoneCommentaire.setRows(5);
         zoneCommentaire.setViewportView(ZoneCommentaire);
-
-        labelResultat.setText("Resultat :");
-
-        texteResultat.setEditable(false);
-        texteResultat.setColumns(20);
-        texteResultat.setRows(5);
-        jScrollPane1.setViewportView(texteResultat);
 
         BoutonValiderExamenBiologique.setBackground(new java.awt.Color(4, 66, 114));
         BoutonValiderExamenBiologique.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         BoutonValiderExamenBiologique.setForeground(new java.awt.Color(255, 255, 255));
         BoutonValiderExamenBiologique.setText("Valider l'examen biologique");
         BoutonValiderExamenBiologique.setActionCommand("Valider ");
+        BoutonValiderExamenBiologique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoutonValiderExamenBiologiqueActionPerformed(evt);
+            }
+        });
+
+        labelResultat.setText("Résultat :");
+
+        texteResultat.setColumns(20);
+        texteResultat.setRows(5);
+        jScrollPane2.setViewportView(texteResultat);
+
+        labelDateRealisation.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        labelDateRealisation.setText("Réalisé le :");
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        jLabel1.setText("Non réalisé");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(93, 93, 93)
+                                .addComponent(BoutonValiderExamenBiologique))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1)
-                                        .addComponent(zoneCommentaire, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(ValiderExamenBiologique)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(TypeExamen)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(TypeExamenBiologique))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(Date)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(dateExamenBiologique))
-                                                        .addComponent(commentaire)
-                                                        .addComponent(labelResultat))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(94, 94, 94)
-                                .addComponent(BoutonValiderExamenBiologique)
-                                .addContainerGap(103, Short.MAX_VALUE))
+                                    .addComponent(ValiderExamenBiologique)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TypeExamen)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TypeExamenBiologique))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(Date)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dateExamenBiologique)))))
+                        .addGap(0, 92, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(zoneCommentaire)
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelResultat)
+                                    .addComponent(commentaire)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(labelDateRealisation)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(ValiderExamenBiologique)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(TypeExamen)
-                                        .addComponent(TypeExamenBiologique))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(Date)
-                                        .addComponent(dateExamenBiologique))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(commentaire)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelResultat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BoutonValiderExamenBiologique)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ValiderExamenBiologique)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TypeExamen)
+                    .addComponent(TypeExamenBiologique))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Date)
+                    .addComponent(dateExamenBiologique))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDateRealisation)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(commentaire)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zoneCommentaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelResultat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BoutonValiderExamenBiologique)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BoutonValiderExamenBiologiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonValiderExamenBiologiqueActionPerformed
+        String resultat = texteResultat.getText();
+        String requete = "UPDATE acte SET resultat = '" + resultat + "', dateRealisationActe = Current_Date" + ", Valide = 'Y' WHERE idActe = " + idActe;
+        dialogueBD.requete(requete);
+        this.dispose();
+    }//GEN-LAST:event_BoutonValiderExamenBiologiqueActionPerformed
 
 
     public void changerLangue(String langue) {
@@ -211,8 +244,10 @@ public class ValiderExamenBiologique extends javax.swing.JFrame {
     private javax.swing.JTextArea ZoneCommentaire;
     private javax.swing.JLabel commentaire;
     private javax.swing.JLabel dateExamenBiologique;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelDateRealisation;
     private javax.swing.JLabel labelResultat;
     private javax.swing.JTextArea texteResultat;
     private javax.swing.JScrollPane zoneCommentaire;

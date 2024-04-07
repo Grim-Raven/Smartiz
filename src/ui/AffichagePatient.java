@@ -9,10 +9,7 @@ import ui.AjoutActe.*;
 import fc.DialogueBD;
 import fc.Utilisateur;
 import ui.tracabilite.HistoriqueConsultationDossier;
-import ui.validerActes.ValidationPrescription;
-import ui.validerActes.ValiderConsultation;
-import ui.validerActes.ValiderRadiologie;
-import ui.validerActes.ValiderAnesthesie;
+import ui.validerActes.*;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -568,9 +565,9 @@ public class AffichagePatient extends javax.swing.JPanel {
                     break;
                 case "Anesthésie":
                     // On ouvre la fenêtre d'affichage/validation d'une anesthésie
-                    JFrame afficherAnesthésie = new ValiderAnesthesie(this.dialogueBD, this.utilisateur, idActe);
+                    JFrame afficherAnesthesie = new ValiderAnesthesie(this.dialogueBD, this.utilisateur, idActe);
                     // On affiche la fenêtre
-                    afficherAnesthésie.setVisible(true);
+                    afficherAnesthesie.setVisible(true);
                     break;
                 case "Prescription":
                     // On ouvre la fenêtre d'affichage/validation de la prescription
@@ -579,7 +576,10 @@ public class AffichagePatient extends javax.swing.JPanel {
                     afficherPrescription.setVisible(true);
                     break;
                 case "Examen":
-                    // TODO
+                    // On ouvre la fenêtre d'affichage/validation de l'examen biologique
+                    JFrame afficherExamen = new ValiderExamenBiologique(dialogueBD, this.utilisateur, idActe);
+                    // On affiche la fenêtre
+                    afficherExamen.setVisible(true);
                     break;
             }
         }
