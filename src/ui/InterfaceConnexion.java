@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
      */
     // Pour contenir l'instance de Dialogue avec la BD
     private final DialogueBD dialogueBD;
+    private long dernierTempsConnexion = 0;
     public InterfaceConnexion(DialogueBD dialogueBD) {
         initComponents();
         this.dialogueBD = dialogueBD;
@@ -204,41 +206,27 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFieldMotDePasseActionPerformed
 
     private void SeConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeConnecterActionPerformed
+        long tempsActuel = System.currentTimeMillis(); // On récupère le temps actuel
         // On récupère l'identifiant et le mot de passe saisis par l'utilisateur
         String identifiant = textFieldIdentifiant.getText();
         // On vérifie qu'il n'y a que des numéros dans l'identifiant, protège des injections SQL de type "1 OR 1=1"
         if(!identifiant.matches("[0-9]+")) {
             labelErreurConnexion.setVisible(true);
         } else {
-
-            String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
-            // On hash le mot de passe avec sha-256
-            String hashedMotDePasse = Hashage.sha256(motDePasse);
-            String requeteConnexion = "SELECT * " +
-                    "FROM PersonnelMedical " +
-                    "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "' AND (select sysdate from dual) < DateFinContrat";
-            ResultSet resultat = dialogueBD.requete(requeteConnexion);
-            // On vérifie si l'identifiant et le mot de passe sont corrects
-            try {
-                if (resultat.next()) {
-                    // Si c'est le cas, on ouvre l'interface de l'application
-                    System.out.println("Connexion réussie");
-                    //On crée un Utilisateur avec les informations récupérées de la BD
-                    Utilisateur utilisateur = new Utilisateur(
-                            resultat.getString("nom"),
-                            resultat.getString("prenom"),
-                            true,
-                            Objects.requireNonNull(Langues.getSelectedItem()).toString(),
-                            resultat.getInt("idService"),
-                            resultat.getInt("idPersonnelMedical"),
-                            resultat.getString("arc"));
-                    new Accueil(dialogueBD, utilisateur).setVisible(true);
-                    this.dispose();
-                } else { // On regarde si les identifiants sont ceux d'un personnel administratif
-                    requeteConnexion = "SELECT * " +
-                            "FROM Administratif " +
-                            "WHERE idPersonnel = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
-                    resultat = dialogueBD.requete(requeteConnexion);
+            if(tempsActuel - dernierTempsConnexion < 3000) {
+                labelErreurConnexion.setText("Veuillez attendre 3 secondes avant de réessayer");
+                labelErreurConnexion.setVisible(true);
+            }else {
+                dernierTempsConnexion = tempsActuel;
+                String motDePasse = String.valueOf(PasswordFieldMotDePasse.getPassword());
+                // On hash le mot de passe avec sha-256
+                String hashedMotDePasse = Hashage.sha256(motDePasse);
+                String requeteConnexion = "SELECT * " +
+                        "FROM PersonnelMedical " +
+                        "WHERE idPersonnelMedical = " + identifiant + " AND mdp = '" + hashedMotDePasse + "' AND (select sysdate from dual) < DateFinContrat";
+                ResultSet resultat = dialogueBD.requete(requeteConnexion);
+                // On vérifie si l'identifiant et le mot de passe sont corrects
+                try {
                     if (resultat.next()) {
                         // Si c'est le cas, on ouvre l'interface de l'application
                         System.out.println("Connexion réussie");
@@ -246,20 +234,41 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                         Utilisateur utilisateur = new Utilisateur(
                                 resultat.getString("nom"),
                                 resultat.getString("prenom"),
-                                false,
+                                true,
                                 Objects.requireNonNull(Langues.getSelectedItem()).toString(),
-                                0,
-                                resultat.getInt("idPersonnel"),
-                                "N");
+                                resultat.getInt("idService"),
+                                resultat.getInt("idPersonnelMedical"),
+                                resultat.getString("arc"));
                         new Accueil(dialogueBD, utilisateur).setVisible(true);
                         this.dispose();
-                    } else {
-                        // Sinon, on affiche un message d'erreur
-                        labelErreurConnexion.setVisible(true);
+                    } else { // On regarde si les identifiants sont ceux d'un personnel administratif
+                        requeteConnexion = "SELECT * " +
+                                "FROM Administratif " +
+                                "WHERE idPersonnel = " + identifiant + " AND mdp = '" + hashedMotDePasse + "'";
+                        resultat = dialogueBD.requete(requeteConnexion);
+                        if (resultat.next()) {
+                            // Si c'est le cas, on ouvre l'interface de l'application
+                            System.out.println("Connexion réussie");
+                            //On crée un Utilisateur avec les informations récupérées de la BD
+                            Utilisateur utilisateur = new Utilisateur(
+                                    resultat.getString("nom"),
+                                    resultat.getString("prenom"),
+                                    false,
+                                    Objects.requireNonNull(Langues.getSelectedItem()).toString(),
+                                    0,
+                                    resultat.getInt("idPersonnel"),
+                                    "N");
+                            new Accueil(dialogueBD, utilisateur).setVisible(true);
+                            this.dispose();
+                        } else {
+                            // Sinon, on affiche un message d'erreur
+                            labelErreurConnexion.setText("Identifiant ou mot de passe incorrect");
+                            labelErreurConnexion.setVisible(true);
+                        }
                     }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
         }
     }//GEN-LAST:event_SeConnecterActionPerformed

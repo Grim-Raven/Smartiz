@@ -602,7 +602,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                     //On récupère la valeur de nom
                     String idService = resultat.getString("nom");
                     //On récupère la date de la demande de l'acte
-                    String date = resultat.getString("datePrescription").substring(0, 10);
+                    String date = resultat.getString("dateRealisationActe").substring(0, 10);
 
                     //On fait une recherche pour récupérer l'information sur l'ouverture du séjour
                     HashMap<String, String> conditions = new HashMap<>();
