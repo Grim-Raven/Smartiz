@@ -238,6 +238,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
 
         //On ajoute la JTable dans un JScrollPane
         jScrollPane1 = new JScrollPane(tableEtude);
+        jScrollPane1.setViewportView(tableEtude);
         PanneauCentre.add(jScrollPane1);
 
         // On change la couleur de fond de la JTable et du JScrollPane
@@ -270,9 +271,17 @@ public class AffichageListeEtude extends javax.swing.JPanel {
     }
 
     private void BoutonCreerEtudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerEtudeActionPerformed
-        //On ouvre le formulaire pour créer une étude 
-        AjouterEtude ajoutEtude = new AjouterEtude(dialogueBD,utilisateur);
-        ajoutEtude.setVisible(true);
+        //On vérifie si l'utilisateur est un ARC
+        if(utilisateur.isArc()){
+            //On ouvre le formulaire pour créer une étude 
+            AjouterEtude ajoutEtude = new AjouterEtude(dialogueBD,utilisateur);
+            ajoutEtude.setVisible(true);
+        }
+        else{
+            // On affiche un message de confirmation
+            javax.swing.JOptionPane.showMessageDialog(null, "Vous n'avez pas les droits");
+        }
+        
     }//GEN-LAST:event_BoutonCreerEtudeActionPerformed
 
     private void tableEtudeMouseClicked(MouseEvent evt) {
