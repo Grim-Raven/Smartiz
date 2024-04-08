@@ -50,7 +50,7 @@ public class DialogueBD {
      * @return le résultat de la requête
      */
     public ResultSet requete(String requete) {
-        System.out.println(requete);
+        
         ResultSet resultSet = null;
         Statement statement;
         try {
@@ -89,9 +89,9 @@ public class DialogueBD {
                 
                 resultatType.next(); // On se met sur la première ligne du résultat
                 // On récupère le type de la colonne
-                System.out.println("DATA_TYPE = " + resultatType.getString("DATA_TYPE"));
+                
                 String typeColonne = resultatType.getString("DATA_TYPE");
-                System.out.println("typeColonne= "+ typeColonne);
+                
 
                 switch (typeColonne) {
                     case "NUMBER":
@@ -125,7 +125,7 @@ public class DialogueBD {
 
         String requete = columns.toString() + values;
         // On exécute la requête
-        System.out.println("requete = "+requete);
+        
         requete(requete);
     }
 
@@ -156,7 +156,6 @@ public class DialogueBD {
                     recherche.append(entry.getKey()).append("= ");
                 }
                 // On récupère le type de la colonne
-                System.out.println(entry.getKey().toString());
                 String typeColonne = resultatType.getString("DATA_TYPE");
 
                 switch (typeColonne) {
@@ -187,7 +186,7 @@ public class DialogueBD {
         }
         String requete = recherche.toString();
         // On exécute la requête
-        System.out.println(requete);
+        
         return requete(requete);
     }
 
@@ -235,7 +234,7 @@ public class DialogueBD {
         // On convertit la requête en String
         String requete = update.toString();
         // On exécute la requête
-        System.out.println(requete);
+        
         requete(requete);
     }
 
@@ -254,7 +253,7 @@ public class DialogueBD {
         requeteID.next();
         if(requeteID.getInt(1) != 0){
             // S'il y a un patient avec un id qui commence par l'année actuelle, on incrémente de 1
-            System.out.println("MAX ID = "+requeteID.getInt(1));
+            
             idPatient = requeteID.getInt(1) + 1;
         }else{
             // Sinon, on crée un nouvel id qui commence par l'année actuelle et se termine par 0000000
@@ -272,9 +271,9 @@ public class DialogueBD {
     public String insertEtude(HashMap<String, String> data) throws SQLException {
         ResultSet requeteID = requete("SELECT MAX(idEtude) from ETUDE");
         requeteID.next();
-        System.out.println(requeteID);
+        
         int idEtude = requeteID.getInt(1) + 1;
-        System.out.println("idEtude = "+ idEtude);
+        
         insertTable("etude", String.valueOf(idEtude),"idEtude",data);
         return String.valueOf(idEtude);
     }
@@ -288,9 +287,9 @@ public class DialogueBD {
     public String insertPatientEtude(HashMap<String, String> data) throws SQLException {
         ResultSet requeteID = requete("SELECT MAX(idEtude) from EtudePatient");
         requeteID.next();
-        System.out.println(requeteID);
+        
         int idEtude = requeteID.getInt(1) + 1;
-        System.out.println("idEtude = "+ idEtude);
+        
         insertTable("EtudePatient", String.valueOf(idEtude),"idEtude",data);
         return String.valueOf(idEtude);
     }
@@ -366,7 +365,7 @@ public class DialogueBD {
             Logger.getLogger(DialogueBD.class.getName());
         }
         // On retourne la liste des services
-        System.out.println(services);
+        
         return services;
     }
     

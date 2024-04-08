@@ -24,23 +24,6 @@ public class AjoutConsultation extends javax.swing.JFrame {
     private DialogueBD dialogueBD;
     private Utilisateur utilisateur;
     private String idSejour;
-    
-    public AjoutConsultation() {
-        initComponents();
-        //Pour empêcher le redimensionnement de la fenêtre, on utilise setResizable(false)
-        setResizable(false);
-        this.dialogueBD = new DialogueBD();
-        // On se connecte à la base de données
-        dialogueBD.connect();
-        this.utilisateur = new Utilisateur("Cot","Harry",true,"Français",1,1111,"Y");
-        this.idSejour = "1";
-        MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel<>(dialogueBD.getNomServices().toArray()));
-        //Pour mettre l'interface en Anglais
-        changerLangue(this.utilisateur.getLangue());
-        // On met la date du jour par défaut
-        DateChooser.setDate(new Date());
-        initMedecin();
-    }
 
     public AjoutConsultation(DialogueBD dialogueBD, Utilisateur utilisateur, String idSejour) {
         initComponents();
@@ -194,7 +177,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         // On crée un filtre de service pour trouver tous les medecins du service
         HashMap<String, String> filtre = new HashMap<>() ;
         filtre.put("idService", dialogueBD.getIdService(MenuDeroulantService.getSelectedItem().toString()));
-        System.out.println(MenuDeroulantService.getSelectedItem().toString());
+        
         // On réinitialise le modèle
         MenuDeroulantMedecin.setModel(new DefaultComboBoxModel());
         try {
@@ -202,7 +185,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
             ResultSet resultat = dialogueBD.rechercheTable("PersonnelMedical", filtre, false);
             // On ajoute les médecins à la liste déroulante
             while(resultat.next()){
-                System.out.println();
+                
                 MenuDeroulantMedecin.addItem(resultat.getString("Prenom").trim() + " " + resultat.getString("Nom").trim() + " - " + resultat.getString("idPersonnelMedical").trim());
             }
         } catch (Exception e) {
@@ -216,12 +199,11 @@ public class AjoutConsultation extends javax.swing.JFrame {
         String idPrescripteur = utilisateur.getIdUtilisateur();
         // On récupère uniquement l'id du médecin
         String idRealisateur = MenuDeroulantMedecin.getSelectedItem().toString().substring(MenuDeroulantMedecin.getSelectedItem().toString().lastIndexOf("-") + 1).trim();
-        System.out.println(idRealisateur);
+        
         Date date = DateChooser.getDate();
         // On récupère un String de la forme yyyy-mm-dd
         String datePrescription = String.format("%1$tY-%1$tm-%1$td", date);
         String commentaire = TexteCommentaire.getText();
-        // TODO : ajouter le code, le cout
         HashMap<String, String> dataActe = new HashMap<>();
         dataActe.put("Nom", nom);
         dataActe.put("idService", dialogueBD.getIdService(idService));
@@ -233,7 +215,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
         dataActe.put("valide", "N");
          // On insère les données dans la table Acte
         dialogueBD.insertActe(dataActe);
-        System.out.println("Consultation ajoutée");
+        
         this.dispose();
     }//GEN-LAST:event_BoutonAjouterActionPerformed
 
@@ -255,40 +237,7 @@ public class AjoutConsultation extends javax.swing.JFrame {
             
         }
         }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjoutConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjoutConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjoutConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjoutConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AjoutConsultation().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AjouterUneConsultation;

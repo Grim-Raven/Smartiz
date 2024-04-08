@@ -181,7 +181,7 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
     }// </editor-fold>//GEN-END:initComponents
 
     private void texteIPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteIPPActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_texteIPPActionPerformed
 
     private void BoutonRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonRechercherActionPerformed
@@ -218,17 +218,17 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     private void texteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteNomActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void texteIPPPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_texteIPPPropertyChange
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_texteIPPPropertyChange
 
     @Override
     public void patientSelected(String idPatient) {
         if(utilisateur.isArc()){
-            System.out.println("Selected: " + idPatient);
+            
 
             //Vérification que le patient n'est pas dans la table EtudePatient
             String verifPatient = "SELECT * from EtudePatient WHERE idPatient = " + idPatient + " AND idEtude = "+idEtude;
@@ -249,7 +249,7 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
                     String requete = "Insert into EtudePatient (idEtude,idPatient) values (" + idEtude + "," + idPatient + ")";
                     //Vérification de la requête demandée
                     String verif = requete.toString();
-                    System.out.println(verif);
+                    
                     //Exécution de la requête
                     dialogueBD.requete(requete);
                     // On affiche un message de confirmation
@@ -262,7 +262,7 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
                     PanneauSud.revalidate();
                 }
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+                
                 e.printStackTrace();
             }
         }
@@ -278,47 +278,6 @@ public class AjoutPatientEtude extends javax.swing.JFrame implements AfficherLis
         }
     }
 
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 2222, "Y");
-            final DialogueBD dialogueBD = new DialogueBD();
-            final String idEtude = "1";
-            {
-                dialogueBD.connect();
-            }
-            public void run() {
-                new AjoutPatientEtude(dialogueBD, utilisateur,idEtude).setVisible(true);
-            }
-        });
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

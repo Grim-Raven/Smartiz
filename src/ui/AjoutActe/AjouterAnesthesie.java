@@ -172,7 +172,7 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
     }//GEN-LAST:event_BoutonAjouterActionPerformed
 
     public void changerLangue(String langue) {
-        //Si la langue selectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
+        //Si la langue sélectionnée lors la connexion est l'anglais, alors l'interface s'affiche en anglais
         //On remplace chaque composant par son équivalent anglais
         if (langue.equals("English")) {
             BoutonAjouter.setText("Add");
@@ -183,41 +183,6 @@ public class AjouterAnesthesie extends javax.swing.JFrame {
             MenuDeroulantService.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Anapathology", "Cardiologie", "Dermatology", "Emergency", "General Medecine", "Gynecology", "Hematology", "Immunology", "Intensive Care", "Neurology", "Obstetrics", "Oncology", "Psychiatrie", "Radiology", "Respiratory Medecine", "Surgery", "Urology"}));
 
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjouterAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjouterAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjouterAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjouterAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AjouterAnesthesie(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3").setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

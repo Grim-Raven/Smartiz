@@ -229,7 +229,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                 try {
                     if (resultat.next()) {
                         // Si c'est le cas, on ouvre l'interface de l'application
-                        System.out.println("Connexion réussie");
+                        
                         //On crée un Utilisateur avec les informations récupérées de la BD
                         Utilisateur utilisateur = new Utilisateur(
                                 resultat.getString("nom"),
@@ -248,7 +248,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
                         resultat = dialogueBD.requete(requeteConnexion);
                         if (resultat.next()) {
                             // Si c'est le cas, on ouvre l'interface de l'application
-                            System.out.println("Connexion réussie");
+                            
                             //On crée un Utilisateur avec les informations récupérées de la BD
                             Utilisateur utilisateur = new Utilisateur(
                                     resultat.getString("nom"),
@@ -274,7 +274,7 @@ public class InterfaceConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_SeConnecterActionPerformed
 
     private void textFieldIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIdentifiantActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_textFieldIdentifiantActionPerformed
 
     public void changerLangue(String langue){
@@ -293,41 +293,6 @@ public class InterfaceConnexion extends javax.swing.JFrame {
             SeConnecter.setText("Log in");
             labelErreurConnexion.setText("Invalid id or password");
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceConnexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceConnexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceConnexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceConnexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfaceConnexion(new DialogueBD()).setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

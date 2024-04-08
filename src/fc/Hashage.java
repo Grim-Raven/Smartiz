@@ -26,7 +26,7 @@ public class Hashage {
                 hexString.append(hex);
             }
             // On retourne la chaîne de caractères hashée
-            System.out.println(hexString.toString());
+            
             return hexString.toString();
         } catch(Exception e){
             throw new RuntimeException(e);

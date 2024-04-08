@@ -62,7 +62,7 @@ public class TestDialogueBD {
         String dateNaissance = "1980-01-01";
         // On exécute la requête
         boolean patientExiste = dialogueBD.patientExiste(nom, prenom, dateNaissance);
-        System.out.println(patientExiste);
+        
         // Le patient existe.
         assertTrue(patientExiste);
     }
@@ -78,7 +78,7 @@ public class TestDialogueBD {
         String dateNaissance = "1980-01-01";// La date de naissance est différente.
         // On exécute la requête
         boolean patientExiste = dialogueBD.patientExiste(nom, prenom, dateNaissance);
-        System.out.println(patientExiste);
+        
         // Le patient n'existe pas.
         assertFalse(patientExiste);
     }
@@ -91,7 +91,7 @@ public class TestDialogueBD {
         // On vérifie que le patient n'existe pas, sinon on le supprime
         if (dialogueBD.patientExiste("Doe", "John", "1990-01-03")) {
             dialogueBD.requete("DELETE FROM Patient WHERE nom = 'Doe' AND prenom = 'John' AND dateNaissance = TO_DATE('1990-01-03', 'YYYY-MM-DD')");
-            System.out.println("Patient supprimé");
+            
         }
 
         // On crée des données pour un patient à insérer
@@ -230,9 +230,9 @@ public class TestDialogueBD {
         try {
             assertTrue(resultat.next());
             // On imprime l'id de tous les patients
-            System.out.println(resultat.getString("idPatient"));
+            
             while(resultat.next()){ // Tant qu'il y a des patients
-                System.out.println(resultat.getString("idPatient"));
+                
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -254,9 +254,9 @@ public class TestDialogueBD {
         try {
             assertTrue(resultat.next());
             // On imprime le nom de tous les patients
-            System.out.println(resultat.getString("nom"));
+            
             while(resultat.next()){ // Tant qu'il y a des patients
-                System.out.println(resultat.getString("nom"));
+                
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -274,9 +274,9 @@ public class TestDialogueBD {
         try {
             assertTrue(resultat.next());
             // On imprime le nom de toutes les études
-            System.out.println(resultat.getString("nom"));
+            
             while(resultat.next()){ // Tant qu'il y a des études
-                System.out.println(resultat.getString("nom"));
+                
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

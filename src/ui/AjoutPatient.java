@@ -556,7 +556,7 @@ public class AjoutPatient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TexteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteNomActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TexteNomActionPerformed
 
     private void boutonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAjouterActionPerformed
@@ -569,7 +569,7 @@ public class AjoutPatient extends javax.swing.JFrame {
             if (dialogueBD.patientExiste(TexteNom.getText(), TextePrenom.getText(), sdf.format(dateNaissanceChooser.getDate()))) {
                 // Si le patient existe déjà, on affiche un message d'erreur
                 javax.swing.JOptionPane.showMessageDialog(null, "Le patient existe déjà");
-                System.out.println("Le patient existe déjà");
+                
             } else {
                 // ------------------------ Récupération des données saisies par l'utilisateur ------------------------
                 // On récupère les données saisies par l'utilisateur relatives au PATIENT
@@ -634,7 +634,7 @@ public class AjoutPatient extends javax.swing.JFrame {
                 dataSejour.put("ouvert", "Y");
                 dataSejour.put("idService", dialogueBD.getIdService(service));
 
-                // TODO : Ajouter le médecin référent
+                
 
                 // ------------------------ Insertion dans la base de données ------------------------
                 // 1 - On insère le patient dans la base de données et on récupère son id
@@ -665,7 +665,7 @@ public class AjoutPatient extends javax.swing.JFrame {
 
                 // On affiche un message de confirmation
                 javax.swing.JOptionPane.showMessageDialog(null, "Le patient a été ajouté avec succès");
-                System.out.println("Le patient a été ajouté avec succès");
+                
             }
         }
         // Si le patient n'existe pas, on l'ajoute à la base de données
@@ -723,52 +723,12 @@ public class AjoutPatient extends javax.swing.JFrame {
 
 
     private void MenuDeroulantServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantServiceActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_MenuDeroulantServiceActionPerformed
 
     private void ConsultationNonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultationNonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_ConsultationNonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjoutPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjoutPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjoutPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjoutPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                // On instancie un objet DialogueBD pour communiquer avec la base de données
-                DialogueBD dialogueBD = new DialogueBD();
-                // On se connecte à la base de données
-                dialogueBD.connect();
-                // On instancie l'interface d'ajout de patient
-                new AjoutPatient(dialogueBD, "Français").setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Adresse;

@@ -197,11 +197,11 @@ public class AjouterEtude extends javax.swing.JFrame {
 
 
     private void MenuDeroulantTypeRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDeroulantTypeRechercheActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_MenuDeroulantTypeRechercheActionPerformed
 
     private void TexteIntituleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexteIntituleActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TexteIntituleActionPerformed
 
     private void BoutonCreerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonCreerActionPerformed
@@ -211,7 +211,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         String personnelMedical = TextNomPraticienHospitalier.getText();
         Date date = DateChooser.getDate();
         String dateDebut = String.format("%1$tY-%1$tm-%1$td", date);
-        System.out.println("dateDebut = "+dateDebut);
+        
         String duree = DureeValeur.getText();
         String type = MenuDeroulantTypeRecherche.getSelectedItem().toString();
         
@@ -226,7 +226,7 @@ public class AjouterEtude extends javax.swing.JFrame {
             //La case année a été coché
             duree = duree + " ans";
         }
-        System.out.println(duree);
+        
             
 
         // On crée un dictionnaire contenant les données du patient
@@ -241,7 +241,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         try {
             dialogueBD.insertEtude(dataEtude);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         
@@ -270,49 +270,6 @@ public class AjouterEtude extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjouterEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjouterEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjouterEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjouterEtude.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        //Create and display the form 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
-            final DialogueBD dialogueBD = new DialogueBD();
-            {
-                dialogueBD.connect();
-            }
-            public void run() {
-                // On instancie l'interface d'ajout d'étude
-                new AjouterEtude(dialogueBD, utilisateur).setVisible(true);
-            }
-        });
-        
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonCreer;

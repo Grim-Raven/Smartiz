@@ -290,7 +290,7 @@ public class AffichageListeEtude extends javax.swing.JPanel {
             if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
                 // On récupère l'ID de l'étude sélectionné
                 Object idEtude = tableEtude.getValueAt(selectedRow, 0);
-                System.out.println("Selected: " + idEtude);
+                
 
                 // On prévient tous les listeners que l'utilisateur a sélectionné une étude
                 for (AfficherListeEtudesListener afficherListeEtudesListener : etudeSelectioneListenerList) {

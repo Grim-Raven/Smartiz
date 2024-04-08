@@ -61,7 +61,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         changerLangue(this.utilisateur.getLangue());
         // Chargez l'image à partir du fichier
         Image icon = Toolkit.getDefaultToolkit().getImage("src/ui/Image/Logo_serpent.png");
-
+        BoutonServices.setEnabled(false);
         // Définissez l'image comme icône de la fenêtre
         this.setIconImage(icon);
     }
@@ -489,7 +489,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
     }//GEN-LAST:event_BoutonRechercherActionPerformed
 
     private void texteNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteNomActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_texteNomActionPerformed
 
     private void BoutonPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonPatientsActionPerformed
@@ -502,7 +502,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         modelTable.addColumn("Date de Naissance");
 
         //On s'assure que le tableau soit créé
-        System.out.println("tableau est créé");
+        
 
         //Un radiologue souhaite affiche les patients dont un acte de radiologie a été demandé
         //On vérifie que l'utilisateur est bien un radiologue (l'id du service de Radiologie est 15)
@@ -526,7 +526,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                         String typeActe2;
                         typeActe2 = resultat.getString("nom").trim();
                         if (typeActe2.equals("Radiographie") || typeActe2.equals("Echographie") || typeActe2.equals("Scanner") || typeActe2.equals("IRM") || typeActe2.equals("Tomographie") || typeActe2.equals("Scintigraphie")) {
-                            System.out.println("Il existe un acte de radiologie");
+                            
                             int idSejour = resultat.getInt("idsejour");
                             //On récupère le type d'acte de radiologie
                             String acte = typeActe2;
@@ -539,13 +539,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                             ResultSet resultatSejour = dialogueBD.rechercheTable("Sejour", conditions, true);
 
                             if (resultatSejour.next()) {
-                                System.out.println("Il existe un séjour correspondant");
+                                
                                 // Récupération de la valeur de l'attribut "ouvert"
                                 String ouvert = resultatSejour.getString("OUVERT");
 
                                 //Si le séjour est ouvert, on récupère les informations du patient
                                 if (ouvert.equals("Y")) {
-                                    System.out.println("séjourt ouvert");
+                                    
                                     int idPatient = resultatSejour.getInt("idpatient");
                                     String nomPatient = "";
                                     String prenomPatient = "";
@@ -556,19 +556,19 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                                     ResultSet resultatPatient = dialogueBD.rechercheTable("Patient", conditionsPatient, true);
                                     try {
                                         if (resultatPatient.next()) {
-                                            System.out.println("Patient trouvé");
+                                            
                                             nomPatient = resultatPatient.getString("nom").trim();
                                             prenomPatient = resultatPatient.getString("prenom").trim();
                                             dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
                                             modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance.substring(0, 10), acte, date});
-                                            System.out.println("ligne ajoutée");
+                                            
                                         }
                                     } catch (SQLException e) {
                                         throw new RuntimeException(e);
                                     }
 
                                 } else {
-                                    System.out.println("Le séjour est fermé");
+                                    
                                 }
 
                             }
@@ -596,7 +596,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                 while (resultat.next()) {
                     String typeActe3;
                     typeActe3 = resultat.getString("nom").trim();
-                    System.out.println("Il existe un acte de radiologie");
+                    
                     //On récupère la valeur de idSejour
                     int idSejour = resultat.getInt("idsejour");
                     //On récupère la valeur de nom
@@ -610,13 +610,13 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
                     ResultSet resultatSejour = dialogueBD.rechercheTable("Sejour", conditions, true);
 
                     if (resultatSejour.next()) {
-                        System.out.println("Il existe un séjour correspondant");
+                        
                         // Récupération de la valeur de l'attribut "ouvert"
                         String ouvert = resultatSejour.getString("OUVERT");
 
                         //Si le séjour est ouvert, on récupère les informations du patient
                         if (ouvert.equals("Y")) {
-                            System.out.println("séjourt ouvert");
+                            
                             int idPatient = resultatSejour.getInt("idpatient");
                             String nomPatient = "";
                             String prenomPatient = "";
@@ -627,12 +627,12 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
 
                             try {
                                 if (resultatPatient.next()) {
-                                    System.out.println("Patient trouvé");
+                                    
                                     nomPatient = resultatPatient.getString("nom").trim();
                                     prenomPatient = resultatPatient.getString("prenom").trim();
                                     dateNaissance = resultatPatient.getString("dateNaissance").substring(0, 10);
                                     modelTable.addRow(new Object[]{idPatient, nomPatient, prenomPatient, dateNaissance, date});
-                                    System.out.println("ligne ajoutée");
+                                    
                                 }
 
                             } catch (SQLException ex) {
@@ -648,7 +648,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
 
         //On crée une JTable avec le modèle de table
         this.tablePatients = new JTable(modelTable);
-        System.out.println("tableau créé et ajouté");
+        
         //On ajoute un listener pour pouvoir cliquer sur la ligne du patient
         tablePatients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -680,7 +680,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         //On ajoute la JTable dans un JScrollPane
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane1.add(tablePatients);
-        System.out.println("Table ajouté dans un JScrollPane");
+        
 
         // On change la couleur de fond des lignes de la JTable
         tablePatients.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -713,15 +713,15 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         JViewport viewport = jScrollPane1.getViewport();
         if (viewport != null && viewport.getView() instanceof JComponent) {
             ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
-            System.out.println("couleur de fond changée");
+            
         } else {
-            System.out.println("couleur de fond PAS changée");
+            
         }
 
     }//GEN-LAST:event_BoutonPatientsActionPerformed
 
     private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
-        System.out.println("veut se fermer");
+        
         this.dispose();
         new InterfaceConnexion(new DialogueBD()).setVisible(true);
     }//GEN-LAST:event_DeconnexionActionPerformed
@@ -732,7 +732,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
                 // On récupère l'IPP du patient sélectionné
                 Object idPatient = tablePatients.getValueAt(selectedRow, 0);
-                System.out.println("Selected: " + idPatient);
+                
 
                 this.patientSelected("" + idPatient);
 
@@ -784,7 +784,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             PanneauPrincipale.revalidate();
             PanneauPrincipale.repaint();
         } else { // Si l'utilisateur est un personnel administratif, on lui permet d'ouvrir un séjour
-            // TODO : Ouvrir un séjour
+            
             // On crée un nouveau JFrame pour ouvrir un séjour
             AjoutSejour ajoutSejour = new AjoutSejour(dialogueBD, utilisateur, idPatient);
             // On affiche le JFrame
@@ -861,7 +861,7 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             //On ajoute la JTable dans un JScrollPane
             jScrollPane2 = new javax.swing.JScrollPane();
             jScrollPane2.add(tableMedecin);
-            System.out.println("Table ajouté dans un JScrollPane");
+            
             
             // On change la couleur de fond des lignes de la JTable
             tableMedecin.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -894,9 +894,9 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
             JViewport viewport = jScrollPane2.getViewport();
             if (viewport != null && viewport.getView() instanceof JComponent) {
                 ((JComponent) viewport.getView()).setBackground(new Color(236, 242, 254));
-                System.out.println("couleur de fond changée");
+                
             } else {
-                System.out.println("couleur de fond PAS changée");
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
@@ -917,48 +917,6 @@ public class Accueil extends javax.swing.JFrame implements AfficherListePatients
         // On actualise le panneau principal central
         PanneauPrincipale.revalidate();
         PanneauPrincipale.repaint();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Accueil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            final Utilisateur utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
-            final DialogueBD dialogueBD = new DialogueBD();
-
-            {
-                dialogueBD.connect();
-            }
-
-            public void run() {
-                new Accueil(dialogueBD, utilisateur).setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -253,7 +253,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 remplirChampsEtude(idEtude); 
-                System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+                
             }
         });
     }//GEN-LAST:event_BoutonAjouterUnPatientEtudeActionPerformed
@@ -306,7 +306,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         ListePatients.add(afficherListePatients, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();
-        System.out.println("le tableau a été ajouté");
+        
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -217,7 +217,6 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
     private void BoutonAjouterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_BoutonAjouterActionPerformed
         // Récupération des données
-        //TODO : Rendre des champs obligatoires
         String typeExamen = buttonGroupTypeExamen.getSelection().getActionCommand();
         String dateExamen = new Date(DateChooserExamen.getDate().getTime()).toString();
         String commentaire = ZoneCommentaire.getText();
@@ -234,7 +233,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
 
         // Ajout de l'examen radiologique à la BD
         String idActe = dialogueBD.insertActe(dataSQL);
-        System.out.println("Ajouté à la base de données");
+        
 
         // Création de la HashMap pour l'envoi de l'examen radiologique au SIR via HL7
         HashMap<String, String> dataHL7 = new HashMap<>();
@@ -261,7 +260,6 @@ public class AjouterRadiologie extends javax.swing.JFrame {
             dataHL7.put("sexe", resultPatient.getString("sexe"));
             dataHL7.put("adresse", resultPatient.getString("adresse"));
             // Envoi de la demande
-            //TODO : Faire quelque chose si pas de réponse
             Message reponse = messageHL7.envoieDemandeRadio(dataHL7);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -270,7 +268,6 @@ public class AjouterRadiologie extends javax.swing.JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         // Fermeture de la fenêtre
         this.dispose();
     }//GEN-LAST:event_BoutonAjouterActionPerformed
@@ -294,40 +291,7 @@ public class AjouterRadiologie extends javax.swing.JFrame {
             BoutonAjouter.setText("Add");      
             
         }}
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjouterRadiologie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjouterRadiologie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjouterRadiologie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjouterRadiologie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AjouterRadiologie(new DialogueBD(),new Utilisateur("Cot","Harry",true,"Français", 1,1111,"Y"),"3").setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonAjouter;

@@ -37,7 +37,7 @@ public class TestHL7 {
             // Envoi de la demande
             Message reponse = messageHL7.envoieDemandeRadio(dataDemande);
             // Vérification de la réponse
-            System.out.println(((ACK) reponse).getMSA().getAcknowledgementCode().getValue());
+            
             assertEquals("AA", ((ACK) reponse).getMSA().getAcknowledgementCode().getValue());;
 
     }

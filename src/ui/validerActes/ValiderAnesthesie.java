@@ -21,9 +21,9 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
     /**
      * Creates new form ValiderAnesthesie
      */
-    private DialogueBD dialogueBD;
-    private Utilisateur utilisateur;
-    private String idActe;
+    private final DialogueBD dialogueBD;
+    private final Utilisateur utilisateur;
+    private final String idActe;
     
     public ValiderAnesthesie(DialogueBD dialogueBD, Utilisateur utilisateur, String idActe) {
         initComponents();
@@ -177,7 +177,7 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
                 sejourOuvert = false;
             }
             boolean valide = resultset.getString("valide").equals("Y");
-            System.out.println(valide);
+            
             if(valide || (utilisateur.getIdService()!= 18) || !sejourOuvert) {
                 boutonValiderConsultationAnesthesie.setVisible(false);
             }
@@ -190,7 +190,7 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
                 });
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         
@@ -223,40 +223,6 @@ public class ValiderAnesthesie extends javax.swing.JFrame {
             commentaire.setText("Comment :");
             service.setText("Medical service :");
       }
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ValiderAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ValiderAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ValiderAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ValiderAnesthesie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new ValiderAnesthesie().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

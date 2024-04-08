@@ -25,7 +25,7 @@ public class Main {
         Thread hl7Thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Starting HL7 receiver");
+                
                 hl7Receiver.startReceiving();
             }
         });

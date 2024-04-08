@@ -26,17 +26,6 @@ public class ValidationPrescription extends javax.swing.JFrame {
     /**
      * Creates new form Validation
      */
-    public ValidationPrescription() {
-        initComponents();
-        // Initialisation des variables
-        this.dialogueBD = new DialogueBD();
-        this.dialogueBD.connect();
-        this.utilisateur = new Utilisateur("Cot", "Harry", true, "Français", 1, 1111, "Y");
-        this.idPrescription = "1";
-        // Remplissage de la prescription
-        remplirPrescription(idPrescription);
-    }
-
     public ValidationPrescription(DialogueBD dialogueBD, Utilisateur utilisateur, String idPrescription) {
         initComponents();
         // Initialisation des variables
@@ -294,42 +283,7 @@ public class ValidationPrescription extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ValidationPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ValidationPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ValidationPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ValidationPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ValidationPrescription().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoutonValider;

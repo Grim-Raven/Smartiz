@@ -562,7 +562,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                     afficherConsultation.setVisible(true);
                     break;
                 default:
-                    // TODO
+                    
                     if("Radiographie IRM Scanner Echographie Scintigraphie Tomographie".contains(typeActe)){
                         JFrame afficherRadiologie = new ValiderRadiologie(this.utilisateur, idActe, dialogueBD);
                         afficherRadiologie.setVisible(true);
@@ -700,7 +700,7 @@ public class AffichagePatient extends javax.swing.JPanel {
                 StringBuilder infoSejour = new StringBuilder(Objects.equals(resultat.getString("Consultation"), "Y") ? "Consultation n°" : "Séjour n°");
                 infoSejour.append(resultat.getString("idSejour"));
                 infoSejour.append(" en ").append(dialogueBD.getNomService(resultat.getString("idService")));
-                System.out.println(dialogueBD.getNomService(resultat.getString("idService")));
+                
                 infoSejour.append(" du ").append(resultat.getString("dateDebut"), 0, 10);
                 if (resultat.getString("dateFin") != null) {
                     infoSejour.append(" au ").append(resultat.getString("dateFin"), 0, 10);

@@ -116,7 +116,7 @@ public class AfficherListePatients extends javax.swing.JScrollPane {
             if (selectedRow != -1) {        // Si une ligne est bien sélectionnée
                 // On récupère l'IPP du patient sélectionné
                 Object idPatient = tablePatients.getValueAt(selectedRow, 0);
-                System.out.println("Selected: " + idPatient);
+                
 
                 // On prévient tous les listeners que l'utilisateur a sélectionné un patient
                 for (AfficherListePatientsListener afficherListePatientsListener : patientSelectioneListenerList) {

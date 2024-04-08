@@ -48,7 +48,7 @@ public class receptionHL7 implements ReceivingApplication {
 
         // On démarre le serveur
         server.start();
-        System.out.println("Started");
+        
     }
 
     /**
