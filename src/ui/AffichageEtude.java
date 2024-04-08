@@ -252,7 +252,7 @@ public class AffichageEtude extends javax.swing.JPanel implements AfficherListeP
         ajoutPatientEtude.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                remplirChampsEtude(idEtude); // On met à jour la liste des actes après l'ajout de l'examen radiologique
+                remplirChampsEtude(idEtude); 
                 System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             }
         });

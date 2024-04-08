@@ -86,7 +86,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         });
 
         NomPraticienHospitalier.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        NomPraticienHospitalier.setText("Nom du praticien hospitalier");
+        NomPraticienHospitalier.setText("ID du responsable de l'étude");
 
         DateDemarrage.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         DateDemarrage.setText("Date de démarrage");
@@ -247,6 +247,7 @@ public class AjouterEtude extends javax.swing.JFrame {
         
         // On affiche un message de confirmation
         javax.swing.JOptionPane.showMessageDialog(null, "L'étude a été ajouté avec succès");
+        this.dispose();;
     }//GEN-LAST:event_BoutonCreerActionPerformed
 
     /**
@@ -259,7 +260,7 @@ public class AjouterEtude extends javax.swing.JFrame {
             CreerEtude.setText("Create a study");
             TypeRecherche.setText("Type of research");
             IntituleEtude.setText("Study title");
-            NomPraticienHospitalier.setText("ID of hospital practitioner");
+            NomPraticienHospitalier.setText("ID of study leader");
             DateDemarrage.setText("Starting date");
             Duree.setText("duration");
             BoutonCreer.setText("Create ");
